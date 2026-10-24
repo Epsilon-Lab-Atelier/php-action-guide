@@ -112,5 +112,5 @@ test('each incident history entry is a dated guide content change, independent o
     });
   }
   assert.equal(updateHistory.filter(event => event.type === 'baseline').length, 1);
-  assert.match(appReleases[0].title, /ネットサービスの確認手帳/);
+  assert.match(appReleases.find(release => release.version === '0.6.0').title, /ネットサービスの確認手帳/);
 });

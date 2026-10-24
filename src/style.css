@@ -484,3 +484,26 @@ textarea:focus-visible { outline: 3px solid #96516b; outline-offset: 3px; }
 .hero-copy strong{font-weight:600}
 @media(max-width:600px){.topic-filter{padding:1rem}.topic-filter [role=group]{display:grid;grid-template-columns:1fr;width:100%}.topic-filter button{width:100%;text-align:left}.incident-card{padding:1rem}.incident-action{padding:.7rem}.topic-heading h3{font-size:1.2rem}.header-label{max-width:145px;text-align:right}}
 @media print{.topic-filter,.scope-section{display:none}}
+
+/* Small paper tabs for returning, sharing, and starting a fresh review. */
+.guide-actions,.session-controls{margin:1rem 0;padding:1rem 1.15rem;background:#fffaf9;border:1px solid var(--line);border-radius:5px}
+.guide-action-buttons{display:flex;flex-wrap:wrap;gap:.6rem}
+.guide-actions .hint,.session-controls .hint{margin:.7rem 0 0;line-height:1.75}
+.guide-actions .hint:empty{display:none}.action-privacy{margin-top:.7rem;font-size:.78rem}.action-privacy summary{cursor:pointer;color:var(--muted)}
+.session-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem}.session-controls>.hint{flex:1 1 16rem;margin:0}.session-controls>.reset-confirmation{flex:1 0 100%;min-width:0}
+.quiet-button{min-height:44px;padding:.45rem .75rem;border:1px solid #bd9ba6;border-radius:4px;background:#fffdfb;color:#70495a;font:inherit;font-size:.82rem;cursor:pointer}
+.quiet-button:hover{background:#faedf1}
+.reset-confirmation{margin-top:.8rem;padding:.9rem;border-left:3px solid #d0a1b0;background:#fff3f6}
+.reset-confirmation .hint{margin:0 0 .8rem}.reset-confirmation button+button{margin-left:.5rem}
+.incident-period{padding:.2rem .8rem;margin:1rem 0;border-left:3px solid #d7b57f;background:#fffaf0}
+.incident-period p{margin:.4rem 0;line-height:1.8}
+.manual-share{margin-top:1rem}.manual-share input{display:block;width:100%;min-width:0;margin-top:.4rem;padding:.65rem;border:1px solid #b78c9a;border-radius:4px;font:inherit;font-size:.8rem}
+.saved-services{margin:0 0 2rem;padding:1.2rem 1.5rem;background:#fffaf5;border:1px solid var(--line);border-top:3px solid #e2b1c0;border-radius:4px;box-shadow:3px 4px 0 #eadbd730}
+.saved-services h2{font-family:Georgia,'Yu Mincho','Hiragino Mincho ProN',serif;font-size:1.25rem;margin:0}
+.saved-service-list{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.saved-service-button{display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;min-height:44px;padding:.65rem .85rem;border:1px solid #ceb9be;border-radius:4px;background:white;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.saved-service-button small{color:var(--muted);font-size:.75rem}.saved-service-button .changed-note{color:#815b2b;font-weight:600}
+.saved-clear summary{font-size:.8rem;cursor:pointer}.saved-clear .hint{margin:.7rem 0}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.7rem 1rem}.footer-links a{min-height:36px;display:inline-flex;align-items:center}
+@media(max-width:520px){.guide-actions,.session-controls,.saved-services{padding:1rem}.guide-action-buttons{display:grid;grid-template-columns:1fr}.guide-action-buttons button{text-align:left}.saved-service-button{width:100%}.footer-links{justify-content:flex-start;width:100%}.site-footer .footer-links a{margin-left:0}.reset-confirmation button{width:100%;margin-top:.5rem}.reset-confirmation button+button{margin-left:0}}
+@media print{.guide-actions,.session-controls,.saved-services{display:none}}

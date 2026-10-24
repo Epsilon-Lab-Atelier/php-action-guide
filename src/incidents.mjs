@@ -3,7 +3,7 @@ export const breachSources = {
   "breachSocial1Source1": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関するお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020632/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-07-13",
     "updatedAt": null,
     "kind": "incident"
@@ -11,7 +11,7 @@ export const breachSources = {
   "breachSocial1Source2": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関する総務省からの行政指導について",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020695/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-07-31",
     "updatedAt": null,
     "kind": "incident"
@@ -19,7 +19,7 @@ export const breachSources = {
   "breachSocial2Source1": {
     "title": "「LINE公式アカウント」誤表示による情報漏えいのお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/019924/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2025-12-09",
     "updatedAt": null,
     "kind": "incident"
@@ -27,7 +27,7 @@ export const breachSources = {
   "breachSocial3Source1": {
     "title": "noteでソースコードからIPアドレスが確認できた事態に関する追加報告とお詫び",
     "url": "https://note.jp/n/n2115642a4e45",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2020-09-30",
     "updatedAt": "2021-09-09",
     "kind": "incident"
@@ -35,7 +35,7 @@ export const breachSources = {
   "breachXserver2026": {
     "title": "エックスサーバー：委託先メール配信サービス「ブラストメール」における個人情報の漏洩に関するお詫びとお知らせ",
     "url": "https://www.xserver.ne.jp/news_detail.php?view_id=19739",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "kind": "incident"
@@ -67,7 +67,7 @@ export const breachSources = {
   "breachConoha2026": {
     "title": "ConoHa WING：一部収容ホストへの第三者による不正アクセスに関するお詫びとお知らせ",
     "url": "https://www.conoha.jp/wing/news/?ap=2015054834&btn_id=wing-news--news_wing-news",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-09-20",
     "updatedAt": null,
     "kind": "incident"
@@ -371,7 +371,7 @@ export const breachIncidents = [
 
 export const breachReviews = {
   "note": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSocial3Source1"
@@ -379,73 +379,73 @@ export const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "wordpress-com": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "pixiv": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "booth": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "amazon-jp": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "rakuten-ichiba": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "yahoo-shopping": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "mercari": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "候補の2021年公式報告は本文取得に失敗したため掲載していません。今回の検索結果から、被害がないとは判断できません。"
   },
   "base": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "youtube": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "instagram": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "x": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "line": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSocial1Source1",
@@ -455,13 +455,13 @@ export const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "fanbox": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "不正ログイン注意喚起の候補は本文取得に失敗したため、流出事案として掲載していません。被害がないことを意味しません。"
   },
   "sakura-rental": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSakura2026",
@@ -470,7 +470,7 @@ export const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "sakura-vps": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSakura2026",
@@ -479,7 +479,7 @@ export const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "xserver": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachXserver2026"
@@ -487,13 +487,13 @@ export const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "lolipop": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "conoha-wing": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachConoha2026"

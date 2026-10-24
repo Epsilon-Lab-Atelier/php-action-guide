@@ -9,13 +9,13 @@ const baseSources = {
     title: 'note: PHPの脆弱性について - noteのサービスではPHPを使用していません',
     url: 'https://note.jp/n/n09b0faecd702',
     publishedAt: '2026-10-22',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   wordpressComNotice: {
     title: 'WordPress.com: 今回の重大なPHP脆弱性への対応について',
     url: 'https://wordpress.com/blog/2026/10/21/php2shell-vulnerabilities/',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   wordpressComDomains: {
     title: 'WordPress.com: サイトアドレスの仕組み',
@@ -27,19 +27,24 @@ const baseSources = {
     title: 'pixiv: PHP 8.5.12の緊急リリースにpixivはどう対応したか',
     url: 'https://inside.pixiv.blog/2026/10/22/193321',
     publishedAt: '2026-10-22',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   boothNotice: {
     title: 'BOOTH: 緊急メンテナンスに伴う注文・ログインへの影響について (復旧)',
     url: 'https://booth.pm/announcements/1004',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   boothDomains: {
     title: 'BOOTH: ショップURLの案内',
     url: 'https://booth.pixiv.help/hc/ja/articles/115005850707',
     publishedAt: null,
     checkedAt,
+  },
+  wordpressSecurityNotice: {
+    title: 'WordPress.org: PHPの重大なセキュリティ更新',
+    url: 'https://wordpress.org/news/2026/10/critical-php-security-release/',
+    publishedAt: '2026-10-21', checkedAt: '2026-10-25', kind: 'incident',
   },
   wordpressRequirements: {
     title: 'WordPress.org: 動作要件',
@@ -53,11 +58,16 @@ const baseSources = {
     publishedAt: null,
     checkedAt,
   },
+  drupalAudit: {
+    title: 'Drupal: PHP更新後のサイト点検の案内',
+    url: 'https://www.drupal.org/association/blog/after-the-php-security-release-auditing-your-drupal-sites',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
+  },
   drupalNotice: {
     title: 'Drupal: PHPの緊急更新に関する案内 (PSA-2026-10-20)',
     url: 'https://www.drupal.org/psa-2026-10-20',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
 };
 
@@ -218,12 +228,12 @@ const baseServices = [
     },
     incident: {
       label: '未確認',
-      text: '個別サイトへの修正適用状況は未確認です。WordPress.comの対応済みという告知は、自分で設置したWordPressの対応を示すものではありません。',
-      sourceIds: ['wordpressComNotice'],
+      text: '個別サイトへの修正適用状況は未確認です。WordPress.orgはPHPの更新を求めていますが、個別環境の対応完了を示すものではありません。',
+      sourceIds: ['wordpressSecurityNotice'],
     },
     officialAction: {
-      text: 'WordPress.comの公式告知でも、自分でサーバーを運用する場合には更新を案内しています。実際の対応は、PHPと利用するホスティング事業者の最新の案内で確認してください。',
-      sourceIds: ['wordpressComNotice'],
+      text: 'WordPress.orgは10月21日の告知で、ホスティング事業者の更新案内を確認し、必要なPHP更新を速やかに行うよう求めています。管理画面の「ツール → サイトヘルス → 情報 → サーバー」で使用中のPHPバージョンを確認できます。',
+      sourceIds: ['wordpressSecurityNotice'],
     },
     actions: {
       user: [
@@ -256,8 +266,8 @@ const baseServices = [
       sourceIds: ['drupalNotice'],
     },
     officialAction: {
-      text: 'Drupal公式は、PHPを自己管理している場合は更新し、事業者が管理している場合は実施時期と必要な作業について事業者の案内に従うよう求めています。',
-      sourceIds: ['drupalNotice'],
+      text: 'Drupal公式はPHPの更新に加え、10月22日の案内で、再構築などで失われる前にログを保全し、10月17日以降の不審な痕跡を点検するよう勧めています。管理を委託している場合は、事業者へ更新・点検状況を確認してください。',
+      sourceIds: ['drupalNotice', 'drupalAudit'],
     },
     actions: {
       user: [
@@ -269,9 +279,10 @@ const baseServices = [
         'PHPの管理担当を確認し、自己管理かホスティング事業者による管理かを整理する。',
         '今回のPHP修正の適用状況と、10月23日の追加案内に基づく対応の要否を確認する。',
         '更新を担当する場合は、PHP・OS提供元の案内に沿って修正を適用し、Drupalの動作を確認する。',
+        '再構築などで失われる前にログを保全し、10月17日以降の点検について公式案内を確認する。管理を委託している場合は担当事業者に相談する。',
       ],
     },
-    caution: 'Drupal公式の更新案内があることと、個別サイトが更新済みであることは別です。PHPの動作要件に書かれた版だけで、今回の修正済みとは判断できません。',
+    caution: 'PHPの修正適用と、修正前に侵入されていないかの確認は別です。ログの単独の一致・不一致だけで侵害や安全を判定できません。点検案内は、個別サイトの侵害を確認した公表ではありません。',
   },
 ];
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-UnmpzD17aVywnHDIulkOWY+d+DGCAQzfOAog6Ixn6bw='; style-src 'sha256-MVXs5IGrl128EAa4eg8XEMWYm8hFEldJZFUk3hrnbp4='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-mYRRY4H9TtRQ6N4CpI4KOldzzQVwnSTO78Vs5Q+U40M='; style-src 'sha256-MVXs5IGrl128EAa4eg8XEMWYm8hFEldJZFUk3hrnbp4='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="利用するサービスの公式情報を確認して、PHPの問題や情報流出について、自分に必要な確認事項を整理する手帳です。">
 <meta name="color-scheme" content="light">
 <title>ネットサービスの確認手帳 | EpsilonLab</title>
@@ -1214,7 +1214,7 @@ const adminSources = {
   sakuraPhpNotice: {
     title: 'さくらインターネット: PHPの脆弱性に関する対応状況 (10月23日追記)',
     url: 'https://www.sakura.ad.jp/corporate/information/announcements/2026/10/22/1968226117/',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   sakuraStatus: {
     title: 'さくらインターネット: メンテナンス・障害情報',
@@ -1224,7 +1224,7 @@ const adminSources = {
   xserverPhpNotice: {
     title: 'エックスサーバー: 公式サイト・管理画面等の一時停止とPHPへの対応',
     url: 'https://www.xserver.ne.jp/news_detail.php?view_id=19734',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   xserverStatus: {
     title: 'エックスサーバー: 障害・メンテナンス情報',
@@ -1234,7 +1234,7 @@ const adminSources = {
   lolipopPhpNotice: {
     title: 'ロリポップ!: PHPの脆弱性へのメンテナンス完了と経緯',
     url: 'https://lolipop.jp/info/news/8239/',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   lolipopSupport: {
     title: 'ロリポップ!: お問い合わせ',
@@ -1244,7 +1244,7 @@ const adminSources = {
   conohaWingPhpNotice: {
     title: 'ConoHa WING: PHPの脆弱性への対応完了のお知らせ (終報)',
     url: 'https://www.conoha.jp/wing/news/?ap=2015054909',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   conohaWingSupport: {
     title: 'ConoHa WING: サポート',
@@ -1254,7 +1254,7 @@ const adminSources = {
   eccubePhpNotice: {
     title: 'EC-CUBE: PHPのセキュリティリリース公開について (対応のお願い)',
     url: 'https://www.ec-cube.net/news/detail.php?news_id=492',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   eccubeSupport: {
     title: 'EC-CUBE: サポート',
@@ -1426,13 +1426,13 @@ const baseSources = {
     title: 'note: PHPの脆弱性について - noteのサービスではPHPを使用していません',
     url: 'https://note.jp/n/n09b0faecd702',
     publishedAt: '2026-10-22',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   wordpressComNotice: {
     title: 'WordPress.com: 今回の重大なPHP脆弱性への対応について',
     url: 'https://wordpress.com/blog/2026/10/21/php2shell-vulnerabilities/',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   wordpressComDomains: {
     title: 'WordPress.com: サイトアドレスの仕組み',
@@ -1444,19 +1444,24 @@ const baseSources = {
     title: 'pixiv: PHP 8.5.12の緊急リリースにpixivはどう対応したか',
     url: 'https://inside.pixiv.blog/2026/10/22/193321',
     publishedAt: '2026-10-22',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   boothNotice: {
     title: 'BOOTH: 緊急メンテナンスに伴う注文・ログインへの影響について (復旧)',
     url: 'https://booth.pm/announcements/1004',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   boothDomains: {
     title: 'BOOTH: ショップURLの案内',
     url: 'https://booth.pixiv.help/hc/ja/articles/115005850707',
     publishedAt: null,
     checkedAt,
+  },
+  wordpressSecurityNotice: {
+    title: 'WordPress.org: PHPの重大なセキュリティ更新',
+    url: 'https://wordpress.org/news/2026/10/critical-php-security-release/',
+    publishedAt: '2026-10-21', checkedAt: '2026-10-25', kind: 'incident',
   },
   wordpressRequirements: {
     title: 'WordPress.org: 動作要件',
@@ -1470,11 +1475,16 @@ const baseSources = {
     publishedAt: null,
     checkedAt,
   },
+  drupalAudit: {
+    title: 'Drupal: PHP更新後のサイト点検の案内',
+    url: 'https://www.drupal.org/association/blog/after-the-php-security-release-auditing-your-drupal-sites',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
+  },
   drupalNotice: {
     title: 'Drupal: PHPの緊急更新に関する案内 (PSA-2026-10-20)',
     url: 'https://www.drupal.org/psa-2026-10-20',
     publishedAt: '2026-10-21',
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
 };
 
@@ -1635,12 +1645,12 @@ const baseServices = [
     },
     incident: {
       label: '未確認',
-      text: '個別サイトへの修正適用状況は未確認です。WordPress.comの対応済みという告知は、自分で設置したWordPressの対応を示すものではありません。',
-      sourceIds: ['wordpressComNotice'],
+      text: '個別サイトへの修正適用状況は未確認です。WordPress.orgはPHPの更新を求めていますが、個別環境の対応完了を示すものではありません。',
+      sourceIds: ['wordpressSecurityNotice'],
     },
     officialAction: {
-      text: 'WordPress.comの公式告知でも、自分でサーバーを運用する場合には更新を案内しています。実際の対応は、PHPと利用するホスティング事業者の最新の案内で確認してください。',
-      sourceIds: ['wordpressComNotice'],
+      text: 'WordPress.orgは10月21日の告知で、ホスティング事業者の更新案内を確認し、必要なPHP更新を速やかに行うよう求めています。管理画面の「ツール → サイトヘルス → 情報 → サーバー」で使用中のPHPバージョンを確認できます。',
+      sourceIds: ['wordpressSecurityNotice'],
     },
     actions: {
       user: [
@@ -1673,8 +1683,8 @@ const baseServices = [
       sourceIds: ['drupalNotice'],
     },
     officialAction: {
-      text: 'Drupal公式は、PHPを自己管理している場合は更新し、事業者が管理している場合は実施時期と必要な作業について事業者の案内に従うよう求めています。',
-      sourceIds: ['drupalNotice'],
+      text: 'Drupal公式はPHPの更新に加え、10月22日の案内で、再構築などで失われる前にログを保全し、10月17日以降の不審な痕跡を点検するよう勧めています。管理を委託している場合は、事業者へ更新・点検状況を確認してください。',
+      sourceIds: ['drupalNotice', 'drupalAudit'],
     },
     actions: {
       user: [
@@ -1686,9 +1696,10 @@ const baseServices = [
         'PHPの管理担当を確認し、自己管理かホスティング事業者による管理かを整理する。',
         '今回のPHP修正の適用状況と、10月23日の追加案内に基づく対応の要否を確認する。',
         '更新を担当する場合は、PHP・OS提供元の案内に沿って修正を適用し、Drupalの動作を確認する。',
+        '再構築などで失われる前にログを保全し、10月17日以降の点検について公式案内を確認する。管理を委託している場合は担当事業者に相談する。',
       ],
     },
-    caution: 'Drupal公式の更新案内があることと、個別サイトが更新済みであることは別です。PHPの動作要件に書かれた版だけで、今回の修正済みとは判断できません。',
+    caution: 'PHPの修正適用と、修正前に侵入されていないかの確認は別です。ログの単独の一致・不一致だけで侵害や安全を判定できません。点検案内は、個別サイトの侵害を確認した公表ではありません。',
   },
 ];
 
@@ -1854,7 +1865,7 @@ const breachSources = {
   "breachSocial1Source1": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関するお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020632/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-07-13",
     "updatedAt": null,
     "kind": "incident"
@@ -1862,7 +1873,7 @@ const breachSources = {
   "breachSocial1Source2": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関する総務省からの行政指導について",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020695/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-07-31",
     "updatedAt": null,
     "kind": "incident"
@@ -1870,7 +1881,7 @@ const breachSources = {
   "breachSocial2Source1": {
     "title": "「LINE公式アカウント」誤表示による情報漏えいのお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/019924/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2025-12-09",
     "updatedAt": null,
     "kind": "incident"
@@ -1878,7 +1889,7 @@ const breachSources = {
   "breachSocial3Source1": {
     "title": "noteでソースコードからIPアドレスが確認できた事態に関する追加報告とお詫び",
     "url": "https://note.jp/n/n2115642a4e45",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2020-09-30",
     "updatedAt": "2021-09-09",
     "kind": "incident"
@@ -1886,7 +1897,7 @@ const breachSources = {
   "breachXserver2026": {
     "title": "エックスサーバー：委託先メール配信サービス「ブラストメール」における個人情報の漏洩に関するお詫びとお知らせ",
     "url": "https://www.xserver.ne.jp/news_detail.php?view_id=19739",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "kind": "incident"
@@ -1918,7 +1929,7 @@ const breachSources = {
   "breachConoha2026": {
     "title": "ConoHa WING：一部収容ホストへの第三者による不正アクセスに関するお詫びとお知らせ",
     "url": "https://www.conoha.jp/wing/news/?ap=2015054834&btn_id=wing-news--news_wing-news",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-25",
     "publishedAt": "2026-09-20",
     "updatedAt": null,
     "kind": "incident"
@@ -2222,7 +2233,7 @@ const breachIncidents = [
 
 const breachReviews = {
   "note": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSocial3Source1"
@@ -2230,73 +2241,73 @@ const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "wordpress-com": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "pixiv": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "booth": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "amazon-jp": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "rakuten-ichiba": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "yahoo-shopping": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "mercari": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "候補の2021年公式報告は本文取得に失敗したため掲載していません。今回の検索結果から、被害がないとは判断できません。"
   },
   "base": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "youtube": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "instagram": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "x": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "line": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSocial1Source1",
@@ -2306,13 +2317,13 @@ const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "fanbox": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "不正ログイン注意喚起の候補は本文取得に失敗したため、流出事案として掲載していません。被害がないことを意味しません。"
   },
   "sakura-rental": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSakura2026",
@@ -2321,7 +2332,7 @@ const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "sakura-vps": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachSakura2026",
@@ -2330,7 +2341,7 @@ const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "xserver": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachXserver2026"
@@ -2338,13 +2349,13 @@ const breachReviews = {
     "note": "公式発表を検索し、掲載した事案の本文を確認しました。すべての事案を網羅するものではありません。"
   },
   "lolipop": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "searched",
     "sourceIds": [],
     "note": "今回の公式情報の検索範囲では、ここに掲載できる事案の本文を確認できていません。被害がないことを意味しません。"
   },
   "conoha-wing": {
-    "attemptedAt": "2026-10-24",
+    "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
     "sourceIds": [
       "breachConoha2026"
@@ -2456,6 +2467,18 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
   summary: event.summary.includes('発生日・公表日とは異なります') ? event.summary : `${event.summary} 日付はこの手帳の掲載内容を変えた日です。事案の発生日・公表日とは異なります。`,
 })));
 const updateHistory = Object.freeze([
+  Object.freeze({
+    id: 'wordpress-php-guidance-2026-10-25', type: 'content', date: '2026-10-25',
+    serviceIds: Object.freeze(['wordpress-selfhost']), sourceIds: Object.freeze(['wordpressSecurityNotice']),
+    title: '自己管理WordPressの公式PHP更新案内を追加しました',
+    summary: '10月21日のWordPress.org公式告知を根拠に、ホスティング事業者への確認とPHPバージョンの確認場所を追記しました。日付はこの手帳の変更日です。',
+  }),
+  Object.freeze({
+    id: 'drupal-audit-guidance-2026-10-25', type: 'content', date: '2026-10-25',
+    serviceIds: Object.freeze(['drupal']), sourceIds: Object.freeze(['drupalAudit']),
+    title: 'DrupalのPHP更新後の点検案内を追加しました',
+    summary: '10月22日の公式案内に基づき、ログの保全と10月17日以降の点検、管理事業者への確認を追加しました。個別サイトの侵害確認ではありません。日付はこの手帳の変更日です。',
+  }),
   Object.freeze({
     id: 'catalog-baseline-2026-10-24',
     type: 'baseline',

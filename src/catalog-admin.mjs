@@ -2,7 +2,7 @@ export const adminSources = {
   sakuraPhpNotice: {
     title: 'さくらインターネット: PHPの脆弱性に関する対応状況 (10月23日追記)',
     url: 'https://www.sakura.ad.jp/corporate/information/announcements/2026/10/22/1968226117/',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   sakuraStatus: {
     title: 'さくらインターネット: メンテナンス・障害情報',
@@ -12,7 +12,7 @@ export const adminSources = {
   xserverPhpNotice: {
     title: 'エックスサーバー: 公式サイト・管理画面等の一時停止とPHPへの対応',
     url: 'https://www.xserver.ne.jp/news_detail.php?view_id=19734',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   xserverStatus: {
     title: 'エックスサーバー: 障害・メンテナンス情報',
@@ -22,7 +22,7 @@ export const adminSources = {
   lolipopPhpNotice: {
     title: 'ロリポップ!: PHPの脆弱性へのメンテナンス完了と経緯',
     url: 'https://lolipop.jp/info/news/8239/',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   lolipopSupport: {
     title: 'ロリポップ!: お問い合わせ',
@@ -32,7 +32,7 @@ export const adminSources = {
   conohaWingPhpNotice: {
     title: 'ConoHa WING: PHPの脆弱性への対応完了のお知らせ (終報)',
     url: 'https://www.conoha.jp/wing/news/?ap=2015054909',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   conohaWingSupport: {
     title: 'ConoHa WING: サポート',
@@ -42,7 +42,7 @@ export const adminSources = {
   eccubePhpNotice: {
     title: 'EC-CUBE: PHPのセキュリティリリース公開について (対応のお願い)',
     url: 'https://www.ec-cube.net/news/detail.php?news_id=492',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-24', kind: 'incident',
+    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   eccubeSupport: {
     title: 'EC-CUBE: サポート',

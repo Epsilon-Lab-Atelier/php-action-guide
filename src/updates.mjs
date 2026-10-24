@@ -15,6 +15,18 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
 })));
 export const updateHistory = Object.freeze([
   Object.freeze({
+    id: 'wordpress-php-guidance-2026-10-25', type: 'content', date: '2026-10-25',
+    serviceIds: Object.freeze(['wordpress-selfhost']), sourceIds: Object.freeze(['wordpressSecurityNotice']),
+    title: '自己管理WordPressの公式PHP更新案内を追加しました',
+    summary: '10月21日のWordPress.org公式告知を根拠に、ホスティング事業者への確認とPHPバージョンの確認場所を追記しました。日付はこの手帳の変更日です。',
+  }),
+  Object.freeze({
+    id: 'drupal-audit-guidance-2026-10-25', type: 'content', date: '2026-10-25',
+    serviceIds: Object.freeze(['drupal']), sourceIds: Object.freeze(['drupalAudit']),
+    title: 'DrupalのPHP更新後の点検案内を追加しました',
+    summary: '10月22日の公式案内に基づき、ログの保全と10月17日以降の点検、管理事業者への確認を追加しました。個別サイトの侵害確認ではありません。日付はこの手帳の変更日です。',
+  }),
+  Object.freeze({
     id: 'catalog-baseline-2026-10-24',
     type: 'baseline',
     date: updateTrackedSince,

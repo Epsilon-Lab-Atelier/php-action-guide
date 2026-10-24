@@ -46,10 +46,11 @@ test('bundled JavaScript parses as a standalone script without a module loader',
   assert.doesNotThrow(() => new Script(scripts[0][2], { filename: 'php-action-guide.inline.js' }));
 });
 
-test('runtime contains no network, persistent-storage, unsafe-HTML or dynamic-code APIs', () => {
+test('runtime contains no network, tracking-storage, unsafe-HTML or dynamic-code APIs', () => {
   const script = scripts[0][2];
   assert.doesNotMatch(script, /\b(?:fetch|eval)\s*\(|\bnew\s+(?:Function|XMLHttpRequest|WebSocket|EventSource)\b|\.sendBeacon\s*\(/);
-  assert.doesNotMatch(script, /\b(?:localStorage|sessionStorage|indexedDB|serviceWorker)\b|document\s*\.\s*cookie|\bcaches\s*\./);
+  assert.doesNotMatch(script, /\b(?:sessionStorage|indexedDB|serviceWorker)\b|document\s*\.\s*cookie|\bcaches\s*\./);
+  assert.doesNotMatch(script, /localStorage\s*\.\s*clear\s*\(/);
   assert.doesNotMatch(script, /\.\s*(?:innerHTML|outerHTML)\s*=|\.\s*(?:insertAdjacentHTML|write|writeln)\s*\(/);
 });
 

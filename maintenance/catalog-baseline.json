@@ -1,0 +1,1574 @@
+{
+  "checkedAt": "2026-10-24",
+  "schemaVersion": 1,
+  "services": {
+    "amazon-jp": {
+      "actions": {
+        "admin": [
+          "Amazon.co.jpへの出品と、自分の通販サイトのサーバー管理を区別する。",
+          "出品に関する案内は、利用する出品者向け公式窓口で確認する。",
+          "自分のサーバーを別途管理する場合は、そのPHPの修正状況を確認する。"
+        ],
+        "user": [
+          "公式アプリやブックマークから、Amazon.co.jpのカスタマーサービスを確認する。",
+          "購入操作の途中で止まった場合は、注文履歴や決済状況を確認してからやり直す。",
+          "個別の対応依頼が届いた場合は、公式アカウント画面でも対象と手続きを確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "これはAmazon.co.jpの買い物に関する確認先です。AWSやAmazonの別サービスの対応状況を示すものではありません。PHP使用や被害の有無は未確認です。",
+      "domains": [
+        {
+          "host": "amazon.co.jp",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.amazon.co.jp",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "shopping"
+      },
+      "id": "amazon-jp",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。"
+      },
+      "keywords": [
+        "amazon",
+        "アマゾン",
+        "あまぞん",
+        "通販"
+      ],
+      "name": "Amazon.co.jp",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "ネット通販・注文の確認",
+      "supportSourceIds": [
+        "amazonHelp"
+      ]
+    },
+    "base": {
+      "actions": {
+        "admin": [
+          "BASEの管理画面やショップ向けヘルプで、店舗側に必要な作業と現在の制限を確認する。",
+          "サービス基盤の保守については公式案内を確認し、自分のショップの表示・受注状況を確認する。",
+          "独自に動かしている連携システムや外部サイトがあれば、そのPHPの対応状況を別途確認する。"
+        ],
+        "user": [
+          "購入したショップとBASEの公式案内で、注文や決済に関する影響を確認する。",
+          "購入手続きの途中で停止した場合は、注文確認メールや注文状況を確認する。",
+          "ショップや注文について不明な点があれば、購入者向けヘルプの問い合わせ先を確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "ショップごとのURLや独自ドメインは、この初版では照合できない場合があります。BASEを利用していると分かる場合は、一覧から選んでください。",
+      "domains": [
+        {
+          "host": "thebase.com",
+          "includeSubdomains": false
+        },
+        {
+          "host": "admin.thebase.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "admin": "commerce",
+        "user": "shopping"
+      },
+      "id": "base",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。"
+      },
+      "keywords": [
+        "base",
+        "ベイス",
+        "べいす",
+        "ネットショップ",
+        "ショップ運営"
+      ],
+      "name": "BASE",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。"
+      },
+      "roles": [
+        "user",
+        "admin"
+      ],
+      "short": "ネットショップの購入・運営",
+      "supportSourceIds": [
+        "baseHelp"
+      ]
+    },
+    "booth": {
+      "actions": {
+        "admin": [
+          "BOOTHのショップ運営者としては、サービス側のPHPを自分で更新する作業とは分けて考える。",
+          "注文や販売に支障がある場合は、BOOTHの案内と問い合わせ窓口を確認する。",
+          "別途管理する自分の通販サイトがあれば、その環境の修正状況を別に確認する。"
+        ],
+        "user": [
+          "BOOTHの公式告知で、注文・ログインに関する案内を確認する。",
+          "購入途中で利用できなくなった場合は、注文履歴や決済状況を確認してから操作を続ける。",
+          "状況が分からない場合は、公式の問い合わせ窓口で確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "メンテナンスの復旧告知だけでは、PHPの使用状況、今回の脆弱性の修正状況、被害の有無は判定できません。",
+      "domainSourceIds": [
+        "boothDomains"
+      ],
+      "domains": [
+        {
+          "host": "booth.pm",
+          "includeSubdomains": true
+        }
+      ],
+      "groupByRole": {
+        "admin": "commerce",
+        "user": "shopping"
+      },
+      "id": "booth",
+      "incident": {
+        "label": "未確認",
+        "sourceIds": [
+          "boothNotice"
+        ],
+        "text": "公式には10月21日のセキュリティ強化目的のメンテナンスと復旧が告知されています。ただし、本文にはPHPや今回の対象CVEとの関係が明記されておらず、この問題への対応状況は未確認です。"
+      },
+      "keywords": [
+        "ブース",
+        "ぶーす",
+        "通販",
+        "ショップ"
+      ],
+      "name": "BOOTH",
+      "officialAction": {
+        "sourceIds": [
+          "boothNotice"
+        ],
+        "text": "告知は、メンテナンス中にログインや購入ができない場合があったと説明しています。この掲載資料から、利用者が追加で行う手続きは未確認です。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [
+          "boothNotice"
+        ],
+        "text": "今回掲載したBOOTHの公式告知では、PHPを使用しているかどうかは明記されていません。関連サービスの技術情報から推測しません。"
+      },
+      "roles": [
+        "user",
+        "admin"
+      ],
+      "short": "商品の購入・販売",
+      "supportSourceIds": []
+    },
+    "conoha-wing": {
+      "actions": {
+        "admin": [
+          "契約がConoHa WINGであることを確認する。",
+          "表示バージョンだけで未修正と決めず、公式告知の適用範囲を確認する。",
+          "サイトの動作と、その後の追加案内を確認する。"
+        ],
+        "user": [
+          "利用するサイトの運営元のお知らせを確認する。",
+          "必要な手続きがあるか確認する。",
+          "サイトの異常は運営元へ問い合わせる。"
+        ]
+      },
+      "category": "service",
+      "caution": "10月23日の追加CVEへの個別対応は、この掲載資料では未確認です。ConoHa VPSや、別契約のサーバーにはこの説明を適用できません。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "hosting"
+      },
+      "id": "conoha-wing",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "conohaWingPhpNotice"
+        ],
+        "text": "10月22日の終報で、提供中の全PHPバージョンへ修正を適用したと説明しています。版番号を維持したまま修正を取り込んだため、表示番号だけでは判別できない場合があります。"
+      },
+      "keywords": [
+        "このは",
+        "コノハ",
+        "conoha",
+        "wing",
+        "ウィング",
+        "レンタルサーバー"
+      ],
+      "name": "ConoHa WING",
+      "officialAction": {
+        "sourceIds": [
+          "conohaWingPhpNotice"
+        ],
+        "text": "この告知では、利用者自身によるPHPバージョンの変更などは必要ないと案内しています。これは告知が扱う問題とConoHa WINGの提供環境に限った説明です。"
+      },
+      "php": {
+        "label": "公式に提供を確認",
+        "sourceIds": [
+          "conohaWingPhpNotice"
+        ],
+        "text": "ConoHa WINGはPHPを提供しています。利用者が独自にPHPを管理するConoHa VPSとは区別してください。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "管理されたレンタルサーバー",
+      "supportSourceIds": [
+        "conohaWingSupport"
+      ]
+    },
+    "drupal": {
+      "actions": {
+        "admin": [
+          "PHPの管理担当を確認し、自己管理かホスティング事業者による管理かを整理する。",
+          "今回のPHP修正の適用状況と、10月23日の追加案内に基づく対応の要否を確認する。",
+          "更新を担当する場合は、PHP・OS提供元の案内に沿って修正を適用し、Drupalの動作を確認する。"
+        ],
+        "user": [
+          "利用するサイトの運営元のお知らせを確認する。",
+          "サービス停止の理由と、利用者向けの対応指示があるかを確認する。",
+          "情報がなければ、安全かどうかを推測せず運営元に確認する。"
+        ]
+      },
+      "category": "cms",
+      "caution": "Drupal公式の更新案内があることと、個別サイトが更新済みであることは別です。PHPの動作要件に書かれた版だけで、今回の修正済みとは判断できません。",
+      "domainSourceIds": [],
+      "domains": [],
+      "groupByRole": {
+        "admin": "cms"
+      },
+      "id": "drupal",
+      "incident": {
+        "label": "未確認",
+        "sourceIds": [
+          "drupalNotice"
+        ],
+        "text": "Drupal公式は今回のPHP更新に関する案内を公開していますが、個別サイトへの修正適用状況は未確認です。"
+      },
+      "keywords": [
+        "ドルーパル",
+        "どるーぱる",
+        "CMS"
+      ],
+      "name": "Drupal",
+      "officialAction": {
+        "sourceIds": [
+          "drupalNotice"
+        ],
+        "text": "Drupal公式は、PHPを自己管理している場合は更新し、事業者が管理している場合は実施時期と必要な作業について事業者の案内に従うよう求めています。"
+      },
+      "php": {
+        "label": "公式に使用を確認",
+        "sourceIds": [
+          "drupalRequirements"
+        ],
+        "text": "Drupal公式の動作要件にはPHPが含まれます。個別サイトのPHPの版や修正状況は、このアプリでは確認できません。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "自分や管理会社が運用するCMS",
+      "supportSourceIds": []
+    },
+    "ec-cube": {
+      "actions": {
+        "admin": [
+          "自社・委託先・ホスティング会社のうち、PHPの管理担当を確認する。",
+          "PHP修正の適用・反映と、10月23日の追加案内への対応要否を確認する。",
+          "EC-CUBE本体・プラグイン・カスタマイズとの互換性と購入・決済を確認する。"
+        ],
+        "user": [
+          "ショップ運営元のお知らせを確認する。",
+          "購入に支障がある場合は注文・決済状況を運営元へ確認する。",
+          "利用者向けの追加手続きがあるか確認する。"
+        ]
+      },
+      "category": "cms",
+      "caution": "EC-CUBE本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。クラウド版ec-cube.coの契約では、公式案内に従ってコンソールの対応状況を確認してください。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "cms"
+      },
+      "id": "ec-cube",
+      "incident": {
+        "label": "利用環境は未確認",
+        "sourceIds": [
+          "eccubePhpNotice"
+        ],
+        "text": "10月22日の公式告知で、10月21日に公表された2件への対応を求めています。個々のサイトで修正済みかは未確認です。"
+      },
+      "keywords": [
+        "eccube",
+        "ec cube",
+        "ec-cube",
+        "イーシーキューブ",
+        "通販",
+        "ネットショップ"
+      ],
+      "name": "EC-CUBE",
+      "officialAction": {
+        "sourceIds": [
+          "eccubePhpNotice"
+        ],
+        "text": "管理者・ホスティング会社・保守会社に共有し、PHPの提供元と版、修正適用、再起動後の反映を確認するよう案内しています。購入・決済などの動作確認も必要としています。"
+      },
+      "php": {
+        "label": "公式に使用を確認",
+        "sourceIds": [
+          "eccubePhpNotice"
+        ],
+        "text": "EC-CUBEはPHPを使って動作します。個別サイトに入っているPHPの版や修正状況は、このアプリでは確認できません。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "自分や委託先が管理する通販サイト",
+      "supportSourceIds": [
+        "eccubeSupport"
+      ]
+    },
+    "fanbox": {
+      "actions": {
+        "admin": [
+          "FANBOXの投稿・支援プランの管理と、自分の外部サーバーの保守を分けて考える。",
+          "投稿や支援金の受け取りに支障がある場合は、FANBOXの公式ヘルプから案内を確認する。",
+          "リンク先や埋め込み先に自分で管理するサイトがあれば、そちらのPHP修正状況を別に確認する。"
+        ],
+        "user": [
+          "FANBOXの公式ヘルプで、支援・支払い・ログインに関する案内を確認する。",
+          "支援や決済の途中で利用できなくなった場合は、支援状況を確認してから操作を続ける。",
+          "自分に必要な追加手続きがあるか、公式のお知らせや個別通知を確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "pixivの更新報告からFANBOXの対応状況を推測しません。クリエイターごとのURLは未登録の場合があるため、一致しなければ一覧からpixiv FANBOXを選んでください。",
+      "domainSourceIds": [
+        "fanboxDomain",
+        "fanboxFindCreators"
+      ],
+      "domains": [
+        {
+          "host": "fanbox.cc",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.fanbox.cc",
+          "includeSubdomains": false
+        },
+        {
+          "host": "official.fanbox.cc",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "admin": "publishing",
+        "user": "social"
+      },
+      "id": "fanbox",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。"
+      },
+      "keywords": [
+        "FANBOX",
+        "ファンボックス",
+        "ピクシブファンボックス",
+        "支援",
+        "クリエイター"
+      ],
+      "name": "pixiv FANBOX",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "pixiv FANBOXのPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。"
+      },
+      "roles": [
+        "user",
+        "admin"
+      ],
+      "short": "クリエイターの支援・限定記事",
+      "supportSourceIds": [
+        "fanboxHelp"
+      ]
+    },
+    "instagram": {
+      "actions": {
+        "admin": [
+          "Instagram内のアカウント管理と、自分が管理する外部サイトのサーバー保守を区別する。",
+          "公式窓口で、影響する機能と自分に必要な手続きが案内されているか確認する。",
+          "別途運用している外部サイトがある場合は、そのCMS・ホスティング事業者の案内も確認する。"
+        ],
+        "user": [
+          "公式ヘルプやアプリ内のお知らせで、利用への影響が案内されているか確認する。",
+          "ログインや投稿に問題がある場合は、該当する公式ヘルプから確認する。",
+          "自分に必要な手続きがあるかは、公式アプリやサイトの案内から確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "公式ヘルプへの案内を掲載していますが、PHP利用や今回の問題への対応済みを示すものではありません。ほかのMetaのサービスの状況も、この項目からは判断できません。",
+      "domainSourceIds": [
+        "instagramHome"
+      ],
+      "domains": [
+        {
+          "host": "instagram.com",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.instagram.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "social"
+      },
+      "id": "instagram",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。"
+      },
+      "keywords": [
+        "インスタグラム",
+        "インスタ",
+        "写真",
+        "リール"
+      ],
+      "name": "Instagram",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "InstagramのPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "写真・動画の閲覧・投稿",
+      "supportSourceIds": [
+        "instagramHelp"
+      ]
+    },
+    "line": {
+      "actions": {
+        "admin": [
+          "LINE内のアカウント管理と、自分が管理する外部サイトのサーバー保守を区別する。",
+          "公式窓口で、影響する機能と自分に必要な手続きが案内されているか確認する。",
+          "別途運用している外部サイトがある場合は、そのCMS・ホスティング事業者の案内も確認する。"
+        ],
+        "user": [
+          "LINE公式ヘルプの「お知らせ」で、自分が利用する機能への影響を確認する。",
+          "トーク・通話・ログインなど、困っている内容に対応する公式の問い合わせ案内を確認する。",
+          "アプリ内から開いた外部サイトに問題がある場合は、そのサイトの運営元の案内も確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "LINEアプリと、LINEから開く外部サイトは分けて考えてください。関連サービスや個別のメンテナンス告知だけから、今回のPHP問題への影響・修正状況は推測しません。",
+      "domainSourceIds": [
+        "lineHome"
+      ],
+      "domains": [
+        {
+          "host": "line.me",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.line.me",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "social"
+      },
+      "id": "line",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。"
+      },
+      "keywords": [
+        "ライン",
+        "トーク",
+        "通話",
+        "メッセージ"
+      ],
+      "name": "LINE",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "LINEのPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "メッセージ・通話",
+      "supportSourceIds": [
+        "lineHelp"
+      ]
+    },
+    "lolipop": {
+      "actions": {
+        "admin": [
+          "公式告知のPHP設定・更新の案内を確認する。",
+          "表示、問い合わせフォーム、ファイルアップロードを実際に確認する。",
+          "使用中のCMSとの互換性と、追加のお知らせを確認する。"
+        ],
+        "user": [
+          "利用するサイトの運営元のお知らせを確認する。",
+          "フォームなどに不具合があれば運営元に知らせる。",
+          "自分に求められている手続きがあるか確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "PHPの更新状況と、サイト内の機能が動くことは別々に確認してください。10月23日の追加CVEへの個別対応について、この資料だけから完了とは判断しません。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "hosting"
+      },
+      "id": "lolipop",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "lolipopPhpNotice"
+        ],
+        "text": "10月22日の告知で、CVE-2026-109618 / CVE-2026-109619への修正適用とサイト表示の再開を報告しています。アップロード進捗機能を無効にしたことも明記しています。"
+      },
+      "keywords": [
+        "ロリポップ",
+        "ろりぽっぷ",
+        "lolipop",
+        "ロリポ",
+        "レンタルサーバー"
+      ],
+      "name": "ロリポップ!",
+      "officialAction": {
+        "sourceIds": [
+          "lolipopPhpNotice"
+        ],
+        "text": "サポート中のPHPへの切り替えと、サイト・フォーム・アップロードなどの動作確認を求めています。WordPressの本体・プラグイン・テーマも確認するよう案内しています。"
+      },
+      "php": {
+        "label": "公式に提供を確認",
+        "sourceIds": [
+          "lolipopPhpNotice"
+        ],
+        "text": "PHPの実行環境をサーバー側で提供しています。公式告知では、提供中のPHPの系列ごとに修正内容を説明しています。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "レンタルサーバーのPHPを確認",
+      "supportSourceIds": [
+        "lolipopSupport"
+      ]
+    },
+    "mercari": {
+      "actions": {
+        "admin": [
+          "メルカリへの出品は、サービスのサーバーを自分で管理する作業とは区別する。",
+          "メルカリShopsを使う場合は、Shops向けの公式案内を別途確認する。",
+          "リンク先など自分で管理するサイトがあれば、そのPHPの対応状況を確認する。"
+        ],
+        "user": [
+          "公式の稼働状況ページやアプリのお知らせで、対象となる機能を確認する。",
+          "購入・出品の操作が途中で止まった場合は、取引画面の状態を確認する。",
+          "取引について判断できない場合は、ヘルプセンターから対象の取引に関する案内を確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "稼働状況に掲載された障害が、今回のPHP問題に起因するとは限りません。メルカリShopsなど別の機能・サービスについては対象範囲を確認してください。",
+      "domains": [
+        {
+          "host": "jp.mercari.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "shopping"
+      },
+      "id": "mercari",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。"
+      },
+      "keywords": [
+        "mercari",
+        "めるかり",
+        "フリマ",
+        "出品"
+      ],
+      "name": "メルカリ",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "フリマの購入・出品・取引",
+      "supportSourceIds": [
+        "mercariStatus",
+        "mercariHelp"
+      ]
+    },
+    "note": {
+      "actions": {
+        "admin": [
+          "noteへの投稿や販売を行う立場では、PHPの保守はサービス側の管理範囲として扱う。",
+          "自分が管理する外部サイトや埋め込み先があれば、その事業者の対応状況を別に確認する。",
+          "独自ドメインのnote proサイトはURLだけで照合できないため、契約と公式案内の対象を確認する。"
+        ],
+        "user": [
+          "公式のお知らせを開き、利用する機能が告知の対象に含まれるか確認する。",
+          "記事内の動画や商品などだけが表示されない場合は、埋め込み元のお知らせを確認する。",
+          "追加のお知らせや個別の案内が届いていないか確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "この説明はnoteの公式告知の範囲です。外部サービスや、ほかの安全上の問題まで保証するものではありません。",
+      "domainSourceIds": [],
+      "domains": [
+        {
+          "host": "note.com",
+          "includeSubdomains": false
+        },
+        {
+          "host": "money.note.com",
+          "includeSubdomains": false
+        },
+        {
+          "host": "tales.note.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "admin": "publishing",
+        "user": "publishing"
+      },
+      "id": "note",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "noteNotice"
+        ],
+        "text": "10月22日の告知では、今回の脆弱性による影響はないと考えており、サービス停止の予定はないと説明しています。外部サービスの埋め込みは、そのサービス側のメンテナンスで表示できない場合があります。"
+      },
+      "keywords": [
+        "ノート",
+        "のーと",
+        "note pro",
+        "記事"
+      ],
+      "name": "note",
+      "officialAction": {
+        "sourceIds": [
+          "noteNotice"
+        ],
+        "text": "運営元は、投稿・閲覧・購入などを従来どおり利用できると案内しています。外部の埋め込みについては、各サービスのお知らせを確認するよう案内しています。"
+      },
+      "php": {
+        "label": "公式に不使用と説明",
+        "sourceIds": [
+          "noteNotice"
+        ],
+        "text": "note株式会社は、同社が提供するサービスでPHPを使用していないと説明しています。告知の対象はnote、note pro、noteマネー、TALESです。"
+      },
+      "roles": [
+        "user",
+        "admin"
+      ],
+      "short": "記事の閲覧・投稿・購入",
+      "supportSourceIds": []
+    },
+    "pixiv": {
+      "actions": {
+        "admin": [
+          "pixivへの投稿者・利用者としては、サーバー側のPHP更新は運営元の管理範囲として扱う。",
+          "作品からリンクする自分のサイトがある場合は、そちらのPHP修正状況を別に確認する。",
+          "運営元の更新報告の日付と、その後の追加案内を確認する。"
+        ],
+        "user": [
+          "公式のお知らせで、現在の利用状況と追加の案内を確認する。",
+          "自分宛ての個別通知がある場合は、対象と必要な手続きを確認する。",
+          "ほかのピクシブ関連サービスも使う場合は、それぞれの告知を確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "10月23日のPHP追加案内への個別対応は、この掲載資料では未確認です。pixivの更新報告から、関連サービス全体の対応状況や被害の有無は断定できません。",
+      "domainSourceIds": [],
+      "domains": [
+        {
+          "host": "pixiv.net",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.pixiv.net",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "social"
+      },
+      "id": "pixiv",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "pixivReport"
+        ],
+        "text": "10月22日の報告では、10月21日にPHPのセキュリティ更新を適用し、pixivのメンテナンスを解除した経緯を説明しています。"
+      },
+      "keywords": [
+        "ピクシブ",
+        "ぴくしぶ",
+        "作品",
+        "イラスト"
+      ],
+      "name": "pixiv",
+      "officialAction": {
+        "sourceIds": [
+          "pixivReport"
+        ],
+        "text": "この掲載資料から、一般利用者へのパスワード変更などの具体的な対応指示は未確認です。資料は運営側の更新作業についての報告です。"
+      },
+      "php": {
+        "label": "公式に使用を確認",
+        "sourceIds": [
+          "pixivReport"
+        ],
+        "text": "運営元の技術ブログで、pixivの稼働環境にPHPを使用し、今回の修正を適用したことを説明しています。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "作品の閲覧・投稿",
+      "supportSourceIds": []
+    },
+    "rakuten-ichiba": {
+      "actions": {
+        "admin": [
+          "楽天市場への出店と、自分のサーバーの管理を区別する。",
+          "店舗運営に関する案内は、出店者向けの公式窓口で確認する。",
+          "独立した通販サイトも運営している場合は、そのPHPの修正状況を別途確認する。"
+        ],
+        "user": [
+          "楽天市場のヘルプや公式のお知らせで、自分の利用への影響を確認する。",
+          "注文が完了したか分からない場合は、購入履歴を確認する。",
+          "配送・キャンセルなど個別の注文は該当ショップ、楽天市場全体の利用は公式ヘルプで確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "楽天市場以外の楽天グループのサービスへ、この情報を当てはめないでください。一般的なヘルプは、今回の問題への修正済みという根拠ではありません。",
+      "domainSourceIds": [
+        "rakutenDomains"
+      ],
+      "domains": [
+        {
+          "host": "www.rakuten.co.jp",
+          "includeSubdomains": false
+        },
+        {
+          "host": "item.rakuten.co.jp",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "shopping"
+      },
+      "id": "rakuten-ichiba",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。"
+      },
+      "keywords": [
+        "rakuten",
+        "楽天",
+        "らくてん",
+        "楽天市場",
+        "通販"
+      ],
+      "name": "楽天市場",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "ネット通販・ショップへの問い合わせ",
+      "supportSourceIds": [
+        "rakutenHelp"
+      ]
+    },
+    "sakura-rental": {
+      "actions": {
+        "admin": [
+          "契約が「さくらのレンタルサーバ」であることを確認する。",
+          "公式告知で、利用中のPHPが修正の対象に含まれるか確認する。",
+          "サイトの表示・フォームなどの動作と、追加のお知らせを確認する。"
+        ],
+        "user": [
+          "サイト運営元のお知らせを確認する。",
+          "利用できない機能と案内されている手続きを確認する。",
+          "不明点はサイト運営元へ問い合わせる。"
+        ]
+      },
+      "category": "service",
+      "caution": "この告知の対象は10月21日の2件です。10月23日の追加CVEへの個別対応は、この資料では未確認です。VPS内で自分が導入したPHPには、この修正済みの説明を適用できません。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "hosting"
+      },
+      "id": "sakura-rental",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "10月23日追記の告知では、10月21日に公表された2件について、サービスで提供するPHPへ必要な修正を適用したと説明しています。"
+      },
+      "keywords": [
+        "さくら",
+        "サクラ",
+        "sakura",
+        "レンタルサーバー"
+      ],
+      "name": "さくらのレンタルサーバ",
+      "officialAction": {
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "事業者は、サポートが続いているPHPの利用を勧めています。自分でOSやソフトウェアを管理する契約では、利用者自身による確認と修正が必要です。"
+      },
+      "php": {
+        "label": "公式に提供を確認",
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "事業者がPHPを提供するサービスです。個々の契約サイトでPHPを使っているかは、このアプリでは確認しません。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "事業者が提供するPHPを利用",
+      "supportSourceIds": [
+        "sakuraStatus"
+      ]
+    },
+    "sakura-vps": {
+      "actions": {
+        "admin": [
+          "VPS内でPHPを使っているか、管理担当者と配布元を確認する。",
+          "PHP・OS提供元の修正を適用し、必要な再起動と動作確認を行う。",
+          "10月23日の追加案内も、自分の構成に当てはまるか確認する。"
+        ],
+        "user": [
+          "利用するサイトの運営元のお知らせを確認する。",
+          "必要な手続きがあるか確認する。",
+          "サーバー会社の告知だけで個別サイトの状態を判断しない。"
+        ]
+      },
+      "category": "service",
+      "caution": "「VPSのサービス提供部分でPHP不使用」と「VPS内の自分のサイトでPHP不使用」は別です。個別環境が安全・対応不要とは判断できません。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "server"
+      },
+      "id": "sakura-vps",
+      "incident": {
+        "label": "利用環境は未確認",
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "事業者の提供部分には影響がないとの説明がありますが、利用者のVPS内で動くPHPの修正状況は示していません。"
+      },
+      "keywords": [
+        "さくら",
+        "サクラ",
+        "sakura",
+        "仮想サーバー",
+        "vps"
+      ],
+      "name": "さくらのVPS",
+      "officialAction": {
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "VPS内でPHPが動いている場合は、利用者自身が状況を確認し、提供元の情報に沿って更新するよう案内しています。"
+      },
+      "php": {
+        "label": "利用環境は未確認",
+        "sourceIds": [
+          "sakuraPhpNotice"
+        ],
+        "text": "事業者はVPSのサービス提供部分ではPHPを使っていないと説明しています。一方、利用者がVPS内に導入したPHPは別で、個々の環境は未確認です。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "VPS内のPHPは利用者が管理",
+      "supportSourceIds": [
+        "sakuraStatus"
+      ]
+    },
+    "wordpress-com": {
+      "actions": {
+        "admin": [
+          "契約先がWordPress.comか、自分で設置したWordPressかを区別する。",
+          "WordPress.comであれば、PHPの更新を自分で行おうとせず、運営元の続報を確認する。",
+          "別のサーバーも管理している場合は、その環境のPHP修正状況を別に確認する。"
+        ],
+        "user": [
+          "利用しているサイトがWordPress.comの管理するサービスか確認する。",
+          "公式告知の日付と、その後の追加のお知らせを確認する。",
+          "閲覧・購入などに支障がある場合は、サイト運営元の案内や問い合わせ窓口を確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "10月23日のPHP追加案内への個別対応は、この掲載資料では未確認です。独自ドメインはURLだけでは照合できません。自己管理のWordPressにこの対応状況は適用できません。",
+      "domainSourceIds": [
+        "wordpressComDomains"
+      ],
+      "domains": [
+        {
+          "host": "wordpress.com",
+          "includeSubdomains": true
+        }
+      ],
+      "groupByRole": {
+        "admin": "publishing",
+        "user": "publishing"
+      },
+      "id": "wordpress-com",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "wordpressComNotice"
+        ],
+        "text": "10月21日の告知では、WordPress.comでホストするサイトは、この日に公表されたPHPの問題に対する保護措置を実施済みと説明しています。"
+      },
+      "keywords": [
+        "ワードプレス",
+        "WordPress com",
+        "ブログ"
+      ],
+      "name": "WordPress.com",
+      "officialAction": {
+        "sourceIds": [
+          "wordpressComNotice"
+        ],
+        "text": "10月21日の告知では、この問題のためにWordPress.comのサイト所有者が行う作業はないと説明しています。自分でサーバーを運用する場合には更新を案内しています。"
+      },
+      "php": {
+        "label": "公式に使用を確認",
+        "sourceIds": [
+          "wordpressComNotice"
+        ],
+        "text": "WordPress.comはPHPを使用し、PHPの導入・保守・修正は運営元が行うと説明しています。"
+      },
+      "roles": [
+        "user",
+        "admin"
+      ],
+      "short": "運営会社に管理を任せるブログサービス",
+      "supportSourceIds": []
+    },
+    "wordpress-selfhost": {
+      "actions": {
+        "admin": [
+          "PHPを誰が管理しているか、契約先や保守担当者に確認する。",
+          "稼働中のPHPに今回の修正が適用されたかと、10月23日の追加案内に基づく対応の要否を確認する。",
+          "自分で管理する場合は、PHP・OS提供元の案内に沿って更新し、適用状況とサイトの動作を確認する。"
+        ],
+        "user": [
+          "そのサイトの運営元が出すお知らせを確認する。",
+          "自分が対象となる案内や手続きがあるか確認する。",
+          "掲載情報がなければ、影響の有無を推測せず運営元に確認する。"
+        ]
+      },
+      "category": "cms",
+      "caution": "WordPress本体やプラグインの更新だけで、PHP自体の修正が完了するとは限りません。URLやページの見た目からCMS・PHPの版を推測しません。",
+      "domainSourceIds": [],
+      "domains": [],
+      "groupByRole": {
+        "admin": "cms"
+      },
+      "id": "wordpress-selfhost",
+      "incident": {
+        "label": "未確認",
+        "sourceIds": [
+          "wordpressComNotice"
+        ],
+        "text": "個別サイトへの修正適用状況は未確認です。WordPress.comの対応済みという告知は、自分で設置したWordPressの対応を示すものではありません。"
+      },
+      "keywords": [
+        "ワードプレス",
+        "WordPress org",
+        "自作",
+        "自分のサイト"
+      ],
+      "name": "自分で設置したWordPress",
+      "officialAction": {
+        "sourceIds": [
+          "wordpressComNotice"
+        ],
+        "text": "WordPress.comの公式告知でも、自分でサーバーを運用する場合には更新を案内しています。実際の対応は、PHPと利用するホスティング事業者の最新の案内で確認してください。"
+      },
+      "php": {
+        "label": "公式に使用を確認",
+        "sourceIds": [
+          "wordpressRequirements"
+        ],
+        "text": "WordPress公式の動作要件にはPHPが含まれます。ただし、あなたのサイトで動いているPHPの版や修正状況は、このアプリでは確認できません。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "レンタルサーバーなどで動かすCMS",
+      "supportSourceIds": []
+    },
+    "x": {
+      "actions": {
+        "admin": [
+          "X内のアカウント管理と、自分が管理する外部サイトのサーバー保守を区別する。",
+          "公式窓口で、影響する機能と自分に必要な手続きが案内されているか確認する。",
+          "別途運用している外部サイトがある場合は、そのCMS・ホスティング事業者の案内も確認する。"
+        ],
+        "user": [
+          "Xの公式ヘルプで、アカウントや利用機能に関する案内を確認する。",
+          "自分宛ての通知がある場合は、対象と必要な手続きを公式サイト上で確認する。",
+          "投稿の埋め込みやリンク先に問題がある場合は、それぞれのサービスのお知らせを確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "掲載情報なしから、安全や対応不要とは判断できません。短縮URLや旧ドメインの転送先は調べません。URL照合で一致しない場合は一覧からXを選んでください。",
+      "domainSourceIds": [
+        "xHelp"
+      ],
+      "domains": [
+        {
+          "host": "x.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "social"
+      },
+      "id": "x",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。"
+      },
+      "keywords": [
+        "Twitter",
+        "ツイッター",
+        "エックス",
+        "SNS"
+      ],
+      "name": "X",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "XのPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "旧Twitter・投稿やメッセージ",
+      "supportSourceIds": [
+        "xHelp"
+      ]
+    },
+    "xserver": {
+      "actions": {
+        "admin": [
+          "契約がレンタルサーバーかVPSかを確認する。",
+          "使用中のPHPの系列と、公式告知に書かれた適用範囲を照合する。",
+          "古い系列や追加の指示は、最新の告知またはサポートへ確認する。"
+        ],
+        "user": [
+          "利用するサイトの運営元のお知らせを確認する。",
+          "必要な手続きがあるか確認する。",
+          "サーバー会社の対応から個別サイトの被害の有無を推測しない。"
+        ]
+      },
+      "category": "service",
+      "caution": "ここで紹介する修正は10月21日の問題への説明です。10月23日の追加CVEへの個別対応は未確認です。XServer VPSへ同じ対応済みの説明を広げないでください。",
+      "domains": [],
+      "groupByRole": {
+        "admin": "hosting"
+      },
+      "id": "xserver",
+      "incident": {
+        "label": "公式説明あり",
+        "sourceIds": [
+          "xserverPhpNotice"
+        ],
+        "text": "10月23日追記時点の告知では、提供するPHP 5.6〜8.5は対象サーバーへの修正適用が完了、5.1〜5.5は過半数への適用完了と説明しています。"
+      },
+      "keywords": [
+        "xserver",
+        "x server",
+        "エックス",
+        "レンタルサーバー"
+      ],
+      "name": "エックスサーバー",
+      "officialAction": {
+        "sourceIds": [
+          "xserverPhpNotice"
+        ],
+        "text": "PHP 5.6〜8.5の利用者は、この問題のために急いでバージョンを変える必要はないと案内しています。利用状況によって追加対応を依頼する場合があるとも説明しています。"
+      },
+      "php": {
+        "label": "公式に提供を確認",
+        "sourceIds": [
+          "xserverPhpNotice"
+        ],
+        "text": "レンタルサーバーでPHPを提供しています。事業者の告知はPHPの系列ごとに修正状況を分けています。"
+      },
+      "roles": [
+        "admin"
+      ],
+      "short": "レンタルサーバーのPHPを確認",
+      "supportSourceIds": [
+        "xserverStatus"
+      ]
+    },
+    "yahoo-shopping": {
+      "actions": {
+        "admin": [
+          "Yahoo!ショッピングへの出店と、独自サイトのサーバー管理を分けて考える。",
+          "出店者向けの案内や問い合わせ先で、店舗側に必要な作業を確認する。",
+          "別途管理するサーバーがあれば、そのPHPの修正状況を確認する。"
+        ],
+        "user": [
+          "Yahoo!ショッピングの公式ヘルプやお知らせで、利用への影響を確認する。",
+          "購入操作が完了したか不明な場合は、注文履歴を確認してから操作を続ける。",
+          "商品や配送の問題は注文先のストア、サービス全体の問題は公式ヘルプで確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "Yahoo!ショッピングの確認先です。Yahoo! JAPANの別サービスやPayPayの対応状況までは示していません。",
+      "domainSourceIds": [
+        "yahooShoppingSite"
+      ],
+      "domains": [
+        {
+          "host": "shopping.yahoo.co.jp",
+          "includeSubdomains": false
+        },
+        {
+          "host": "store.shopping.yahoo.co.jp",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "shopping"
+      },
+      "id": "yahoo-shopping",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。"
+      },
+      "keywords": [
+        "yahoo",
+        "ヤフー",
+        "やふー",
+        "ショッピング",
+        "通販"
+      ],
+      "name": "Yahoo!ショッピング",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "ネット通販・注文やストアの確認",
+      "supportSourceIds": [
+        "yahooShoppingHelp"
+      ]
+    },
+    "youtube": {
+      "actions": {
+        "admin": [
+          "YouTube内のアカウント管理と、自分が管理する外部サイトのサーバー保守を区別する。",
+          "公式窓口で、影響する機能と自分に必要な手続きが案内されているか確認する。",
+          "別途運用している外部サイトがある場合は、そのCMS・ホスティング事業者の案内も確認する。"
+        ],
+        "user": [
+          "公式ヘルプで、視聴・投稿など自分が利用する機能のお知らせを確認する。",
+          "アカウントへの個別通知がある場合は、公式アプリやサイトから内容を確認する。",
+          "サイトに埋め込まれた動画だけが表示できない場合は、動画側と掲載サイト側の案内を分けて確認する。"
+        ]
+      },
+      "category": "service",
+      "caution": "YouTubeのPHP利用・今回の問題への対応状況は未確認です。短縮URLの転送先は調べないため、短縮URLから一致しない場合は一覧でYouTubeを選んでください。",
+      "domainSourceIds": [
+        "youtubeContact"
+      ],
+      "domains": [
+        {
+          "host": "youtube.com",
+          "includeSubdomains": false
+        },
+        {
+          "host": "www.youtube.com",
+          "includeSubdomains": false
+        }
+      ],
+      "groupByRole": {
+        "user": "social"
+      },
+      "id": "youtube",
+      "incident": {
+        "label": "掲載情報なし",
+        "sourceIds": [],
+        "text": "このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。"
+      },
+      "keywords": [
+        "ユーチューブ",
+        "ようつべ",
+        "動画",
+        "配信"
+      ],
+      "name": "YouTube",
+      "officialAction": {
+        "sourceIds": [],
+        "text": "今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。"
+      },
+      "php": {
+        "label": "未確認",
+        "sourceIds": [],
+        "text": "YouTubeのPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。"
+      },
+      "roles": [
+        "user"
+      ],
+      "short": "動画の視聴・投稿",
+      "supportSourceIds": [
+        "youtubeHelp"
+      ]
+    }
+  },
+  "sources": {
+    "amazonHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "Amazon.co.jp: カスタマーサービスへの連絡",
+      "url": "https://www.amazon.co.jp/gp/help/customer/display.html?nodeId=GSD587LKW72HKU2V"
+    },
+    "baseHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "BASE: ショップ向け・購入者向けヘルプ",
+      "url": "https://help.thebase.in/hc/ja"
+    },
+    "boothDomains": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "BOOTH: ショップURLの案内",
+      "url": "https://booth.pixiv.help/hc/ja/articles/115005850707"
+    },
+    "boothNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-21",
+      "title": "BOOTH: 緊急メンテナンスに伴う注文・ログインへの影響について (復旧)",
+      "url": "https://booth.pm/announcements/1004"
+    },
+    "conohaWingPhpNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "ConoHa WING: PHPの脆弱性への対応完了のお知らせ (終報)",
+      "url": "https://www.conoha.jp/wing/news/?ap=2015054909"
+    },
+    "conohaWingSupport": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "ConoHa WING: サポート",
+      "url": "https://support.conoha.jp/wing/"
+    },
+    "drupalNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-21",
+      "title": "Drupal: PHPの緊急更新に関する案内 (PSA-2026-10-20)",
+      "url": "https://www.drupal.org/psa-2026-10-20"
+    },
+    "drupalRequirements": {
+      "checkedAt": "2026-10-24",
+      "kind": "technical",
+      "publishedAt": null,
+      "title": "Drupal: PHPの動作要件",
+      "url": "https://www.drupal.org/docs/getting-started/system-requirements/php-requirements"
+    },
+    "eccubePhpNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "EC-CUBE: PHPのセキュリティリリース公開について (対応のお願い)",
+      "url": "https://www.ec-cube.net/news/detail.php?news_id=492"
+    },
+    "eccubeSupport": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "EC-CUBE: サポート",
+      "url": "https://www.ec-cube.net/support/"
+    },
+    "fanboxDomain": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "pixiv FANBOX: クリエイターページURLの例 (英語)",
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/52236444926873-Can-I-remove-FANBOX-posts-that-were-reuploaded-without-permission-on-external-websites-from-Google-search-results"
+    },
+    "fanboxFindCreators": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "pixiv FANBOX: クリエイターを探す方法 (英語)",
+      "url": "https://fanbox.pixiv.help/hc/en-us/articles/360011710754-How-can-I-find-creators"
+    },
+    "fanboxHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "pixiv FANBOX: ヘルプセンター",
+      "url": "https://fanbox.pixiv.help/hc/ja"
+    },
+    "instagramHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "Instagram: ヘルプセンター",
+      "url": "https://help.instagram.com/?locale=ja_JP"
+    },
+    "instagramHome": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "Instagram: 公式サイト",
+      "url": "https://www.instagram.com/"
+    },
+    "lineHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "LINE: ヘルプセンター・お知らせ",
+      "url": "https://help.line.me/line/smartphone/sp?lang=ja"
+    },
+    "lineHome": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "LINE: 公式サイト",
+      "url": "https://www.line.me/ja/"
+    },
+    "lolipopPhpNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "ロリポップ!: PHPの脆弱性へのメンテナンス完了と経緯",
+      "url": "https://lolipop.jp/info/news/8239/"
+    },
+    "lolipopSupport": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "ロリポップ!: お問い合わせ",
+      "url": "https://lolipop.jp/support-chat/"
+    },
+    "mercariHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "メルカリ: ヘルプセンター",
+      "url": "https://help.jp.mercari.com/"
+    },
+    "mercariStatus": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "メルカリ: サービスの稼働状況",
+      "url": "https://status.jp.mercari.com/"
+    },
+    "noteNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "note: PHPの脆弱性について - noteのサービスではPHPを使用していません",
+      "url": "https://note.jp/n/n09b0faecd702"
+    },
+    "pixivReport": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "pixiv: PHP 8.5.12の緊急リリースにpixivはどう対応したか",
+      "url": "https://inside.pixiv.blog/2026/10/22/193321"
+    },
+    "rakutenDomains": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "楽天市場: 公式サイトと商品ページのURLに関する案内",
+      "url": "https://ichiba.faq.rakuten.net/detail/000010716"
+    },
+    "rakutenHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "楽天市場: ヘルプ・お問い合わせ",
+      "url": "https://ichiba.faq.rakuten.net/"
+    },
+    "sakuraPhpNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "さくらインターネット: PHPの脆弱性に関する対応状況 (10月23日追記)",
+      "url": "https://www.sakura.ad.jp/corporate/information/announcements/2026/10/22/1968226117/"
+    },
+    "sakuraStatus": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "さくらインターネット: メンテナンス・障害情報",
+      "url": "https://help.sakura.ad.jp/status/"
+    },
+    "wordpressComDomains": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "WordPress.com: サイトアドレスの仕組み",
+      "url": "https://wordpress.com/support/changing-site-address/"
+    },
+    "wordpressComNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-21",
+      "title": "WordPress.com: 今回の重大なPHP脆弱性への対応について",
+      "url": "https://wordpress.com/blog/2026/10/21/php2shell-vulnerabilities/"
+    },
+    "wordpressRequirements": {
+      "checkedAt": "2026-10-24",
+      "kind": "technical",
+      "publishedAt": null,
+      "title": "WordPress.org: 動作要件",
+      "url": "https://wordpress.org/about/requirements/"
+    },
+    "xHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "X: ヘルプセンター",
+      "url": "https://help.x.com/ja"
+    },
+    "xserverPhpNotice": {
+      "checkedAt": "2026-10-24",
+      "kind": "incident",
+      "publishedAt": "2026-10-22",
+      "title": "エックスサーバー: 公式サイト・管理画面等の一時停止とPHPへの対応",
+      "url": "https://www.xserver.ne.jp/news_detail.php?view_id=19734"
+    },
+    "xserverStatus": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "エックスサーバー: 障害・メンテナンス情報",
+      "url": "https://www.xserver.ne.jp/support/information.php"
+    },
+    "yahooShoppingHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "Yahoo!ショッピング: サービスの案内とヘルプ",
+      "url": "https://support.yahoo-net.jp/SccShopping/s/article/H000011889"
+    },
+    "yahooShoppingSite": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "Yahoo!ショッピング: 公式サイト",
+      "url": "https://shopping.yahoo.co.jp/"
+    },
+    "youtubeContact": {
+      "checkedAt": "2026-10-24",
+      "kind": "domain",
+      "publishedAt": null,
+      "title": "YouTube: 公式のお問い合わせ案内",
+      "url": "https://www.youtube.com/t/contact_us?hl=ja"
+    },
+    "youtubeHelp": {
+      "checkedAt": "2026-10-24",
+      "kind": "support",
+      "publishedAt": null,
+      "title": "YouTube: ヘルプセンター",
+      "url": "https://support.google.com/youtube/?hl=ja"
+    }
+  }
+}

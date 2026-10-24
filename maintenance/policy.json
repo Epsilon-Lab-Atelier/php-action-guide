@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "Epsilon-Lab-Atelier/php-action-guide",
-  "repositoryConfirmed": false,
-  "enabled": false,
+  "repositoryConfirmed": true,
+  "enabled": true,
+  "activation": "repository_push",
   "publishedSiteUrl": null,
   "account": "Epsilon-Lab-Atelier",
   "updateMode": "pull_request",

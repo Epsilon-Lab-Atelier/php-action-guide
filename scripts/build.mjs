@@ -1,9 +1,9 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
-const [template, style, url, discovery, retail, social, admin, catalog, app] = await Promise.all(['src/index.html','src/style.css','src/url.mjs','src/discovery.mjs','src/catalog-retail.mjs','src/catalog-social.mjs','src/catalog-admin.mjs','src/catalog.mjs','src/app.mjs'].map(read));
+const [template, style, url, discovery, usage, retail, social, admin, catalog, profiles, breaches, incidentModel, updates, memo, app] = await Promise.all(['src/index.html','src/style.css','src/url.mjs','src/discovery.mjs','src/usage.mjs','src/catalog-retail.mjs','src/catalog-social.mjs','src/catalog-admin.mjs','src/catalog.mjs','src/usage-profiles.mjs','src/incidents.mjs','src/incident-model.mjs','src/updates.mjs','src/memo.mjs','src/app.mjs'].map(read));
 // Only project-owned modules are bundled; no network or third-party dependencies.
-const script = [url, discovery, retail, social, admin, catalog, app].map(s => s.replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '')).join('\n');
+const script = [url, discovery, usage, retail, social, admin, catalog, profiles, breaches, incidentModel, updates, memo, app].map(s => s.replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '')).join('\n');
 if (/<\/script/i.test(script) || /<\/style/i.test(style)) throw new Error('Unsafe closing tag in bundle');
 const hash = s => createHash('sha256').update(s).digest('base64');
 const brandImage = `data:image/png;base64,${(await readFile(new URL('../src/assets/epsilon-mark.png', import.meta.url))).toString('base64')}`;

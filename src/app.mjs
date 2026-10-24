@@ -144,8 +144,7 @@ function switchMode(mode) {
 $('#select-mode').addEventListener('click',()=>switchMode('select'));
 $('#url-mode').addEventListener('click',()=>switchMode('url'));
 $('#unknown-button').addEventListener('click',()=>selectService(null));
-$('#url-form').addEventListener('submit', event => {
-  event.preventDefault();
+function searchUrl() {
   const result = resolveInput($('#url-input').value,services);
   if (!result.ok) {
     Object.assign(state,{kind:'invalid',service:null,hostname:null}); render();
@@ -155,6 +154,14 @@ $('#url-form').addEventListener('submit', event => {
   }
   $('#url-input').value = result.hostname; // Drop path, queries and fragments immediately.
   selectService(result.service,result.hostname);
+}
+// Search is local UI work, not a form submission. Preview frames can forbid forms.
+$('#url-search-button').addEventListener('click', searchUrl);
+$('#url-input').addEventListener('keydown', event => {
+  if (event.key === 'Enter' && !event.isComposing) {
+    event.preventDefault();
+    searchUrl();
+  }
 });
 // The catalog is a dated snapshot. Do not silently present it as live information.
 const catalogAge = Date.now() - Date.parse(`${checkedAt}T00:00:00+09:00`);

@@ -1,5 +1,6 @@
 node_modules/
 .openai/
 .qa/
+dist/__qa*.html
 *.zip
 .DS_Store

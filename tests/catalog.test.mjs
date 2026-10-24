@@ -94,3 +94,14 @@ test('missing incident evidence remains explicitly unknown for BOOTH and individ
   assert.equal(services.find(({ id }) => id === 'booth').php.label, '未確認');
   for (const id of ['booth', 'wordpress-selfhost', 'drupal']) assert.equal(services.find((service) => service.id === id).incident.label, '未確認');
 });
+
+test('a service name explains the URL requirement while an unregistered domain stays unknown', () => {
+  const name = resolveInput('amazon', services);
+  assert.equal(name.ok, false);
+  assert.match(name.error, /サービス名だけでは検索できません/);
+  for (const input of ['amazon.co.jp', 'https://amazon.co.jp/']) {
+    const domain = resolveInput(input, services);
+    assert.equal(domain.ok, true);
+    assert.equal(domain.service, null);
+  }
+});

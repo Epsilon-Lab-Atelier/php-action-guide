@@ -59,6 +59,9 @@ export function parseInput(input) {
     return fail('IPアドレスは照合対象外です。サービスのドメインを入力してください。');
   }
   const labels = hostname.split('.');
+  if (labels.length < 2) {
+    return fail('サービス名だけでは検索できません。note.com のようなドメインか、https://... で始まるURLを入力してください。');
+  }
   if (hostname.length > 253 || labels.length < 2 || labels.some((label) => !/^[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?$/u.test(label))) {
     return fail('ドメインの形式を確認してください。例: note.com');
   }

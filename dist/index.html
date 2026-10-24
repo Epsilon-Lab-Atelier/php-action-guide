@@ -4,52 +4,320 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-SL/lCeSC2ywcyVElaTsuz2bJX45QftnfyIa0RMUNdgg='; style-src 'sha256-wm5pUzexO3LxkDxxUUWzPPjsJDltwNllVtQiIVbMwiw='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-oD8S405gjYtd44aza5ckGCGgW8moGiIZrCwV92nZgKE='; style-src 'sha256-nttz8IQbBTyISm80lOWgQG4OMgW7oT/sJZV9V1yYqGw='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="利用するサービスの公式情報を確認して、PHPの問題について自分に必要な行動を整理するガイドです。">
 <meta name="color-scheme" content="light">
 <title>PHPの問題、何をすればいい？ | EpsilonLab</title>
-<style>:root{--ink:#203e45;--muted:#576f73;--paper:#f7f8f5;--white:#fff;--teal:#176455;--mint:#eaf4ec;--line:#dbe4df;--orange:#dc896a;--amber:#79520e;--amber-bg:#fcf4e3;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}*{box-sizing:border-box}body{margin:0;font-size:15px;line-height:1.8}button,input{font:inherit}button,a,input,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:var(--teal);text-underline-offset:4px;overflow-wrap:anywhere}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[tabindex="-1"]:focus-visible{outline:3px solid #c66b46;outline-offset:4px}button{color:var(--ink)}[hidden]{display:none!important}.wrap{max-width:1160px;margin:0 auto;padding-inline:32px}.site-header{height:100px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-size:23px;font-weight:750;letter-spacing:-.8px;color:var(--ink)}.brand-mark{height:34px;width:34px;background:var(--ink);color:#fff;border-radius:10px;display:grid;place-items:center;font-family:Georgia,serif;font-size:29px;line-height:1;padding-bottom:6px}.header-label{font-size:10px;letter-spacing:1.6px;font-weight:650}.version{margin-left:12px;border:1px solid var(--line);border-radius:20px;padding:5px 9px;font-size:10px;letter-spacing:.3px}.hero{padding:46px 44px;display:grid;grid-template-columns:1.55fr 1fr;align-items:center;gap:50px;background:#eaf0eb;border:1px solid #e3e9e2;border-radius:20px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;background:var(--orange);width:6px;height:42px;left:0;top:59px}.eyebrow{font-size:11px;letter-spacing:1.2px;font-weight:700;color:var(--teal);margin:0 0 16px}h1{font-size:clamp(28px,3.6vw,43px);line-height:1.5;letter-spacing:.01em;margin:0;font-weight:750}.hero-copy{margin:20px 0 0;font-size:14px;color:var(--muted);line-height:1.9}.hero-note{border-left:1px solid #c9d6ce;padding-left:36px}.tiny-label{font-size:12px;letter-spacing:.05em;font-weight:700}.hero-note ol{list-style:none;padding:0;margin:20px 0}.hero-note li{margin:13px 0;font-size:14px;font-weight:600}.hero-note li span{font-size:11px;font-weight:400;color:var(--teal);padding-right:12px}.hero-note p{font-size:11px;line-height:1.8;color:var(--muted);margin:0}.update-bar{display:flex;justify-content:space-between;align-items:center;margin:22px 0 30px;font-size:12px;gap:15px}.status-dot{display:inline-block;width:7px;height:7px;background:var(--teal);border-radius:50%;margin-right:8px}.update-bar a{font-size:12px}.workspace{display:grid;grid-template-columns:340px minmax(0,1fr);gap:28px;align-items:start}.selector-panel{border:1px solid var(--line);border-radius:16px;background:var(--white);overflow:hidden}.step{padding:25px}.step+.step{border-top:1px solid var(--line)}.step-heading{display:flex;align-items:center;gap:10px;margin-bottom:5px}.step-number{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:white;font-size:12px;font-weight:600}h2{font-size:18px;line-height:1.65;margin:0}h3{font-size:15px;line-height:1.7;margin:0 0 12px}.hint{font-size:12px;color:var(--muted);line-height:1.8;margin:8px 0 16px}.role-options{display:grid;gap:9px;margin-top:17px}.role-button{border:1px solid var(--line);border-radius:10px;background:white;text-align:left;padding:12px 15px;position:relative;min-height:66px}.role-button:after{content:"";position:absolute;top:24px;right:14px;width:15px;height:15px;border:1px solid #a6b7ac;border-radius:50%;background:white}.role-button.active{border:1.5px solid var(--teal);padding:11.5px 14.5px;background:var(--mint)}.role-button.active:after{background:var(--teal);box-shadow:inset 0 0 0 3px white}.role-button strong{display:block;font-size:13px;font-weight:650}.role-button span{display:block;font-size:11px;color:var(--muted);padding-right:16px}.mode-switch{display:grid;grid-template-columns:1fr 1fr;background:#f0f3ef;border-radius:8px;padding:4px;margin:20px 0 15px}.mode-switch button{border:0;background:none;border-radius:6px;font-size:12px;padding:9px 6px;min-height:42px}.mode-switch .active{background:white;box-shadow:0 1px 4px #203e4517;color:var(--teal);font-weight:700}.service-list{display:grid;gap:8px}.service-button{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:white;min-height:62px}.service-button:hover{background:#f4f8f4}.service-button[aria-pressed=true]{background:var(--mint);border-color:var(--teal)}.service-initial{height:31px;width:31px;display:grid;place-items:center;flex-shrink:0;border-radius:8px;background:#eff3ef;font-family:Georgia,serif;font-weight:700;font-size:18px;color:var(--teal)}.service-button strong{font-size:13px;font-weight:650;display:block}.service-button small{font-size:10px;color:var(--muted);display:block}.service-button .chevron{margin-left:auto;font-size:18px;color:#81998b}.text-button{border:0;background:none;font-size:12px;text-decoration:underline;text-underline-offset:4px;padding:15px 2px 3px;min-height:44px;color:var(--muted)}label[for=url-input]{font-size:12px;font-weight:650;display:block;margin-top:18px}input[type=text]{display:block;width:100%;height:48px;border:1px solid #96aca2;background:white;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:16px;min-width:0}.primary-button{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-radius:8px;background:var(--teal);color:#fff;padding:12px 17px;font-size:13px;font-weight:650;min-height:46px}.primary-button:hover{background:#0d5144}.privacy-note{border-top:1px solid var(--line);margin-top:24px;padding-top:18px;font-size:11px;color:var(--muted);line-height:1.9}.privacy-note strong{color:var(--ink)}.privacy-note p{margin-bottom:0}.error{color:#9f382a;background:#fff0e9;font-size:12px;padding:12px;border-radius:8px;overflow-wrap:anywhere}.result-panel{min-width:0}.empty-state{border:1px dashed #becfc3;border-radius:16px;min-height:620px;padding:80px 35px 36px;text-align:center;background:#fbfcf9;display:flex;flex-direction:column;align-items:center}.empty-state h2{font-size:21px}.empty-state>p:not(.eyebrow){font-size:14px;color:var(--muted);line-height:2;margin:17px 0}.document-icon{display:block;width:68px;height:83px;border:1.5px solid #adc8b8;border-radius:10px;background:#e8f2e9;transform:rotate(-6deg);margin:0 0 35px;position:relative;padding:18px 14px;box-shadow:8px 7px 0 #f2e7d8}.document-icon i{display:block;height:4px;background:#8bb29b;border-radius:3px;margin-bottom:11px}.document-icon i:last-child{width:65%}.empty-tip{margin-top:35px;border-top:1px solid var(--line);padding-top:25px;font-size:12px;max-width:380px;text-align:left}.empty-tip strong{font-size:12px;font-weight:600}.empty-tip p{font-size:12px;color:var(--muted);margin-bottom:0}.result-header{padding:4px 0 20px;display:flex;align-items:start;justify-content:space-between;gap:15px}.result-kicker{font-size:10px;letter-spacing:1px;color:var(--teal);margin:0 0 5px;font-weight:700}.result-header h2{font-size:27px;letter-spacing:-.03em;overflow-wrap:anywhere;line-height:1.5}.result-header .hint{margin:6px 0 0;font-size:11px;overflow-wrap:anywhere}.role-label{font-size:10px;background:#e8eeea;padding:5px 10px;border-radius:20px;flex-shrink:0;margin-top:6px}.result-card{border:1px solid var(--line);border-radius:13px;padding:24px 26px;background:white;margin-bottom:15px}.card-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}.card-title span{font-size:10px;color:#647f71;font-weight:600;letter-spacing:1px}.card-title h3{font-size:14px;margin:0}.badge{display:inline-block;border-radius:5px;padding:3px 8px;background:var(--mint);color:#245a43;font-size:11px;font-weight:600;margin-bottom:8px}.badge.unknown{background:var(--amber-bg);color:var(--amber)}.result-card p{font-size:13px;line-height:1.9;margin:5px 0 10px;overflow-wrap:anywhere}.inline-sources{display:flex;flex-wrap:wrap;gap:5px 12px;font-size:11px;margin-top:12px}.inline-sources a{color:#436a5c}.action-card{border-top:3px solid var(--teal);padding-top:21px}.action-card .card-title h3{font-size:16px}.action-subtitle{font-size:11px!important;color:var(--muted);margin:17px 0 12px!important}.official-action{padding:12px 14px;background:#f1f5f0;border-radius:7px;font-size:12px!important}.checklist{list-style:none;padding:0;margin:0}.checklist li+li{border-top:1px solid #e7ece6}.checklist label{display:flex;align-items:flex-start;gap:12px;padding:13px 0;cursor:pointer;font-size:13px;line-height:1.9}.checklist input{width:19px;height:19px;accent-color:var(--teal);margin:3px 0 0;flex-shrink:0}.checklist input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}.progress-note{font-size:10px!important;color:var(--muted);margin:7px 0 0!important}.notice{padding:15px 18px;border-radius:9px;background:var(--amber-bg);color:#725215;font-size:12px;line-height:1.9}.stale{margin-bottom:25px}.source-details{background:transparent;border-top:1px solid var(--line);margin-top:20px}.source-details summary{font-size:12px;padding:16px 0;cursor:pointer;font-weight:650}.source-list{list-style:none;margin:0;padding:0 0 10px}.source-list li{padding:11px 0;border-top:1px solid var(--line);font-size:11px}.source-list a{display:block;font-size:12px;font-weight:600}.source-list small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.issue-section{margin-top:70px;padding-top:35px;border-top:1px solid #cddbd1;display:grid;grid-template-columns:1fr 1.35fr;gap:0 50px}.issue-section>div{grid-row:span 2}.issue-section h2{font-size:21px}.issue-section>div>p:not(.eyebrow){font-size:13px;color:var(--muted);margin:15px 0}.issue-section details{border-bottom:1px solid var(--line);align-self:start}.issue-section summary{padding:17px 0;font-size:13px;font-weight:600;cursor:pointer}.detail-body{padding:3px 0 16px;font-size:12px;line-height:1.9}.detail-body h3{margin-top:16px;font-size:13px}.detail-body p{margin:10px 0}.detail-body code{font-size:11px;overflow-wrap:anywhere;color:#365d53;background:#eaf0eb;padding:2px 4px;border-radius:3px}.site-footer{margin-top:70px;padding-top:27px;padding-bottom:34px;border-top:1px solid var(--line);display:flex;align-items:center;gap:20px;font-size:10px;color:var(--muted)}.brand-text{font-size:15px;color:var(--ink);font-weight:700}.site-footer p{flex:1}.site-footer a{font-size:10px}.skip{position:absolute;top:-100px;left:20px;background:white;z-index:10;padding:12px}.skip:focus{top:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:880px){.wrap{padding-inline:24px}.hero{padding:34px;gap:28px;grid-template-columns:1.4fr 1fr}.hero-note{padding-left:25px}.workspace{grid-template-columns:300px minmax(0,1fr);gap:20px}.step{padding:20px}.result-card{padding:20px}.result-header{flex-wrap:wrap}.role-label{margin:0}.issue-section{gap:25px}.hero-note li{font-size:12px}.empty-state{padding:65px 22px 28px}}
-@media(max-width:680px){body{font-size:14px}.wrap{padding-inline:18px}.site-header{height:78px}.brand{font-size:21px}.header-label{font-size:8px;letter-spacing:1px}.version{display:none}.hero{padding:29px 25px;display:block;border-radius:15px}.hero:before{top:39px;height:33px}.hero .eyebrow{font-size:10px;margin-bottom:13px}h1{font-size:30px;line-height:1.55}.hero-copy{font-size:12px;margin-top:17px}.hero-note{display:none}.update-bar{font-size:10px;margin:18px 0 25px;gap:8px;align-items:flex-start}.update-bar a{font-size:10px}.workspace{display:block}.selector-panel{margin-bottom:28px}.step{padding:22px}.role-options{grid-template-columns:1fr 1fr;gap:8px}.role-button{padding:12px 10px 26px;min-height:92px}.role-button.active{padding:11.5px 9.5px 25.5px}.role-button:after{width:13px;height:13px;top:auto;bottom:10px;right:12px}.role-button strong{font-size:11px}.role-button span{font-size:10px;padding-right:0}.step h2{font-size:17px}.service-list{grid-template-columns:1fr 1fr;gap:8px}.service-button{padding:11px 10px;gap:8px;min-height:77px;align-items:flex-start}.service-initial{display:none}.service-button strong{font-size:12px}.service-button small{font-size:10px}.service-button .chevron{font-size:15px}.service-button[data-id=wordpress-selfhost] strong{font-size:11px}.text-button{font-size:11px}.empty-state{min-height:410px;padding:44px 22px 28px}.empty-state h2{font-size:18px}.empty-state>p:not(.eyebrow){font-size:12px}.empty-tip{margin-top:17px;padding-top:20px}.document-icon{width:51px;height:64px;padding:13px 10px;margin-bottom:30px}.document-icon i{height:3px;margin-bottom:9px}.result-header{padding-top:0;gap:10px}.result-header h2{font-size:26px}.result-card{padding:21px 20px}.result-card p{font-size:13px}.card-title h3{font-size:13px}.card-title{gap:8px}.action-card .card-title h3{font-size:15px}.checklist label{font-size:13px}.notice{font-size:11px}.issue-section{margin-top:45px;display:block;padding-top:28px}.issue-section h2{font-size:18px}.issue-section>div>p:not(.eyebrow){font-size:12px}.issue-section summary{font-size:12px}.site-footer{margin-top:42px;gap:10px;flex-wrap:wrap;padding-top:24px}.site-footer p{flex-basis:60%;margin:0}.site-footer a{margin-left:auto}.desktop-break{display:none}}
-@media(prefers-reduced-motion:no-preference){button{transition:background .15s,border-color .15s}html{scroll-behavior:smooth}}
-@media print{.selector-panel,.hero-note,.site-header,.site-footer,.empty-state,.mode-switch,.source-details summary{display:none}.wrap{padding:0;max-width:none}.hero{padding:10px;border:0}.hero h1{font-size:24px}.hero-copy{display:none}.workspace{display:block}.result-card{break-inside:avoid}.issue-section{display:block;margin-top:20px}.result-panel{width:100%}.source-details{display:block}.source-list{display:block}}
-
-.result-card p,.checklist label{font-size:14px}.result-panel{scroll-margin-top:20px}@media(max-width:680px){.result-card p,.checklist label{font-size:14px}.notice{font-size:12px}}
-
-@media(max-width:680px){h1{font-size:clamp(20px,6.2vw,28px)}.title-line{white-space:nowrap}}
-
-#url-input{color:#203e45;-webkit-text-fill-color:#203e45;caret-color:#203e45;background-color:#fff;color-scheme:light}#url-input::placeholder{color:#576f73;-webkit-text-fill-color:#576f73;opacity:1}
-
-label[for=service-filter]{display:block;font-size:12px;font-weight:650}.name-search{position:relative;margin:8px 0 15px}.name-search input{display:block;width:100%;min-width:0;height:46px;border:1px solid #96aca2;border-radius:8px;padding:10px 63px 10px 12px;font-size:16px;color:#203e45;-webkit-text-fill-color:#203e45;caret-color:#203e45;background:#fff;color-scheme:light}.name-search input::placeholder{font-size:12px;color:#576f73;-webkit-text-fill-color:#576f73;opacity:1}.name-search input::-webkit-search-cancel-button{display:none}.name-search button{position:absolute;right:5px;top:3px;height:40px;border:0;background:transparent;font-size:11px;color:#176455;padding:6px 8px}.category-filters{display:flex;flex-wrap:wrap;gap:6px}.category-button{background:#f4f6f2;border:1px solid #dbe4df;border-radius:7px;font-size:10px;padding:7px 9px;min-height:36px;text-align:left}.category-button[aria-pressed=true]{background:#203e45;border-color:#203e45;color:#fff}.list-count{font-size:11px;color:#576f73;margin:15px 0 8px}#service-list{display:block;max-height:510px;overflow-y:auto;overscroll-behavior:contain;padding:3px 5px 6px 1px;scrollbar-width:thin;scrollbar-color:#b5c8bc transparent}.service-group+.service-group{margin-top:18px}.service-group-title{font-size:11px;font-weight:650;margin:0 0 8px;color:#3f6553}.service-grid{display:grid;gap:7px}.service-initial{font-size:15px}.service-button{min-height:62px}.filter-empty{font-size:12px;padding:15px;background:#f4f6f2;border-radius:8px;color:#576f73}.catalog-note{font-size:10px;color:#576f73;line-height:1.8;margin:12px 0 0}.support-panel{padding:20px 23px;border:1px solid #dbe4df;border-radius:12px;background:#fff;margin:20px 0}.support-panel h3{font-size:13px}.support-panel>a{display:block;font-size:12px;margin:8px 0}
-@media(max-width:680px){.service-grid{grid-template-columns:1fr 1fr}.category-button{font-size:11px;min-height:40px}#service-list{max-height:470px}.role-button strong{font-size:11px}.role-button span{font-size:10px}.service-button{min-height:80px}.service-button strong{overflow-wrap:anywhere}}
-@media(max-width:360px){.service-grid{grid-template-columns:1fr}.service-button{min-height:62px}.service-initial{display:grid}.role-options{grid-template-columns:1fr}.role-button,.role-button.active{padding:12px 15px;min-height:64px}.role-button:after{top:24px;bottom:auto}}
+<style>:root {
+  --ink: #282c41;
+  --muted: #666774;
+  --paper: #f8f6f3;
+  --white: #fff;
+  --accent: #66546e;
+  --accent-dark: #514058;
+  --tint: #f0ebf2;
+  --line: #e2dedf;
+  --sage: #426b60;
+  --sage-bg: #edf3f0;
+  --amber: #795920;
+  --amber-bg: #faf2e3;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  font-synthesis: none;
+  color: var(--ink);
+  background: var(--paper);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-size: 15px; line-height: 1.85; }
+button, input { font: inherit; }
+button { color: var(--ink); cursor: pointer; }
+button, a, input, summary { -webkit-tap-highlight-color: transparent; }
+a { color: var(--accent-dark); text-underline-offset: 4px; overflow-wrap: anywhere; }
+a:hover { text-decoration-thickness: 2px; }
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible, [tabindex="-1"]:focus-visible { outline: 3px solid #8f654a; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 36px; }
+.site-header { min-height: 110px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; font-size: 23px; font-weight: 650; letter-spacing: .02em; color: var(--ink); line-height: 1.3; }
+.brand-mark { display: block; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.brand small { display: block; margin-top: 7px; font-size: 11px; color: var(--muted); font-weight: 400; letter-spacing: .04em; }
+.header-label { font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.version { display: inline-block; margin-left: 12px; border: 1px solid var(--line); border-radius: 20px; padding: 3px 9px; font-size: 11px; }
+.hero { padding: 38px 0 42px; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr); align-items: center; gap: 48px; border-top: 1px solid var(--line); }
+.eyebrow { font-size: 12px; letter-spacing: .08em; font-weight: 600; color: var(--accent); margin: 0 0 16px; }
+.hero .eyebrow::before { content: ""; display: inline-block; height: 7px; width: 7px; border-radius: 50%; background: #bd786b; margin-right: 10px; vertical-align: 1px; }
+h1 { font-size: clamp(30px, 3.35vw, 43px); line-height: 1.6; letter-spacing: .025em; margin: 0; font-weight: 650; }
+.title-line { background: linear-gradient(transparent 79%, #e8dee8 79%, #e8dee8 96%, transparent 96%); padding-bottom: 3px; }
+.hero-copy { margin: 22px 0 0; font-size: 14px; color: var(--muted); line-height: 2; max-width: 540px; }
+.hero-note { border-left: 1px solid #d8ced9; padding: 10px 0 10px 34px; }
+.tiny-label { font-size: 13px; letter-spacing: .04em; font-weight: 650; }
+.hero-note ol { list-style: none; padding: 0; margin: 16px 0; }
+.hero-note li { display: flex; align-items: baseline; gap: 14px; margin: 13px 0; font-size: 14px; }
+.hero-note li span { font-family: Georgia, serif; font-size: 18px; font-style: italic; color: var(--accent); }
+.hero-note p { font-size: 12px; line-height: 1.8; color: var(--muted); margin: 0; max-width: 260px; }
+.update-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; margin: 0 0 32px; background: #eeece8; border-radius: 10px; font-size: 12px; gap: 12px; color: #5c5e69; }
+.status-dot { display: inline-block; width: 6px; height: 6px; background: #777181; border-radius: 50%; margin-right: 9px; vertical-align: 1px; }
+.update-bar a { font-size: 12px; }
+.workspace { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 32px; align-items: start; }
+.selector-panel { border: 1px solid var(--line); border-radius: 18px; background: var(--white); box-shadow: 0 5px 24px #282c4104; min-width: 0; scroll-margin-top: 20px; }
+.step { padding: 26px; }
+.step + .step { border-top: 1px solid var(--line); }
+.step-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.step-number { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--tint); color: var(--accent); font-size: 13px; font-weight: 650; }
+h2 { font-size: 18px; line-height: 1.7; margin: 0; }
+h3 { font-size: 15px; line-height: 1.7; margin: 0 0 12px; }
+.hint { font-size: 13px; color: var(--muted); line-height: 1.85; margin: 9px 0 16px; }
+.role-options { display: grid; gap: 10px; margin-top: 18px; }
+.role-button { border: 1px solid var(--line); border-radius: 12px; background: white; text-align: left; padding: 13px 44px 13px 15px; position: relative; min-height: 76px; }
+.role-button::after { content: ""; position: absolute; top: calc(50% - 9px); right: 15px; width: 18px; height: 18px; border: 1px solid #8a818f; border-radius: 50%; background: white; }
+.role-button.active { border-color: var(--accent); background: var(--tint); }
+.role-button.active::after { background: var(--accent); box-shadow: inset 0 0 0 4px white; }
+.role-button strong { display: block; font-size: 14px; font-weight: 650; }
+.role-button span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.mode-switch { display: grid; grid-template-columns: 1fr 1fr; background: #f2eff3; border-radius: 11px; padding: 4px; margin: 22px 0 18px; }
+.mode-switch button { border: 0; background: none; border-radius: 8px; font-size: 13px; padding: 9px 6px; min-height: 44px; }
+.mode-switch .active { background: white; box-shadow: 0 2px 6px #282c4110; color: var(--accent-dark); font-weight: 650; }
+label[for="service-filter"], label[for="url-input"] { display: block; font-size: 13px; font-weight: 650; }
+.name-search { position: relative; margin: 8px 0 18px; }
+.name-search input, #url-input { display: block; width: 100%; min-width: 0; height: 50px; border: 1px solid #8a818f; border-radius: 10px; padding: 10px 13px; font-size: 16px; color: var(--ink); -webkit-text-fill-color: var(--ink); caret-color: var(--ink); background: #fff; color-scheme: light; }
+.name-search input { padding-right: 68px; }
+#url-input { margin-top: 8px; }
+.name-search input::placeholder, #url-input::placeholder { font-size: 13px; color: var(--muted); -webkit-text-fill-color: var(--muted); opacity: 1; }
+.name-search input::-webkit-search-cancel-button { display: none; }
+.name-search button { position: absolute; right: 4px; top: 3px; min-height: 44px; border: 0; background: transparent; font-size: 12px; color: var(--accent-dark); padding: 6px 10px; border-radius: 7px; }
+.category-filters { display: flex; flex-wrap: wrap; gap: 7px; }
+.category-button { background: #fff; border: 1px solid var(--line); border-radius: 22px; font-size: 12px; padding: 8px 12px; min-height: 44px; text-align: left; }
+.category-button:hover { background: var(--tint); }
+.category-button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; }
+.list-count { font-size: 12px; color: var(--muted); margin: 20px 0 12px; }
+#service-list { max-height: 520px; overflow-y: auto; padding: 4px 7px 8px 3px; scrollbar-width: thin; scrollbar-color: #bcb2be transparent; }
+.service-group + .service-group { margin-top: 22px; }
+.service-group-title { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 650; margin: 0 0 10px; color: var(--muted); }
+.service-group-title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.service-grid { display: grid; gap: 8px; }
+.service-button { display: flex; align-items: center; gap: 12px; text-align: left; width: 100%; padding: 12px; border-radius: 11px; border: 1px solid var(--line); background: white; min-height: 72px; }
+.service-button:hover { background: #f8f5f9; border-color: #c8bacd; }
+.service-button[aria-pressed="true"] { background: var(--tint); border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); }
+.service-initial { height: 33px; width: 33px; display: grid; place-items: center; flex-shrink: 0; border-radius: 10px; background: #f2eff3; font-family: Georgia, serif; font-weight: 600; font-size: 16px; color: var(--accent); }
+.service-button > span:nth-child(2) { min-width: 0; }
+.service-button strong { font-size: 14px; font-weight: 650; display: block; overflow-wrap: anywhere; line-height: 1.65; }
+.service-button small { font-size: 12px; color: var(--muted); display: block; line-height: 1.7; margin-top: 3px; }
+.service-button .chevron { margin-left: auto; font-size: 20px; color: #84778a; }
+.catalog-note { font-size: 12px; color: var(--muted); line-height: 1.85; margin: 15px 0 0; }
+.text-button { border: 0; background: none; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; padding: 12px 2px 3px; min-height: 44px; color: var(--accent-dark); }
+.filter-empty { font-size: 13px; padding: 16px; background: #f5f2f6; border-radius: 10px; color: var(--muted); }
+.primary-button { display: flex; justify-content: space-between; align-items: center; width: 100%; border: 0; border-radius: 10px; background: var(--accent); color: white; padding: 13px 18px; font-size: 14px; font-weight: 650; min-height: 50px; }
+.primary-button:hover { background: var(--accent-dark); }
+.privacy-note { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 20px; font-size: 12px; color: var(--muted); line-height: 1.85; }
+.privacy-note strong { color: var(--ink); font-weight: 600; }
+.privacy-note p { margin-bottom: 0; }
+.error { color: #933e32; background: #fff0eb; font-size: 13px; padding: 14px; border-radius: 10px; overflow-wrap: anywhere; }
+.result-panel { min-width: 0; scroll-margin-top: 24px; }
+.empty-state { border: 1px solid var(--line); border-radius: 18px; padding: 52px 36px 32px; text-align: center; background: linear-gradient(160deg, #fff 40%, #f5f0f6); display: flex; flex-direction: column; align-items: center; }
+.empty-state h2 { font-size: 23px; font-weight: 600; }
+.empty-state > p:not(.eyebrow) { font-size: 14px; color: var(--muted); line-height: 2; margin: 16px 0; }
+.document-icon { display: block; width: 64px; height: 78px; border: 1px solid #c5b6cc; border-radius: 10px; background: #f1ebf4; transform: rotate(-7deg); margin: 0 0 30px; position: relative; padding: 18px 14px; box-shadow: 8px 7px 0 #ebe5dc; }
+.document-icon i { display: block; height: 3px; background: #aa97b3; border-radius: 3px; margin-bottom: 11px; }
+.document-icon i:last-child { width: 65%; }
+.empty-flow { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px 0 6px; width: 100%; }
+.empty-flow span { font-size: 12px; color: var(--muted); }
+.empty-flow i { display: block; font: italic 21px Georgia, serif; color: var(--accent); margin-bottom: 7px; }
+.empty-flow b { font-weight: 400; color: #a99eae; font-size: 14px; }
+.empty-tip { margin-top: 28px; border-top: 1px solid #ded5e2; padding-top: 22px; max-width: 430px; text-align: left; }
+.empty-tip strong { font-size: 13px; font-weight: 600; }
+.empty-tip p { font-size: 13px; color: var(--muted); margin-bottom: 0; }
+.result-header { padding: 3px 0 22px; display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.result-kicker { font-size: 12px; letter-spacing: .05em; color: var(--accent); margin: 0 0 9px; font-weight: 650; }
+.result-header h2 { font-size: 30px; font-weight: 650; overflow-wrap: anywhere; line-height: 1.5; }
+.result-header .hint { margin: 8px 0 0; font-size: 12px; overflow-wrap: anywhere; }
+.role-label { font-size: 11px; background: var(--tint); color: var(--accent-dark); padding: 6px 11px; border-radius: 20px; flex-shrink: 0; margin-top: 6px; }
+.back-to-finder { display: none; }
+.result-card { border: 1px solid var(--line); border-radius: 16px; padding: 26px 28px; background: white; margin-bottom: 18px; }
+.card-title { display: flex; align-items: baseline; gap: 13px; margin-bottom: 16px; }
+.card-title > span { font: italic 20px Georgia, serif; color: var(--accent); flex-shrink: 0; }
+.card-title h3 { font-size: 16px; margin: 0; font-weight: 650; }
+.badge { display: inline-block; border-radius: 5px; padding: 4px 9px; background: var(--sage-bg); color: var(--sage); font-size: 12px; font-weight: 600; margin-bottom: 9px; }
+.badge.unknown { background: var(--amber-bg); color: var(--amber); }
+.result-card p { font-size: 15px; line-height: 1.95; margin: 6px 0 12px; overflow-wrap: anywhere; }
+.inline-sources { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; margin-top: 16px; }
+.action-card { border-color: #d8ccdf; background: #fcfafe; border-top: 3px solid var(--accent); padding-top: 24px; }
+.action-card .card-title h3 { font-size: 18px; }
+.action-subtitle { font-size: 12px !important; color: var(--muted); margin: 22px 0 10px !important; }
+.official-action { padding: 15px 17px; background: #f0ebf3; border-radius: 10px; font-size: 14px !important; }
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li + li { border-top: 1px solid #e8e0ec; }
+.checklist label { display: flex; align-items: flex-start; gap: 13px; padding: 16px 0; cursor: pointer; font-size: 15px; line-height: 1.9; }
+.checklist input { width: 21px; height: 21px; accent-color: var(--accent); margin: 4px 0 0; flex-shrink: 0; cursor: pointer; }
+.checklist input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.progress-note { font-size: 12px !important; color: var(--muted); margin: 10px 0 0 !important; }
+.notice { padding: 17px 19px; border-radius: 11px; background: var(--amber-bg); color: #72551e; font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; }
+.stale { margin-bottom: 28px; }
+.support-panel { padding: 24px 26px; border: 1px solid var(--line); border-radius: 15px; background: white; margin: 22px 0; }
+.support-panel h3 { font-size: 15px; }
+.support-panel > a { display: block; font-size: 13px; margin: 10px 0; }
+.source-details { border-top: 1px solid var(--line); margin-top: 22px; }
+.source-details summary { font-size: 13px; padding: 18px 0; cursor: pointer; font-weight: 600; }
+.source-list { list-style: none; margin: 0; padding: 0 0 10px; }
+.source-list li { padding: 14px 0; border-top: 1px solid var(--line); font-size: 12px; }
+.source-list a { display: block; font-size: 13px; font-weight: 600; }
+.source-list small { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; }
+.issue-section { margin-top: 64px; padding-top: 36px; border-top: 1px solid #d9d1dc; display: grid; grid-template-columns: 1fr 1.4fr; gap: 0 56px; scroll-margin-top: 24px; }
+.issue-section > div { grid-row: span 2; }
+.issue-section h2 { font-size: 22px; }
+.issue-section > div > p:not(.eyebrow) { font-size: 14px; color: var(--muted); margin: 18px 0; }
+.issue-section details { border-bottom: 1px solid var(--line); align-self: start; }
+.issue-section summary { padding: 19px 0; font-size: 14px; font-weight: 600; cursor: pointer; }
+.detail-body { padding: 3px 0 18px; font-size: 14px; line-height: 1.95; }
+.detail-body h3 { margin-top: 20px; font-size: 15px; }
+.detail-body p { margin: 12px 0; }
+.detail-body code { font-size: 12px; overflow-wrap: anywhere; color: var(--accent-dark); background: #ede7f0; padding: 2px 4px; border-radius: 4px; }
+.site-footer { margin-top: 64px; padding-top: 30px; padding-bottom: 34px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 20px; font-size: 12px; color: var(--muted); }
+.brand-text { display: flex; align-items: center; gap: 10px; font-size: 16px; color: var(--ink); font-weight: 650; }
+.footer-mark { border-radius: 50%; object-fit: cover; }
+.site-footer p { flex: 1; }
+.site-footer a { font-size: 12px; }
+.skip { position: absolute; top: -100px; left: 20px; background: white; z-index: 10; padding: 12px; }
+.skip:focus { top: 10px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-width: 1000px) {
+  .wrap { padding-inline: 28px; }
+  .hero { gap: 30px; grid-template-columns: minmax(0, 1.7fr) minmax(220px, 1fr); }
+  .hero-note { padding-left: 25px; }
+  .workspace { grid-template-columns: 330px minmax(0, 1fr); gap: 24px; }
+  .step { padding: 22px; }
+  .result-header { flex-wrap: wrap; gap: 8px; }
+  .result-card { padding: 24px; }
+  .role-label { margin: 0; }
+  .empty-state { padding: 42px 24px 28px; }
+  .empty-state h2 { font-size: 20px; }
+  .issue-section { gap: 32px; }
+}
+@media (max-width: 800px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; padding: 30px 0; }
+  .hero-note { padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .hero-note ol { display: flex; flex-wrap: wrap; gap: 6px 25px; margin: 10px 0; }
+  .hero-note li { margin: 0; font-size: 13px; }
+  .hero-note p { max-width: none; }
+  .workspace { display: block; }
+  .selector-panel { margin-bottom: 28px; }
+  .role-options { grid-template-columns: 1fr 1fr; }
+  .role-button { padding-right: 38px; }
+  .role-button::after { right: 12px; }
+  #service-list { max-height: 440px; }
+  .result-header { flex-wrap: nowrap; }
+  .empty-state { padding: 36px 28px; }
+  .document-icon { width: 48px; height: 60px; padding: 13px 10px; margin-bottom: 24px; }
+  .document-icon i { margin-bottom: 8px; }
+  .back-to-finder { display: inline-block; font-size: 13px; min-height: 44px; margin-bottom: 12px; padding-top: 10px; }
+  .issue-section { display: block; margin-top: 44px; }
+  .issue-section > div { margin-bottom: 18px; }
+}
+@media (max-width: 520px) {
+  .wrap { padding-inline: 20px; }
+  .site-header { min-height: 94px; gap: 10px; }
+  .brand { font-size: 20px; gap: 10px; }
+  .brand-mark { width: 46px; height: 46px; }
+  .brand small { font-size: 10px; margin-top: 6px; letter-spacing: 0; }
+  .header-label { font-size: 10px; }
+  .version { display: none; }
+  .hero { gap: 24px; }
+  h1 { font-size: clamp(23px, 6.2vw, 31px); line-height: 1.7; letter-spacing: .01em; }
+  .hero .eyebrow { font-size: 11px; margin-bottom: 12px; }
+  .hero-copy { font-size: 14px; margin-top: 18px; }
+  .hero-note { padding-top: 0; border-top: 0; }
+  .hero-note .tiny-label, .hero-note ol { display: none; }
+  .hero-note li { gap: 12px; }
+  .hero-note li span { font-size: 16px; }
+  .hero-note p { font-size: 12px; }
+  .update-bar { padding: 12px 14px; margin-bottom: 24px; flex-wrap: wrap; gap: 4px 12px; }
+  .update-bar > span, .update-bar a { font-size: 11px; }
+  .step { padding: 22px 18px; }
+  .step-heading { gap: 10px; }
+  .step-heading h2 { font-size: 17px; }
+  .role-options { grid-template-columns: 1fr; }
+  .role-button { min-height: 72px; }
+  .category-button { font-size: 12px; padding-inline: 11px; }
+  .service-button { padding: 12px 10px; gap: 10px; }
+  .service-initial { width: 30px; height: 30px; }
+  .service-button strong { font-size: 14px; }
+  .service-button small { font-size: 12px; }
+  .empty-state { padding: 30px 20px 24px; }
+  .empty-state h2 { font-size: 19px; }
+  .empty-state > p:not(.eyebrow) { font-size: 13px; }
+  .empty-flow { gap: 9px; }
+  .empty-flow span { font-size: 11px; }
+  .empty-tip { margin-top: 22px; padding-top: 18px; }
+  .empty-tip strong, .empty-tip p { font-size: 12px; }
+  .result-header { flex-wrap: wrap; gap: 10px; }
+  .result-header h2 { font-size: 28px; }
+  .result-card { padding: 22px 19px; border-radius: 14px; }
+  .card-title { gap: 10px; }
+  .card-title h3 { font-size: 15px; }
+  .card-title > span { font-size: 18px; }
+  .action-card .card-title h3 { font-size: 17px; }
+  .result-card p, .checklist label { font-size: 15px; }
+  .notice { padding: 16px; font-size: 13px; }
+  .support-panel { padding: 22px 20px; }
+  .issue-section { padding-top: 28px; }
+  .issue-section h2 { font-size: 20px; }
+  .site-footer { margin-top: 42px; gap: 12px; flex-wrap: wrap; }
+  .site-footer p { flex-basis: 100%; order: 3; margin: 0; }
+  .site-footer a { margin-left: auto; }
+  .desktop-break { display: none; }
+}
+@media (max-width: 360px) {
+  .wrap { padding-inline: 16px; }
+  .brand { font-size: 18px; }
+  .brand-mark { width: 42px; height: 42px; }
+  .header-label { max-width: 55px; line-height: 1.5; }
+  .hero-copy { font-size: 13px; }
+  .step { padding-inline: 16px; }
+  .service-initial { display: none; }
+  .empty-flow { gap: 7px; }
+  .empty-flow span { font-size: 10px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  button { transition: background .16s ease, border-color .16s ease; }
+}
+@media print {
+  .selector-panel, .hero-note, .site-header, .site-footer, .empty-state, .mode-switch, .back-to-finder, .source-details summary { display: none; }
+  .wrap { padding: 0; max-width: none; }
+  .hero { padding: 10px; border: 0; }
+  .hero h1 { font-size: 24px; }
+  .hero-copy { display: none; }
+  .workspace { display: block; }
+  .result-card { break-inside: avoid; }
+  .issue-section { display: block; margin-top: 20px; }
+  .result-panel { width: 100%; }
+  .source-details, .source-list { display: block; }
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">本文へ進む</a>
-<header class="site-header wrap"><a class="brand" href="./index.html" aria-label="EpsilonLab ホーム"><span class="brand-mark" aria-hidden="true">e.</span>EpsilonLab</a><span class="header-label">PHP ACTION GUIDE <span class="version">初版 0.2.0</span></span></header>
+<header class="site-header wrap"><a class="brand" href="#main" aria-label="EpsilonLab ページの先頭へ"><img class="brand-mark" src="data:image/png;base64,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" width="52" height="52" alt=""><span>EpsilonLab<small>わかることから、少しずつ。</small></span></a><span class="header-label">PHPの確認ガイド <span class="version">0.3.0</span></span></header>
 <main id="main" class="wrap">
 <section class="hero" aria-labelledby="page-title">
-<div><p class="eyebrow">気になるニュースを、自分の行動に。</p><h1 id="page-title">PHPの問題、<br><span class="title-line">私は何をすればいい？</span></h1><p class="hero-copy">利用するサービスや管理する環境の、公式情報と<br class="desktop-break">あなたが確認したいことを整理できます。</p></div>
+<div><p class="eyebrow">気になるニュースを、自分の行動に。</p><h1 id="page-title">PHPの問題、<br><span class="title-line">私は何をすればいい？</span></h1><p class="hero-copy">使っているサービスや、管理しているサイト。<br>公式情報を確かめながら、自分に必要な確認と対応を整理しましょう。</p></div>
 <aside class="hero-note"><span class="tiny-label">このガイドでわかること</span><ol><li><span>01</span> PHPの利用について</li><li><span>02</span> 今回の問題への公式説明</li><li><span>03</span> あなたが確認すること</li></ol><p>サービスの安全性を判定するものではありません。</p></aside>
 </section>
 <div class="update-bar"><span><span class="status-dot" aria-hidden="true"></span>情報確認日: <time datetime="2026-10-24">2026年10月24日</time></span><a href="#issue">対象の問題を確認</a></div>
 <p id="stale-notice" class="notice stale" hidden></p>
 <noscript><p class="notice">このガイドを操作するにはJavaScriptを有効にしてください。対象は2026年10月のPHPの問題です。<a href="https://www.php.net/archive/2026.php" rel="noreferrer">PHP公式のお知らせ</a>と、利用サービスの公式案内を確認してください。</p></noscript>
 <div class="workspace">
-<aside class="selector-panel" aria-label="確認する条件">
+<aside id="finder" class="selector-panel" aria-label="確認する条件" tabindex="-1">
 <section class="step"><div class="step-heading"><span class="step-number">1</span><h2>あなたの立場</h2></div><p class="hint">近いほうを選んでください。</p><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>サービスを利用する人</strong><span>閲覧・買い物・投稿など</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>サイトを管理する人</strong><span>サイト・ショップ・サーバーの管理</span></button></div></section>
 <section class="step"><div class="step-heading"><span class="step-number">2</span><h2 id="finder-title">利用するサービスを探す</h2></div>
 <div class="mode-switch" role="group" aria-label="検索方法"><button type="button" id="select-mode" aria-pressed="true" class="active">一覧から選ぶ</button><button type="button" id="url-mode" aria-pressed="false">URLで探す</button></div>
-<div id="list-panel"><p id="role-list-hint" class="hint">使っているサービスを、名前や用途から探せます。</p><label for="service-filter">サービス名で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例: アマゾン、note" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div id="category-filters" class="category-filters" role="group" aria-label="用途で絞り込む"></div><p id="list-count" class="list-count" role="status" aria-live="polite"></p><div id="service-list" class="service-list"></div><p class="catalog-note">一覧への掲載は、PHPの利用や今回の問題の影響を意味しません。</p><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
+<div id="list-panel"><p id="role-list-hint" class="hint">使っているサービスを、名前や用途から探せます。</p><label for="service-filter">名前で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例: アマゾン、note" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div id="category-filters" class="category-filters" role="group" aria-label="用途で絞り込む"></div><p id="list-count" class="list-count" role="status" aria-live="polite"></p><div id="service-list" class="service-list"></div><p class="catalog-note">一覧への掲載は、PHPの利用や今回の問題の影響を意味しません。</p><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
 <div id="url-panel" hidden><div id="url-form" role="search" aria-label="掲載サービスのURL照合"><label for="url-input">サービスのURL / ドメイン</label><input id="url-input" type="text" inputmode="url" placeholder="例: https://note.com/" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="4096" aria-describedby="url-hint url-error"><p id="url-hint" class="hint">サービス名ではなく、note.com のようなドメインかURLを入力してください。</p><button id="url-search-button" class="primary-button" type="button">掲載情報を探す <span aria-hidden="true">→</span></button><p id="url-error" class="error" role="alert" hidden></p></div><div class="privacy-note"><strong>入力したURLは外部に送信・保存しません。</strong><p>このアプリ内の登録ドメインと照合します。入力先へのアクセスや実際のPHP利用調査は行いません。</p></div><p class="hint">独自ドメインは一致しないことがあります。利用先がわかる場合は「一覧から選ぶ」を使ってください。</p></div>
 </section>
 </aside>
-<section id="result" class="result-panel" aria-labelledby="result-title"><div class="empty-state"><span class="document-icon" aria-hidden="true"><i></i><i></i><i></i></span><p class="eyebrow">YOUR NEXT STEP</p><h2 id="result-title" tabindex="-1">まずは、サービスを選びましょう。</h2><p>公式にわかっていることと、<br>まだ確認できていないことを分けてご案内します。</p><div class="empty-tip"><strong>「未確認」は「危険」という意味ではありません。</strong><p>情報が足りない状態です。「安全」「対応不要」とも判断せず、運営元のお知らせを確かめましょう。</p></div></div></section>
+<section id="result" class="result-panel" aria-labelledby="result-title"><div class="empty-state"><span class="document-icon" aria-hidden="true"><i></i><i></i><i></i></span><p class="eyebrow">確認をはじめましょう</p><h2 id="result-title" tabindex="-1">まずは、サービスを選びましょう。</h2><p>サービスを選ぶと、わかっていることと、<br class="desktop-break">これから確認したいことをご案内します。</p><div class="empty-flow" aria-hidden="true"><span><i>01</i>利用状況</span><b>→</b><span><i>02</i>公式の説明</span><b>→</b><span><i>03</i>確認すること</span></div><div class="empty-tip"><strong>「未確認」は「危険」という意味ではありません。</strong><p>情報が足りない状態です。「安全」「対応不要」とも判断せず、運営元のお知らせを確かめましょう。</p></div></div></section>
 </div>
-<section id="issue" class="issue-section" aria-labelledby="issue-title"><div><p class="eyebrow">ABOUT THIS GUIDE</p><h2 id="issue-title">どのPHPの問題を扱っているの？</h2><p>2026年10月に公表された、PHP2Shellと呼ばれる問題を中心に扱っています。PHPは、Webサイトの裏側の処理を動かすために使われる言語です。</p></div><details><summary>対象の問題・影響条件・管理者向け情報を見る</summary><div class="detail-body"><h3>10月21日に修正版が公開された2件</h3><p><code>CVE-2026-109618</code> / <code>CVE-2026-109619</code></p><p>PHP内部のメモリや状態の扱いに関する問題です。条件がそろうと、ログインしていない第三者がサーバーに不正な処理をさせるおそれがあります。PHP公式は、Webからのリクエストを処理するPHP環境に更新を呼びかけています。Windowsや特定のCMSだけの問題ではありません。</p><p>この2件の修正を含むリリースは <code>8.2.35 / 8.3.36 / 8.4.27 / 8.5.12</code> です。配布元が修正を取り込む場合もあるため、表示バージョンだけで判断せず配布元の案内を確認してください。CMS本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。</p><h3>10月23日の追加案内も確認してください</h3><p><code>CVE-2026-115560</code> は別の追加案内です。アップロード進捗機能が有効で、<code>session.serialize_handler</code> を設定で <code>php_binary</code> または <code>php_serialize</code> にし、実行時に <code>ini_set()</code> で <code>php</code> へ変更してから <code>session_start()</code> を呼ぶ特殊な組合せが条件とされています。</p><p>PHP公式は次の通常修正版まで <code>session.upload_progress.enabled=0</code> を推奨しています。実行時にハンドラーを変更しないアプリは、この機能を維持できると説明しています。管理者は公式案内を読んで構成を確認してください。</p><p><a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener noreferrer">PHP公式: 10月21日・23日の案内 (英語)</a><br><small>情報確認日: 2026-10-24</small></p><p>古い系列を使っている場合は、配布元による修正の有無や、サポート中の系列への移行も確認しましょう。個別サイトの被害の有無は、このガイドからは判断できません。</p></div></details><details><summary>このガイドの情報・URL検索について</summary><div class="detail-body"><p>公式ページを確認した日の情報を手作業で掲載しています。各サービスの説明は、その資料が対象にしているサービス・問題・時点の範囲に限ります。最新状況はリンク先を確認してください。</p><p>「未確認」は掲載資料から判断できない状態、「掲載情報なし」は登録情報がない状態です。公式発表が世界中のどこにも存在しないという意味ではありません。</p><p>URL検索は登録ドメインとの照合だけです。PHPの利用状況、バージョン、修正適用、情報流出は検査しません。登録済みサービスでも、独自ドメインや登録外のサブドメインは一致しません。</p><p>このアプリは入力URLやチェック状態を保存しません。ブラウザの復元機能などで画面が残る場合があります。解析用の外部通信は行いません。公式リンクを開く際は、その公式サイトへ移動します。</p></div></details></section>
+<section id="issue" class="issue-section" aria-labelledby="issue-title"><div><p class="eyebrow">このガイドについて</p><h2 id="issue-title">どのPHPの問題を扱っているの？</h2><p>2026年10月に公表された、PHP2Shellと呼ばれる問題を中心に扱っています。PHPは、Webサイトの裏側の処理を動かすために使われる言語です。</p></div><details><summary>対象の問題・影響条件・管理者向け情報を見る</summary><div class="detail-body"><h3>10月21日に修正版が公開された2件</h3><p><code>CVE-2026-109618</code> / <code>CVE-2026-109619</code></p><p>PHP内部のメモリや状態の扱いに関する問題です。条件がそろうと、ログインしていない第三者がサーバーに不正な処理をさせるおそれがあります。PHP公式は、Webからのリクエストを処理するPHP環境に更新を呼びかけています。Windowsや特定のCMSだけの問題ではありません。</p><p>この2件の修正を含むリリースは <code>8.2.35 / 8.3.36 / 8.4.27 / 8.5.12</code> です。配布元が修正を取り込む場合もあるため、表示バージョンだけで判断せず配布元の案内を確認してください。CMS本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。</p><h3>10月23日の追加案内も確認してください</h3><p><code>CVE-2026-115560</code> は別の追加案内です。アップロード進捗機能が有効で、<code>session.serialize_handler</code> を設定で <code>php_binary</code> または <code>php_serialize</code> にし、実行時に <code>ini_set()</code> で <code>php</code> へ変更してから <code>session_start()</code> を呼ぶ特殊な組合せが条件とされています。</p><p>PHP公式は次の通常修正版まで <code>session.upload_progress.enabled=0</code> を推奨しています。実行時にハンドラーを変更しないアプリは、この機能を維持できると説明しています。管理者は公式案内を読んで構成を確認してください。</p><p><a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener noreferrer">PHP公式: 10月21日・23日の案内 (英語)</a><br><small>情報確認日: 2026-10-24</small></p><p>古い系列を使っている場合は、配布元による修正の有無や、サポート中の系列への移行も確認しましょう。個別サイトの被害の有無は、このガイドからは判断できません。</p></div></details><details><summary>このガイドの情報・URL検索について</summary><div class="detail-body"><p>公式ページを確認した日の情報を手作業で掲載しています。各サービスの説明は、その資料が対象にしているサービス・問題・時点の範囲に限ります。最新状況はリンク先を確認してください。</p><p>「未確認」は掲載資料から判断できない状態、「掲載情報なし」は登録情報がない状態です。公式発表が世界中のどこにも存在しないという意味ではありません。</p><p>URL検索は登録ドメインとの照合だけです。PHPの利用状況、バージョン、修正適用、情報流出は検査しません。登録済みサービスでも、独自ドメインや登録外のサブドメインは一致しません。</p><p>このアプリは入力URLやチェック状態を保存しません。ブラウザの復元機能などで画面が残る場合があります。解析用の外部通信は行いません。公式リンクを開く際は、その公式サイトへ移動します。</p></div></details></section>
 </main>
-<footer class="site-footer wrap"><span class="brand-text">EpsilonLab</span><p>わかっていることを確かめて、次の一歩へ。</p><a href="#main">ページの先頭へ ↑</a></footer>
+<footer class="site-footer wrap"><span class="brand-text"><img class="footer-mark" src="data:image/png;base64,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" width="34" height="34" alt="">EpsilonLab</span><p>わかっていることを確かめて、次の一歩へ。</p><a href="#main">ページの先頭へ ↑</a></footer>
 <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
 <script type="module">/**
  * Parse a user-supplied web address locally. No DNS, HTTP or storage access.
@@ -1171,7 +1439,7 @@ function render(focus = false) {
   const service = state.service ?? fallback;
   const header = el('div', 'result-header');
   const titleBlock = el('div');
-  titleBlock.append(el('p', 'result-kicker', '3  確認結果と、あなたの次の一歩'));
+  titleBlock.append(el('p', 'result-kicker', '3  確認結果と、次の一歩'));
   const title = el('h2', '', state.kind === 'invalid' ? 'URLを確認してください' : service.name);
   title.id = 'result-title'; title.tabIndex = -1;
   titleBlock.append(title);
@@ -1180,6 +1448,8 @@ function render(focus = false) {
   titleBlock.append(el('p', 'hint', `情報確認日: ${checkedAt} / 最新状況は公式ページへ`));
   header.append(titleBlock, el('span', 'role-label', state.role === 'user' ? 'サービス利用者向け' : 'サイト管理者向け'));
   root.append(header);
+  const back = el('a', 'back-to-finder', '← 条件を選び直す');
+  back.href = '#finder'; root.prepend(back);
   if (state.service && !state.service.roles.includes(state.role)) {
     root.append(el('p','notice',`この登録は主に${state.service.roles.includes('admin') ? '管理者' : 'サービス利用者'}向けです。ここでは、現在選んでいる立場の確認手順を表示します。`));
   }
@@ -1195,7 +1465,7 @@ function render(focus = false) {
   heading.append(el('span', '', '03'), el('h3', '', state.role === 'user' ? 'あなたが確認すること' : '管理者が確認すること'));
   action.append(heading, el('p', 'action-subtitle', service.officialAction.sourceIds.length ? '今回の問題について公式資料にある案内' : '今回の問題に関する対応指示は未確認'), el('p', 'official-action', service.officialAction.text));
   if (service.officialAction.sourceIds.length) action.append(sourceLinks(service.officialAction.sourceIds));
-  action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認の手順 / チェックして整理できます'));
+  action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認手順。確認できた項目にチェックを付けましょう。'));
   const list = el('ul', 'checklist');
   const tasks = service.actions[state.role];
   const progress = el('p', 'progress-note', `0 / ${tasks.length} 項目を確認。サービスや立場を選び直すとチェックはリセットされます。`);
@@ -1239,7 +1509,7 @@ function render(focus = false) {
   if (focus) {
     title.focus({ preventScroll: true });
     const titleBounds = title.getBoundingClientRect();
-    if (window.matchMedia('(max-width: 680px)').matches || titleBounds.top < 0 || titleBounds.bottom > window.innerHeight) root.scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (window.matchMedia('(max-width: 800px)').matches || titleBounds.top < 0 || titleBounds.bottom > window.innerHeight) root.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
 }
 function selectService(service, hostname = null) {

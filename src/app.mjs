@@ -57,7 +57,7 @@ function render(focus = false) {
   const service = state.service ?? fallback;
   const header = el('div', 'result-header');
   const titleBlock = el('div');
-  titleBlock.append(el('p', 'result-kicker', '3  確認結果と、あなたの次の一歩'));
+  titleBlock.append(el('p', 'result-kicker', '3  確認結果と、次の一歩'));
   const title = el('h2', '', state.kind === 'invalid' ? 'URLを確認してください' : service.name);
   title.id = 'result-title'; title.tabIndex = -1;
   titleBlock.append(title);
@@ -66,6 +66,8 @@ function render(focus = false) {
   titleBlock.append(el('p', 'hint', `情報確認日: ${checkedAt} / 最新状況は公式ページへ`));
   header.append(titleBlock, el('span', 'role-label', state.role === 'user' ? 'サービス利用者向け' : 'サイト管理者向け'));
   root.append(header);
+  const back = el('a', 'back-to-finder', '← 条件を選び直す');
+  back.href = '#finder'; root.prepend(back);
   if (state.service && !state.service.roles.includes(state.role)) {
     root.append(el('p','notice',`この登録は主に${state.service.roles.includes('admin') ? '管理者' : 'サービス利用者'}向けです。ここでは、現在選んでいる立場の確認手順を表示します。`));
   }
@@ -81,7 +83,7 @@ function render(focus = false) {
   heading.append(el('span', '', '03'), el('h3', '', state.role === 'user' ? 'あなたが確認すること' : '管理者が確認すること'));
   action.append(heading, el('p', 'action-subtitle', service.officialAction.sourceIds.length ? '今回の問題について公式資料にある案内' : '今回の問題に関する対応指示は未確認'), el('p', 'official-action', service.officialAction.text));
   if (service.officialAction.sourceIds.length) action.append(sourceLinks(service.officialAction.sourceIds));
-  action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認の手順 / チェックして整理できます'));
+  action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認手順。確認できた項目にチェックを付けましょう。'));
   const list = el('ul', 'checklist');
   const tasks = service.actions[state.role];
   const progress = el('p', 'progress-note', `0 / ${tasks.length} 項目を確認。サービスや立場を選び直すとチェックはリセットされます。`);
@@ -125,7 +127,7 @@ function render(focus = false) {
   if (focus) {
     title.focus({ preventScroll: true });
     const titleBounds = title.getBoundingClientRect();
-    if (window.matchMedia('(max-width: 680px)').matches || titleBounds.top < 0 || titleBounds.bottom > window.innerHeight) root.scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (window.matchMedia('(max-width: 800px)').matches || titleBounds.top < 0 || titleBounds.bottom > window.innerHeight) root.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
 }
 function selectService(service, hostname = null) {

@@ -6,11 +6,25 @@ import { metadataForService, metadataForCatalog, historyForService, updateHistor
 import { createMemoText, memoFilename } from './memo.mjs';
 import { breachIncidents, breachSources, breachReviews } from './incidents.mjs';
 import { incidentsForService, incidentMetadata, breachContextOptions, normalizeBreachContext, breachGuidance } from './incident-model.mjs';
+import { snapshotSessionProgress, rememberSessionProgress, restoreSessionProgress, resetSessionChecks } from './session.mjs';
+import { parseGuideHash, buildGuideLink } from './navigation.mjs';
+import { SAVED_SERVICES_KEY, readSavedServices, saveSavedService, removeSavedService, clearSavedServices, savedServiceRevision } from './saved-services.mjs';
 
 const $ = (selector) => document.querySelector(selector);
 const allSourceRecords={...sources,...breachSources};
-const initialTopic=location.hash==='#php'?'php':location.hash==='#breaches'?'breach':'all';
+const initialGuide = parseGuideHash(location.hash, services);
+const initialTopic = initialGuide?.topic ?? 'all';
 const state = { topic:initialTopic, breachContext:[], checkedBreachTasks:new Set(), role: 'user', kind: 'empty', service: null, hostname: null, query: '', category: 'all', usage: [], checkedTasks: new Set() };
+let pageSessionProgress = new Map();
+const publicGuideUrl = 'https://epsilon-lab-atelier.github.io/php-action-guide/';
+// Lazy access lets storage-denied browsers keep using the rest of the notebook.
+const serviceDeviceStorage = {
+  getItem: key => window.localStorage.getItem(key),
+  setItem: (key,value) => window.localStorage.setItem(key,value),
+  removeItem: key => window.localStorage.removeItem(key)
+};
+let savedServiceState = readSavedServices(serviceDeviceStorage, services);
+const contentRevisions = new Map();
 const emptyState = $('#result').firstElementChild.cloneNode(true);
 const groupLabels = { shopping:'買い物・フリマ', social:'SNS・動画・作品', publishing:'ブログ・投稿サービス', cms:'自分で設置するCMS', hosting:'レンタルサーバー', server:'VPS・自分で管理するサーバー', commerce:'ショップ運営サービス' };
 const groupOrder = { user:['shopping','publishing','social'], admin:['cms','hosting','server','commerce','publishing'] };
@@ -95,11 +109,12 @@ function breachCasesPanel() {
     article.append(el('p','incident-date',`${record.publishedAt.slice(0,4)}年公表${record.publishedAt<'2026-01-01'?'・過去の事案':''}`),el('h4','',record.title));
     const badge=el('span','badge',record.status.label);article.append(badge,el('p','',record.status.text));
     const scope=el('div','incident-scope');scope.append(el('strong','','対象となる範囲'),el('p','',record.scope));article.append(scope);
+    const period=el('div','incident-period');period.append(el('strong','','利用・登録などの対象期間'),el('p','',record.affectedPeriod));article.append(period);
     const action=el('div','incident-action');action.append(el('strong','','公式に案内されていること'),el('p','',record.officialAction.text));article.append(action);
     article.append(sourceLinks(record.sourceIds));
-    const detail=el('details','incident-detail');detail.append(el('summary','','対象期間・情報の種類・事業者の対応を見る'));
+    const detail=el('details','incident-detail');detail.append(el('summary','','情報の種類・発生時期・事業者の対応を見る'));
     const rows=el('dl','incident-fields');
-    for(const [label,text] of [['発生・検知の時期',record.occurredAt],['利用・登録などの対象期間',record.affectedPeriod],['対象となる情報',record.dataTypes.join('／')],['対象外と説明される情報',record.excludedData ?? 'この記録には掲載していません。'],['事業者の対応',`${record.providerResponse.label}：${record.providerResponse.text}`],['初公表日',record.publishedAt],['掲載した最新の公式続報・追記日',record.updatedAt ?? '別の続報・追記日は未記録'],['資料を確認した日（最も古いもの）',meta.checkedAt ?? '未確認'],['この手帳の掲載変更日',meta.lastChangedAt ?? '未記録']]) rows.append(el('dt','',label),el('dd','',text));
+    for(const [label,text] of [['発生・検知の時期',record.occurredAt],['対象となる情報',record.dataTypes.join('／')],['対象外と説明される情報',record.excludedData ?? 'この記録には掲載していません。'],['事業者の対応',`${record.providerResponse.label}：${record.providerResponse.text}`],['初公表日',record.publishedAt],['掲載した最新の公式続報・追記日',record.updatedAt ?? '別の続報・追記日は未記録'],['資料を確認した日（最も古いもの）',meta.checkedAt ?? '未確認'],['この手帳の掲載変更日',meta.lastChangedAt ?? '未記録']]) rows.append(el('dt','',label),el('dd','',text));
     detail.append(rows,el('p','hint',record.caution),el('p','hint','事業者の対策が完了したことと、既に情報が流出したかどうかは別の情報です。'));
     const list=el('ul','source-list');for(const id of record.sourceIds){const s=breachSources[id];const li=el('li');li.append(officialLink(s),el('small','',`資料公表日：${s.publishedAt ?? '記載なし・未確認'} / 追記日：${s.updatedAt ?? '未記録'} / 確認日：${s.checkedAt}`));list.append(li);}detail.append(list);article.append(detail);panel.append(article);
   }
@@ -107,7 +122,7 @@ function breachCasesPanel() {
 }
 function breachChecklistPanel() {
   const section=el('section','result-card breach-checklist');section.append(el('h3','','情報流出の確認メモ'),el('p','hint','公式の対応指示とは分けた、EpsilonLabの一般的な確認手順です。該当しない項目もあります。'));
-  const area=el('div');area.id='breach-tasks';const progress=el('p','progress-note');progress.id='breach-progress';progress.setAttribute('aria-live','polite');section.append(area,progress,el('p','memo-note','チェックは被害や安全性の判定ではありません。サービスや立場を変えるとリセットします。'));return section;
+  const area=el('div');area.id='breach-tasks';const progress=el('p','progress-note');progress.id='breach-progress';progress.setAttribute('aria-live','polite');section.append(area,progress,el('p','memo-note','チェックは被害や安全性の判定ではありません。掲載サービスのチェックは、このページを開いている間、サービスと立場ごとに保持します。'));return section;
 }
 function renderBreachTasks() {
   const area=$('#breach-tasks');if(!area)return;
@@ -199,7 +214,7 @@ function personalChecklist() {
   const footer=el('div','memo-footer');
   const bar=el('progress');bar.id='personal-progress-bar';bar.setAttribute('aria-label','確認メモのチェック数');
   const progress=el('p','progress-note');progress.id='personal-progress';progress.setAttribute('aria-live','polite');
-  footer.append(bar,progress,el('p','memo-note','チェックは被害の有無や修正完了の判定ではありません。サービスや立場を変えると、選択とチェックはリセットされます。'));
+  footer.append(bar,progress,el('p','memo-note','チェックは被害の有無や修正完了の判定ではありません。掲載サービスの選択とチェックは、このページを開いている間、サービスと立場ごとに保持します。'));
   section.append(title,intro,selected,area,footer);
   const reference=el('details','guidance-reference');
   reference.append(el('summary','','この確認メモについて'));
@@ -218,7 +233,7 @@ function memoInput() {
     usageLabels:usageOptionsForService(service).filter(option=>state.usage.includes(option.id)).map(option=>option.label),
     groups,checkedTaskIds:state.checkedTasks,php:service.php,incident:service.incident,officialAction:service.officialAction,
     sources:[...ids.map(id=>sources[id]),{title:'PHP公式: 対象問題と追加案内',url:'https://www.php.net/archive/2026.php',checkedAt,kind:'incident'}],checkedAt:dates.checkedAt,lastChangedAt:dates.lastChangedAt,
-    createdAt:new Date().toISOString(),version:'0.6.0',issueTitle:state.topic==='php'?'2026年10月のPHP問題（PHP2Shellと追加案内）':state.topic==='breach'?'情報流出・不正アクセスの公式公表':'2026年10月のPHP問題（PHP2Shellと追加案内）／情報流出・不正アクセスの公式公表',caution:includesPhp()?service.caution:'この手帳の掲載範囲だけでは被害の有無を判断できません。',
+    createdAt:new Date().toISOString(),version:'0.7.0',issueTitle:state.topic==='php'?'2026年10月のPHP問題（PHP2Shellと追加案内）':state.topic==='breach'?'情報流出・不正アクセスの公式公表':'2026年10月のPHP問題（PHP2Shellと追加案内）／情報流出・不正アクセスの公式公表',caution:includesPhp()?service.caution:'この手帳の掲載範囲だけでは被害の有無を判断できません。',
     includePhp:includesPhp(),includeBreaches:includesBreaches(),breachIncidents:selectedIncidents(),breachSources:[...new Set(selectedIncidents().flatMap(record=>record.sourceIds))].map(id=>({id,...breachSources[id]})),breachGroups:currentBreachGuide().groups,breachCheckedTaskIds:state.checkedBreachTasks,breachContextLabels:breachContextOptions.filter(option=>state.breachContext.includes(option.id)).map(option=>option.label)};
 }
 function refreshMemoPreview() {
@@ -342,6 +357,118 @@ const fallback = {
   },
   caution: '掲載情報なしは「安全」「対応不要」という意味ではありません。独自ドメインなど、実際には掲載サービスを利用していても一致しない場合があります。'
 };
+function rememberCurrentProgress() {
+  pageSessionProgress = rememberSessionProgress(pageSessionProgress, state);
+}
+function publishedServiceRevision(service, role) {
+  const key=`${role}:${service.id}`;
+  if(contentRevisions.has(key))return contentRevisions.get(key);
+  const incidents=incidentsForService(breachIncidents,service.id);
+  const ids=[...new Set([...service.php.sourceIds,...service.incident.sourceIds,...service.officialAction.sourceIds,...(service.supportSourceIds??[]),...incidents.flatMap(record=>record.sourceIds)])].sort();
+  const evidence=ids.map(id=>{const {checkedAt:ignored,...content}=allSourceRecords[id];return {id,...content};});
+  const content={php:service.php,incident:service.incident,officialAction:service.officialAction,actions:service.actions[role],caution:service.caution,incidents,evidence,usage:role==='user'?guidanceForServiceUsage(usageOptionsForService(service).map(option=>option.id),service):null,breachGuide:breachGuidance(breachContextOptions.map(option=>option.id),role)};
+  const revision=savedServiceRevision(JSON.parse(JSON.stringify(content)));
+  contentRevisions.set(key,revision);return revision;
+}
+function savedServiceError(status) {
+  if(status==='malformed')return '保存した一覧を読み取れませんでした。「保存した内容を消す」から、この手帳の保存だけを削除してやり直せます。';
+  if(status==='quota')return '端末の保存領域がいっぱいで保存できませんでした。確認メモのテキスト保存は引き続き利用できます。';
+  return 'この画面では端末への保存を利用できません。確認メモのコピーやテキスト保存をご利用ください。';
+}
+function applySavedServiceResult(result, message, failureMessage = null) {
+  if(!result.ok && ['unavailable','quota'].includes(result.status) && !result.entries.length)result={...result,entries:savedServiceState.entries};
+  savedServiceState=result;renderSavedServices();render();
+  $('#announcement').textContent=result.ok?message:(failureMessage??savedServiceError(result.status));
+  const status=$('#guide-action-status');if(status)status.textContent=$('#announcement').textContent;
+}
+function openSavedService(entry) {
+  const service=services.find(item=>item.id===entry.serviceId);
+  if(!service || !service.roles.includes(entry.role))return;
+  chooseRole(entry.role,{renderResult:false});switchMode('select');
+  state.query='';state.category='all';$('#service-filter').value='';renderServiceList();
+  selectService(service);
+}
+function renderSavedServices() {
+  const root=$('#saved-services');root.replaceChildren();
+  root.hidden=savedServiceState.entries.length===0 && savedServiceState.status!=='malformed';
+  if(root.hidden)return;
+  const title=el('h2','','いつものサービス');title.id='saved-services-title';
+  root.append(title,el('p','hint','この端末で覚えているサービスです。チェックは毎回、新しく確認できます。'));
+  if(!savedServiceState.ok)root.append(el('p','notice',savedServiceError(savedServiceState.status)));
+  const list=el('div','saved-service-list');
+  for(const entry of savedServiceState.entries){
+    const service=services.find(item=>item.id===entry.serviceId);if(!service)continue;
+    const changed=entry.revision!==publishedServiceRevision(service,entry.role);
+    const button=el('button','saved-service-button');button.type='button';button.dataset.savedService=entry.serviceId;button.dataset.savedRole=entry.role;
+    button.append(el('strong','',service.name),el('small','',entry.role==='user'?'利用者向け':'管理者向け'));
+    if(changed)button.append(el('small','changed-note','保存時から掲載内容に変更があります'));
+    button.addEventListener('click',()=>openSavedService(entry));list.append(button);
+  }
+  root.append(list);
+  const clear=el('details','saved-clear');clear.append(el('summary','','保存した内容を消す'));
+  clear.append(el('p','hint','この手帳に保存したサービスの一覧を、端末からすべて削除します。今開いている確認メモは残ります。'));
+  const button=el('button','quiet-button','保存したサービスをすべて削除');button.type='button';button.id='clear-saved-services';
+  button.addEventListener('click',()=>{applySavedServiceResult(clearSavedServices(serviceDeviceStorage),'この端末の保存一覧を削除しました。','保存一覧を削除できませんでした。ブラウザの保存設定を確認して、もう一度お試しください。');($('#remember-service')??$('#service-filter')).focus();});
+  clear.append(button);root.append(clear);
+}
+function guideActionsPanel() {
+  const panel=el('section','guide-actions');panel.id='guide-actions';panel.setAttribute('aria-label','この案内を開き直す');
+  const selection={serviceId:state.service.id,role:state.role,topic:state.topic};
+  const link=buildGuideLink(publicGuideUrl,selection,services);
+  const status=el('p','hint');status.id='guide-action-status';status.setAttribute('role','status');
+  const buttons=el('div','guide-action-buttons');
+  if(link){
+    const copy=el('button','secondary-button','この案内へのリンクをコピー');copy.type='button';copy.id='copy-guide-link';
+    const manual=el('div','manual-share');manual.hidden=true;
+    const label=el('label','','共有するリンク');label.htmlFor='guide-link';
+    const input=el('input');input.id='guide-link';input.type='text';input.readOnly=true;input.value=link;
+    manual.append(label,input);
+    copy.addEventListener('click',async()=>{
+      try {if(!navigator.clipboard?.writeText)throw new Error('Clipboard unavailable');await navigator.clipboard.writeText(link);if(panel.isConnected)status.textContent='サービス・立場・テーマだけのリンクをコピーしました。';}
+      catch {if(!panel.isConnected)return;manual.hidden=false;input.focus();input.select();status.textContent='選択したリンクを、端末のコピー操作でコピーしてください。';}
+    });buttons.append(copy);panel.append(manual);
+  }
+  if(state.service.roles.includes(state.role)){
+    const saved=savedServiceState.entries.find(entry=>entry.serviceId===state.service.id&&entry.role===state.role);
+    const revision=publishedServiceRevision(state.service,state.role);
+    const changed=saved && saved.revision!==revision;
+    const remember=el('button','secondary-button',saved?'この端末の保存から外す':'このサービスを端末に覚えておく');remember.type='button';remember.id='remember-service';
+    remember.addEventListener('click',()=>{
+      const result=saved?removeSavedService(serviceDeviceStorage,services,selection):saveSavedService(serviceDeviceStorage,services,{...selection,revision});
+      applySavedServiceResult(result,saved?'このサービスを保存一覧から外しました。':'サービスと立場をこの端末に保存しました。チェックや利用状況は保存していません。');
+      $('#remember-service')?.focus();
+    });buttons.append(remember);
+    if(changed){
+      panel.append(el('p','notice','保存時から掲載内容が変わっています。対象範囲・対象期間・公式案内を読み直してください。以前のチェックは端末には保存されていません。'));
+      const reviewed=el('button','quiet-button','掲載内容の変更を確認した');reviewed.type='button';reviewed.id='acknowledge-service-update';
+      reviewed.addEventListener('click',()=>{applySavedServiceResult(saveSavedService(serviceDeviceStorage,services,{...selection,revision}),'現在の掲載内容を確認した目印を保存しました。安全性の判定ではありません。');$('#remember-service')?.focus();});buttons.append(reviewed);
+    }
+  }
+  panel.prepend(buttons);
+  const privacy=el('details','action-privacy');privacy.append(el('summary','','リンクと端末保存について'),el('p','hint','リンクに含まれるのはサービス・立場・テーマだけです。端末への保存はボタンを押したときだけ。サービス・立場と、掲載内容の変更を確かめる目印を保存します。チェック・利用状況・入力URLは含めません。'));
+  panel.append(privacy,status);
+  if(!savedServiceState.ok)status.textContent=savedServiceError(savedServiceState.status);
+  return panel;
+}
+function resetChecksPanel() {
+  const panel=el('section','session-controls');
+  panel.setAttribute('aria-label','確認途中のメモ');
+  panel.append(el('p','hint',state.service ? '確認途中のメモは、サービス・立場ごとにこのページ内で保持します。再読み込みでリセットします。' : '一覧にないサービスのメモは、別のサービスへ移ると消えます。'));
+  const open=el('button','quiet-button','確認をやり直す');open.type='button';open.id='reset-checks';open.setAttribute('aria-expanded','false');open.setAttribute('aria-controls','reset-checks-confirmation');
+  const confirmation=el('div','reset-confirmation');confirmation.id='reset-checks-confirmation';confirmation.hidden=true;confirmation.setAttribute('role','group');confirmation.setAttribute('aria-labelledby','reset-checks-description');
+  const description=el('p','hint',`${state.service?.name ?? '現在の案内'}の${state.role==='user'?'利用者向け':'管理者向け'}チェックを、PHP・情報流出の両テーマで外します。選んだ使い方や条件、他のサービスのメモはそのままです。`);description.id='reset-checks-description';
+  const confirm=el('button','secondary-button','この案内のチェックを外す');confirm.type='button';confirm.id='confirm-reset-checks';
+  const cancel=el('button','quiet-button','戻る');cancel.type='button';cancel.id='cancel-reset-checks';
+  const close=()=>{confirmation.hidden=true;open.setAttribute('aria-expanded','false');open.focus();};
+  open.addEventListener('click',()=>{confirmation.hidden=!confirmation.hidden;open.setAttribute('aria-expanded',String(!confirmation.hidden));if(!confirmation.hidden)cancel.focus();});
+  cancel.addEventListener('click',close);
+  confirmation.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();close();}});
+  confirm.addEventListener('click',()=>{
+    Object.assign(state,resetSessionChecks(state));rememberCurrentProgress();render();
+    $('#reset-checks').focus();$('#announcement').textContent='このサービス・立場のチェックを外しました。使い方と条件の選択は保っています。';
+  });
+  confirmation.append(description,confirm,cancel);panel.append(open,confirmation);return panel;
+}
 function render(focus = false) {
   document.body.classList.remove('printing-memo');$('#print-memo pre').textContent='';
   document.querySelectorAll('.service-button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.id === state.service?.id)));
@@ -378,6 +505,8 @@ function render(focus = false) {
     $('#announcement').textContent = 'URLの形式を確認してください。';
     return;
   }
+  if(state.service && state.service.roles.includes(state.role))root.append(guideActionsPanel());
+  root.append(resetChecksPanel());
   if(state.role==='user')root.append(usageChooser());
   if(includesBreaches())root.append(breachCasesPanel(),breachContextChooser(),breachChecklistPanel());
   if(includesPhp()){
@@ -401,7 +530,7 @@ function render(focus = false) {
     action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認手順。確認できた項目にチェックを付けましょう。'));
     const list = el('ul', 'checklist');
     const tasks = service.actions.admin;
-    const progress = el('p', 'progress-note', `${tasks.filter((_,index)=>state.checkedTasks.has(`admin.${index}`)).length} / ${tasks.length} 項目を確認。サービスや立場を選び直すとチェックはリセットされます。`);
+    const progress = el('p', 'progress-note', `${tasks.filter((_,index)=>state.checkedTasks.has(`admin.${index}`)).length} / ${tasks.length} 項目を確認。掲載サービスのチェックは、このページを開いている間、サービスと立場ごとに保持します。`);
     progress.setAttribute('aria-live', 'polite');
     tasks.forEach((task, index) => {
       const row = el('li'); const label = el('label'); const checkbox = el('input');
@@ -451,10 +580,11 @@ function render(focus = false) {
     if (window.matchMedia('(max-width: 800px)').matches || titleBounds.top < 0 || titleBounds.bottom > window.innerHeight) root.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
 }
-function selectService(service, hostname = null) {
-  Object.assign(state, { service, hostname, kind: service ? 'found' : 'unknown', usage: [], checkedTasks: new Set(), breachContext:[], checkedBreachTasks:new Set() });
+function selectService(service, hostname = null, { focus = true } = {}) {
+  rememberCurrentProgress();
+  Object.assign(state, { service, hostname, kind: service ? 'found' : 'unknown', ...restoreSessionProgress(pageSessionProgress,service?.id,state.role) });
   $('#url-error').hidden = true; $('#url-input').removeAttribute('aria-invalid');
-  render(true);
+  render(focus);
 }
 function renderServiceList() {
   const available = services.filter(service => service.roles.includes(state.role));
@@ -502,21 +632,23 @@ function renderServiceList() {
 }
 $('#service-filter').addEventListener('input',()=>{state.query=$('#service-filter').value;renderServiceList();});
 $('#clear-filter').addEventListener('click',()=>{state.query='';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
-document.querySelectorAll('[data-role]').forEach(button => button.addEventListener('click',()=>{
-  if (state.role === button.dataset.role) return;
-  state.role = button.dataset.role; state.category='all';state.query='';$('#service-filter').value='';
-  state.usage=[];state.checkedTasks.clear();state.breachContext=[];state.checkedBreachTasks.clear();
+function chooseRole(role, { renderResult = true } = {}) {
+  if (!['user','admin'].includes(role) || state.role === role) return;
+  rememberCurrentProgress();
+  state.role = role; state.category='all';state.query='';$('#service-filter').value='';
   const selectionCleared = state.service && !state.service.roles.includes(state.role);
   if (selectionCleared) Object.assign(state,{kind:'empty',service:null,hostname:null});
+  Object.assign(state,restoreSessionProgress(pageSessionProgress,state.service?.id,state.role));
   document.querySelectorAll('[data-role]').forEach(other=>{
-    const active = other === button; other.classList.toggle('active',active); other.setAttribute('aria-pressed',String(active));
+    const active = other.dataset.role === state.role; other.classList.toggle('active',active); other.setAttribute('aria-pressed',String(active));
   });
   $('#finder-title').textContent = state.role === 'user' ? '利用するサービスを探す' : '管理する環境を探す';
   $('#role-list-hint').textContent = state.role === 'user' ? '使っているサービスを、名前や用途から探せます。' : '契約中のサーバー、CMS、ショップなどを選んでください。';
   $('#service-filter').placeholder = state.role === 'user' ? '例: アマゾン、note' : '例: さくら、WordPress';
-  renderServiceList(); render();
+  renderServiceList(); if(renderResult)render();
   if (selectionCleared) $('#announcement').textContent='立場に合わせて一覧を切り替えました。対象を選び直してください。';
-}));
+}
+document.querySelectorAll('[data-role]').forEach(button => button.addEventListener('click',()=>chooseRole(button.dataset.role)));
 renderServiceList();
 function switchMode(mode) {
   const showList = mode === 'select';
@@ -530,7 +662,8 @@ $('#unknown-button').addEventListener('click',()=>selectService(null));
 function searchUrl() {
   const result = resolveInput($('#url-input').value,services);
   if (!result.ok) {
-    Object.assign(state,{kind:'invalid',service:null,hostname:null,usage:[],checkedTasks:new Set(),breachContext:[],checkedBreachTasks:new Set()}); render();
+    rememberCurrentProgress();
+    Object.assign(state,{kind:'invalid',service:null,hostname:null,...snapshotSessionProgress()}); render();
     $('#url-error').textContent = result.error; $('#url-error').hidden = false;
     $('#url-input').setAttribute('aria-invalid','true'); $('#url-input').focus();
     return;
@@ -555,7 +688,21 @@ if (catalogAge >= 7 * 86400000) {
 
 renderUpdates();
 
-function chooseTopic(topic){state.topic=['all','php','breach'].includes(topic)?topic:'all';document.querySelectorAll('[data-topic]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topic===state.topic)));renderServiceList();render();$('#announcement').textContent=`${state.topic==='all'?'すべて':state.topic==='php'?'PHPの問題':'情報流出・不正アクセス'}を表示します。`; }
+function chooseTopic(topic,{renderResult=true}={}){state.topic=['all','php','breach'].includes(topic)?topic:'all';document.querySelectorAll('[data-topic]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topic===state.topic)));renderServiceList();if(renderResult)render();$('#announcement').textContent=`${state.topic==='all'?'すべて':state.topic==='php'?'PHPの問題':'情報流出・不正アクセス'}を表示します。`; }
+function applyGuideSelection(selection,{focus=false}={}) {
+  if(!selection)return;
+  if(!selection.serviceId){chooseTopic(selection.topic);return;}
+  const service=services.find(item=>item.id===selection.serviceId);
+  chooseRole(selection.role,{renderResult:false});
+  state.query='';state.category='all';$('#service-filter').value='';switchMode('select');
+  chooseTopic(selection.topic,{renderResult:false});selectService(service,null,{focus});
+}
 document.querySelectorAll('[data-topic]').forEach(button=>button.addEventListener('click',()=>chooseTopic(button.dataset.topic)));
-window.addEventListener('hashchange',()=>{if(location.hash==='#php')chooseTopic('php');else if(location.hash==='#breaches')chooseTopic('breach');});
+window.addEventListener('hashchange',()=>applyGuideSelection(parseGuideHash(location.hash,services),{focus:true}));
+window.addEventListener('storage',event=>{
+  if(event.key!==SAVED_SERVICES_KEY && event.key!==null)return;
+  savedServiceState=readSavedServices(serviceDeviceStorage,services);renderSavedServices();render();
+});
 chooseTopic(initialTopic);
+renderSavedServices();
+applyGuideSelection(initialGuide,{focus:!!initialGuide?.serviceId});

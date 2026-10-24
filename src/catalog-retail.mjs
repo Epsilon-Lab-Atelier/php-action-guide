@@ -1,0 +1,226 @@
+// General support pages are contact routes, not evidence of PHP remediation.
+export const retailSources = {
+  amazonHelp: {
+    title: 'Amazon.co.jp: カスタマーサービスへの連絡',
+    url: 'https://www.amazon.co.jp/gp/help/customer/display.html?nodeId=GSD587LKW72HKU2V',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+  rakutenHelp: {
+    title: '楽天市場: ヘルプ・お問い合わせ',
+    url: 'https://ichiba.faq.rakuten.net/',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+  rakutenDomains: {
+    title: '楽天市場: 公式サイトと商品ページのURLに関する案内',
+    url: 'https://ichiba.faq.rakuten.net/detail/000010716',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'domain',
+  },
+  yahooShoppingHelp: {
+    title: 'Yahoo!ショッピング: サービスの案内とヘルプ',
+    url: 'https://support.yahoo-net.jp/SccShopping/s/article/H000011889',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+  yahooShoppingSite: {
+    title: 'Yahoo!ショッピング: 公式サイト',
+    url: 'https://shopping.yahoo.co.jp/',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'domain',
+  },
+  mercariHelp: {
+    title: 'メルカリ: ヘルプセンター',
+    url: 'https://help.jp.mercari.com/',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+  mercariStatus: {
+    title: 'メルカリ: サービスの稼働状況',
+    url: 'https://status.jp.mercari.com/',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+  baseHelp: {
+    title: 'BASE: ショップ向け・購入者向けヘルプ',
+    url: 'https://help.thebase.in/hc/ja',
+    publishedAt: null,
+    checkedAt: '2026-10-24',
+    kind: 'support',
+  },
+};
+
+const retailUnknownPhp = () => ({
+  label: '未確認',
+  text: 'このカタログには、当該サービスのPHP使用・不使用を確認できる公式資料をまだ掲載していません。公式ヘルプがあることから、利用技術は判断できません。',
+  sourceIds: [],
+});
+const retailUnknownIncident = () => ({
+  label: '掲載情報なし',
+  text: 'このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。公式のお知らせが存在しない、または対応が不要という意味ではありません。',
+  sourceIds: [],
+});
+const retailUnknownAction = () => ({
+  text: '掲載資料から、今回のPHP問題に伴う利用者の具体的な手続きは未確認です。公式窓口で対象や必要な行動を確認してください。',
+  sourceIds: [],
+});
+
+export const retailServices = [
+  {
+    id: 'amazon-jp',
+    name: 'Amazon.co.jp',
+    short: 'ネット通販・注文の確認',
+    category: 'service',
+    roles: ['user'],
+    groupByRole: { user: 'shopping' },
+    keywords: ['amazon', 'アマゾン', 'あまぞん', '通販'],
+    domains: [
+      { host: 'amazon.co.jp', includeSubdomains: false },
+      { host: 'www.amazon.co.jp', includeSubdomains: false },
+    ],
+    supportSourceIds: ['amazonHelp'],
+    php: retailUnknownPhp(),
+    incident: retailUnknownIncident(),
+    officialAction: retailUnknownAction(),
+    actions: {
+      user: [
+        '公式アプリやブックマークから、Amazon.co.jpのカスタマーサービスを確認する。',
+        '購入操作の途中で止まった場合は、注文履歴や決済状況を確認してからやり直す。',
+        '個別の対応依頼が届いた場合は、公式アカウント画面でも対象と手続きを確認する。',
+      ],
+      admin: [
+        'Amazon.co.jpへの出品と、自分の通販サイトのサーバー管理を区別する。',
+        '出品に関する案内は、利用する出品者向け公式窓口で確認する。',
+        '自分のサーバーを別途管理する場合は、そのPHPの修正状況を確認する。',
+      ],
+    },
+    caution: 'これはAmazon.co.jpの買い物に関する確認先です。AWSやAmazonの別サービスの対応状況を示すものではありません。PHP使用や被害の有無は未確認です。',
+  },
+  {
+    id: 'rakuten-ichiba',
+    name: '楽天市場',
+    short: 'ネット通販・ショップへの問い合わせ',
+    category: 'service',
+    roles: ['user'],
+    groupByRole: { user: 'shopping' },
+    keywords: ['rakuten', '楽天', 'らくてん', '楽天市場', '通販'],
+    domains: [
+      { host: 'www.rakuten.co.jp', includeSubdomains: false },
+      { host: 'item.rakuten.co.jp', includeSubdomains: false },
+    ],
+    supportSourceIds: ['rakutenHelp'],
+    domainSourceIds: ['rakutenDomains'],
+    php: retailUnknownPhp(),
+    incident: retailUnknownIncident(),
+    officialAction: retailUnknownAction(),
+    actions: {
+      user: [
+        '楽天市場のヘルプや公式のお知らせで、自分の利用への影響を確認する。',
+        '注文が完了したか分からない場合は、購入履歴を確認する。',
+        '配送・キャンセルなど個別の注文は該当ショップ、楽天市場全体の利用は公式ヘルプで確認する。',
+      ],
+      admin: [
+        '楽天市場への出店と、自分のサーバーの管理を区別する。',
+        '店舗運営に関する案内は、出店者向けの公式窓口で確認する。',
+        '独立した通販サイトも運営している場合は、そのPHPの修正状況を別途確認する。',
+      ],
+    },
+    caution: '楽天市場以外の楽天グループのサービスへ、この情報を当てはめないでください。一般的なヘルプは、今回の問題への修正済みという根拠ではありません。',
+  },
+  {
+    id: 'yahoo-shopping',
+    name: 'Yahoo!ショッピング',
+    short: 'ネット通販・注文やストアの確認',
+    category: 'service',
+    roles: ['user'],
+    groupByRole: { user: 'shopping' },
+    keywords: ['yahoo', 'ヤフー', 'やふー', 'ショッピング', '通販'],
+    domains: [
+      { host: 'shopping.yahoo.co.jp', includeSubdomains: false },
+      { host: 'store.shopping.yahoo.co.jp', includeSubdomains: false },
+    ],
+    supportSourceIds: ['yahooShoppingHelp'],
+    domainSourceIds: ['yahooShoppingSite'],
+    php: retailUnknownPhp(),
+    incident: retailUnknownIncident(),
+    officialAction: retailUnknownAction(),
+    actions: {
+      user: [
+        'Yahoo!ショッピングの公式ヘルプやお知らせで、利用への影響を確認する。',
+        '購入操作が完了したか不明な場合は、注文履歴を確認してから操作を続ける。',
+        '商品や配送の問題は注文先のストア、サービス全体の問題は公式ヘルプで確認する。',
+      ],
+      admin: [
+        'Yahoo!ショッピングへの出店と、独自サイトのサーバー管理を分けて考える。',
+        '出店者向けの案内や問い合わせ先で、店舗側に必要な作業を確認する。',
+        '別途管理するサーバーがあれば、そのPHPの修正状況を確認する。',
+      ],
+    },
+    caution: 'Yahoo!ショッピングの確認先です。Yahoo! JAPANの別サービスやPayPayの対応状況までは示していません。',
+  },
+  {
+    id: 'mercari',
+    name: 'メルカリ',
+    short: 'フリマの購入・出品・取引',
+    category: 'service',
+    roles: ['user'],
+    groupByRole: { user: 'shopping' },
+    keywords: ['mercari', 'めるかり', 'フリマ', '出品'],
+    domains: [{ host: 'jp.mercari.com', includeSubdomains: false }],
+    supportSourceIds: ['mercariStatus', 'mercariHelp'],
+    php: retailUnknownPhp(),
+    incident: retailUnknownIncident(),
+    officialAction: retailUnknownAction(),
+    actions: {
+      user: [
+        '公式の稼働状況ページやアプリのお知らせで、対象となる機能を確認する。',
+        '購入・出品の操作が途中で止まった場合は、取引画面の状態を確認する。',
+        '取引について判断できない場合は、ヘルプセンターから対象の取引に関する案内を確認する。',
+      ],
+      admin: [
+        'メルカリへの出品は、サービスのサーバーを自分で管理する作業とは区別する。',
+        'メルカリShopsを使う場合は、Shops向けの公式案内を別途確認する。',
+        'リンク先など自分で管理するサイトがあれば、そのPHPの対応状況を確認する。',
+      ],
+    },
+    caution: '稼働状況に掲載された障害が、今回のPHP問題に起因するとは限りません。メルカリShopsなど別の機能・サービスについては対象範囲を確認してください。',
+  },
+  {
+    id: 'base',
+    name: 'BASE',
+    short: 'ネットショップの購入・運営',
+    category: 'service',
+    roles: ['user', 'admin'],
+    groupByRole: { user: 'shopping', admin: 'commerce' },
+    keywords: ['base', 'ベイス', 'べいす', 'ネットショップ', 'ショップ運営'],
+    domains: [
+      { host: 'thebase.com', includeSubdomains: false },
+      { host: 'admin.thebase.com', includeSubdomains: false },
+    ],
+    supportSourceIds: ['baseHelp'],
+    php: retailUnknownPhp(),
+    incident: retailUnknownIncident(),
+    officialAction: retailUnknownAction(),
+    actions: {
+      user: [
+        '購入したショップとBASEの公式案内で、注文や決済に関する影響を確認する。',
+        '購入手続きの途中で停止した場合は、注文確認メールや注文状況を確認する。',
+        'ショップや注文について不明な点があれば、購入者向けヘルプの問い合わせ先を確認する。',
+      ],
+      admin: [
+        'BASEの管理画面やショップ向けヘルプで、店舗側に必要な作業と現在の制限を確認する。',
+        'サービス基盤の保守については公式案内を確認し、自分のショップの表示・受注状況を確認する。',
+        '独自に動かしている連携システムや外部サイトがあれば、そのPHPの対応状況を別途確認する。',
+      ],
+    },
+    caution: 'ショップごとのURLや独自ドメインは、この初版では照合できない場合があります。BASEを利用していると分かる場合は、一覧から選んでください。',
+  },
+];

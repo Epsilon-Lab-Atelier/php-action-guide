@@ -1,0 +1,196 @@
+const SOCIAL_CHECKED_AT = '2026-10-24';
+
+export const socialSources = {
+  youtubeHelp: {
+    title: 'YouTube: ヘルプセンター',
+    url: 'https://support.google.com/youtube/?hl=ja',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'support',
+  },
+  youtubeContact: {
+    title: 'YouTube: 公式のお問い合わせ案内',
+    url: 'https://www.youtube.com/t/contact_us?hl=ja',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'domain',
+  },
+  instagramHelp: {
+    title: 'Instagram: ヘルプセンター',
+    url: 'https://help.instagram.com/?locale=ja_JP',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'support',
+  },
+  instagramHome: {
+    title: 'Instagram: 公式サイト',
+    url: 'https://www.instagram.com/',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'domain',
+  },
+  xHelp: {
+    title: 'X: ヘルプセンター',
+    url: 'https://help.x.com/ja',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'support',
+  },
+  lineHelp: {
+    title: 'LINE: ヘルプセンター・お知らせ',
+    url: 'https://help.line.me/line/smartphone/sp?lang=ja',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'support',
+  },
+  lineHome: {
+    title: 'LINE: 公式サイト',
+    url: 'https://www.line.me/ja/',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'domain',
+  },
+  fanboxHelp: {
+    title: 'pixiv FANBOX: ヘルプセンター',
+    url: 'https://fanbox.pixiv.help/hc/ja',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'support',
+  },
+  fanboxDomain: {
+    title: 'pixiv FANBOX: クリエイターページURLの例 (英語)',
+    url: 'https://fanbox.pixiv.help/hc/en-us/articles/52236444926873-Can-I-remove-FANBOX-posts-that-were-reuploaded-without-permission-on-external-websites-from-Google-search-results',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'domain',
+  },
+  fanboxFindCreators: {
+    title: 'pixiv FANBOX: クリエイターを探す方法 (英語)',
+    url: 'https://fanbox.pixiv.help/hc/en-us/articles/360011710754-How-can-I-find-creators',
+    publishedAt: null,
+    checkedAt: SOCIAL_CHECKED_AT,
+    kind: 'domain',
+  },
+};
+
+function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domainSourceIds, userActions, adminActions, caution, roles = ['user'] }) {
+  return {
+    id,
+    name,
+    short,
+    category: 'service',
+    roles,
+    groupByRole: roles.includes('admin') ? { user: 'social', admin: 'publishing' } : { user: 'social' },
+    keywords,
+    domains: hosts.map((host) => ({ host, includeSubdomains: false })),
+    supportSourceIds,
+    domainSourceIds,
+    php: {
+      label: '未確認',
+      text: `${name}のPHP利用状況を判断できる公式資料は、このカタログでは未確認です。ヘルプ窓口があることや、通常どおり使えることからPHP不使用とは判断しません。`,
+      sourceIds: [],
+    },
+    incident: {
+      label: '掲載情報なし',
+      text: 'このカタログには対象問題への対応を説明する公式資料をまだ掲載していません。運営元の公式案内で、利用への影響と個別の対応指示を確認してください。',
+      sourceIds: [],
+    },
+    officialAction: {
+      text: '今回のPHP問題について、利用者に求められている具体的な手続きは未確認です。以下の公式窓口からお知らせや自分宛ての案内を確認してください。',
+      sourceIds: [],
+    },
+    actions: {
+      user: userActions,
+      admin: adminActions ?? [
+        `${name}内のアカウント管理と、自分が管理する外部サイトのサーバー保守を区別する。`,
+        '公式窓口で、影響する機能と自分に必要な手続きが案内されているか確認する。',
+        '別途運用している外部サイトがある場合は、そのCMS・ホスティング事業者の案内も確認する。',
+      ],
+    },
+    caution,
+  };
+}
+
+export const socialServices = [
+  socialEntry({
+    id: 'youtube',
+    name: 'YouTube',
+    short: '動画の視聴・投稿',
+    keywords: ['ユーチューブ', 'ようつべ', '動画', '配信'],
+    hosts: ['youtube.com', 'www.youtube.com'],
+    supportSourceIds: ['youtubeHelp'],
+    domainSourceIds: ['youtubeContact'],
+    userActions: [
+      '公式ヘルプで、視聴・投稿など自分が利用する機能のお知らせを確認する。',
+      'アカウントへの個別通知がある場合は、公式アプリやサイトから内容を確認する。',
+      'サイトに埋め込まれた動画だけが表示できない場合は、動画側と掲載サイト側の案内を分けて確認する。',
+    ],
+    caution: 'YouTubeのPHP利用・今回の問題への対応状況は未確認です。短縮URLの転送先は調べないため、短縮URLから一致しない場合は一覧でYouTubeを選んでください。',
+  }),
+  socialEntry({
+    id: 'instagram',
+    name: 'Instagram',
+    short: '写真・動画の閲覧・投稿',
+    keywords: ['インスタグラム', 'インスタ', '写真', 'リール'],
+    hosts: ['instagram.com', 'www.instagram.com'],
+    supportSourceIds: ['instagramHelp'],
+    domainSourceIds: ['instagramHome'],
+    userActions: [
+      '公式ヘルプやアプリ内のお知らせで、利用への影響が案内されているか確認する。',
+      'ログインや投稿に問題がある場合は、該当する公式ヘルプから確認する。',
+      '自分に必要な手続きがあるかは、公式アプリやサイトの案内から確認する。',
+    ],
+    caution: '公式ヘルプへの案内を掲載していますが、PHP利用や今回の問題への対応済みを示すものではありません。ほかのMetaのサービスの状況も、この項目からは判断できません。',
+  }),
+  socialEntry({
+    id: 'x',
+    name: 'X',
+    short: '旧Twitter・投稿やメッセージ',
+    keywords: ['Twitter', 'ツイッター', 'エックス', 'SNS'],
+    hosts: ['x.com'],
+    supportSourceIds: ['xHelp'],
+    domainSourceIds: ['xHelp'],
+    userActions: [
+      'Xの公式ヘルプで、アカウントや利用機能に関する案内を確認する。',
+      '自分宛ての通知がある場合は、対象と必要な手続きを公式サイト上で確認する。',
+      '投稿の埋め込みやリンク先に問題がある場合は、それぞれのサービスのお知らせを確認する。',
+    ],
+    caution: '掲載情報なしから、安全や対応不要とは判断できません。短縮URLや旧ドメインの転送先は調べません。URL照合で一致しない場合は一覧からXを選んでください。',
+  }),
+  socialEntry({
+    id: 'line',
+    name: 'LINE',
+    short: 'メッセージ・通話',
+    keywords: ['ライン', 'トーク', '通話', 'メッセージ'],
+    hosts: ['line.me', 'www.line.me'],
+    supportSourceIds: ['lineHelp'],
+    domainSourceIds: ['lineHome'],
+    userActions: [
+      'LINE公式ヘルプの「お知らせ」で、自分が利用する機能への影響を確認する。',
+      'トーク・通話・ログインなど、困っている内容に対応する公式の問い合わせ案内を確認する。',
+      'アプリ内から開いた外部サイトに問題がある場合は、そのサイトの運営元の案内も確認する。',
+    ],
+    caution: 'LINEアプリと、LINEから開く外部サイトは分けて考えてください。関連サービスや個別のメンテナンス告知だけから、今回のPHP問題への影響・修正状況は推測しません。',
+  }),
+  socialEntry({
+    id: 'fanbox',
+    name: 'pixiv FANBOX',
+    short: 'クリエイターの支援・限定記事',
+    roles: ['user', 'admin'],
+    keywords: ['FANBOX', 'ファンボックス', 'ピクシブファンボックス', '支援', 'クリエイター'],
+    hosts: ['fanbox.cc', 'www.fanbox.cc', 'official.fanbox.cc'],
+    supportSourceIds: ['fanboxHelp'],
+    domainSourceIds: ['fanboxDomain', 'fanboxFindCreators'],
+    userActions: [
+      'FANBOXの公式ヘルプで、支援・支払い・ログインに関する案内を確認する。',
+      '支援や決済の途中で利用できなくなった場合は、支援状況を確認してから操作を続ける。',
+      '自分に必要な追加手続きがあるか、公式のお知らせや個別通知を確認する。',
+    ],
+    adminActions: [
+      'FANBOXの投稿・支援プランの管理と、自分の外部サーバーの保守を分けて考える。',
+      '投稿や支援金の受け取りに支障がある場合は、FANBOXの公式ヘルプから案内を確認する。',
+      'リンク先や埋め込み先に自分で管理するサイトがあれば、そちらのPHP修正状況を別に確認する。',
+    ],
+    caution: 'pixivの更新報告からFANBOXの対応状況を推測しません。クリエイターごとのURLは未登録の場合があるため、一致しなければ一覧からpixiv FANBOXを選んでください。',
+  }),
+];

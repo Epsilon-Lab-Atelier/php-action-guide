@@ -12,11 +12,28 @@ PHP使用、脆弱性の影響条件、修正適用、被害確認は異なる�
 
 ## データ
 
-`catalog.mjs` の各サービスには `php`, `incident`, `officialAction`, `actions.user`, `actions.admin`, `caution` を持たせています。公式説明を表示する各欄から `sourceIds` で出典をたどれます。出典はHTTPS URL、公開日(不明ならnull)、情報確認日を持ちます。
+v0.2.0では22件を登録しています。`catalog.mjs` が既存6項目と、`catalog-retail.mjs` の5項目、`catalog-social.mjs` の5項目、`catalog-admin.mjs` の6項目を集約します。
+
+各項目には `php`, `incident`, `officialAction`, `actions.user`, `actions.admin`, `caution` を持たせています。公式説明を表示する各欄から `sourceIds` で出典をたどれます。出典はHTTPS URL、公開日(不明ならnull)、情報確認日と、用途を示す `kind` (`incident`, `technical`, `domain`, `support`) を持ちます。
+
+`supportSourceIds` は最新のお知らせ・問い合わせの確認窓口、`domainSourceIds` はドメイン登録の確認資料です。公式窓口のリンクはPHP利用や修正済みの根拠として扱わず、画面でも説明欄と分けて表示します。根拠を確認できない事実の `sourceIds` は空にし、「未確認」「掲載情報なし」と明示します。掲載件数は対応済みと確認できた件数ではありません。
 
 ドメインは `{host, includeSubdomains}` の明示的なリストです。noteの登録はnote.com、money.note.com、tales.note.comの完全一致、pixivはpixiv.netとwww.pixiv.netの完全一致です。WordPress.comとBOOTHでは、公式のサービス内サブドメインを許容します。
 
-自分で設置したWordPressとDrupalにはドメインを登録しません。wordpress.orgやdrupal.orgを入力しても、利用者自身のサイトのCMSが分かるわけではないためです。
+自分で設置したWordPress、Drupal、EC-CUBEとサーバーの項目にはドメインを登録しません。製品や事業者の公式サイトを入力しても、利用者自身のサイトのCMSや契約環境が分かるわけではないためです。
+
+## 立場別の一覧と検索
+
+`roles` で一覧に掲載する立場、`groupByRole` で立場ごとの用途、`keywords` で検索用の読みや別名を定義します。利用者向けは14件、管理者向けは13件で、note、WordPress.com、BOOTH、BASE、pixiv FANBOXの5件が重複します。
+
+| 立場 | 用途別の件数 |
+| --- | --- |
+| 利用者 | 買い物・フリマ6件、ブログ・投稿サービス2件、SNS・動画・作品6件 |
+| 管理者 | 自分で設置するCMS3件、レンタルサーバー4件、VPS・自分で管理するサーバー1件、ショップ運営サービス2件、ブログ・投稿サービス3件 |
+
+`discovery.mjs` は立場と用途で絞り込んだうえで、名前・短い説明・キーワード・登録ドメインを検索します。入力中に一覧を更新し、件数を表示します。検索文字列はNFKC、英字の小文字化、カタカナからひらがなへの変換で表記をそろえ、空白区切りの複数語はすべてを含む項目を返します。該当項目がないときは案内と絞り込み解除を表示します。
+
+立場を変えると名前・用途の絞り込みを解除し、切替先の一覧にない選択項目も解除します。URL照合は全カタログを対象とし、現在の立場の一覧にない項目が一致した場合は主な対象者を明記して、その立場の確認手順を表示します。どちらの検索もブラウザ内で完結します。
 
 ## URL照合
 

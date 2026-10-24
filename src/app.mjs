@@ -1,8 +1,12 @@
 import { services, sources, checkedAt } from './catalog.mjs';
 import { resolveInput } from './url.mjs';
+import { filterServices, categoriesForRole } from './discovery.mjs';
 
 const $ = (selector) => document.querySelector(selector);
-const state = { role: 'user', kind: 'empty', service: null, hostname: null };
+const state = { role: 'user', kind: 'empty', service: null, hostname: null, query: '', category: 'all' };
+const emptyState = $('#result').firstElementChild.cloneNode(true);
+const groupLabels = { shopping:'買い物・フリマ', social:'SNS・動画・作品', publishing:'ブログ・投稿サービス', cms:'自分で設置するCMS', hosting:'レンタルサーバー', server:'VPS・自分で管理するサーバー', commerce:'ショップ運営サービス' };
+const groupOrder = { user:['shopping','publishing','social'], admin:['cms','hosting','server','commerce','publishing'] };
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -43,8 +47,12 @@ const fallback = {
 };
 function render(focus = false) {
   document.querySelectorAll('.service-button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.id === state.service?.id)));
-  if (state.kind === 'empty') return;
   const root = $('#result');
+  if (state.kind === 'empty') {
+    root.replaceChildren(emptyState.cloneNode(true));
+    $('#result-title').textContent = state.role === 'user' ? 'まずは、サービスを選びましょう。' : '管理する環境を選びましょう。';
+    return;
+  }
   root.replaceChildren();
   const service = state.service ?? fallback;
   const header = el('div', 'result-header');
@@ -58,6 +66,9 @@ function render(focus = false) {
   titleBlock.append(el('p', 'hint', `情報確認日: ${checkedAt} / 最新状況は公式ページへ`));
   header.append(titleBlock, el('span', 'role-label', state.role === 'user' ? 'サービス利用者向け' : 'サイト管理者向け'));
   root.append(header);
+  if (state.service && !state.service.roles.includes(state.role)) {
+    root.append(el('p','notice',`この登録は主に${state.service.roles.includes('admin') ? '管理者' : 'サービス利用者'}向けです。ここでは、現在選んでいる立場の確認手順を表示します。`));
+  }
   if (state.kind === 'invalid') {
     root.append(el('p','notice','入力の形式を確認して、もう一度検索してください。直前のサービスの情報は表示していません。URLがわからない場合は、一覧から選べます。'));
     $('#announcement').textContent = 'URLの形式を確認してください。';
@@ -68,7 +79,7 @@ function render(focus = false) {
   const action = el('section', 'result-card action-card');
   const heading = el('div', 'card-title');
   heading.append(el('span', '', '03'), el('h3', '', state.role === 'user' ? 'あなたが確認すること' : '管理者が確認すること'));
-  action.append(heading, el('p', 'action-subtitle', '掲載した公式資料にある利用者向けの案内'), el('p', 'official-action', service.officialAction.text));
+  action.append(heading, el('p', 'action-subtitle', service.officialAction.sourceIds.length ? '今回の問題について公式資料にある案内' : '今回の問題に関する対応指示は未確認'), el('p', 'official-action', service.officialAction.text));
   if (service.officialAction.sourceIds.length) action.append(sourceLinks(service.officialAction.sourceIds));
   action.append(el('p', 'action-subtitle', 'EpsilonLabからの確認の手順 / チェックして整理できます'));
   const list = el('ul', 'checklist');
@@ -92,17 +103,20 @@ function render(focus = false) {
     action.append(link);
   }
   root.append(action, el('p','notice',service.caution));
+  if (service.supportSourceIds?.length) {
+    const support = el('section','support-panel');
+    support.append(el('h3','','最新のお知らせ・問い合わせの確認先'), el('p','hint','公式の確認窓口です。このリンク自体はPHPの利用や修正済みを示す根拠ではありません。'));
+    for (const id of service.supportSourceIds) support.append(officialLink(sources[id]));
+    root.append(support);
+  }
   if (state.service) {
-    const ids = [...new Set([...service.php.sourceIds, ...service.incident.sourceIds, ...service.officialAction.sourceIds])];
-    // Include separate domain-registration evidence where available.
-    if (service.id === 'wordpress-com') ids.push('wordpressComDomains');
-    if (service.id === 'booth') ids.push('boothDomains');
+    const ids = [...new Set([...service.php.sourceIds, ...service.incident.sourceIds, ...service.officialAction.sourceIds, ...(service.domainSourceIds ?? []), ...(service.supportSourceIds ?? [])])];
     const details = el('details','source-details');
-    details.append(el('summary','',`根拠となる公式資料と確認日 (${ids.length}件)`));
+    details.append(el('summary','',`公式資料・確認窓口と確認日 (${ids.length}件)`));
     const sourceList = el('ul','source-list');
     ids.forEach(id => {
       const source = sources[id]; const li = el('li');
-      li.append(officialLink(source), el('small','',`公開日: ${source.publishedAt ?? '記載なし・未確認'} / 情報確認日: ${source.checkedAt}`));
+      li.append(officialLink(source), el('small','',`${source.kind === 'support' ? '公式窓口 (PHP対応の根拠ではありません)' : '公式資料'} / 公開日: ${source.publishedAt ?? '記載なし・未確認'} / 確認日: ${source.checkedAt}`));
       sourceList.append(li);
     });
     details.append(sourceList); root.append(details);
@@ -119,22 +133,65 @@ function selectService(service, hostname = null) {
   $('#url-error').hidden = true; $('#url-input').removeAttribute('aria-invalid');
   render(true);
 }
-services.forEach(service => {
-  const button = el('button','service-button'); button.type = 'button';
-  button.dataset.id = service.id; button.setAttribute('aria-pressed','false');
-  const initial = el('span','service-initial',service.id === 'wordpress-selfhost' ? 'W' : service.name.charAt(0)); initial.setAttribute('aria-hidden','true');
-  const text = el('span'); text.append(el('strong','',service.name),el('small','',service.short));
-  const chevron = el('span','chevron','›'); chevron.setAttribute('aria-hidden','true');
-  button.append(initial,text,chevron); button.addEventListener('click',()=>selectService(service));
-  $('#service-list').append(button);
-});
+function renderServiceList() {
+  const available = services.filter(service => service.roles.includes(state.role));
+  const visible = filterServices(services, state);
+  const knownGroups = categoriesForRole(services, state.role);
+  const groups = groupOrder[state.role].filter(id => knownGroups.includes(id));
+  $('#category-filters').replaceChildren();
+  for (const group of ['all', ...groups]) {
+    const count = group === 'all' ? available.length : available.filter(service => service.groupByRole[state.role] === group).length;
+    const button = el('button', 'category-button', `${group === 'all' ? 'すべて' : groupLabels[group]} ${count}`);
+    button.type = 'button'; button.dataset.category = group;
+    button.setAttribute('aria-pressed', String(state.category === group));
+    button.addEventListener('click',()=>{ state.category = group; renderServiceList(); document.querySelector(`[data-category="${group}"]`).focus(); });
+    $('#category-filters').append(button);
+  }
+  $('#list-count').textContent = `${state.role === 'user' ? '利用者向け' : '管理者向け'} ${available.length}件のうち ${visible.length}件を表示`;
+  $('#clear-filter').hidden = !state.query;
+  const list = $('#service-list'); list.replaceChildren();
+  for (const group of groups) {
+    const matches = visible.filter(service => service.groupByRole[state.role] === group);
+    if (!matches.length) continue;
+    const section = el('section', 'service-group');
+    section.append(el('h3','service-group-title',`${groupLabels[group]} (${matches.length})`));
+    const grid = el('div','service-grid');
+    for (const service of matches) {
+      const button = el('button','service-button'); button.type = 'button';
+      button.dataset.id = service.id; button.setAttribute('aria-pressed',String(service.id === state.service?.id));
+      const initial = el('span','service-initial',service.id === 'wordpress-selfhost' ? 'W' : service.name.charAt(0)); initial.setAttribute('aria-hidden','true');
+      const text = el('span'); text.append(el('strong','',service.name),el('small','',service.short));
+      const chevron = el('span','chevron','›'); chevron.setAttribute('aria-hidden','true');
+      button.append(initial,text,chevron); button.addEventListener('click',()=>selectService(service));
+      grid.append(button);
+    }
+    section.append(grid); list.append(section);
+  }
+  if (!visible.length) {
+    const empty = el('div','filter-empty');
+    empty.append(el('p','','一致する項目はありません。名前の一部で探すか、用途の絞り込みを変更してください。'));
+    const reset = el('button','text-button','絞り込みを解除する'); reset.type='button';
+    reset.addEventListener('click',()=>{ state.query='';state.category='all';$('#service-filter').value='';renderServiceList();$('#service-filter').focus(); });
+    empty.append(reset);list.append(empty);
+  }
+}
+$('#service-filter').addEventListener('input',()=>{state.query=$('#service-filter').value;renderServiceList();});
+$('#clear-filter').addEventListener('click',()=>{state.query='';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
 document.querySelectorAll('[data-role]').forEach(button => button.addEventListener('click',()=>{
-  state.role = button.dataset.role;
+  if (state.role === button.dataset.role) return;
+  state.role = button.dataset.role; state.category='all';state.query='';$('#service-filter').value='';
+  const selectionCleared = state.service && !state.service.roles.includes(state.role);
+  if (selectionCleared) Object.assign(state,{kind:'empty',service:null,hostname:null});
   document.querySelectorAll('[data-role]').forEach(other=>{
     const active = other === button; other.classList.toggle('active',active); other.setAttribute('aria-pressed',String(active));
   });
-  render();
+  $('#finder-title').textContent = state.role === 'user' ? '利用するサービスを探す' : '管理する環境を探す';
+  $('#role-list-hint').textContent = state.role === 'user' ? '使っているサービスを、名前や用途から探せます。' : '契約中のサーバー、CMS、ショップなどを選んでください。';
+  $('#service-filter').placeholder = state.role === 'user' ? '例: アマゾン、note' : '例: さくら、WordPress';
+  renderServiceList(); render();
+  if (selectionCleared) $('#announcement').textContent='立場に合わせて一覧を切り替えました。対象を選び直してください。';
 }));
+renderServiceList();
 function switchMode(mode) {
   const showList = mode === 'select';
   $('#list-panel').hidden = !showList; $('#url-panel').hidden = showList;

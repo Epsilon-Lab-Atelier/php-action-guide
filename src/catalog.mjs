@@ -1,6 +1,10 @@
+import { retailSources, retailServices } from './catalog-retail.mjs';
+import { socialSources, socialServices } from './catalog-social.mjs';
+import { adminSources, adminServices } from './catalog-admin.mjs';
+
 export const checkedAt = '2026-10-24';
 
-export const sources = {
+const baseSources = {
   noteNotice: {
     title: 'note: PHPの脆弱性について - noteのサービスではPHPを使用していません',
     url: 'https://note.jp/n/n09b0faecd702',
@@ -57,7 +61,7 @@ export const sources = {
   },
 };
 
-export const services = [
+const baseServices = [
   {
     id: 'note',
     name: 'note',
@@ -269,4 +273,21 @@ export const services = [
     },
     caution: 'Drupal公式の更新案内があることと、個別サイトが更新済みであることは別です。PHPの動作要件に書かれた版だけで、今回の修正済みとは判断できません。',
   },
+];
+
+const baseDiscovery = {
+  note: { roles:['user','admin'], groupByRole:{user:'publishing',admin:'publishing'}, keywords:['ノート','のーと','note pro','記事'], domainSourceIds:[] },
+  'wordpress-com': { roles:['user','admin'], groupByRole:{user:'publishing',admin:'publishing'}, keywords:['ワードプレス','WordPress com','ブログ'], domainSourceIds:['wordpressComDomains'] },
+  pixiv: { roles:['user'], groupByRole:{user:'social'}, keywords:['ピクシブ','ぴくしぶ','作品','イラスト'], domainSourceIds:[] },
+  booth: { roles:['user','admin'], groupByRole:{user:'shopping',admin:'commerce'}, keywords:['ブース','ぶーす','通販','ショップ'], domainSourceIds:['boothDomains'] },
+  'wordpress-selfhost': { roles:['admin'], groupByRole:{admin:'cms'}, keywords:['ワードプレス','WordPress org','自作','自分のサイト'], domainSourceIds:[] },
+  drupal: { roles:['admin'], groupByRole:{admin:'cms'}, keywords:['ドルーパル','どるーぱる','CMS'], domainSourceIds:[] },
+};
+export const sources = {
+  ...Object.fromEntries(Object.entries(baseSources).map(([id, source]) => [id, {...source, kind: id.endsWith('Domains') ? 'domain' : id.endsWith('Requirements') ? 'technical' : 'incident'}])),
+  ...retailSources, ...socialSources, ...adminSources,
+};
+export const services = [
+  ...baseServices.map(service => ({...service, ...baseDiscovery[service.id], supportSourceIds:[]})),
+  ...retailServices, ...socialServices, ...adminServices,
 ];

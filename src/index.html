@@ -12,10 +12,10 @@
 </head>
 <body>
 <a class="skip" href="#main">本文へ進む</a>
-<header class="site-header wrap"><a class="brand" href="./index.html" aria-label="EpsilonLab ホーム"><span class="brand-mark" aria-hidden="true">e.</span>EpsilonLab</a><span class="header-label">PHP ACTION GUIDE <span class="version">初版 0.1.1</span></span></header>
+<header class="site-header wrap"><a class="brand" href="./index.html" aria-label="EpsilonLab ホーム"><span class="brand-mark" aria-hidden="true">e.</span>EpsilonLab</a><span class="header-label">PHP ACTION GUIDE <span class="version">初版 0.2.0</span></span></header>
 <main id="main" class="wrap">
 <section class="hero" aria-labelledby="page-title">
-<div><p class="eyebrow">気になるニュースを、自分の行動に。</p><h1 id="page-title">PHPの問題、<br><span class="title-line">私は何をすればいい？</span></h1><p class="hero-copy">使っているサービスを選ぶと、公式情報と<br class="desktop-break">あなたが確認したいことを整理できます。</p></div>
+<div><p class="eyebrow">気になるニュースを、自分の行動に。</p><h1 id="page-title">PHPの問題、<br><span class="title-line">私は何をすればいい？</span></h1><p class="hero-copy">利用するサービスや管理する環境の、公式情報と<br class="desktop-break">あなたが確認したいことを整理できます。</p></div>
 <aside class="hero-note"><span class="tiny-label">このガイドでわかること</span><ol><li><span>01</span> PHPの利用について</li><li><span>02</span> 今回の問題への公式説明</li><li><span>03</span> あなたが確認すること</li></ol><p>サービスの安全性を判定するものではありません。</p></aside>
 </section>
 <div class="update-bar"><span><span class="status-dot" aria-hidden="true"></span>情報確認日: <time datetime="2026-10-24">2026年10月24日</time></span><a href="#issue">対象の問題を確認</a></div>
@@ -23,10 +23,10 @@
 <noscript><p class="notice">このガイドを操作するにはJavaScriptを有効にしてください。対象は2026年10月のPHPの問題です。<a href="https://www.php.net/archive/2026.php" rel="noreferrer">PHP公式のお知らせ</a>と、利用サービスの公式案内を確認してください。</p></noscript>
 <div class="workspace">
 <aside class="selector-panel" aria-label="確認する条件">
-<section class="step"><div class="step-heading"><span class="step-number">1</span><h2>あなたの立場</h2></div><p class="hint">近いほうを選んでください。</p><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>サービスを利用する人</strong><span>閲覧・買い物・投稿など</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>サイトを管理する人</strong><span>CMS・サーバーの管理など</span></button></div></section>
-<section class="step"><div class="step-heading"><span class="step-number">2</span><h2>サービスを探す</h2></div>
+<section class="step"><div class="step-heading"><span class="step-number">1</span><h2>あなたの立場</h2></div><p class="hint">近いほうを選んでください。</p><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>サービスを利用する人</strong><span>閲覧・買い物・投稿など</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>サイトを管理する人</strong><span>サイト・ショップ・サーバーの管理</span></button></div></section>
+<section class="step"><div class="step-heading"><span class="step-number">2</span><h2 id="finder-title">利用するサービスを探す</h2></div>
 <div class="mode-switch" role="group" aria-label="検索方法"><button type="button" id="select-mode" aria-pressed="true" class="active">一覧から選ぶ</button><button type="button" id="url-mode" aria-pressed="false">URLで探す</button></div>
-<div id="list-panel"><p class="hint">4サービス + 2つのCMSを掲載</p><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
+<div id="list-panel"><p id="role-list-hint" class="hint">使っているサービスを、名前や用途から探せます。</p><label for="service-filter">サービス名で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例: アマゾン、note" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div id="category-filters" class="category-filters" role="group" aria-label="用途で絞り込む"></div><p id="list-count" class="list-count" role="status" aria-live="polite"></p><div id="service-list" class="service-list"></div><p class="catalog-note">一覧への掲載は、PHPの利用や今回の問題の影響を意味しません。</p><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
 <div id="url-panel" hidden><div id="url-form" role="search" aria-label="掲載サービスのURL照合"><label for="url-input">サービスのURL / ドメイン</label><input id="url-input" type="text" inputmode="url" placeholder="例: https://note.com/" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="4096" aria-describedby="url-hint url-error"><p id="url-hint" class="hint">サービス名ではなく、note.com のようなドメインかURLを入力してください。</p><button id="url-search-button" class="primary-button" type="button">掲載情報を探す <span aria-hidden="true">→</span></button><p id="url-error" class="error" role="alert" hidden></p></div><div class="privacy-note"><strong>入力したURLは外部に送信・保存しません。</strong><p>このアプリ内の登録ドメインと照合します。入力先へのアクセスや実際のPHP利用調査は行いません。</p></div><p class="hint">独自ドメインは一致しないことがあります。利用先がわかる場合は「一覧から選ぶ」を使ってください。</p></div>
 </section>
 </aside>

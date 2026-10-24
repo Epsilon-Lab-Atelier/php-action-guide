@@ -5,13 +5,20 @@ import { resolveInput } from '../src/url.mjs';
 
 const serviceFor = (input) => resolveInput(input, services).service?.id ?? null;
 
-test('initial catalog has six uniquely identified services and separate CMS entries', () => {
-  assert.deepEqual(services.map(({ id }) => id).sort(), [
-    'booth', 'drupal', 'note', 'pixiv', 'wordpress-com', 'wordpress-selfhost',
-  ]);
-  assert.equal(new Set(services.map(({ id }) => id)).size, services.length);
-  assert.equal(services.filter(({ category }) => category === 'service').length, 4);
-  assert.equal(services.filter(({ category }) => category === 'cms').length, 2);
+test('expanded catalog separates user services from administration environments', () => {
+  assert.equal(services.length,22);
+  assert.equal(new Set(services.map(({ id }) => id)).size,services.length);
+  assert.equal(services.filter(s=>s.roles.includes('user')).length,14);
+  assert.equal(services.filter(s=>s.roles.includes('admin')).length,13);
+  for (const service of services) {
+    assert.ok(service.roles.length);
+    for (const role of service.roles) {
+      assert.ok(['user','admin'].includes(role));
+      assert.ok(service.groupByRole[role]);
+    }
+  }
+  for (const id of ['sakura-rental','sakura-vps','wordpress-selfhost','ec-cube']) assert.deepEqual(services.find(s=>s.id===id).roles,['admin']);
+  for (const id of ['amazon-jp','youtube','pixiv']) assert.deepEqual(services.find(s=>s.id===id).roles,['user']);
 });
 
 test('every entry separates PHP facts, incident facts, official actions and role-based guidance', () => {
@@ -19,7 +26,11 @@ test('every entry separates PHP facts, incident facts, official actions and role
     for (const key of ['name', 'short', 'caution']) assert.ok(service[key]?.trim(), `${service.id}.${key}`);
     for (const key of ['php', 'incident', 'officialAction']) {
       assert.ok(service[key].text?.trim(), `${service.id}.${key}.text`);
-      assert.ok(service[key].sourceIds.length > 0, `${service.id}.${key} evidence`);
+      if (!service[key].sourceIds.length) {
+        assert.match(service[key].text,/未確認|まだ掲載/);
+        assert.ok(service.supportSourceIds?.length, `${service.id} needs an official contact route`);
+      }
+      for (const id of service[key].sourceIds) assert.ok(!['support','domain'].includes(sources[id]?.kind), `${id} cannot establish PHP or incident claims`);
       for (const id of service[key].sourceIds) assert.ok(Object.hasOwn(sources, id), `missing source ${id}`);
     }
     assert.ok(service.php.label?.trim());
@@ -35,7 +46,7 @@ test('every entry separates PHP facts, incident facts, official actions and role
 test('all evidence links are HTTPS and have valid, explicit confirmation dates', () => {
   const isDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value) && new Date(value).toISOString().slice(0, 10) === value;
   assert.ok(isDate(checkedAt));
-  const allowedHosts = new Set(['note.jp', 'wordpress.com', 'inside.pixiv.blog', 'booth.pm', 'booth.pixiv.help', 'wordpress.org', 'www.drupal.org']);
+  const allowedHosts = new Set(['note.jp','wordpress.com','inside.pixiv.blog','booth.pm','booth.pixiv.help','wordpress.org','www.drupal.org','www.amazon.co.jp','ichiba.faq.rakuten.net','support.yahoo-net.jp','shopping.yahoo.co.jp','help.jp.mercari.com','status.jp.mercari.com','help.thebase.in','support.google.com','www.youtube.com','help.instagram.com','www.instagram.com','help.x.com','help.line.me','www.line.me','fanbox.pixiv.help','www.sakura.ad.jp','help.sakura.ad.jp','www.xserver.ne.jp','lolipop.jp','www.conoha.jp','support.conoha.jp','www.ec-cube.net']);
   for (const [id, source] of Object.entries(sources)) {
     const url = new URL(source.url);
     assert.equal(url.protocol, 'https:', id);
@@ -78,7 +89,7 @@ test('WordPress.com and BOOTH recognize registered subdomains only within their 
 
 test('pixiv recognizes only its two explicit hostnames and does not absorb related services', () => {
   for (const host of ['pixiv.net', 'www.pixiv.net']) assert.equal(serviceFor(host), 'pixiv', host);
-  for (const host of ['accounts.pixiv.net', 'inside.pixiv.blog', 'fanbox.cc', 'booth.pixiv.help']) assert.equal(serviceFor(host), null, host);
+  for (const host of ['accounts.pixiv.net', 'inside.pixiv.blog', 'booth.pixiv.help']) assert.equal(serviceFor(host), null, host);
 });
 
 test('self-managed CMS entries require a manual selection and are never inferred from paths', () => {
@@ -95,13 +106,30 @@ test('missing incident evidence remains explicitly unknown for BOOTH and individ
   for (const id of ['booth', 'wordpress-selfhost', 'drupal']) assert.equal(services.find((service) => service.id === id).incident.label, '未確認');
 });
 
-test('a service name explains the URL requirement while an unregistered domain stays unknown', () => {
+test('URL input distinguishes service names, registered Amazon and unregistered domains', () => {
   const name = resolveInput('amazon', services);
   assert.equal(name.ok, false);
   assert.match(name.error, /サービス名だけでは検索できません/);
   for (const input of ['amazon.co.jp', 'https://amazon.co.jp/']) {
     const domain = resolveInput(input, services);
     assert.equal(domain.ok, true);
-    assert.equal(domain.service, null);
+    assert.equal(domain.service.id, 'amazon-jp');
+    assert.equal(domain.service.php.label, '未確認');
+  }
+});
+
+test('new domains do not match company-wide or lookalike hosts', () => {
+  assert.equal(serviceFor('amazon.co.jp'),'amazon-jp');
+  assert.equal(serviceFor('fanbox.cc'),'fanbox');
+  assert.equal(serviceFor('shopping.yahoo.co.jp'),'yahoo-shopping');
+  for (const input of ['aws.amazon.com','amazon.co.jp.example.org','yahoo.co.jp','support.google.com','unlisted.example.org']) assert.equal(serviceFor(input),null);
+});
+test('hosting and CMS choice never infers a provider from a customer domain', () => {
+  for(const service of services.filter(s=>['hosting','server','cms'].includes(s.groupByRole.admin))) assert.deepEqual(service.domains,[]);
+});
+test('support and domain routes remain separate from technical evidence', () => {
+  for(const service of services) {
+    for(const id of service.supportSourceIds ?? []) assert.equal(sources[id]?.kind,'support');
+    for(const id of service.domainSourceIds ?? []) assert.ok(['domain','support'].includes(sources[id]?.kind));
   }
 });

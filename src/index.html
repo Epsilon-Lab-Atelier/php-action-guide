@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="__CSP__">
+<meta name="description" content="利用するサービスの公式情報を確認して、PHPの問題について自分に必要な行動を整理するガイドです。">
+<meta name="color-scheme" content="light">
+<title>PHPの問題、何をすればいい？ | EpsilonLab</title>
+<style>__STYLE__</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ進む</a>
+<header class="site-header wrap"><a class="brand" href="./index.html" aria-label="EpsilonLab ホーム"><span class="brand-mark" aria-hidden="true">e.</span>EpsilonLab</a><span class="header-label">PHP ACTION GUIDE <span class="version">初版 0.1</span></span></header>
+<main id="main" class="wrap">
+<section class="hero" aria-labelledby="page-title">
+<div><p class="eyebrow">気になるニュースを、自分の行動に。</p><h1 id="page-title">PHPの問題、<br><span class="title-line">私は何をすればいい？</span></h1><p class="hero-copy">使っているサービスを選ぶと、公式情報と<br class="desktop-break">あなたが確認したいことを整理できます。</p></div>
+<aside class="hero-note"><span class="tiny-label">このガイドでわかること</span><ol><li><span>01</span> PHPの利用について</li><li><span>02</span> 今回の問題への公式説明</li><li><span>03</span> あなたが確認すること</li></ol><p>サービスの安全性を判定するものではありません。</p></aside>
+</section>
+<div class="update-bar"><span><span class="status-dot" aria-hidden="true"></span>情報確認日: <time datetime="2026-10-24">2026年10月24日</time></span><a href="#issue">対象の問題を確認</a></div>
+<p id="stale-notice" class="notice stale" hidden></p>
+<noscript><p class="notice">このガイドを操作するにはJavaScriptを有効にしてください。対象は2026年10月のPHPの問題です。<a href="https://www.php.net/archive/2026.php" rel="noreferrer">PHP公式のお知らせ</a>と、利用サービスの公式案内を確認してください。</p></noscript>
+<div class="workspace">
+<aside class="selector-panel" aria-label="確認する条件">
+<section class="step"><div class="step-heading"><span class="step-number">1</span><h2>あなたの立場</h2></div><p class="hint">近いほうを選んでください。</p><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>サービスを利用する人</strong><span>閲覧・買い物・投稿など</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>サイトを管理する人</strong><span>CMS・サーバーの管理など</span></button></div></section>
+<section class="step"><div class="step-heading"><span class="step-number">2</span><h2>サービスを探す</h2></div>
+<div class="mode-switch" role="group" aria-label="検索方法"><button type="button" id="select-mode" aria-pressed="true" class="active">一覧から選ぶ</button><button type="button" id="url-mode" aria-pressed="false">URLで探す</button></div>
+<div id="list-panel"><p class="hint">4サービス + 2つのCMSを掲載</p><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
+<div id="url-panel" hidden><form id="url-form" novalidate><label for="url-input">サービスのURL / ドメイン</label><input id="url-input" name="service-url" type="text" inputmode="url" placeholder="例: https://note.com/" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="4096" aria-describedby="url-hint url-error"><p id="url-hint" class="hint">ドメインだけでも検索できます。</p><button class="primary-button" type="submit">掲載情報を探す <span aria-hidden="true">→</span></button><p id="url-error" class="error" role="alert" hidden></p></form><div class="privacy-note"><strong>入力したURLは外部に送信・保存しません。</strong><p>このアプリ内の登録ドメインと照合します。入力先へのアクセスや実際のPHP利用調査は行いません。</p></div><p class="hint">独自ドメインは一致しないことがあります。利用先がわかる場合は「一覧から選ぶ」を使ってください。</p></div>
+</section>
+</aside>
+<section id="result" class="result-panel" aria-labelledby="result-title"><div class="empty-state"><span class="document-icon" aria-hidden="true"><i></i><i></i><i></i></span><p class="eyebrow">YOUR NEXT STEP</p><h2 id="result-title" tabindex="-1">まずは、サービスを選びましょう。</h2><p>公式にわかっていることと、<br>まだ確認できていないことを分けてご案内します。</p><div class="empty-tip"><strong>「未確認」は「危険」という意味ではありません。</strong><p>情報が足りない状態です。「安全」「対応不要」とも判断せず、運営元のお知らせを確かめましょう。</p></div></div></section>
+</div>
+<section id="issue" class="issue-section" aria-labelledby="issue-title"><div><p class="eyebrow">ABOUT THIS GUIDE</p><h2 id="issue-title">どのPHPの問題を扱っているの？</h2><p>2026年10月に公表された、PHP2Shellと呼ばれる問題を中心に扱っています。PHPは、Webサイトの裏側の処理を動かすために使われる言語です。</p></div><details><summary>対象の問題・影響条件・管理者向け情報を見る</summary><div class="detail-body"><h3>10月21日に修正版が公開された2件</h3><p><code>CVE-2026-109618</code> / <code>CVE-2026-109619</code></p><p>PHP内部のメモリや状態の扱いに関する問題です。条件がそろうと、ログインしていない第三者がサーバーに不正な処理をさせるおそれがあります。PHP公式は、Webからのリクエストを処理するPHP環境に更新を呼びかけています。Windowsや特定のCMSだけの問題ではありません。</p><p>この2件の修正を含むリリースは <code>8.2.35 / 8.3.36 / 8.4.27 / 8.5.12</code> です。配布元が修正を取り込む場合もあるため、表示バージョンだけで判断せず配布元の案内を確認してください。CMS本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。</p><h3>10月23日の追加案内も確認してください</h3><p><code>CVE-2026-115560</code> は別の追加案内です。アップロード進捗機能が有効で、<code>session.serialize_handler</code> を設定で <code>php_binary</code> または <code>php_serialize</code> にし、実行時に <code>ini_set()</code> で <code>php</code> へ変更してから <code>session_start()</code> を呼ぶ特殊な組合せが条件とされています。</p><p>PHP公式は次の通常修正版まで <code>session.upload_progress.enabled=0</code> を推奨しています。実行時にハンドラーを変更しないアプリは、この機能を維持できると説明しています。管理者は公式案内を読んで構成を確認してください。</p><p><a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener noreferrer">PHP公式: 10月21日・23日の案内 (英語)</a><br><small>情報確認日: 2026-10-24</small></p><p>古い系列を使っている場合は、配布元による修正の有無や、サポート中の系列への移行も確認しましょう。個別サイトの被害の有無は、このガイドからは判断できません。</p></div></details><details><summary>このガイドの情報・URL検索について</summary><div class="detail-body"><p>公式ページを確認した日の情報を手作業で掲載しています。各サービスの説明は、その資料が対象にしているサービス・問題・時点の範囲に限ります。最新状況はリンク先を確認してください。</p><p>「未確認」は掲載資料から判断できない状態、「掲載情報なし」は登録情報がない状態です。公式発表が世界中のどこにも存在しないという意味ではありません。</p><p>URL検索は登録ドメインとの照合だけです。PHPの利用状況、バージョン、修正適用、情報流出は検査しません。登録済みサービスでも、独自ドメインや登録外のサブドメインは一致しません。</p><p>このアプリは入力URLやチェック状態を保存しません。ブラウザの復元機能などで画面が残る場合があります。解析用の外部通信は行いません。公式リンクを開く際は、その公式サイトへ移動します。</p></div></details></section>
+</main>
+<footer class="site-footer wrap"><span class="brand-text">EpsilonLab</span><p>わかっていることを確かめて、次の一歩へ。</p><a href="#main">ページの先頭へ ↑</a></footer>
+<p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+<script type="module">__SCRIPT__</script>
+</body></html>

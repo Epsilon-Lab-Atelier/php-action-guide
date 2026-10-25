@@ -4,7 +4,7 @@
   "repositoryConfirmed": true,
   "enabled": true,
   "activation": "repository_push",
-  "publishedSiteUrl": null,
+  "publishedSiteUrl": "https://epsilon-lab-atelier.github.io/php-action-guide/",
   "account": "Epsilon-Lab-Atelier",
   "updateMode": "pull_request",
   "allowAutoMerge": false,

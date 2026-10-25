@@ -177,7 +177,7 @@ export function watchlistRows(state, { services = [], incidents = [], history = 
         action: latest?.officialAction?.text ?? '', publishedAt: latest?.publishedAt ?? null,
         updatedAt: latest?.updatedAt ?? null, title: latest?.title ?? '',
       },
-      php: topics.includes('php') ? { label: service.incident?.label ?? '未確認', action: service.officialAction?.text ?? '' } : null,
+      php: topics.includes('php') ? { label: service.incident?.label ?? '未確認', usageLabel: service.php?.label ?? '未確認', action: service.officialAction?.text ?? '' } : null,
       latestChangedAt: metadata.lastChangedAt, latestChangedAtTime: metadata.lastChangedAtTime,
       latestSummary: String(event?.summary ?? '').replaceAll('この手帳', 'このアプリ'),
       latestTitle: event?.title ?? '', actionImpact: event?.actionImpact ?? 'unknown', actionSummary: event?.actionSummary ?? '',
@@ -191,7 +191,7 @@ export function watchlistRows(state, { services = [], incidents = [], history = 
 function watchlistNode(document, tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
+  if (text !== undefined) node.textContent = String(text).replaceAll('この手帳', 'このアプリ');
   return node;
 }
 
@@ -237,12 +237,12 @@ export function renderWatchlistView(container, { rows = [], onOpen, onRemove, on
       if (!row.breach.count) status.append(node('small', '', '未掲載は「被害なし」を意味しません。'));
       statuses.append(status);
     }
-    if (row.php) statuses.append(node('dt', '', 'PHPの問題'), node('dd', '', row.php.label));
+    if (row.php) statuses.append(node('dt', '', 'PHPの問題'), node('dd', '', `${row.php.usageLabel} · ${row.php.label}`));
     card.append(statuses);
     const dates = node('div', 'watchlist-dates');
     dates.append(node('p', '', `公式情報の確認：${formatInformationTime(row.metadata.checkedAt, row.metadata.checkedAtTime)}`));
     dates.append(node('small', '', '引用資料のうち、確認日時が最も古いものを表示'));
-    dates.append(node('p', '', `対応案内の変更：${formatInformationTime(row.metadata.lastActionChangedAt, row.metadata.lastActionChangedAtTime)}`));
+    dates.append(node('p', '', `対応案内の変更：${row.metadata.lastActionChangedAt ? formatInformationTime(row.metadata.lastActionChangedAt, row.metadata.lastActionChangedAtTime) : '比較記録なし'}`));
     if (row.metadata.checkFailures.length) dates.append(node('small', 'watchlist-source-warning', `取得できなかった資料：${row.metadata.checkFailures.length}件。最後に確認できた日時を保持しています。`));
     card.append(dates);
     const changes = node('div', 'watchlist-latest');

@@ -78,7 +78,7 @@ export function groupUpdatesByDate(history = [], services = [], { topic = 'all',
 function updateViewNode(document, tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
+  if (text !== undefined) node.textContent = String(text).replaceAll('この手帳', 'このアプリ');
   return node;
 }
 

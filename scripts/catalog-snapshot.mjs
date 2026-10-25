@@ -11,7 +11,15 @@ function canonical(value) {
 }
 const serialized = value => JSON.stringify(canonical(value));
 const copy = value => JSON.parse(JSON.stringify(value));
-const validDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value;
+const validDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(`${value}T00:00:00Z`)) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value;
+
+function validReviewTime(value) {
+  if (typeof value !== 'string') return false;
+  const match = value.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d{1,3})?(Z|[+-]\d{2}:\d{2})$/);
+  if (!match || !validDate(match[1]) || Number(match[2]) > 23 || Number(match[3]) > 59 || Number(match[4]) > 59) return false;
+  return Number.isFinite(Date.parse(value));
+}
+const reviewJapanDate = value => new Date(Date.parse(value) + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 export function createCatalogSnapshot(catalog = { services, sources, checkedAt, breachIncidents, breachSources, breachReviews }) {
   const ids = catalog.services.map(service => service.id);
@@ -41,7 +49,7 @@ function validateSnapshot(snapshot) {
 
 function substantiveSource(source) {
   if (!source) return source;
-  const { checkedAt: ignored, ...content } = source;
+  const { checkedAt: ignoredDate, checkedAtTime: ignoredTime, lastAttempt: ignoredAttempt, ...content } = source;
   return content;
 }
 
@@ -56,11 +64,11 @@ function changedFields(before, after) {
 
 function substantiveReview(review) {
   if (!review) return review;
-  const { attemptedAt: ignored, ...content } = review;
+  const { attemptedAt: ignoredDate, attemptedAtTime: ignoredTime, ...content } = review;
   return content;
 }
 
-/** Date-only rereads are reported separately from actual content or source changes. */
+/** Verification dates, precise times and failures are separate from content changes. */
 export function diffCatalogSnapshots(before, after) {
   validateSnapshot(before); validateSnapshot(after);
   const changes = [];
@@ -72,7 +80,12 @@ export function diffCatalogSnapshots(before, after) {
   for (const id of [...new Set([...Object.keys(before.sources), ...Object.keys(after.sources)])].sort()) {
     const oldSource = before.sources[id], newSource = after.sources[id];
     if (serialized(substantiveSource(oldSource)) !== serialized(substantiveSource(newSource))) changedSourceIds.push(id);
-    if (oldSource?.checkedAt !== newSource?.checkedAt) verificationChanges.push({ sourceId: id, before: oldSource?.checkedAt ?? null, after: newSource?.checkedAt ?? null });
+    if (oldSource?.checkedAt !== newSource?.checkedAt || oldSource?.checkedAtTime !== newSource?.checkedAtTime || serialized(oldSource?.lastAttempt) !== serialized(newSource?.lastAttempt)) {
+      const change = { sourceId: id, before: oldSource?.checkedAt ?? null, after: newSource?.checkedAt ?? null };
+      if (oldSource?.checkedAtTime !== undefined || newSource?.checkedAtTime !== undefined) Object.assign(change, { beforeTime: oldSource?.checkedAtTime ?? null, afterTime: newSource?.checkedAtTime ?? null });
+      if (oldSource?.lastAttempt !== undefined || newSource?.lastAttempt !== undefined) Object.assign(change, { beforeAttempt: oldSource?.lastAttempt ? copy(oldSource.lastAttempt) : null, afterAttempt: newSource?.lastAttempt ? copy(newSource.lastAttempt) : null });
+      verificationChanges.push(change);
+    }
   }
   for (const id of [...new Set([...Object.keys(before.services), ...Object.keys(after.services)])].sort()) {
     const oldService = before.services[id], newService = after.services[id];
@@ -98,7 +111,11 @@ export function diffCatalogSnapshots(before, after) {
     const oldReview = oldReviews[id], newReview = newReviews[id];
     const fields = changedFields(substantiveReview(oldReview), substantiveReview(newReview));
     if (fields.length) reviewChanges.push({ serviceId: id, kind: !oldReview ? 'added' : !newReview ? 'removed' : 'changed', fields });
-    if (oldReview?.attemptedAt !== newReview?.attemptedAt) reviewVerificationChanges.push({ serviceId: id, before: oldReview?.attemptedAt ?? null, after: newReview?.attemptedAt ?? null });
+    if (oldReview?.attemptedAt !== newReview?.attemptedAt || oldReview?.attemptedAtTime !== newReview?.attemptedAtTime) {
+      const change = { serviceId: id, before: oldReview?.attemptedAt ?? null, after: newReview?.attemptedAt ?? null };
+      if (oldReview?.attemptedAtTime !== undefined || newReview?.attemptedAtTime !== undefined) Object.assign(change, { beforeTime: oldReview?.attemptedAtTime ?? null, afterTime: newReview?.attemptedAtTime ?? null });
+      reviewVerificationChanges.push(change);
+    }
   }
   return { schemaVersion: 1,
     hasContentChanges: changes.length > 0 || changedSourceIds.length > 0 || incidentChanges.length > 0 || reviewChanges.length > 0,
@@ -107,7 +124,7 @@ export function diffCatalogSnapshots(before, after) {
   };
 }
 
-/** Explicit successful reading can advance a source date; failures never erase it. */
+/** Only body reads advance verification. Timed failures retain the last successful read. */
 export function applySourceReviews(snapshot, reviews) {
   validateSnapshot(snapshot);
   if (!Array.isArray(reviews)) throw new Error('Reviews must be an array');
@@ -119,13 +136,34 @@ export function applySourceReviews(snapshot, reviews) {
     seen.add(review.sourceId);
     if (!next.sources[review.sourceId]) throw new Error(`Unknown source id: ${review.sourceId}`);
     if (!validDate(review.attemptedAt)) throw new Error('Invalid attempt date');
+    const source = next.sources[review.sourceId];
+    const timed = review.attemptedAtTime !== undefined;
+    if (timed) {
+      if (!validReviewTime(review.attemptedAtTime) || reviewJapanDate(review.attemptedAtTime) !== review.attemptedAt) throw new Error('Attempt time must be a valid zoned timestamp matching the Japanese attempt date');
+      if (source.checkedAt && review.attemptedAt < source.checkedAt) throw new Error('Review date would move backwards');
+      for (const previous of [source.checkedAtTime, source.lastAttempt?.at]) {
+        if (validReviewTime(previous) && Date.parse(review.attemptedAtTime) < Date.parse(previous)) throw new Error('Review time would move backwards');
+      }
+      if (review.note !== undefined && (typeof review.note !== 'string' || review.note.length > 1000)) throw new Error('Review note must be a short string');
+    }
     if (review.outcome !== 'read' || review.bodyRead !== true) {
-      deferred.push({ sourceId: review.sourceId, outcome: review.outcome ?? 'unconfirmed', attemptedAt: review.attemptedAt });
+      if (timed) source.lastAttempt = { at: review.attemptedAtTime, outcome: 'unavailable', ...(review.note ? { note: review.note } : {}) };
+      deferred.push({ sourceId: review.sourceId, outcome: review.outcome ?? 'unconfirmed', attemptedAt: review.attemptedAt, ...(timed ? { attemptedAtTime: review.attemptedAtTime } : {}) });
       continue;
     }
-    if (review.url !== next.sources[review.sourceId].url) throw new Error('Reviewed URL does not match the registered source');
-    if (next.sources[review.sourceId].checkedAt && review.attemptedAt < next.sources[review.sourceId].checkedAt) throw new Error('Review date would move backwards');
-    next.sources[review.sourceId].checkedAt = review.attemptedAt;
+    if (review.url !== source.url) throw new Error('Reviewed URL does not match the registered source');
+    if (source.checkedAt && review.attemptedAt < source.checkedAt) throw new Error('Review date would move backwards');
+    if (!timed && validReviewTime(source.lastAttempt?.at) && review.attemptedAt < reviewJapanDate(source.lastAttempt.at)) throw new Error('Review date would move backwards');
+    source.checkedAt = review.attemptedAt;
+    if (timed) {
+      source.checkedAtTime = review.attemptedAtTime;
+      source.lastAttempt = { at: review.attemptedAtTime, outcome: 'read', ...(review.note ? { note: review.note } : {}) };
+    } else {
+      // Do not borrow the previous read's clock time for an untimed new reading,
+      // or continue showing a previous failure after a successful body read.
+      delete source.checkedAtTime;
+      delete source.lastAttempt;
+    }
     accepted.push(review.sourceId);
   }
   // A partial source review never advances the whole catalog date.

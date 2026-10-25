@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
-import { services, sources, checkedAt } from '../src/catalog.mjs';
+import { sources, checkedAt } from '../src/catalog.mjs';
+import { directoryServices as services } from '../src/service-directory.mjs';
 import { breachIncidents, breachSources, breachReviews } from '../src/incidents.mjs';
 
 function canonical(value) {

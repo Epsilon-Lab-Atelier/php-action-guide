@@ -131,7 +131,17 @@ function renderPersonalized() {
   for(const group of guide.groups.filter(group=>group.kind!=='official')) {
     const section=el('section',`risk-answer risk-answer-${group.kind}`);section.dataset.group=group.id;
     section.append(el('h4','',group.title));const list=el('ul','risk-answer-list');
-    const renderItem=item=>{const row=el('li');if(item.title)row.append(el('strong','',item.title));row.append(el('p','',item.text));if(item.sourceIds?.length)row.append(sourceLinks(item.sourceIds));return row;};
+    const renderItem=item=>{
+      const row=el('li');if(item.title)row.append(el('strong','',item.title));
+      for(const text of item.text.split('\n').filter(Boolean)) {
+        const paragraph=el('p');
+        const labeled=text.match(/^(登録・提出した情報と照合する項目|対象外などの説明|利用・登録の対象期間|公表対象)：(.*)$/);
+        if(labeled)paragraph.append(el('strong','',labeled[1]),el('br'),document.createTextNode(labeled[2]));
+        else paragraph.textContent=text;
+        row.append(paragraph);
+      }
+      if(item.sourceIds?.length)row.append(sourceLinks(item.sourceIds));return row;
+    };
     const foldRecords=state.topic==='breach'&&['official','scope'].includes(group.kind)&&group.items.length>1;
     (foldRecords?group.items.slice(0,1):group.items).forEach(item=>list.append(renderItem(item)));
     section.append(list);

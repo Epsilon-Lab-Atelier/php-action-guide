@@ -127,7 +127,8 @@ function renderPersonalized() {
   if(root.hidden)return;
   const guide=personalizedRiskGuidance({service:state.service,topic:state.topic,role:state.role,selections:state.selections,incidents:selectedIncidents()});
   root.append(el('h3','risk-answer-heading',guide.heading),el('p','risk-summary',guide.intro));
-  for(const group of guide.groups) {
+  // The official action is already visible in the public summary above.
+  for(const group of guide.groups.filter(group=>group.kind!=='official')) {
     const section=el('section',`risk-answer risk-answer-${group.kind}`);section.dataset.group=group.id;
     section.append(el('h4','',group.title));const list=el('ul','risk-answer-list');
     const renderItem=item=>{const row=el('li');if(item.title)row.append(el('strong','',item.title));row.append(el('p','',item.text));if(item.sourceIds?.length)row.append(sourceLinks(item.sourceIds));return row;};

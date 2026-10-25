@@ -67,3 +67,13 @@ test('static controls retain unique accessible IDs and non-JavaScript fallback',
   assert.match(html, /id="url-error"[^>]*role="alert"/);
   assert.match(html, /<noscript>[\s\S]*https:\/\/www\.php\.net\/archive\/2026\.php[\s\S]*<\/noscript>/);
 });
+
+
+test('risk-check release removes memo, completion tracking and persistent service storage from runtime', () => {
+  assert.match(html, /<title>ネットサービスのリスクチェック \| EpsilonLab<\/title>/);
+  const script = scripts[0][2];
+  assert.doesNotMatch(script, /localStorage|navigator\.clipboard|window\.print|createMemoText|checkedTasks|checkedBreachTasks/);
+  assert.doesNotMatch(html, /id="(?:print-memo|saved-services)"/);
+  assert.match(html, /id="check-view"/);
+  assert.match(html, /id="updates-view" hidden/);
+});

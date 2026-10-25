@@ -2,6 +2,64 @@
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
 {
+  "id": "futureshop",
+  "name": "futureshop（フューチャーショップ）",
+  "short": "1店舗の会員情報・別の一部サーバー事案",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "keywords": [
+    "futureshop",
+    "フューチャーショップ",
+    "Future Shop"
+  ],
+  "domains": [
+    {
+      "host": "www.future-shop.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachFutureshopExplanation2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "lashinbang",
+  "name": "らしんばん",
+  "short": "利用サービス別の顧客・届け先情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "keywords": [
+    "らしんばん",
+    "羅針盤",
+    "Lashinbang"
+  ],
+  "domains": [
+    {
+      "host": "www.lashinbang.com",
+      "includeSubdomains": false
+    },
+    {
+      "host": "shop.lashinbang.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachLashinbang2026"
+  ],
+  "supportSourceIds": []
+},
+{
   "id": "awa-bank",
   "name": "阿波銀行",
   "short": "法人契約先・株主などの情報",

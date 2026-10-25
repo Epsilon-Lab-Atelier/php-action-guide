@@ -374,3 +374,81 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
   .update-controls > .update-search-control { flex-basis: 100%; }
   .update-row-badges { gap: 5px; }
 }
+
+/* Saved companies remain a compact overview, separate from usage answers. */
+.watch-nav-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 6px; padding-inline: 4px; border-radius: 5px; background: #e3eaf6; font-size: 10px; font-variant-numeric: tabular-nums; }
+.watch-nav-dot { display: inline-block; width: 6px; height: 6px; margin: 0 0 3px 5px; border-radius: 50%; background: var(--accent); }
+.result-header { flex-wrap: wrap; }
+.result-header > div:first-child { flex: 1; min-width: 180px; }
+.watch-toggle { min-height: 40px; padding: 8px 12px; border: 1px solid #b9ccef; background: #fff; color: var(--accent-dark); font-size: 12px; font-weight: 650; white-space: nowrap; }
+.watch-toggle[aria-pressed="true"] { background: var(--tint); border-color: #91b0ed; }
+.incident-period strong { display: block; margin-bottom: 4px; font-size: 11px; color: #526888; }
+.incident-period p { margin: 0; font-size: 13px; }
+.first-action { padding: 17px 19px; border: 1px solid #b5caf5; border-left: 4px solid var(--accent); border-radius: 8px; background: #edf3ff; margin-bottom: 22px; }
+.first-action h3 { font-size: 12px; color: var(--accent-dark); margin: 0 0 7px; }
+.first-action p { margin: 0; font-size: 15px; font-weight: 650; line-height: 1.8; }
+.information-summary { margin: -2px 0 20px; padding: 14px 17px; border: 1px solid var(--line); border-radius: 8px; background: #fafcff; }
+.information-dates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 0; }
+.information-dates dt { color: var(--muted); font-size: 10px; margin-bottom: 3px; }
+.information-dates dd { margin: 0; font-size: 11px; font-variant-numeric: tabular-nums; }
+.information-date-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; }
+.information-failure, .watchlist-source-warning { color: var(--amber); font-size: 11px; }
+.update-count-note { max-width: 760px; margin: 6px 0 0 !important; font-size: 12px !important; color: var(--muted); }
+.update-impact { display: inline-block; padding: 3px 7px; border-radius: 4px; color: #635537; background: #f7f1e5; font-size: 10px; }
+.update-impact-unchanged { color: #536b83; background: #eef3f9; }
+.update-impact-detail { padding: 10px 12px; border-left: 2px solid #a4bce7; background: #f4f7fc; }
+.update-event-time { display: block; margin-top: 8px; color: var(--muted); font-size: 10px; }
+.watchlist-section { padding-top: 32px; }
+.watchlist-heading > p { color: var(--muted); font-size: 13px; }
+.watchlist-heading .watchlist-count { color: #355f9e; font-size: 12px; margin-top: 14px; }
+.watchlist-privacy, .watchlist-storage-warning { font-size: 11px; color: var(--muted); margin-bottom: 22px; }
+.watchlist-storage-warning { color: var(--amber); padding: 12px 15px; border: 1px solid #eddfbb; background: var(--amber-bg); border-radius: 7px; }
+.watchlist-empty { max-width: 680px; padding: 50px 32px; margin: 28px auto; border: 1px solid var(--line); border-radius: 11px; background: #fff; text-align: center; }
+.watchlist-empty h2 { font-size: 21px; }
+.watchlist-empty p { margin: 12px 0 22px; color: var(--muted); font-size: 13px; }
+.watchlist-empty .primary-button { width: auto; padding-inline: 24px; }
+.watchlist-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; align-items: start; }
+.watchlist-card { display: flex; flex-direction: column; min-width: 0; padding: 22px 24px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.watchlist-card.has-update { border-color: #8eadea; box-shadow: 0 0 0 1px #d7e4fc; }
+.watchlist-card-heading { display: flex; align-items: start; gap: 12px; margin-bottom: 9px; }
+.watchlist-card-heading h2 { flex: 1; min-width: 0; font-size: 20px; letter-spacing: -.025em; }
+.watchlist-remove { min-height: 34px; padding: 5px 8px; border: 0; background: transparent; color: var(--muted); font-size: 11px; }
+.watchlist-remove:hover { color: var(--ink); background: #f1f4f9; }
+.watchlist-unread { align-self: flex-start; padding: 3px 8px; border-radius: 4px; margin: 0 0 8px; color: var(--accent-dark); background: var(--tint); font-size: 11px; font-weight: 650; }
+.watchlist-statuses { margin: 3px 0 14px; }
+.watchlist-statuses dt { margin-top: 10px; color: var(--muted); font-size: 10px; }
+.watchlist-statuses dd { margin: 4px 0 0; font-size: 13px; }
+.watchlist-statuses strong { font-weight: 600; }
+.watchlist-statuses small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+.watchlist-dates { padding: 12px 0; border-top: 1px solid #eef2f7; font-variant-numeric: tabular-nums; }
+.watchlist-dates p { margin: 3px 0; font-size: 11px; color: #536278; }
+.watchlist-dates small { display: block; font-size: 10px; color: var(--muted); }
+.watchlist-dates .watchlist-source-warning { color: var(--amber); }
+.watchlist-latest { padding: 12px 14px; background: #f5f8fd; border-radius: 6px; }
+.watchlist-changed-at { color: #637795; font-size: 10px; margin-bottom: 5px; }
+.watchlist-latest-title { font-size: 12px; line-height: 1.8; margin: 0; }
+.watchlist-action-summary { font-size: 11px; color: #536b83; margin: 7px 0 0; }
+.watchlist-card-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; }
+.watchlist-open { flex: 1; min-width: 130px; min-height: 42px; padding: 8px 12px; border: 1px solid #c7d6ef; background: #fff; color: var(--accent-dark); font-size: 12px; font-weight: 600; }
+.watchlist-open:hover { background: var(--tint); border-color: #9cb9ee; }
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; justify-content: center; gap: 7px; padding-block: 12px 8px; }
+  .site-header .brand { margin-right: auto; }
+  .main-nav { gap: 1px; }
+  .main-nav button { padding-inline: 8px; font-size: 11px; }
+  .watch-nav-count { margin-left: 3px; min-width: 17px; }
+  .watchlist-grid { grid-template-columns: 1fr; gap: 13px; }
+  .watchlist-card { padding: 18px; }
+  .watchlist-section { padding-top: 24px; }
+  .watchlist-card-heading h2 { font-size: 18px; }
+  .watch-toggle { font-size: 11px; }
+  .information-dates { grid-template-columns: 1fr; gap: 7px; }
+  .information-dates > div { display: flex; justify-content: space-between; gap: 12px; }
+  .first-action { padding: 14px; }
+  .first-action p { font-size: 14px; }
+}
+@media (max-width: 520px) {
+  .main-nav { width: 100%; justify-content: space-between; }
+  .main-nav button { flex: 1; font-size: 12px; }
+  .watchlist-empty { padding: 32px 20px; }
+}

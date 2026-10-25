@@ -166,3 +166,92 @@ test('breach source body review advances only that source and failed review chan
   assert.deepEqual(success.snapshot.breachReviews, before.breachReviews);
   assert.equal(diffCatalogSnapshots(before, success.snapshot).hasContentChanges, false);
 });
+
+const timedRead = (snapshot, at, extras = {}) => ({
+  sourceId: 'fixtureNotice', attemptedAt: '2026-10-25', attemptedAtTime: at,
+  outcome: 'read', bodyRead: true, url: snapshot.sources.fixtureNotice.url, ...extras,
+});
+
+test('morning and evening body reads are distinguishable without creating content changes', () => {
+  const before = incidentFixture();
+  const morning = applySourceReviews(before, [timedRead(before, '2026-10-25T06:12:00+09:00')]).snapshot;
+  const evening = applySourceReviews(morning, [timedRead(morning, '2026-10-25T18:20:35+09:00')]).snapshot;
+  assert.equal(evening.sources.fixtureNotice.checkedAt, '2026-10-25');
+  assert.equal(evening.sources.fixtureNotice.checkedAtTime, '2026-10-25T18:20:35+09:00');
+  assert.deepEqual(evening.sources.fixtureNotice.lastAttempt, { at: '2026-10-25T18:20:35+09:00', outcome: 'read' });
+  assert.equal(evening.checkedAt, before.checkedAt);
+  assert.deepEqual(evening.incidents, before.incidents);
+  const diff = diffCatalogSnapshots(morning, evening);
+  assert.equal(diff.hasContentChanges, false);
+  assert.deepEqual(diff.changedSourceIds, []);
+  assert.equal(diff.verificationChanges.length, 1);
+  assert.equal(diff.verificationChanges[0].before, '2026-10-25');
+  assert.equal(diff.verificationChanges[0].after, '2026-10-25');
+  assert.equal(diff.verificationChanges[0].beforeTime, '2026-10-25T06:12:00+09:00');
+  assert.equal(diff.verificationChanges[0].afterTime, '2026-10-25T18:20:35+09:00');
+  diff.verificationChanges[0].afterAttempt.outcome = 'unavailable';
+  assert.equal(evening.sources.fixtureNotice.lastAttempt.outcome, 'read');
+});
+
+test('failed timed rereads preserve the exact last successful check and report the failed attempt', () => {
+  const before = incidentFixture();
+  const morning = applySourceReviews(before, [timedRead(before, '2026-10-25T06:12:00+09:00')]).snapshot;
+  for (const review of [{ outcome: 'failed', bodyRead: false }, { outcome: 'read', bodyRead: false }]) {
+    const result = applySourceReviews(morning, [timedRead(morning, '2026-10-25T18:20:00+09:00', { ...review, note: '公式本文を取得できず' })]);
+    const source = result.snapshot.sources.fixtureNotice;
+    assert.equal(source.checkedAt, '2026-10-25');
+    assert.equal(source.checkedAtTime, '2026-10-25T06:12:00+09:00');
+    assert.deepEqual(source.lastAttempt, { at: '2026-10-25T18:20:00+09:00', outcome: 'unavailable', note: '公式本文を取得できず' });
+    assert.equal(result.accepted.length, 0);
+    assert.equal(result.deferred.length, 1);
+    assert.equal(result.deferred[0].attemptedAtTime, '2026-10-25T18:20:00+09:00');
+    assert.equal(diffCatalogSnapshots(morning, result.snapshot).hasContentChanges, false);
+  }
+  assert.equal(morning.sources.fixtureNotice.lastAttempt.outcome, 'read');
+});
+
+test('review times require an explicit zone and the actual Japanese calendar date', () => {
+  const before = incidentFixture();
+  // Midnight in Japan can still be the previous UTC date.
+  const midnight = applySourceReviews(before, [timedRead(before, '2026-10-24T15:00:00Z')]).snapshot;
+  assert.equal(midnight.sources.fixtureNotice.checkedAt, '2026-10-25');
+  for (const at of ['2026-10-25T06:12:00', '2026-10-25', '2026-10-24T14:59:59Z', '2026-02-30T06:12:00+09:00', '2026-10-25T24:00:00+09:00', '2026-10-25T06:60:00+09:00', '2026-10-25T06:12:60+09:00', '2026-10-25T06:12:00+24:00']) {
+    assert.throws(() => applySourceReviews(before, [timedRead(before, at)]), /Attempt time/);
+  }
+});
+
+test('out-of-order successful and unavailable timed attempts cannot move the review clock backwards', () => {
+  const before = incidentFixture();
+  const evening = applySourceReviews(before, [timedRead(before, '2026-10-25T18:20:00+09:00')]).snapshot;
+  for (const extras of [{}, { outcome: 'failed', bodyRead: false }]) {
+    assert.throws(() => applySourceReviews(evening, [timedRead(evening, '2026-10-25T06:12:00+09:00', extras)]), /backwards/);
+  }
+  const failure = applySourceReviews(evening, [timedRead(evening, '2026-10-26T06:00:00+09:00', { attemptedAt: '2026-10-26', outcome: 'failed', bodyRead: false })]).snapshot;
+  assert.throws(() => applySourceReviews(failure, [timedRead(failure, '2026-10-25T19:00:00+09:00')]), /backwards/);
+  assert.throws(() => applySourceReviews(failure, [{ sourceId: 'fixtureNotice', attemptedAt: '2026-10-25', outcome: 'read', bodyRead: true, url: failure.sources.fixtureNotice.url }]), /backwards/);
+  const utcEqual = applySourceReviews(evening, [timedRead(evening, '2026-10-25T09:20:00Z')]).snapshot;
+  assert.equal(utcEqual.sources.fixtureNotice.checkedAtTime, '2026-10-25T09:20:00Z');
+});
+
+test('an untimed later successful read cannot reuse an old precise time or stale failure', () => {
+  const before = incidentFixture();
+  const morning = applySourceReviews(before, [timedRead(before, '2026-10-25T06:12:00+09:00')]).snapshot;
+  const failure = applySourceReviews(morning, [timedRead(morning, '2026-10-25T18:20:00+09:00', { outcome: 'failed', bodyRead: false })]).snapshot;
+  const nextDay = applySourceReviews(failure, [{ sourceId: 'fixtureNotice', attemptedAt: '2026-10-26', outcome: 'read', bodyRead: true, url: failure.sources.fixtureNotice.url }]).snapshot;
+  assert.equal(nextDay.sources.fixtureNotice.checkedAt, '2026-10-26');
+  assert.equal(Object.hasOwn(nextDay.sources.fixtureNotice, 'checkedAtTime'), false);
+  assert.equal(Object.hasOwn(nextDay.sources.fixtureNotice, 'lastAttempt'), false);
+  assert.equal(diffCatalogSnapshots(failure, nextDay).hasContentChanges, false);
+});
+
+test('partial timed reviews update only the reviewed source and service attempt times stay verification-only', () => {
+  const before = incidentFixture();
+  before.sources.secondNotice = { ...before.sources.fixtureNotice, url: 'https://example.test/second' };
+  const after = applySourceReviews(before, [timedRead(before, '2026-10-25T06:12:00+09:00')]).snapshot;
+  assert.deepEqual(after.sources.secondNotice, before.sources.secondNotice);
+  after.breachReviews['fixture-service'].attemptedAtTime = '2026-10-24T06:12:00+09:00';
+  const diff = diffCatalogSnapshots(before, after);
+  assert.equal(diff.hasContentChanges, false);
+  assert.deepEqual(diff.reviewChanges, []);
+  assert.deepEqual(diff.reviewVerificationChanges, [{ serviceId: 'fixture-service', before: '2026-10-24', after: '2026-10-24', beforeTime: null, afterTime: '2026-10-24T06:12:00+09:00' }]);
+});

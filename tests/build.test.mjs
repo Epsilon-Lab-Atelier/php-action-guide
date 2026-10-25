@@ -69,11 +69,14 @@ test('static controls retain unique accessible IDs and non-JavaScript fallback',
 });
 
 
-test('risk-check release removes memo, completion tracking and persistent service storage from runtime', () => {
+test('risk-check keeps memo and completion tracking absent while explicitly supporting local watchlists', () => {
   assert.match(html, /<title>ネットサービスのリスクチェック \| EpsilonLab<\/title>/);
   const script = scripts[0][2];
-  assert.doesNotMatch(script, /localStorage|navigator\.clipboard|window\.print|createMemoText|checkedTasks|checkedBreachTasks/);
+  assert.doesNotMatch(script, /navigator\.clipboard|window\.print|createMemoText|checkedTasks|checkedBreachTasks/);
   assert.doesNotMatch(html, /id="(?:print-memo|saved-services)"/);
   assert.match(html, /id="check-view"/);
   assert.match(html, /id="updates-view" hidden/);
+  assert.match(html, /id="watchlist-view" hidden/);
+  assert.match(script, /readWatchlist/);
+  assert.match(script, /watchServiceRevision/);
 });

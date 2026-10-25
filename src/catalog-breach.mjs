@@ -1,6 +1,33 @@
 // Directory entries for information-leak research. PHP evidence belongs in catalog.mjs.
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
+{
+  "id": "awa-bank",
+  "name": "阿波銀行",
+  "short": "法人契約先・株主などの情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "keywords": [
+    "阿波銀行",
+    "あわぎん",
+    "AWABANK"
+  ],
+  "domains": [
+    {
+      "host": "www.awabank.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachAwaBankFirst2026"
+  ],
+  "supportSourceIds": []
+},
   {
     "id": "sagawa",
     "name": "佐川急便",

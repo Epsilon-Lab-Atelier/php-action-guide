@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5yZUFu7fn+T3lGM+2VfyNgeINJEWx8+dRnKHz2jMVjM='; style-src 'sha256-A82D9wFiW47qZoiEla0icAUwYOepgjOHngGJdvNPik4='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/hOqrkJx5Fj5vQ9YfGW7RCEmrenjidD+fpgII8juHIQ='; style-src 'sha256-OjoBOMqFgpw2k+35gjjiJX9ligu0/Qhfi0nhZa8WChw='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="サービスの公式発表とあなたの利用状況から、関係する情報と必要な対応を確認。情報漏洩・不正アクセスとPHPの問題を分けて掲載しています。">
 <meta name="color-scheme" content="light">
 <title>ネットサービスのリスクチェック | EpsilonLab</title>
@@ -384,13 +384,91 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
   .update-controls > .update-search-control { flex-basis: 100%; }
   .update-row-badges { gap: 5px; }
 }
+
+/* Saved companies remain a compact overview, separate from usage answers. */
+.watch-nav-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 6px; padding-inline: 4px; border-radius: 5px; background: #e3eaf6; font-size: 10px; font-variant-numeric: tabular-nums; }
+.watch-nav-dot { display: inline-block; width: 6px; height: 6px; margin: 0 0 3px 5px; border-radius: 50%; background: var(--accent); }
+.result-header { flex-wrap: wrap; }
+.result-header > div:first-child { flex: 1; min-width: 180px; }
+.watch-toggle { min-height: 40px; padding: 8px 12px; border: 1px solid #b9ccef; background: #fff; color: var(--accent-dark); font-size: 12px; font-weight: 650; white-space: nowrap; }
+.watch-toggle[aria-pressed="true"] { background: var(--tint); border-color: #91b0ed; }
+.incident-period strong { display: block; margin-bottom: 4px; font-size: 11px; color: #526888; }
+.incident-period p { margin: 0; font-size: 13px; }
+.first-action { padding: 17px 19px; border: 1px solid #b5caf5; border-left: 4px solid var(--accent); border-radius: 8px; background: #edf3ff; margin-bottom: 22px; }
+.first-action h3 { font-size: 12px; color: var(--accent-dark); margin: 0 0 7px; }
+.first-action p { margin: 0; font-size: 15px; font-weight: 650; line-height: 1.8; }
+.information-summary { margin: -2px 0 20px; padding: 14px 17px; border: 1px solid var(--line); border-radius: 8px; background: #fafcff; }
+.information-dates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 0; }
+.information-dates dt { color: var(--muted); font-size: 10px; margin-bottom: 3px; }
+.information-dates dd { margin: 0; font-size: 11px; font-variant-numeric: tabular-nums; }
+.information-date-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; }
+.information-failure, .watchlist-source-warning { color: var(--amber); font-size: 11px; }
+.update-count-note { max-width: 760px; margin: 6px 0 0 !important; font-size: 12px !important; color: var(--muted); }
+.update-impact { display: inline-block; padding: 3px 7px; border-radius: 4px; color: #635537; background: #f7f1e5; font-size: 10px; }
+.update-impact-unchanged { color: #536b83; background: #eef3f9; }
+.update-impact-detail { padding: 10px 12px; border-left: 2px solid #a4bce7; background: #f4f7fc; }
+.update-event-time { display: block; margin-top: 8px; color: var(--muted); font-size: 10px; }
+.watchlist-section { padding-top: 32px; }
+.watchlist-heading > p { color: var(--muted); font-size: 13px; }
+.watchlist-heading .watchlist-count { color: #355f9e; font-size: 12px; margin-top: 14px; }
+.watchlist-privacy, .watchlist-storage-warning { font-size: 11px; color: var(--muted); margin-bottom: 22px; }
+.watchlist-storage-warning { color: var(--amber); padding: 12px 15px; border: 1px solid #eddfbb; background: var(--amber-bg); border-radius: 7px; }
+.watchlist-empty { max-width: 680px; padding: 50px 32px; margin: 28px auto; border: 1px solid var(--line); border-radius: 11px; background: #fff; text-align: center; }
+.watchlist-empty h2 { font-size: 21px; }
+.watchlist-empty p { margin: 12px 0 22px; color: var(--muted); font-size: 13px; }
+.watchlist-empty .primary-button { width: auto; padding-inline: 24px; }
+.watchlist-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; align-items: start; }
+.watchlist-card { display: flex; flex-direction: column; min-width: 0; padding: 22px 24px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.watchlist-card.has-update { border-color: #8eadea; box-shadow: 0 0 0 1px #d7e4fc; }
+.watchlist-card-heading { display: flex; align-items: start; gap: 12px; margin-bottom: 9px; }
+.watchlist-card-heading h2 { flex: 1; min-width: 0; font-size: 20px; letter-spacing: -.025em; }
+.watchlist-remove { min-height: 34px; padding: 5px 8px; border: 0; background: transparent; color: var(--muted); font-size: 11px; }
+.watchlist-remove:hover { color: var(--ink); background: #f1f4f9; }
+.watchlist-unread { align-self: flex-start; padding: 3px 8px; border-radius: 4px; margin: 0 0 8px; color: var(--accent-dark); background: var(--tint); font-size: 11px; font-weight: 650; }
+.watchlist-statuses { margin: 3px 0 14px; }
+.watchlist-statuses dt { margin-top: 10px; color: var(--muted); font-size: 10px; }
+.watchlist-statuses dd { margin: 4px 0 0; font-size: 13px; }
+.watchlist-statuses strong { font-weight: 600; }
+.watchlist-statuses small { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+.watchlist-dates { padding: 12px 0; border-top: 1px solid #eef2f7; font-variant-numeric: tabular-nums; }
+.watchlist-dates p { margin: 3px 0; font-size: 11px; color: #536278; }
+.watchlist-dates small { display: block; font-size: 10px; color: var(--muted); }
+.watchlist-dates .watchlist-source-warning { color: var(--amber); }
+.watchlist-latest { padding: 12px 14px; background: #f5f8fd; border-radius: 6px; }
+.watchlist-changed-at { color: #637795; font-size: 10px; margin-bottom: 5px; }
+.watchlist-latest-title { font-size: 12px; line-height: 1.8; margin: 0; }
+.watchlist-action-summary { font-size: 11px; color: #536b83; margin: 7px 0 0; }
+.watchlist-card-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; }
+.watchlist-open { flex: 1; min-width: 130px; min-height: 42px; padding: 8px 12px; border: 1px solid #c7d6ef; background: #fff; color: var(--accent-dark); font-size: 12px; font-weight: 600; }
+.watchlist-open:hover { background: var(--tint); border-color: #9cb9ee; }
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; justify-content: center; gap: 7px; padding-block: 12px 8px; }
+  .site-header .brand { margin-right: auto; }
+  .main-nav { gap: 1px; }
+  .main-nav button { padding-inline: 8px; font-size: 11px; }
+  .watch-nav-count { margin-left: 3px; min-width: 17px; }
+  .watchlist-grid { grid-template-columns: 1fr; gap: 13px; }
+  .watchlist-card { padding: 18px; }
+  .watchlist-section { padding-top: 24px; }
+  .watchlist-card-heading h2 { font-size: 18px; }
+  .watch-toggle { font-size: 11px; }
+  .information-dates { grid-template-columns: 1fr; gap: 7px; }
+  .information-dates > div { display: flex; justify-content: space-between; gap: 12px; }
+  .first-action { padding: 14px; }
+  .first-action p { font-size: 14px; }
+}
+@media (max-width: 520px) {
+  .main-nav { width: 100%; justify-content: space-between; }
+  .main-nav button { flex: 1; font-size: 12px; }
+  .watchlist-empty { padding: 32px 20px; }
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">本文へ進む</a>
 <header class="site-header wrap">
 <a class="brand" href="#main" aria-label="EpsilonLab ページの先頭へ"><img class="brand-mark" src="data:image/png;base64,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" width="36" height="36" alt=""><span>EpsilonLab</span></a>
-<nav class="main-nav" aria-label="メインメニュー"><button id="nav-check" type="button" data-view="check" aria-pressed="true" class="active">チェックする</button><button id="nav-updates" type="button" data-view="updates" aria-pressed="false">更新履歴</button></nav>
+<nav class="main-nav" aria-label="メインメニュー"><button id="nav-check" type="button" data-view="check" aria-pressed="true" class="active">チェックする</button><button id="nav-watchlist" type="button" data-view="watchlist" aria-pressed="false">ウォッチリスト</button><button id="nav-updates" type="button" data-view="updates" aria-pressed="false">更新履歴</button></nav>
 </header>
 <main id="main" class="wrap">
 <div id="check-view">
@@ -410,11 +488,12 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
 <section id="result" class="result-panel" aria-labelledby="result-title"><div class="empty-state"><span class="empty-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m16 3 10 4v8c0 6-4 11-10 14C10 26 6 21 6 15V7l10-4Z"/><path d="m11 16 3.5 3.5L22 12"/></svg></span><h2 id="result-title" tabindex="-1">気になるサービスを選んでください</h2><p>まず公開情報を確認。利用状況を選ぶと、<br class="desktop-break">関係する情報と必要な対応が表示されます。</p><div class="empty-tip"><strong>掲載されていない場合も、被害がないとは限りません。</strong><p>このアプリは公式発表を整理するものです。個人の被害の有無は判定しません。</p></div></div></section>
 </div>
 <section id="about" class="scope-section"><details><summary>このリスクチェックについて</summary><div class="detail-body"><p>情報漏洩・不正アクセスとPHPの問題を分け、公式発表の対象範囲と対応案内を掲載しています。利用状況を選ぶことで、関係する確認事項を絞り込めます。</p><p>個人の被害や安全性を判定するものではありません。メールアドレスやパスワードの入力は不要です。最新の状況と個別の対象判定は、リンク先の公式案内で確認してください。</p></div></details></section>
-<section id="issue" class="issue-section" aria-labelledby="issue-title"><div><h2 id="issue-title">PHP問題の概要</h2><p>2026年10月に公表された、PHP2Shellと呼ばれる問題を中心に扱っています。PHPは、Webサイトの裏側の処理を動かすために使われる言語です。</p></div><details><summary>対象の問題・影響条件・管理者向け情報を見る</summary><div class="detail-body"><h3>10月21日に修正版が公開された2件</h3><p><code>CVE-2026-109618</code> / <code>CVE-2026-109619</code></p><p>PHP内部のメモリや状態の扱いに関する問題です。条件がそろうと、ログインしていない第三者がサーバーに不正な処理をさせるおそれがあります。PHP公式は、Webからのリクエストを処理するPHP環境に更新を呼びかけています。Windowsや特定のCMSだけの問題ではありません。</p><p>この2件の修正を含むリリースは <code>8.2.35 / 8.3.36 / 8.4.27 / 8.5.12</code> です。配布元が修正を取り込む場合もあるため、表示バージョンだけで判断せず配布元の案内を確認してください。CMS本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。</p><p>10月21日の2件は、修正を含むリリースへの更新が完全な対策です。設定変更などの暫定策だけで、すべての攻撃経路への対策が完了したとは判断しません。</p><h3>10月23日の追加案内も確認してください</h3><p><code>CVE-2026-115560</code> は別の追加案内です。アップロード進捗機能が有効で、<code>session.serialize_handler</code> を設定で <code>php_binary</code> または <code>php_serialize</code> にし、実行時に <code>ini_set()</code> で <code>php</code> へ変更してから <code>session_start()</code> を呼ぶ特殊な組合せが条件とされています。</p><p>上記4つの修正版に更新済みでも、この追加案内の条件は別に確認してください。PHP公式は次の通常修正版まで <code>session.upload_progress.enabled=0</code> を推奨しています。既に無効化している場合は設定を維持すれば追加作業は不要と説明しています。実行時にハンドラーを変更しないアプリは、この機能を維持できます。設定を変更する管理者は、提供元の手順に沿って全PHPワーカーへの反映も確認してください。</p><p><a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener noreferrer">PHP公式: 10月21日・23日の案内 (英語)</a><br><a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp" target="_blank" rel="noopener noreferrer">PHP公式: 修正と暫定策の範囲（英語）</a><br><small>PHP資料の確認日: 2026-10-25</small></p><p>古い系列を使っている場合は、配布元による修正の有無や、サポート中の系列への移行も確認しましょう。個別サイトの被害の有無は、このガイドからは判断できません。</p></div></details><details><summary>このガイドの情報・URL検索について</summary><div class="detail-body"><p>公式ページの本文を確認した情報を掲載しています。各サービスの説明は、その資料が対象にしているサービス・問題・時点の範囲に限ります。最新状況はリンク先を確認してください。</p><p>「未確認」は掲載資料から判断できない状態、「掲載情報なし」は登録情報がない状態です。公式発表が世界中のどこにも存在しないという意味ではありません。</p><p>URL検索は登録ドメインとの照合だけです。PHPの利用状況、バージョン、修正適用、情報流出は検査しません。登録済みサービスでも、独自ドメインや登録外のサブドメインは一致しません。</p><p>利用状況の選択は、このページを開いている間だけ保持します。入力したURLや選択内容は外部に送信せず、端末への自動保存も行いません。公式リンクを開くと、その公式サイトへ移動します。</p></div></details></section>
+<section id="issue" class="issue-section" aria-labelledby="issue-title"><div><h2 id="issue-title">PHP問題の概要</h2><p>2026年10月に公表された、PHP2Shellと呼ばれる問題を中心に扱っています。PHPは、Webサイトの裏側の処理を動かすために使われる言語です。</p></div><details><summary>対象の問題・影響条件・管理者向け情報を見る</summary><div class="detail-body"><h3>10月21日に修正版が公開された2件</h3><p><code>CVE-2026-109618</code> / <code>CVE-2026-109619</code></p><p>PHP内部のメモリや状態の扱いに関する問題です。条件がそろうと、ログインしていない第三者がサーバーに不正な処理をさせるおそれがあります。PHP公式は、Webからのリクエストを処理するPHP環境に更新を呼びかけています。Windowsや特定のCMSだけの問題ではありません。</p><p>この2件の修正を含むリリースは <code>8.2.35 / 8.3.36 / 8.4.27 / 8.5.12</code> です。配布元が修正を取り込む場合もあるため、表示バージョンだけで判断せず配布元の案内を確認してください。CMS本体やプラグインの更新だけでは、PHP自体の修正を確認したことにはなりません。</p><p>10月21日の2件は、修正を含むリリースへの更新が完全な対策です。設定変更などの暫定策だけで、すべての攻撃経路への対策が完了したとは判断しません。</p><h3>10月23日の追加案内も確認してください</h3><p><code>CVE-2026-115560</code> は別の追加案内です。アップロード進捗機能が有効で、<code>session.serialize_handler</code> を設定で <code>php_binary</code> または <code>php_serialize</code> にし、実行時に <code>ini_set()</code> で <code>php</code> へ変更してから <code>session_start()</code> を呼ぶ特殊な組合せが条件とされています。</p><p>上記4つの修正版に更新済みでも、この追加案内の条件は別に確認してください。PHP公式は次の通常修正版まで <code>session.upload_progress.enabled=0</code> を推奨しています。既に無効化している場合は設定を維持すれば追加作業は不要と説明しています。実行時にハンドラーを変更しないアプリは、この機能を維持できます。設定を変更する管理者は、提供元の手順に沿って全PHPワーカーへの反映も確認してください。</p><p><a href="https://www.php.net/archive/2026.php" target="_blank" rel="noopener noreferrer">PHP公式: 10月21日・23日の案内 (英語)</a><br><a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp" target="_blank" rel="noopener noreferrer">PHP公式: 修正と暫定策の範囲（英語）</a><br><small>PHP資料の確認日: 2026-10-25</small></p><p>古い系列を使っている場合は、配布元による修正の有無や、サポート中の系列への移行も確認しましょう。個別サイトの被害の有無は、このガイドからは判断できません。</p></div></details><details><summary>このガイドの情報・URL検索について</summary><div class="detail-body"><p>公式ページの本文を確認した情報を掲載しています。各サービスの説明は、その資料が対象にしているサービス・問題・時点の範囲に限ります。最新状況はリンク先を確認してください。</p><p>「未確認」は掲載資料から判断できない状態、「掲載情報なし」は登録情報がない状態です。公式発表が世界中のどこにも存在しないという意味ではありません。</p><p>URL検索は登録ドメインとの照合だけです。PHPの利用状況、バージョン、修正適用、情報流出は検査しません。登録済みサービスでも、独自ドメインや登録外のサブドメインは一致しません。</p><p>ウォッチリストの企業・サービスと、前回開いた掲載内容の識別情報だけをこのブラウザに保存します。端末間の同期はありません。利用状況の選択は、このページを開いている間だけ保持します。入力したURLや選択内容は外部に送信せず、端末への自動保存も行いません。公式リンクを開くと、その公式サイトへ移動します。</p></div></details></section>
 </div>
+<div id="watchlist-view" hidden><section id="watchlist" class="watchlist-section" aria-labelledby="watchlist-title"></section></div>
 <div id="updates-view" hidden><section id="updates" class="updates-section" aria-labelledby="updates-title"></section></div>
 </main>
-<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.9.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
+<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.10.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
 <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
 <script type="module">/**
  * Parse a user-supplied web address locally. No DNS, HTTP or storage access.
@@ -1595,6 +1674,33 @@ const services = [
 // Directory entries for information-leak research. PHP evidence belongs in catalog.mjs.
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 const breachServices = [
+{
+  "id": "awa-bank",
+  "name": "阿波銀行",
+  "short": "法人契約先・株主などの情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "keywords": [
+    "阿波銀行",
+    "あわぎん",
+    "AWABANK"
+  ],
+  "domains": [
+    {
+      "host": "www.awabank.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachAwaBankFirst2026"
+  ],
+  "supportSourceIds": []
+},
   {
     "id": "sagawa",
     "name": "佐川急便",
@@ -5033,6 +5139,24 @@ function usageScopeForService(service) {
 
 // Official disclosures are separate from PHP patch status. No personal exposure diagnosis.
 const breachSources = {
+  "breachAwaBankFirst2026": {
+    "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について",
+    "url": "https://www.awabank.co.jp/kojin/news/2026/news20260403a/",
+    "checkedAt": "2026-10-25",
+    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "publishedAt": "2026-04-03",
+    "updatedAt": null,
+    "kind": "incident"
+  },
+  "breachAwaBankFollowup2026": {
+    "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について（続報）",
+    "url": "https://www.awabank.co.jp/kojin/news/2026/news20260603a/",
+    "checkedAt": "2026-10-25",
+    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "publishedAt": "2026-06-03",
+    "updatedAt": null,
+    "kind": "incident"
+  },
   "breachDaiwaDomain2026": {
     "title": "大和証券：公式サービスサイト（ドメイン確認）",
     "url": "https://www.daiwa.jp/",
@@ -6410,6 +6534,53 @@ const breachSources = {
 };
 
 const breachIncidents = [
+{
+  "id": "awa-bank-test-environment-2026",
+  "serviceIds": [
+    "awa-bank"
+  ],
+  "title": "行内OAシステムのテスト環境からの情報漏えい（2026年4月公表）",
+  "type": "breach",
+  "publishedAt": "2026-04-03",
+  "updatedAt": "2026-06-03",
+  "occurredAt": "2026年3月24日に外部から連絡を受け、翌25日に同行の情報の漏えいを確認。",
+  "affectedPeriod": "法人インターネットバンキング契約先は2024年10月時点、株主は2021年3月31日時点、その他顧客・関係先は主に2021年4月時点。",
+  "scope": "法人インターネットバンキング契約先、株主、その他顧客・関係先の情報、延べ27,745件。全口座利用者を一律の対象とする公表ではありません。",
+  "dataTypes": [
+    "法人契約先の氏名（会社名）・登録メールアドレス",
+    "株主の氏名（会社名）・住所・株主番号・保有株式数。一部は配当金受取口座番号",
+    "その他顧客・関係先の氏名（会社名）。一部は住所・預金や貸出金等の取引情報"
+  ],
+  "excludedData": "暗証番号・パスワード等は含まれないと説明。取引環境とは切り離されたテスト環境の事案です。",
+  "status": {
+    "code": "confirmed",
+    "label": "情報の漏えいを確認",
+    "text": "6月3日続報では、追加の不正アクセス・漏えい・拡散や、本件に起因する二次被害は確認されていないと説明。"
+  },
+  "providerResponse": {
+    "label": "アクセス遮断・個別案内・再発防止策",
+    "text": "対象環境へのアクセスを遮断し、顧客・株主に個別対応。捜査終了後の環境廃止と全情報システムの見直しを公表。"
+  },
+  "officialAction": {
+    "text": "公表対象と銀行からの個別案内を確認してください。不審な電話・メール・郵便物に注意し、不審な連絡は公式のお客さま窓口へ相談するよう案内しています。"
+  },
+  "sourceIds": [
+    "breachAwaBankFirst2026",
+    "breachAwaBankFollowup2026"
+  ],
+  "history": [
+    {
+      "id": "initial-listing-20261025",
+      "date": "2026-10-25",
+      "changedAtTime": "2026-10-25T10:27:36+09:00",
+      "changeKind": "new",
+      "actionImpact": "unknown",
+      "title": "4月公表の事案を新規掲載",
+      "summary": "初報と6月の続報を確認して追加。今日発生した事案という意味ではありません。"
+    }
+  ],
+  "caution": "対象者ごとに情報項目が異なります。個人の被害の有無やPHP問題との関係を判定するものではありません。"
+},
   {
     "id": "line-game-identifiers-2026",
     "serviceIds": [
@@ -11695,6 +11866,15 @@ const breachIncidents = [
 ];
 
 const breachReviews = {
+  "awa-bank": {
+  "attemptedAt": "2026-10-25",
+  "status": "body-reviewed",
+  "note": "4月3日初報と6月3日続報の公式本文を確認。公表対象と情報項目を分けて新規掲載。",
+  "sourceIds": [
+    "breachAwaBankFirst2026",
+    "breachAwaBankFollowup2026"
+  ]
+},
   "note": {
     "attemptedAt": "2026-10-25",
     "status": "body-reviewed",
@@ -12814,6 +12994,10 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
   type: 'content',
   incidentId: incident.id,
   date: event.date,
+  ...(event.changedAtTime ? {changedAtTime:event.changedAtTime} : {}),
+  ...(event.actionImpact ? {actionImpact:event.actionImpact} : {}),
+  ...(event.actionSummary ? {actionSummary:event.actionSummary} : {}),
+  ...(event.changeKind ? {changeKind:event.changeKind} : {}),
   serviceIds: Object.freeze([...incident.serviceIds]),
   sourceIds: Object.freeze([...(event.sourceIds ?? incident.sourceIds)]),
   title: `${incident.title}：${event.title}`,
@@ -12851,6 +13035,11 @@ const updateHistory = Object.freeze([
 ]);
 
 const appReleases = Object.freeze([
+  Object.freeze({
+    version: '0.10.0', date: '2026-10-25', title: 'ウォッチリストで気になる企業をまとめて確認',
+    summary: '保存した企業の状況と前回開いた後の掲載変更をまとめ、利用状況に応じた最初の行動と対象期間を見やすくしました。',
+    changes: Object.freeze(['このブラウザに保存するウォッチリスト', '対象期間と、利用状況に応じた「まずすること」を表示', '公式資料の確認日時と掲載・対応案内の変更日時を区別', '更新履歴に対応変化の比較記録を表示']),
+  }),
   Object.freeze({
     version: '0.9.0', date: '2026-10-25', title: 'ネットサービスのリスクチェックへ',
     summary: '公開情報を見て、利用状況を選び、自分に関係する情報と対応を確認する構成へ変更しました。事業者の対応状況や資料確認日の更新を意味しません。',
@@ -13001,6 +13190,7 @@ const riskDataPatterns = {
 const riskBreachChoices = [
   { id:'account', label:'登録・申込み・問い合わせをした', short:'会員登録やフォームへの入力など' },
   { id:'browse', label:'閲覧・検索をした', short:'Webサイトやアプリの閲覧' },
+  { id:'post', label:'記事を投稿した', short:'投稿した時期・記事数を確認' },
   { id:'purchase', label:'購入・契約・支払いをした', short:'注文・予約・有料サービスなど' },
   { id:'address', label:'住所・配送先を伝えた', short:'申込みや配送での登録も含む' },
   { id:'identity', label:'本人確認書類を提出した', short:'免許証・本人確認画像など' },
@@ -13009,6 +13199,11 @@ const riskBreachChoices = [
   { id:'notice', label:'個別のお知らせが届いた', short:'対象者へのメールや郵送など' },
 ];
 const riskServiceWords = {
+  'awa-bank': {
+    account:['法人IBの契約先・株主・関係先にあたる','その他の顧客も公表対象の区分と照合'],
+    purchase:['口座や決済を利用した','全口座利用者が一律に対象ではありません'],
+    former:['以前、法人契約・株主などの関係があった','当時の契約・株式保有・取引時期を確認'],
+  },
   sagawa: {
     account:['スマートクラブに登録した','以前の会員登録も含む'],
     purchase:['荷物を送った・受け取った','会員登録せず利用した場合も含む'],
@@ -13079,7 +13274,7 @@ function riskEvidenceFor(record, id) {
 function riskSourceIds(record) {
   return [...new Set((Array.isArray(record?.sourceIds)?record.sourceIds:[]).filter(id=>typeof id==='string'))];
 }
-function riskItem(id, title, text, sourceIds=[]) { return {id,title,text,sourceIds:[...sourceIds]}; }
+function riskItem(id, title, text, sourceIds=[]) { return {id,title,text,sourceIds:[...new Set(sourceIds)]}; }
 function riskGroup(id,title,kind,items) { return {id,title,kind,items}; }
 
 /** Pass the service's incident records to offer only relevant information choices. */
@@ -13094,6 +13289,7 @@ function riskOptionsForService(service, topic='breach', role='user', incidents=[
   const words=Object.hasOwn(riskServiceWords,service.id)?riskServiceWords[service.id]:{};
   const commerceGroups=['transport','shopping','media','finance','daily','commerce'];
   return riskBreachChoices.filter(option=>{
+    if (option.id==='post') return service.id==='note' && records.some(record=>/投稿/.test(record.scope??''));
     if (option.id==='relationship') return riskRelationshipServiceIds.has(service.id);
     if ((option.id==='account'||option.id==='purchase') && riskWorkforceOnlyServiceIds.has(service.id)) return false;
     if (option.id==='purchase') return Boolean(words.purchase) || commerceGroups.includes(service.groupByRole?.[role]) || records.some(record=>riskEvidenceFor(record,'purchase').length);
@@ -13116,7 +13312,7 @@ function riskBreachScope(record, selected) {
   if (record.status?.code==='not-confirmed') return riskItem(`scope.${record.id}`,record.title,`${status}\n公表対象：${record.scope}`,refs);
   const specific=selected.filter(id=>['address','identity','purchase'].includes(id));
   const evidence=[...new Set(specific.flatMap(id=>riskEvidenceFor(record,id)))];
-  const fullData=selected.includes('account')||selected.includes('former')||selected.includes('relationship');
+  const fullData=selected.includes('account')||selected.includes('post')||selected.includes('former')||selected.includes('relationship');
   const displayed=evidence.length?evidence:(fullData?riskEvidenceFor(record,'account'):[]);
   const paragraphs=[`${record.status?.label ?? '状況を確認中'}。公表対象：${record.scope}`];
   if (displayed.length) paragraphs.push(`登録・提出した情報と照合する項目：${displayed.join('／')}`);
@@ -13132,11 +13328,16 @@ function riskBreachExtra(service, records, selected) {
   if (selected.includes('notice')) items.push(riskItem('notice','届いた通知の対象と手続き','公式サイト・公式アプリから通知の真偽を確かめ、対象となる情報・必要な手続き・期限を確認してください。通知内のリンクだけを頼りに個人情報を入力しないでください。'));
   if (!active.length) return items;
   if (selected.includes('former')) {
-    if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))items.push(riskItem('former','以前の関係も公表範囲と照合','在籍・勤務・採用応募などの時期を公表範囲と照らし合わせてください。会社の公式窓口や個別通知で、対象となる在籍者・退職者・業務関係者等の範囲を確認してください。'));
+    if(service.id==='awa-bank')items.push(riskItem('former','以前の契約・株主などの関係を照合','当時の法人契約・株式保有・取引の時期を、公表された区分ごとの基準時点と照らし合わせてください。現在の口座利用の有無だけでは判断せず、銀行からの個別案内も確認してください。',records.flatMap(riskSourceIds)));
+    else if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))items.push(riskItem('former','以前の関係も公表範囲と照合','在籍・勤務・採用応募などの時期を公表範囲と照らし合わせてください。会社の公式窓口や個別通知で、対象となる在籍者・退職者・業務関係者等の範囲を確認してください。'));
     else if(service.id==='medley-atlink')items.push(riskItem('former','過去の受診歴も確認','受診した医療機関と時期を公表対象と照らし合わせてください。現在は通院していない場合も、対象医療機関の案内を確認してください。'));
     else items.push(riskItem('former','過去の利用も対象範囲と照合','利用・登録していた時期を公表範囲と照らし合わせてください。退会済みでログインできない場合は、元利用者向けの公式窓口を確認してください。'));
   }
-  if (selected.includes('browse') && !selected.some(id=>['account','purchase','address','identity','relationship','former'].includes(id))) {
+  if (selected.includes('post') && service.id==='note') {
+    const postingRecords=active.filter(record=>/投稿/.test(record.scope??''));
+    if(postingRecords.length)items.push(riskItem('note.post','投稿した時期・記事数を照合','当時の記事の投稿時期と記事数を、公表された対象条件と照らし合わせてください。投稿したという選択だけで、あなたの情報が取得・利用されたとは判定できません。',postingRecords.flatMap(riskSourceIds)));
+  }
+  if (selected.includes('browse') && !selected.some(id=>['account','post','purchase','address','identity','relationship','former'].includes(id))) {
     if(service.id==='medley-atlink')items.push(riskItem('browse','アプリ未利用でも受診歴を確認','公式は、アプリ・Web予約を利用していない患者の初期ログイン情報等も公表対象に含めています。対象の医療機関を受診したことがあるか、医療機関の案内で確認してください。',riskSourceIds(records[0])));
     else items.push(riskItem('browse','閲覧と情報の登録を区別','閲覧したという選択だけでは、公表された被害対象とは判定できません。上に示す対象サービス・機能を利用したか、登録や問い合わせで情報を入力したことがないかを確認してください。'));
   }
@@ -13166,6 +13367,49 @@ function riskPhpGuidance(service,role,selected) {
   return groups;
 }
 
+function riskFirstAction(text, sourceIds=[]) {
+  return {text,sourceIds:[...new Set(sourceIds)]};
+}
+function riskFirstSentence(text) {
+  return String(text??'').trim().match(/^[\s\S]*?[。！？](?:[」』])?|^[\s\S]+$/)?.[0]??'';
+}
+
+// This is an initial reading/checking step, never an individual exposure finding.
+function riskBreachFirstAction(service,records,selected) {
+  const refs=[...new Set(records.flatMap(riskSourceIds))];
+  if(selected.includes('notice'))return riskFirstAction('公式サイト・公式アプリから、届いた通知の対象と必要な手続きを確認してください。',refs.length?refs:service.supportSourceIds??[]);
+  if(!records.length)return riskFirstAction('利用したサービスの公式お知らせで、自分に関係する案内が出ているか確認してください。',service.supportSourceIds??[]);
+  if(records.every(record=>record.status?.code==='not-confirmed'))return riskFirstAction(riskFirstSentence(records[0].officialAction?.text)||'掲載した公式の続報で、現在の状況と利用者への案内を確認してください。',riskSourceIds(records[0]));
+  if(selected.includes('former')) {
+    if(service.id==='awa-bank')return riskFirstAction('公表された各基準時点に、法人契約・株式保有・取引の関係があったか確認してください。',refs);
+    if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))return riskFirstAction('以前の在籍・勤務・応募などの時期が、公表された対象範囲に含まれるか確認してください。',refs);
+    if(service.id==='medley-atlink')return riskFirstAction('以前受診した医療機関と時期が、公表された対象範囲に含まれるか確認してください。',refs);
+    if(service.id==='times-car')return riskFirstAction('以前の登録・利用時期を公表範囲と照合し、退会済み・未入会の場合は公式FAQの専用窓口を確認してください。',refs);
+    return riskFirstAction('当時の登録・利用時期が、公表された対象期間・対象範囲に含まれるか確認してください。',refs);
+  }
+  if(selected.includes('post')&&service.id==='note')return riskFirstAction('記事を投稿した時期・記事数が、公表された対象条件に含まれるか確認してください。',records.filter(record=>/投稿/.test(record.scope??'')).flatMap(riskSourceIds));
+  if(selected.includes('relationship'))return riskFirstAction('在籍・勤務・取引・応募などの関係が、公表された対象者に含まれるか確認してください。',refs);
+  if(service.id==='medley-atlink')return riskFirstAction('受診した医療機関が公表対象に含まれるか、医療機関の公式案内を確認してください。',refs);
+  if(service.id==='awa-bank')return riskFirstAction('法人IB契約先・株主・その他顧客や関係先の区分と基準時点を、銀行の公表対象・個別案内で確認してください。',refs);
+  if(selected.includes('account')) {
+    if(service.id==='times-car')return riskFirstAction('現在の会員は、公式マイページで自分の対象情報を確認してください。',refs);
+    return riskFirstAction('登録・申込みをしたサービスや機能が、公表された対象に含まれるか確認してください。',refs);
+  }
+  if(selected.includes('purchase')&&service.id==='burger-king')return riskFirstAction('店舗での注文と公式アプリへの会員登録を分け、公表対象のアプリに登録したことがあるか確認してください。',refs);
+  if(selected.includes('purchase')&&service.id==='sagawa')return riskFirstAction('荷物を送った・受け取った時期が、公表された対象期間に含まれるか確認してください。',refs);
+  if(selected.includes('identity'))return riskFirstAction('提出した本人確認書類の種類が、公表された対象情報に含まれるか公式案内で確認してください。',records.filter(record=>riskEvidenceFor(record,'identity').length).flatMap(riskSourceIds));
+  if(selected.includes('address'))return riskFirstAction('住所・配送先を伝えたサービスと時期が、公表された対象範囲に含まれるか確認してください。',records.filter(record=>riskEvidenceFor(record,'address').length).flatMap(riskSourceIds));
+  if(selected.includes('purchase'))return riskFirstAction('購入・契約・支払いをしたサービスや機能が、公表された対象範囲に含まれるか確認してください。',refs);
+  return riskFirstAction('閲覧だけでなく、対象のサービスや機能で登録・情報入力をしたことがないか確認してください。',refs);
+}
+
+function riskPhpFirstAction(service,role,selected,groups) {
+  const actions=groups.find(group=>group.kind==='action')?.items??[];
+  const priority=role==='admin'?['php.notice','php.delegated','php.unsure']:[];
+  const item=priority.map(id=>actions.find(action=>action.id===id)).find(Boolean)??actions[0];
+  return riskFirstAction(riskFirstSentence(item?.text)||'公式のお知らせで、利用しているサービス・環境に必要な対応を確認してください。',item?.sourceIds?.length?item.sourceIds:service.officialAction?.sourceIds??[]);
+}
+
 /**
  * Pure presentation model. It quotes current record scope/status and official action.
  * Selection count never yields a score, an exposure finding, or a safety finding.
@@ -13174,15 +13418,17 @@ function personalizedRiskGuidance({service,topic='breach',role='user',selections
   const records=riskRecordsForService(service,incidents);
   const options=riskOptionsForService(service,topic,role,records);
   const selected=normalizeRiskSelections(selections,options);
-  const result={heading:'あなたに関係する情報と対応',intro:'利用状況を選ぶと、公表された対象範囲と必要な確認を絞って表示します。',selectionLabels:options.filter(option=>selected.includes(option.id)).map(option=>option.label),groups:[]};
+  const result={heading:'あなたに関係する情報と対応',intro:'利用状況を選ぶと、公表された対象範囲と必要な確認を絞って表示します。',selectionLabels:options.filter(option=>selected.includes(option.id)).map(option=>option.label),firstAction:null,groups:[]};
   if(!service || !selected.length)return result;
   if(topic==='php') {
     if(!service.php||!service.officialAction)return result;
     result.intro=role==='admin'?'管理方法に合わせた案内です。公式発表の対象環境・問題を確認してください。':'サービスの利用方法に合わせた案内です。サーバーのPHP更新は運営・管理担当者が行います。';
-    result.groups=riskPhpGuidance(service,role,selected);return result;
+    result.groups=riskPhpGuidance(service,role,selected);
+    result.firstAction=riskPhpFirstAction(service,role,selected,result.groups);return result;
   }
   if(topic!=='breach')return result;
   result.intro='選択した利用状況と公式発表を照合するための案内です。あなた個人の被害の有無を判定するものではありません。';
+  result.firstAction=riskBreachFirstAction(service,records,selected);
   if(!records.length) {
     result.groups=[riskGroup('scope','このサービスの掲載状況','scope',[riskItem('no-record','','このアプリには紹介できる事案がまだ掲載されていません。利用状況から被害の有無は判断できないため、サービスの公式お知らせを確認してください。',service.supportSourceIds??[])])];
     return result;
@@ -13195,6 +13441,116 @@ function personalizedRiskGuidance({service,topic='breach',role='user',selections
   if(extra.length)result.groups.push(riskGroup('actions','選んだ利用状況で確認すること','action',extra));
   return result;
 }
+
+// A verification time is a successful source-body read, never a scheduled run time.
+function informationDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value ? value : null;
+}
+
+function informationInstant(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(value)) return null;
+  if (!informationDate(value.slice(0, 10))) return null;
+  const parsed = new Date(value);
+  return Number.isFinite(parsed.getTime()) ? parsed.toISOString() : null;
+}
+
+function informationJapanParts(value) {
+  const parts = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date(value));
+  const part = type => parts.find(item => item.type === type).value;
+  return { date: `${part('year')}-${part('month')}-${part('day')}`, time: `${part('hour')}:${part('minute')}` };
+}
+
+function informationTimeForDate(date, value) {
+  const instant = informationInstant(value);
+  return informationDate(date) && instant && informationJapanParts(instant).date === date ? instant : null;
+}
+
+/** Old records keep their known date; a missing clock time is never invented. */
+function formatInformationTime(date, time) {
+  if (!informationDate(date)) return '未記録';
+  const instant = informationTimeForDate(date, time);
+  return instant ? `${date} ${informationJapanParts(instant).time}（日本時間）` : `${date}（時刻未記録）`;
+}
+
+const informationImpactLabels = Object.freeze({
+  'scope-expanded': '対象範囲が拡大',
+  changed: '必要な対応が変更',
+  unchanged: '必要な対応の変更なし',
+  unknown: '対応の変更は未分類',
+});
+const informationImpactText = Object.freeze({
+  'scope-expanded': '対象範囲が広がりました。以前は対象外だった方も、公式案内を再確認してください。',
+  changed: '利用者向けの対応案内が変わりました。必要な手続きや期限を確認してください。',
+  unchanged: 'この更新による必要な対応の変更はありません。',
+  unknown: '過去の案内との比較記録はありません。最新の公式案内を確認してください。',
+});
+
+/** Only explicit editorial comparison can establish an unchanged action. */
+function actionImpactForEvent(event) {
+  const code = Object.hasOwn(informationImpactLabels, event?.actionImpact) ? event.actionImpact : 'unknown';
+  const summary = typeof event?.actionSummary === 'string' ? event.actionSummary.trim() : '';
+  return { code, label: informationImpactLabels[code], text: code !== 'unknown' && summary ? summary : informationImpactText[code] };
+}
+
+/** Aggregate a visible batch: one unknown event prevents a blanket 'unchanged'. */
+function summarizeActionImpact(events = []) {
+  const impacts = (Array.isArray(events) ? events : []).map(actionImpactForEvent);
+  const code = ['scope-expanded', 'changed', 'unknown', 'unchanged'].find(candidate => impacts.some(impact => impact.code === candidate)) ?? 'unknown';
+  const match = impacts.filter(impact => impact.code === code);
+  return { code, label: informationImpactLabels[code], text: match.length === 1 ? match[0].text : informationImpactText[code] };
+}
+
+function informationHistory(records) {
+  return (Array.isArray(records) ? records : []).filter(event => event && (!event.type || event.type === 'content') && informationDate(event.date))
+    .map(event => ({ ...event, changedAtTime: informationTimeForDate(event.date, event.changedAtTime) }));
+}
+
+function informationLatest(events) {
+  const date = events.map(event => event.date).sort().at(-1) ?? null;
+  const sameDay = events.filter(event => event.date === date);
+  // If any entry on that day lacks a time, the final clock time is unknown.
+  const time = sameDay.length && sameDay.every(event => event.changedAtTime) ? sameDay.map(event => event.changedAtTime).sort().at(-1) : null;
+  return { date, time, events: time ? sameDay.filter(event => event.changedAtTime === time) : sameDay };
+}
+
+/**
+ * Source dates describe the oldest referenced successful check. Content and
+ * action-change timestamps remain separate; later unclassified history cannot
+ * assert that the previous instructions are still unchanged.
+ */
+function informationStatus(record = {}, sourceMap = {}) {
+  const ids = [...new Set((Array.isArray(record?.sourceIds) ? record.sourceIds : []).filter(id => typeof id === 'string' && id))];
+  const entries = ids.map(id => ({ id, source: sourceMap && Object.hasOwn(sourceMap, id) ? sourceMap[id] : null }));
+  const missingSourceIds = entries.filter(({ source }) => !informationDate(source?.checkedAt)).map(({ id }) => id);
+  const checkedAt = entries.length && !missingSourceIds.length ? entries.map(({ source }) => source.checkedAt).sort()[0] : null;
+  const sourceTimes = entries.map(({ source }) => informationTimeForDate(source?.checkedAt, source?.checkedAtTime));
+  const checkedAtTime = entries.length && sourceTimes.every(Boolean) ? sourceTimes.sort()[0] : null;
+  const history = informationHistory(record?.history);
+  const latest = informationLatest(history);
+  const actions = informationLatest(history.filter(event => ['changed', 'scope-expanded'].includes(event.actionImpact)));
+  const unknownAfterAction = history.some(event => actionImpactForEvent(event).code === 'unknown' && (!actions.date || event.date > actions.date || (event.date === actions.date && (!event.changedAtTime || !actions.time || event.changedAtTime >= actions.time))));
+  const checkFailures = entries.flatMap(({ id, source }) => {
+    const attempt = source?.lastAttempt;
+    const at = informationInstant(attempt?.at);
+    if (attempt?.outcome !== 'unavailable' || !at) return [];
+    const successful = informationTimeForDate(source?.checkedAt, source?.checkedAtTime);
+    if (successful && at <= successful) return [];
+    if (!successful && informationDate(source?.checkedAt) && informationJapanParts(at).date < source.checkedAt) return [];
+    return [{ sourceId: id, at, note: typeof attempt.note === 'string' && attempt.note.trim() ? attempt.note.trim() : '今回の確認では資料を取得できませんでした。最後に本文を確認できた日時を表示しています。' }];
+  });
+  return {
+    checkedAt, checkedAtTime,
+    lastChangedAt: latest.date, lastChangedAtTime: latest.time,
+    lastActionChangedAt: unknownAfterAction ? null : actions.date,
+    lastActionChangedAtTime: unknownAfterAction ? null : actions.time,
+    actionComparisonUnknown: unknownAfterAction || !history.length,
+    actionImpact: summarizeActionImpact(latest.events),
+    checkFailures, missingSourceIds,
+  };
+}
+
 
 const updateViewTopics = Object.freeze({ breach: '情報漏洩・不正アクセス', php: 'PHPの問題' });
 const updateViewKinds = Object.freeze({ new: '新規掲載', followup: '続報を反映', correction: '訂正を反映', update: '掲載内容を更新' });
@@ -13224,7 +13580,14 @@ function groupUpdatesByDate(history = [], services = [], { topic = 'all', query 
   const days = new Map();
   const ordered = history.map((event, index) => ({ event, index }))
     .filter(({ event }) => event.type === 'content' && updateViewValidDate(event.date))
-    .sort((a, b) => a.event.date.localeCompare(b.event.date) || a.index - b.index);
+    .map(entry => ({ ...entry, time: informationStatus({ history: [entry.event] }).lastChangedAtTime }));
+  const fullyTimedDates = new Map();
+  for (const { event, time } of ordered) fullyTimedDates.set(event.date, (fullyTimedDates.get(event.date) ?? true) && Boolean(time));
+  // Preserve the recorded order when clock times are incomplete. Fully timed
+  // morning/evening batches use actual instants, including mixed UTC/JST input.
+  ordered.sort((a, b) => a.event.date.localeCompare(b.event.date)
+    || (fullyTimedDates.get(a.event.date) ? a.time.localeCompare(b.time) : 0)
+    || a.index - b.index);
 
   for (const { event, index } of ordered) {
     const eventId = event.id ?? `history-${index}`;
@@ -13288,6 +13651,7 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
   heading.append(title, node('p', '', '更新された企業・サービスを、日付ごとに確認できます。'));
   const todayCount = allDays.find(day => day.date === today)?.serviceCount ?? 0;
   heading.append(node('p', 'update-today', `今日（${today ?? '日付を取得できません'}・日本時間）の掲載変更：${todayCount}企業・サービス`));
+  heading.append(node('p', 'hint update-count-note', '本日アプリに追加・変更した掲載情報です。過去の事案の新規掲載も含みます。今日起きた事故の件数ではありません。'));
   container.append(heading);
 
   const controls = node('div', 'update-controls');
@@ -13307,7 +13671,7 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
   controls.append(dateControl, topicControl, searchControl);
   const summary = node('p', 'update-summary'); summary.setAttribute('role', 'status'); summary.setAttribute('aria-live', 'polite');
   const results = node('section', 'update-date-group'); results.setAttribute('aria-label', '選んだ日の掲載変更');
-  container.append(controls, summary, results, node('p', 'hint', '日付はこのアプリの掲載内容を変更した日です。事案の発生日・企業の公表日・資料を確認した日とは異なります。新規掲載には過去の事案も含みます。'));
+  container.append(controls, summary, results);
 
   function populateDates() {
     const dates = [...new Set([...allDays.map(day => day.date), ...(today ? [today] : [])])].sort().reverse();
@@ -13336,6 +13700,8 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
       const badges = node('span', 'update-row-badges');
       for (const topic of service.topics) badges.append(node('span', 'update-theme', updateViewTopics[topic]));
       badges.append(node('span', 'update-kind', service.kinds.map(kind => updateViewKinds[kind]).join('・')));
+      const impact = summarizeActionImpact(service.events);
+      if (impact.code !== 'unknown') badges.append(node('span', `update-impact update-impact-${impact.code}`, impact.label));
       if (service.events.length > 1) badges.append(node('span', 'update-change-count', `${service.events.length}件`));
       rowHeading.append(badges);
       const detail = node('div', 'update-service-detail');
@@ -13343,6 +13709,10 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
       for (const event of service.events) {
         const item = node('li', 'update-event');
         item.append(node('span', 'update-kind', updateViewKinds[event.kind]), node('h3', '', event.title), node('p', '', String(event.summary ?? '').replaceAll('この手帳', 'このアプリ')));
+        const eventImpact = actionImpactForEvent(event);
+        const impactLine = node('p', `update-impact-detail update-impact-${eventImpact.code}`);
+        impactLine.append(node('strong', '', `${eventImpact.label}：`), document.createTextNode(eventImpact.text));
+        item.append(impactLine, node('p', 'hint update-event-time', `アプリへの掲載変更：${formatInformationTime(event.date, event.changedAtTime)}`));
         const sourceList = node('ul', 'source-list');
         for (const id of event.sourceIds) {
           const source = sources[id];
@@ -13399,6 +13769,275 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
 }
 
 
+// Only an explicitly chosen service and its viewed content marker are persisted.
+// The injected storage keeps failures testable and avoids browser globals here.
+const WATCHLIST_KEY = 'epsilon-risk-check.watchlist.v1';
+const watchlistMaxItems = 500;
+const watchlistMaxBytes = 131072;
+const watchlistRevisionPattern = /^[a-f0-9]{16}$/;
+const watchlistIdPattern = /^[a-z0-9][a-z0-9-]{0,79}$/;
+
+function watchlistPlainObject(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+    && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+}
+function watchlistIdentity(value) {
+  return typeof value === 'string' && watchlistIdPattern.test(value)
+    && !['constructor', 'prototype'].includes(value);
+}
+function watchlistRevisions(value) {
+  if (!watchlistPlainObject(value) || !Object.keys(value).length || Object.keys(value).length > 2
+    || Object.keys(value).some(topic => !['breach', 'php'].includes(topic) || typeof value[topic] !== 'string' || !watchlistRevisionPattern.test(value[topic]))) return null;
+  return Object.fromEntries(['breach', 'php'].filter(topic => Object.hasOwn(value, topic)).map(topic => [topic, value[topic]]));
+}
+function watchlistEntry(value, strict = false) {
+  if (!watchlistPlainObject(value) || !Object.hasOwn(value, 'serviceId') || !Object.hasOwn(value, 'seenRevisions') || !watchlistIdentity(value.serviceId)) return null;
+  const revisions = watchlistRevisions(value.seenRevisions);
+  if (!revisions) return null;
+  if (strict && (Object.keys(value).length !== 2 || Object.keys(value).some(key => !['serviceId', 'seenRevisions'].includes(key)))) return null;
+  return { serviceId: value.serviceId, seenRevisions: revisions };
+}
+function watchlistItems(state) {
+  const seen = new Set();
+  return (Array.isArray(state?.items) ? state.items : []).flatMap(item => {
+    const entry = watchlistEntry(item);
+    if (!entry || seen.has(entry.serviceId) || seen.size >= watchlistMaxItems) return [];
+    seen.add(entry.serviceId);
+    return [entry];
+  });
+}
+function watchlistResult(ok, status, items = []) {
+  return { ok, status, items: items.map(item => ({ serviceId: item.serviceId, seenRevisions: { ...item.seenRevisions } })) };
+}
+function watchlistStorageError(error, items = []) {
+  return watchlistResult(false, error?.name === 'QuotaExceededError' || error?.code === 22 || error?.code === 1014 ? 'quota' : 'unavailable', items);
+}
+
+/** Reading never writes, repairs, marks viewed, or migrates old saved-service data. */
+function readWatchlist(storage, services = []) {
+  let raw;
+  try {
+    if (!storage || typeof storage.getItem !== 'function') return watchlistResult(false, 'unavailable');
+    raw = storage.getItem(WATCHLIST_KEY);
+  } catch (error) { return watchlistStorageError(error); }
+  if (raw === null || raw === undefined) return watchlistResult(true, 'empty');
+  if (typeof raw !== 'string' || raw.length > watchlistMaxBytes) return watchlistResult(false, 'malformed');
+  try {
+    const value = JSON.parse(raw);
+    if (!watchlistPlainObject(value) || Object.keys(value).length !== 2 || value.version !== 1 || !Array.isArray(value.items)
+      || Object.keys(value).some(key => !['version', 'items'].includes(key)) || value.items.length > watchlistMaxItems) return watchlistResult(false, 'malformed');
+    const entries = value.items.map(item => watchlistEntry(item, true));
+    if (entries.some(item => !item)) return watchlistResult(false, 'malformed');
+    const known = new Set(services.map(service => service?.id));
+    const items = watchlistItems({ items: entries }).filter(item => known.has(item.serviceId));
+    return watchlistResult(true, items.length !== entries.length ? 'filtered' : items.length ? 'loaded' : 'empty', items);
+  } catch { return watchlistResult(false, 'malformed'); }
+}
+
+/** Call only after the reader adds/removes a service or opens its current information. */
+function writeWatchlist(storage, state) {
+  const items = watchlistItems(state);
+  try {
+    if (!storage || typeof storage.setItem !== 'function') return watchlistResult(false, 'unavailable', items);
+    // Construct the payload afresh; usage selections, URLs and other caller fields never persist.
+    storage.setItem(WATCHLIST_KEY, JSON.stringify({ version: 1, items }));
+    return watchlistResult(true, 'saved', items);
+  } catch (error) { return watchlistStorageError(error, items); }
+}
+
+/** New watches start at the current content; past entries are not unread notifications. */
+function toggleWatchService(state, serviceId, revisions) {
+  const items = watchlistItems(state);
+  if (!watchlistIdentity(serviceId)) return { items, status: 'invalid' };
+  if (items.some(item => item.serviceId === serviceId)) return { items: items.filter(item => item.serviceId !== serviceId), status: 'removed' };
+  const clean = watchlistRevisions(revisions);
+  if (!clean) return { items, status: 'invalid' };
+  if (items.length >= watchlistMaxItems) return { items, status: 'limit' };
+  return { items: [...items, { serviceId, seenRevisions: clean }], status: 'added' };
+}
+
+/** Opening the list does not call this; opening a company's information does. */
+function markWatchServiceSeen(state, serviceId, revision, topic = 'breach') {
+  const items = watchlistItems(state);
+  if (!watchlistIdentity(serviceId) || !['breach', 'php'].includes(topic) || typeof revision !== 'string' || !watchlistRevisionPattern.test(revision)) return { items, status: 'invalid' };
+  return { items: items.map(item => item.serviceId === serviceId ? { serviceId, seenRevisions: { ...item.seenRevisions, [topic]: revision } } : item), status: 'seen' };
+}
+
+const watchlistVerificationKeys = new Set(['checkedAt', 'checkedAtTime', 'attemptedAt', 'attemptedAtTime', 'lastAttempt', 'lastAttemptAt', 'lastAttemptStatus', 'verifiedAt', 'verificationAttempts']);
+function watchlistContent(value) {
+  if (value === null || ['string', 'boolean', 'number'].includes(typeof value)) return value;
+  if (Array.isArray(value)) return value.map(watchlistContent);
+  if (!watchlistPlainObject(value)) return null;
+  return Object.fromEntries(Object.keys(value).sort().filter(key => !watchlistVerificationKeys.has(key) && value[key] !== undefined)
+    .map(key => [key, watchlistContent(value[key])]));
+}
+function watchlistContentEvents(history, serviceId) {
+  return (Array.isArray(history) ? history : []).filter(event => event?.type === 'content' && event.serviceIds?.includes(serviceId));
+}
+function watchlistRecords(incidents, serviceId) {
+  return (Array.isArray(incidents) ? incidents : []).filter(record => record?.serviceIds?.includes(serviceId));
+}
+function watchlistRefs(service, records, events, topic) {
+  return [...new Set([
+    ...(topic !== 'breach' ? [...(service?.php?.sourceIds ?? []), ...(service?.incident?.sourceIds ?? []), ...(service?.officialAction?.sourceIds ?? [])] : []),
+    ...(service?.domainSourceIds ?? []), ...(service?.supportSourceIds ?? []),
+    ...records.flatMap(record => record.sourceIds ?? []), ...events.flatMap(event => event.sourceIds ?? []),
+  ].filter(id => typeof id === 'string'))].sort();
+}
+
+/** Opaque change marker, not a security hash or a reader risk score. */
+function watchServiceRevision(service, { incidents = [], history = [], sources = {} } = {}, topic = null) {
+  if (!service?.id) return null;
+  const records = (topic === 'php' ? [] : watchlistRecords(incidents, service.id)).slice().sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  const events = watchlistContentEvents(history, service.id).filter(event => !topic || (event.incidentId ? 'breach' : 'php') === topic)
+    .slice().sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  const refs = watchlistRefs(service, records, events, topic).map(id => [id, Object.hasOwn(sources, id) ? sources[id] : null]);
+  const { php, incident, officialAction, actions, caution, topics, ...sharedService } = service;
+  const contentService = topic === 'breach' ? { ...sharedService, topics: ['breach'] } : topic === 'php' ? { ...service, topics: ['php'] } : service;
+  const text = JSON.stringify(watchlistContent({ service: contentService, records, events, sources: refs }));
+  let digest = 14695981039346656037n;
+  for (let index = 0; index < text.length; index += 1) {
+    digest ^= BigInt(text.charCodeAt(index));
+    digest = BigInt.asUintN(64, digest * 1099511628211n);
+  }
+  return digest.toString(16).padStart(16, '0');
+}
+
+function watchServiceRevisions(service, data = {}) {
+  if (!service?.id) return {};
+  const topics = service.topics ?? (service.php ? ['breach', 'php'] : ['breach']);
+  return Object.fromEntries(['breach', 'php'].filter(topic => topics.includes(topic)).map(topic => [topic, watchServiceRevision(service, data, topic)]));
+}
+
+function watchlistLatestEvent(events) {
+  const date = events.map(event => String(event.date ?? '')).sort().at(-1);
+  const sameDay = events.filter(event => event.date === date);
+  // Clock times may mix Z and +09:00. Compare instants only if the whole
+  // day's order is known; otherwise retain a representative recorded entry.
+  if (sameDay.every(event => Number.isFinite(Date.parse(event.changedAtTime ?? '')))) {
+    sameDay.sort((a, b) => Date.parse(b.changedAtTime) - Date.parse(a.changedAtTime));
+  }
+  return sameDay[0] ?? null;
+}
+
+/** Reading this view model never changes the saved viewed markers. */
+function watchlistRows(state, { services = [], incidents = [], history = [], sources = {} } = {}) {
+  return watchlistItems(state).flatMap(item => {
+    const service = services.find(candidate => candidate.id === item.serviceId);
+    if (!service) return [];
+    const records = watchlistRecords(incidents, service.id).slice().sort((a, b) => String(b.updatedAt ?? b.publishedAt ?? '').localeCompare(String(a.updatedAt ?? a.publishedAt ?? '')));
+    const latest = records[0];
+    const events = watchlistContentEvents(history, service.id);
+    const event = watchlistLatestEvent(events);
+    const revision = watchServiceRevision(service, { incidents, history, sources });
+    const topics = [...(service.topics ?? (service.php ? ['breach', 'php'] : ['breach']))];
+    const revisions = watchServiceRevisions(service, { incidents, history, sources });
+    const unreadTopics = topics.filter(topic => revisions[topic] !== item.seenRevisions[topic]);
+    const evidenceSourceIds = [...new Set([
+      ...records.flatMap(record => record.sourceIds ?? []),
+      ...(topics.includes('php') ? [...(service.php?.sourceIds ?? []), ...(service.incident?.sourceIds ?? []), ...(service.officialAction?.sourceIds ?? [])] : []),
+    ])];
+    const metadata = informationStatus({ sourceIds: evidenceSourceIds, history: events }, sources);
+    const actionImpactSummary = metadata.actionImpact;
+    return [{
+      serviceId: service.id, name: service.name, revision, revisions, unreadTopics, unread: unreadTopics.length > 0, topics,
+      breach: {
+        count: records.length, label: latest?.status?.label ?? '掲載事案なし',
+        action: latest?.officialAction?.text ?? '', publishedAt: latest?.publishedAt ?? null,
+        updatedAt: latest?.updatedAt ?? null, title: latest?.title ?? '',
+      },
+      php: topics.includes('php') ? { label: service.incident?.label ?? '未確認', action: service.officialAction?.text ?? '' } : null,
+      latestChangedAt: metadata.lastChangedAt, latestChangedAtTime: metadata.lastChangedAtTime,
+      latestSummary: String(event?.summary ?? '').replaceAll('この手帳', 'このアプリ'),
+      latestTitle: event?.title ?? '', actionImpact: event?.actionImpact ?? 'unknown', actionSummary: event?.actionSummary ?? '',
+      metadata, actionImpactSummary,
+    }];
+  }).sort((a, b) => Number(b.unread) - Number(a.unread)
+    || String(b.latestChangedAt ?? '').localeCompare(String(a.latestChangedAt ?? ''))
+    || a.name.localeCompare(b.name, 'ja'));
+}
+
+function watchlistNode(document, tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function renderWatchlistView(container, { rows = [], onOpen, onRemove, onBrowse, storageAvailable = true } = {}) {
+  const node = (tag, className, text) => watchlistNode(container.ownerDocument, tag, className, text);
+  container.replaceChildren();
+  const heading = node('div', 'watchlist-heading');
+  const title = node('h1', '', 'ウォッチリスト'); title.id = 'watchlist-title'; title.tabIndex = -1;
+  heading.append(title, node('p', '', '気になる企業の状況と、前回見た後の掲載変更をまとめて確認。'));
+  const unread = rows.filter(row => row.unread).length;
+  heading.append(node('p', 'watchlist-count', `${rows.length}企業・サービス${rows.length ? ` · 前回見た後に掲載変更 ${unread}件` : ''}`));
+  container.append(heading);
+  const privacy = node('p', storageAvailable ? 'watchlist-privacy' : 'watchlist-storage-warning', storageAvailable
+    ? 'このブラウザだけに保存します。他の端末とは共有されません。利用状況の選択や入力URLは保存しません。'
+    : 'このブラウザでは保存できません。ウォッチリストは、このページを開いている間だけ利用できます。');
+  if (!storageAvailable) privacy.setAttribute('role', 'status');
+  container.append(privacy);
+  if (!rows.length) {
+    const empty = node('section', 'watchlist-empty');
+    empty.append(node('h2', '', '気になる企業を追加しましょう'), node('p', '', '企業・サービスの案内で「＋ ウォッチリスト」を選ぶと、ここにまとめられます。'));
+    if (typeof onBrowse === 'function') {
+      const browse = node('button', 'primary-button', '企業・サービスを探す'); browse.type = 'button'; browse.addEventListener('click', onBrowse); empty.append(browse);
+    }
+    container.append(empty);
+    return { count: 0, unreadCount: 0 };
+  }
+  const list = node('div', 'watchlist-grid');
+  for (const row of rows) {
+    const card = node('article', `watchlist-card${row.unread ? ' has-update' : ''}`); card.dataset.watchService = row.serviceId;
+    const header = node('div', 'watchlist-card-heading'); header.append(node('h2', '', row.name));
+    if (typeof onRemove === 'function') {
+      const remove = node('button', 'watchlist-remove', '解除'); remove.type = 'button'; remove.setAttribute('aria-label', `${row.name}をウォッチリストから外す`);
+      remove.addEventListener('click', () => onRemove(row.serviceId)); header.append(remove);
+    }
+    card.append(header);
+    if (row.unread) card.append(node('span', 'watchlist-unread', '前回見た後に掲載変更'));
+    const statuses = node('dl', 'watchlist-statuses');
+    if (row.topics.includes('breach')) {
+      statuses.append(node('dt', '', '情報漏洩・不正アクセス'));
+      const status = node('dd');
+      status.append(node('strong', '', row.breach.count ? `${row.breach.count}件を掲載 · 直近の公表・続報：${row.breach.label}` : '掲載事案なし'));
+      if (row.breach.publishedAt) status.append(node('small', '', `${row.breach.publishedAt} 公表${row.breach.updatedAt ? ` / ${row.breach.updatedAt} 続報` : ''}`));
+      if (!row.breach.count) status.append(node('small', '', '未掲載は「被害なし」を意味しません。'));
+      statuses.append(status);
+    }
+    if (row.php) statuses.append(node('dt', '', 'PHPの問題'), node('dd', '', row.php.label));
+    card.append(statuses);
+    const dates = node('div', 'watchlist-dates');
+    dates.append(node('p', '', `公式情報の確認：${formatInformationTime(row.metadata.checkedAt, row.metadata.checkedAtTime)}`));
+    dates.append(node('small', '', '引用資料のうち、確認日時が最も古いものを表示'));
+    dates.append(node('p', '', `対応案内の変更：${formatInformationTime(row.metadata.lastActionChangedAt, row.metadata.lastActionChangedAtTime)}`));
+    if (row.metadata.checkFailures.length) dates.append(node('small', 'watchlist-source-warning', `取得できなかった資料：${row.metadata.checkFailures.length}件。最後に確認できた日時を保持しています。`));
+    card.append(dates);
+    const changes = node('div', 'watchlist-latest');
+    changes.append(node('p', 'watchlist-changed-at', row.latestChangedAt ? `掲載情報の変更：${formatInformationTime(row.latestChangedAt, row.latestChangedAtTime)}` : '掲載情報の変更記録はありません'));
+    if (row.latestTitle) changes.append(node('p', 'watchlist-latest-title', row.latestTitle));
+    if (row.actionImpactSummary.code !== 'unknown') changes.append(node('p', 'watchlist-action-summary', row.actionImpactSummary.text));
+    else if (row.unread) changes.append(node('p', 'watchlist-action-summary', '掲載内容の変更です。必要な対応も変わったか、案内を開いて確認してください。'));
+    card.append(changes);
+    if (typeof onOpen === 'function') {
+      const actions = node('div', 'watchlist-card-actions');
+      for (const topic of ['breach', 'php'].filter(topic => row.topics.includes(topic))) {
+        const open = node('button', 'watchlist-open', `${topic === 'breach' ? '情報漏洩の案内' : 'PHPの案内'}${row.unreadTopics.includes(topic) ? ' · 更新あり' : ''}`); open.type = 'button';
+        open.setAttribute('aria-label', `${row.name}の${topic === 'breach' ? '情報漏洩' : 'PHP'}の案内を見る`);
+        open.addEventListener('click', () => onOpen(row.serviceId, topic)); actions.append(open);
+      }
+      card.append(actions);
+    }
+    list.append(card);
+  }
+  container.append(list, node('p', 'hint', '掲載情報の変更は、新しい事故の発生や、必要な対応の変更を意味するとは限りません。詳しい対象範囲と公式案内を確認してください。'));
+  return { count: rows.length, unreadCount: unread };
+}
+
+
+
+
 
 
 
@@ -13410,6 +14049,11 @@ function renderUpdateView(container, { history = [], services = [], sources = {}
 
 const $ = selector => document.querySelector(selector);
 const allSourceRecords = {...sources, ...breachSources};
+let watchStorage = null;
+try { watchStorage = window.localStorage; } catch { /* Use this page's memory when browser storage is blocked. */ }
+let watchState = readWatchlist(watchStorage,directoryServices);
+let watchStorageAvailable = watchState.ok || watchState.status==='malformed';
+const watchData = {services:directoryServices,incidents:breachIncidents,history:updateHistory,sources:allSourceRecords};
 const initialGuide = parseGuideHash(location.hash, directoryServices);
 const initialTopic = initialGuide?.topic === 'php' ? 'php' : 'breach';
 const state = {topic:initialTopic,role:'user',view:'check',kind:'empty',service:null,hostname:null,query:'',category:'all',selections:[]};
@@ -13443,7 +14087,46 @@ function displayedMetadata(service) {
   const phpIds=includesPhp()?[...(service.php?.sourceIds??[]),...(service.incident?.sourceIds??[]),...(service.officialAction?.sourceIds??[]),...(service.supportSourceIds??[]),...(service.domainSourceIds??[])]:[];
   const ids=[...new Set([...phpIds,...records.flatMap(record=>record.sourceIds)])];
   const history=historyForService(service.id).filter(event=>event.type==='content' && (event.incidentId?includesBreaches():includesPhp()));
-  return incidentMetadata({sourceIds:ids,history},allSourceRecords);
+  return informationStatus({sourceIds:ids,history},allSourceRecords);
+}
+function currentWatchRows() { return watchlistRows(watchState,watchData); }
+function updateWatchNavigation() {
+  const rows=currentWatchRows();
+  const button=$('#nav-watchlist');button.replaceChildren(document.createTextNode('ウォッチリスト'),el('span','watch-nav-count',String(rows.length)));
+  const unread=rows.filter(row=>row.unread).length;
+  if(unread){const badge=el('span','watch-nav-dot');badge.setAttribute('aria-label',`${unread}件に掲載変更`);button.append(badge);}
+}
+function persistWatch(next) {
+  const saved=writeWatchlist(watchStorage,next);watchState=saved;watchStorageAvailable=saved.ok;updateWatchNavigation();return saved.ok;
+}
+function setWatchButton(button,service) {
+  const selected=watchState.items.some(item=>item.serviceId===service.id);
+  button.textContent=selected?'ウォッチ中':'＋ ウォッチリスト';button.setAttribute('aria-pressed',String(selected));
+  button.setAttribute('aria-label',`${service.name}をウォッチリスト${selected?'から外す':'に追加'}`);
+}
+function openOverviewService(id,topic) {
+  const service=directoryServices.find(item=>item.id===id);if(!service)return;
+  chooseRole(service.roles.includes('user')?'user':'admin',{renderResult:false});
+  chooseTopic(topic,{renderResult:false});state.query='';state.category='all';$('#service-filter').value='';switchMode('select');
+  showView('check',{updateHash:true});selectService(service);
+}
+function showWatchlist({focus=true}={}) {
+  renderWatchlistView($('#watchlist'),{rows:currentWatchRows(),storageAvailable:watchStorageAvailable,onOpen:openOverviewService,onRemove:id=>{
+    const service=directoryServices.find(item=>item.id===id);if(!service)return;
+    const saved=persistWatch(toggleWatchService(watchState,id,watchServiceRevisions(service,watchData)));
+    showWatchlist({focus:false});render();$('#watchlist-title').focus({preventScroll:true});
+    $('#announcement').textContent=saved?`${service.name}をウォッチリストから外しました。`:'この画面では外しましたが、ブラウザに保存できませんでした。';
+  },onBrowse:()=>{switchMode('select');showView('check',{focus:true,updateHash:true});$('#service-filter').focus();}});
+  showView('watchlist',{focus,updateHash:true});
+}
+function informationSummary(dates) {
+  const box=el('div','information-summary');
+  const rows=el('dl','information-dates');
+  const labels=[['公式情報の確認',formatInformationTime(dates.checkedAt,dates.checkedAtTime)],['掲載内容の変更',formatInformationTime(dates.lastChangedAt,dates.lastChangedAtTime)],['対応案内の変更',dates.lastActionChangedAt?formatInformationTime(dates.lastActionChangedAt,dates.lastActionChangedAtTime):'比較記録なし']];
+  for(const [label,value] of labels){const item=el('div');item.append(el('dt','',label),el('dd','',value));rows.append(item);}
+  box.append(rows,el('p','information-date-note','確認日時は参照資料のうち最も古いもの。朝6時・夕18時を目安に調査し、確認できた内容を順次反映します。'));
+  if(dates.checkFailures.length)box.append(el('p','information-failure','今回取得できなかった資料があります。最後に本文を確認できた日時を保持しています。詳細は出典をご確認ください。'));
+  return box;
 }
 function disclosure(label, className, ...children) {
   const panel=el('details',`disclosure-panel ${className}`);
@@ -13460,17 +14143,18 @@ function breachCasesPanel() {
   }
   for(const [index,record] of records.entries()) {
     const article=el('article','incident-card');article.dataset.incident=record.id;
-    const meta=incidentMetadata(record,breachSources);
+    const meta=informationStatus(record,breachSources);
     article.append(el('p','incident-date',`${record.publishedAt} 公表${record.publishedAt<'2026-01-01'?' · 過去の事案':''}${record.updatedAt?` / 続報 ${record.updatedAt}`:''}`),el('h4','',record.title));
     article.append(el('span',`badge status-${record.status.code}`,record.status.label));
     const scope=el('div','incident-scope');scope.append(el('strong','','対象になるのは'),el('p','',record.scope));article.append(scope);
+    const period=el('div','incident-period');period.append(el('strong','','対象期間'),el('p','',record.affectedPeriod||'対象期間は掲載資料から確認できません。'));article.append(period);
     const action=el('div','incident-action');action.append(el('strong','','今確認すること'),el('p','',record.officialAction.text));article.append(action);
     article.append(sourceLinks(record.sourceIds));
     const detail=el('details','incident-detail');detail.append(el('summary','','公表内容の詳細を見る'));
     const rows=el('dl','incident-fields');
     for(const [label,text] of [['公表されている状況',record.status.text],['利用・登録などの対象期間',record.affectedPeriod],['発生・検知の時期',record.occurredAt],['対象となる情報',record.dataTypes.length?record.dataTypes.join('／'):'対象となる情報の項目は未公表'],['対象外と説明される情報',record.excludedData ?? 'この記録には掲載していません。'],['事業者の対応',`${record.providerResponse.label}：${record.providerResponse.text}`],['初公表日',record.publishedAt],['掲載した最新の公式続報・追記日',record.updatedAt ?? '別の続報・追記日は未記録'],['資料を確認した日（最も古いもの）',meta.checkedAt ?? '未確認'],['この手帳の掲載変更日',meta.lastChangedAt ?? '未記録']]) rows.append(el('dt','',label),el('dd','',text));
     detail.append(rows,el('p','hint',record.caution),el('p','hint','事業者の対策が完了したことと、既に情報が流出したかどうかは別の情報です。'));
-    const list=el('ul','source-list');for(const id of record.sourceIds){const source=breachSources[id];const li=el('li');li.append(officialLink(source),el('small','',`資料公表日：${source.publishedAt ?? '記載なし・未確認'} / 追記日：${source.updatedAt ?? '未記録'} / 確認日：${source.checkedAt}`));if(source.verificationNote)li.append(el('small','',source.verificationNote));list.append(li);}detail.append(list);article.append(detail);
+    const list=el('ul','source-list');for(const id of record.sourceIds){const source=breachSources[id];const li=el('li');li.append(officialLink(source),el('small','',`資料公表日：${source.publishedAt ?? '記載なし・未確認'} / 追記日：${source.updatedAt ?? '未記録'} / 本文確認：${formatInformationTime(source.checkedAt,source.checkedAtTime)}`));if(source.verificationNote)li.append(el('small','',source.verificationNote));for(const failure of meta.checkFailures.filter(item=>item.sourceId===id))li.append(el('small','information-failure',failure.note));list.append(li);}detail.append(list);article.append(detail);
     if(index===0)panel.append(article);
     else {
       const archived=el('details','incident-archive');archived.append(el('summary','',`${record.publishedAt.slice(0,4)}年公表 · ${record.title} — ${record.status.label}`),article);panel.append(archived);
@@ -13498,26 +14182,20 @@ function referencePanel(service,dates) {
   const ids=includesPhp()?[...new Set([...(service.php?.sourceIds??[]),...(service.incident?.sourceIds??[]),...(service.officialAction?.sourceIds??[]),...(service.domainSourceIds??[]),...(service.supportSourceIds??[])])]:[...new Set([...selectedIncidents().flatMap(record=>record.sourceIds),...(service.domainSourceIds??[]),...(service.supportSourceIds??[])])];
   if(ids.length){
     const list=el('ul','source-list');
-    for(const id of ids){const source=allSourceRecords[id];if(!source)continue;const li=el('li');li.append(officialLink(source),el('small','',`${source.kind==='support'?'公式窓口（個別の対応状況を示す根拠ではありません）':'公式資料'} / 公開日：${source.publishedAt??'記載なし・未確認'} / 確認日：${source.checkedAt}`));if(source.verificationNote)li.append(el('small','',source.verificationNote));list.append(li);}
+    for(const id of ids){const source=allSourceRecords[id];if(!source)continue;const li=el('li');li.append(officialLink(source),el('small','',`${source.kind==='support'?'公式窓口（個別の対応状況を示す根拠ではありません）':'公式資料'} / 公開日：${source.publishedAt??'記載なし・未確認'} / 本文確認：${formatInformationTime(source.checkedAt,source.checkedAtTime)}`));if(source.verificationNote)li.append(el('small','',source.verificationNote));for(const failure of informationStatus({sourceIds:[id]},allSourceRecords).checkFailures)li.append(el('small','information-failure',failure.note));list.append(li);}
     body.append(list);
   }
   const history=el('button','text-button','このサービスの更新履歴を見る');history.type='button';history.addEventListener('click',()=>showUpdates(service.id));body.append(history);return disclosure('出典と確認日','service-reference',body);
 }
 
 function showView(view,{focus=false,updateHash=false}={}) {
-  state.view=view==='updates'?'updates':'check';
-  $('#check-view').hidden=state.view!=='check';$('#updates-view').hidden=state.view!=='updates';
-  for(const name of ['check','updates']) {const button=$(`#nav-${name}`);button.setAttribute('aria-pressed',String(state.view===name));button.classList.toggle('active',state.view===name);}
-  if(updateHash)history.replaceState(null,'',state.view==='updates'?'#updates':'#main');
-  if(focus){const target=state.view==='updates'?$('#updates-title'):$('#page-title');target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'instant'});}
+  state.view=['updates','watchlist'].includes(view)?view:'check';
+  for(const name of ['check','updates','watchlist']) { $(`#${name}-view`).hidden=state.view!==name;const button=$(`#nav-${name}`);button.setAttribute('aria-pressed',String(state.view===name));button.classList.toggle('active',state.view===name);}
+  if(updateHash)history.replaceState(null,'',state.view==='check'?'#main':`#${state.view}`);
+  if(focus){const target=state.view==='check'?$('#page-title'):$(`#${state.view}-title`);target.tabIndex=-1;target.focus({preventScroll:true});target.scrollIntoView({block:'start',behavior:'instant'});}
 }
 function showUpdates(serviceId=null) {
-  renderUpdateView($('#updates'),{history:updateHistory,services:directoryServices,sources:allSourceRecords,releases:appReleases,initialServiceId:serviceId,onSelectService:(id,topic)=>{
-    const service=directoryServices.find(item=>item.id===id);if(!service)return;
-    chooseRole(service.roles.includes('user')?'user':'admin',{renderResult:false});
-    chooseTopic(topic,{renderResult:false});state.query='';state.category='all';$('#service-filter').value='';switchMode('select');
-    showView('check',{updateHash:true});selectService(service);
-  }});
+  renderUpdateView($('#updates'),{history:updateHistory,services:directoryServices,sources:allSourceRecords,releases:appReleases,initialServiceId:serviceId,onSelectService:openOverviewService});
   showView('updates',{focus:true,updateHash:true});
 }
 function renderPersonalized() {
@@ -13525,6 +14203,7 @@ function renderPersonalized() {
   root.replaceChildren();root.hidden=!state.selections.length;
   if(root.hidden)return;
   const guide=personalizedRiskGuidance({service:state.service,topic:state.topic,role:state.role,selections:state.selections,incidents:selectedIncidents()});
+  if(guide.firstAction){const first=el('section','first-action');first.append(el('h3','','まずすること'),el('p','',guide.firstAction.text));if(guide.firstAction.sourceIds?.length)first.append(sourceLinks(guide.firstAction.sourceIds));root.append(first);}
   root.append(el('h3','risk-answer-heading',guide.heading),el('p','risk-summary',guide.intro));
   // The official action is already visible in the public summary above.
   for(const group of guide.groups.filter(group=>group.kind!=='official')) {
@@ -13570,6 +14249,11 @@ function render(focus=false) {
   if(state.kind==='empty'){root.append(emptyState.cloneNode(true));return;}
   const title=el('h2','',state.service?.name??(state.kind==='invalid'?'URLを確認してください':'掲載情報が見つかりませんでした'));title.id='result-title';title.tabIndex=-1;
   const header=el('div','result-header');const block=el('div');block.append(el('p','result-kicker',includesPhp()?'PHPの問題':'情報漏洩・不正アクセス'),title);header.append(block,el('span','role-label',state.role==='admin'?'管理者向け':'利用者向け'));root.append(header);
+  if(state.service){const button=el('button','watch-toggle');button.type='button';setWatchButton(button,state.service);button.addEventListener('click',()=>{
+    const service=state.service;const saved=persistWatch(toggleWatchService(watchState,service.id,watchServiceRevisions(service,watchData)));setWatchButton(button,service);
+    $('#announcement').textContent=saved?`${service.name}のウォッチリストを更新しました。`:'ブラウザに保存できないため、このページを開いている間だけ保持します。';
+    const prior=$('#watch-save-note');if(prior)prior.remove();if(!saved){const note=el('p','notice','ブラウザに保存できません。このページを開いている間だけウォッチできます。');note.id='watch-save-note';header.after(note);}
+  });header.append(button);}
   const back=el('button','back-to-finder','← サービスを選び直す');back.type='button';back.addEventListener('click',()=>{$('#finder').focus();$('#finder').scrollIntoView({block:'start',behavior:'instant'});});root.prepend(back);
   if(!state.service) {
     root.append(el('p','notice',state.kind==='invalid'?'入力の形式を確認してください。サービス名からも探せます。':'登録済みの公開情報はありません。未掲載は「被害なし」を意味しません。公式アプリや、いつも使うブックマークから運営元のお知らせを確認してください。'));
@@ -13583,7 +14267,7 @@ function render(focus=false) {
       const facts=el('div','service-facts');facts.append(el('h4','','PHPの利用について'),el('p','',service.php?.text??'未確認'),sourceLinks(service.php?.sourceIds??[]));
       action.append(disclosure('PHPの利用・公式説明の詳細','php-facts',facts));root.append(action);
     }
-    root.append(personalizePanel());renderPersonalized();root.append(referencePanel(service,displayedMetadata(service)));
+    root.append(informationSummary(displayedMetadata(service)),personalizePanel());renderPersonalized();root.append(referencePanel(service,displayedMetadata(service)));
   }
   if(focus){title.focus({preventScroll:true});if(window.matchMedia('(max-width: 800px)').matches||title.getBoundingClientRect().top<0)root.scrollIntoView({block:'start',behavior:'instant'});}
   $('#announcement').textContent=state.service?`${state.service.name}の公開情報を表示しました。利用状況を選ぶと必要な対応を絞り込めます。`:title.textContent;
@@ -13591,6 +14275,7 @@ function render(focus=false) {
 function selectService(service,hostname=null,{focus=true}={}) {
   if(service&&!service.roles.includes(state.role))chooseRole(service.roles.includes('user')?'user':'admin',{renderResult:false});
   Object.assign(state,{service,hostname,kind:service?'found':'unknown',selections:[]});$('#url-error').hidden=true;$('#url-input').removeAttribute('aria-invalid');render(focus);
+  if(service&&watchState.items.some(item=>item.serviceId===service.id))persistWatch(markWatchServiceSeen(watchState,service.id,watchServiceRevision(service,watchData,state.topic),state.topic));
 }
 function chooseRole(role,{renderResult=true}={}) {
   if(!['user','admin'].includes(role))return;
@@ -13625,7 +14310,7 @@ function chooseTopic(topic,{renderResult=true}={}) {
   document.querySelectorAll('button[data-topic]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topic===state.topic)));
   $('#issue').hidden=!includesPhp();
   $('#service-filter').placeholder=state.role==='admin'?'例：さくら、WordPress':includesPhp()?'例：note、WordPress.com':'例：佐川急便、タイムズ';
-  renderServiceList();updateTopicDates();if(renderResult)render();
+  renderServiceList();updateTopicDates();if(renderResult){render();if(state.view==='check'&&state.service&&watchState.items.some(item=>item.serviceId===state.service.id))persistWatch(markWatchServiceSeen(watchState,state.service.id,watchServiceRevision(state.service,watchData,state.topic),state.topic));}
 }
 function applyGuideSelection(selection,{focus=false}={}) {
   if(!selection)return;
@@ -13643,9 +14328,13 @@ $('#select-mode').addEventListener('click',()=>switchMode('select'));$('#url-mod
 $('#unknown-button').addEventListener('click',()=>selectService(null));$('#url-search-button').addEventListener('click',searchUrl);
 $('#url-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();searchUrl();}});
 $('#nav-check').addEventListener('click',()=>showView('check',{focus:true,updateHash:true}));$('#nav-updates').addEventListener('click',()=>showUpdates());
-window.addEventListener('hashchange',()=>{if(location.hash==='#updates')showUpdates();else {showView('check');applyGuideSelection(parseGuideHash(location.hash,directoryServices),{focus:true});if(['#about','#main','#finder'].includes(location.hash))$(location.hash)?.scrollIntoView({block:'start',behavior:'instant'});}});
+$('#nav-watchlist').addEventListener('click',()=>showWatchlist());
+window.addEventListener('storage',event=>{if(event.key!==WATCHLIST_KEY&&event.key!==null)return;watchState=readWatchlist(watchStorage,directoryServices);watchStorageAvailable=watchState.ok||watchState.status==='malformed';updateWatchNavigation();if(state.view==='watchlist')showWatchlist({focus:false});else if(state.service)render();});
+window.addEventListener('hashchange',()=>{if(location.hash==='#updates')showUpdates();else if(location.hash==='#watchlist')showWatchlist();else {showView('check');applyGuideSelection(parseGuideHash(location.hash,directoryServices),{focus:true});if(['#about','#main','#finder'].includes(location.hash))$(location.hash)?.scrollIntoView({block:'start',behavior:'instant'});}});
 chooseTopic(initialTopic);applyGuideSelection(initialGuide,{focus:!!initialGuide?.serviceId});
+updateWatchNavigation();
 if(location.hash==='#updates')showUpdates();
+else if(location.hash==='#watchlist')showWatchlist();
 function renderServiceList() {
   const topicServices=servicesForTopic(state.topic);
   const available = topicServices.filter(service => service.roles.includes(state.role));

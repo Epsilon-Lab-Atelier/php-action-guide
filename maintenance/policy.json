@@ -15,6 +15,14 @@
     "minute": 0
   },
   "publicationScope": "verified_content_only",
+  "verificationRecordPolicy": {
+    "allowMeasuredAttemptsOnly": true,
+    "fields": ["checkedAt", "checkedAtTime", "lastAttempt", "attemptedAt"],
+    "successfulBodyReadRequiredToAdvanceCheckedAt": true,
+    "retainLastSuccessfulCheckOnFailure": true,
+    "officialSourceBodyRequirementAppliesTo": "substantive_content_changes",
+    "recordOnlyChangesCreateContentHistory": false
+  },
   "publicationRequirements": [
     "official_source_body_verified",
     "public_noreply_identity_verified",

@@ -1,9 +1,14 @@
 {
   "name": "php-action-guide",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "type": "module",
-  "description": "EpsilonLab network-service safety notebook",
-  "scripts": { "build": "node scripts/build.mjs", "test": "node --test tests/*.test.mjs" },
-  "engines": { "node": ">=22" }
+  "description": "EpsilonLab network-service risk check",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

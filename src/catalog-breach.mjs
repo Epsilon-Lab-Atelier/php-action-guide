@@ -2,6 +2,61 @@
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
 {
+  "id": "hachijuni-nagano-bank",
+  "name": "八十二長野銀行",
+  "short": "職員1名のメール内の顧客・関係先情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "keywords": [
+    "八十二長野銀行",
+    "八十二銀行",
+    "長野銀行",
+    "82銀行"
+  ],
+  "domains": [
+    {
+      "host": "bank.82group.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breach82BankFollowup2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "osaka-university",
+  "name": "大阪大学",
+  "short": "委託先が共有していた卒業生・在学生・教職員情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "keywords": [
+    "大阪大学",
+    "阪大",
+    "The University of Osaka"
+  ],
+  "domains": [
+    {
+      "host": "www.osaka-u.ac.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachOsakaUniversity2026"
+  ],
+  "supportSourceIds": []
+},
+{
   "id": "futureshop",
   "name": "futureshop（フューチャーショップ）",
   "short": "1店舗の会員情報・別の一部サーバー事案",

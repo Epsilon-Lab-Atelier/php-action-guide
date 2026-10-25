@@ -1,75 +1,103 @@
 // Official disclosures are separate from PHP patch status. No personal exposure diagnosis.
 export const breachSources = {
+  "breach82BankFirst2026": {
+    "title": "八十二長野銀行：職員メールアカウントへの不正アクセス（初報）",
+    "url": "https://bank.82group.jp/file.jsp?id=release/2026/pdf/news20261008.pdf",
+    "publishedAt": "2026-10-08",
+    "updatedAt": null,
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:29:12+09:00",
+    "kind": "incident",
+    "lastAttempt": {
+      "at": "2026-10-26T06:29:12+09:00",
+      "outcome": "read"
+    }
+  },
+  "breach82BankFollowup2026": {
+    "title": "八十二長野銀行：情報漏えいの可能性がある範囲の特定（第2報）",
+    "url": "https://bank.82group.jp/file.jsp?id=release/2026/pdf/news20261019.pdf",
+    "publishedAt": "2026-10-19",
+    "updatedAt": null,
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:28:34+09:00",
+    "kind": "incident",
+    "lastAttempt": {
+      "at": "2026-10-26T06:28:34+09:00",
+      "outcome": "read"
+    }
+  },
+  "breachOsakaUniversity2026": {
+    "title": "大阪大学：委託事業者における個人情報漏えい",
+    "url": "https://www.osaka-u.ac.jp/ja/news/topics/2026/10/21004",
+    "publishedAt": "2026-10-21",
+    "updatedAt": null,
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:28:54+09:00",
+    "kind": "incident",
+    "lastAttempt": {
+      "at": "2026-10-26T06:28:54+09:00",
+      "outcome": "read"
+    }
+  },
   "breachFutureshopFirst2026": {
     "title": "futureshop：1店舗の会員情報漏えい（第一報）",
     "url": "https://www.future-shop.jp/news/2026/10/23.html",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T18:04:34+09:00",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:27:30+09:00",
     "kind": "incident",
-    "lastAttempt": {
-      "at": "2026-10-25T18:04:34+09:00",
-      "outcome": "read"
-    }
+    "lastAttempt": {"at":"2026-10-26T06:27:30+09:00","outcome":"read"}
   },
   "breachFutureshopAccess2026": {
     "title": "futureshop：一部サーバーへの不正アクセス（第一報）",
     "url": "https://www.future-shop.jp/news/2026/10/21.html",
     "publishedAt": "2026-10-21",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T18:05:15+09:00",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:27:30+09:00",
     "kind": "incident",
-    "lastAttempt": {
-      "at": "2026-10-25T18:05:15+09:00",
-      "outcome": "read"
-    }
+    "lastAttempt": {"at":"2026-10-26T06:27:30+09:00","outcome":"read"}
   },
   "breachFutureshopExplanation2026": {
     "title": "futureshop：メンテナンスと別々の不正アクセス事案の説明",
     "url": "https://www.future-shop.jp/news/2026/10/25.html",
     "publishedAt": "2026-10-25",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T18:04:34+09:00",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:27:51+09:00",
     "kind": "incident",
-    "lastAttempt": {
-      "at": "2026-10-25T18:04:34+09:00",
-      "outcome": "read"
-    }
+    "lastAttempt": {"at":"2026-10-26T06:28:50+09:00","note":"再取得時に本文を取得できませんでした。直前の本文確認日時を保持。","outcome":"unavailable"}
   },
   "breachLashinbang2026": {
     "title": "らしんばん：個人情報漏えいの可能性（10月9日追記を含む）",
     "url": "https://www.lashinbang.com/info/26357/",
     "publishedAt": "2026-10-01",
     "updatedAt": "2026-10-09",
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T18:03:56+09:00",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:27:30+09:00",
     "kind": "incident",
-    "lastAttempt": {
-      "at": "2026-10-25T18:05:01+09:00",
-      "outcome": "unavailable",
-      "note": "再取得時は403。直前に確認できた本文と確認日時を保持。"
-    }
+    "lastAttempt": {"at":"2026-10-26T06:27:30+09:00","outcome":"read"}
   },
   "breachAwaBankFirst2026": {
     "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について",
     "url": "https://www.awabank.co.jp/kojin/news/2026/news20260403a/",
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:28:29+09:00",
     "publishedAt": "2026-04-03",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:28:29+09:00","outcome":"read"}
   },
   "breachAwaBankFollowup2026": {
     "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について（続報）",
     "url": "https://www.awabank.co.jp/kojin/news/2026/news20260603a/",
-    "checkedAt": "2026-10-25",
-    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "checkedAt": "2026-10-26",
+    "checkedAtTime": "2026-10-26T06:28:29+09:00",
     "publishedAt": "2026-06-03",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:28:29+09:00","outcome":"read"}
   },
   "breachDaiwaDomain2026": {
     "title": "大和証券：公式サービスサイト（ドメイン確認）",
@@ -82,42 +110,52 @@ export const breachSources = {
   "breachSocial1Source1": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関するお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020632/",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-07-13",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:38+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:38+09:00","outcome":"read"}
   },
   "breachSocial1Source2": {
     "title": "LINE GAMEユーザー内部識別子の外部送信に関する総務省からの行政指導について",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/020695/",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-07-31",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:38+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:38+09:00","outcome":"read"}
   },
   "breachSocial2Source1": {
     "title": "「LINE公式アカウント」誤表示による情報漏えいのお知らせとお詫び",
     "url": "https://www.lycorp.co.jp/ja/privacy-security/announcement/019924/",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2025-12-09",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:54+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:54+09:00","outcome":"read"}
   },
   "breachSocial3Source1": {
     "title": "noteでソースコードからIPアドレスが確認できた事態に関する追加報告とお詫び",
     "url": "https://note.jp/n/n2115642a4e45",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2020-09-30",
     "updatedAt": "2021-09-09",
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:29:07+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:29:07+09:00","outcome":"read"}
   },
   "breachXserver2026": {
     "title": "エックスサーバー：委託先メール配信サービス「ブラストメール」における個人情報の漏洩に関するお詫びとお知らせ",
     "url": "https://www.xserver.ne.jp/news_detail.php?view_id=19739",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:05+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:05+09:00","outcome":"read"}
   },
   "breachSakura2026": {
     "title": "さくらインターネット：不正アクセスの調査結果と再発防止策（第三報）",
@@ -125,7 +163,8 @@ export const breachSources = {
     "checkedAt": "2026-10-24",
     "publishedAt": "2026-09-10",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:29:07+09:00","note":"本文テキストを部分確認しましたが、情報項目表の画像を確認できず資料全体の再確認は未完了です。","outcome":"unavailable"}
   },
   "breachSakuraSecond2026": {
     "title": "さくらインターネット：当社システムへの不正アクセスに関するお知らせ（第二報）",
@@ -133,23 +172,28 @@ export const breachSources = {
     "checkedAt": "2026-10-24",
     "publishedAt": "2026-08-19",
     "updatedAt": "2026-08-26",
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:29:07+09:00","note":"本文テキストを部分確認しましたが、情報項目表の画像を確認できず資料全体の再確認は未完了です。","outcome":"unavailable"}
   },
   "breachSakuraFaq2026": {
     "title": "さくら：当社システムへの不正アクセスに関するご案内",
     "url": "https://help.sakura.ad.jp/unauth-access-faq/",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "publishedAt": null,
     "updatedAt": "2026-09-10",
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:29+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:29+09:00","outcome":"read"}
   },
   "breachConoha2026": {
     "title": "ConoHa WING：一部収容ホストへの第三者による不正アクセスに関するお詫びとお知らせ",
     "url": "https://www.conoha.jp/wing/news/?ap=2015054834&btn_id=wing-news--news_wing-news",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-09-20",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:54+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:54+09:00","outcome":"read"}
   },
   "breachSagawa2026": {
     "title": "佐川急便：お荷物問い合わせサービスの再開および個人情報の流出に関する調査状況（第5報）",
@@ -158,7 +202,7 @@ export const breachSources = {
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","note":"JavaScriptが必要との表示のみで告知本文を取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:27:09+09:00","note":"JavaScriptが必要との表示のみで告知本文を取得できませんでした。","outcome":"unavailable"},
   },
   "breachSagawaFourth2026": {
     "title": "佐川急便：お荷物問い合わせサービスへの不正アクセスによる個人情報流出の可能性（第4報）",
@@ -167,7 +211,7 @@ export const breachSources = {
     "publishedAt": "2026-10-09",
     "updatedAt": null,
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","note":"JavaScriptが必要との表示のみで告知本文を取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:27:51+09:00","note":"JavaScriptが必要との表示のみで告知本文を取得できませんでした。","outcome":"unavailable"},
   },
   "breachBurgerKing2026": {
     "title": "バーガーキング：不正アクセスによる公式アプリ会員情報漏えいに関するお詫びとお知らせ",
@@ -179,57 +223,57 @@ export const breachSources = {
     "verificationMethod": "official-document-reproduction",
     "verificationUrl": "https://biznews365.jp/wp-content/uploads/2026/10/image-41.png",
     "verificationNote": "公式PDFは今回直接取得できず、公式告知一覧で掲載・日付を確認し、出典を明記した転載画像にある告知文書の全1ページを読みました。公式ホストからの本文取得による再確認は未完了です。",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","note":"公式PDFは403応答で取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:27:09+09:00","note":"公式PDFは403応答で取得できませんでした。","outcome":"unavailable"},
   },
   "breachTimesCarFifth2026": {
     "title": "タイムズカー：個人情報漏えいに関する報告と今後の対応（第5報）",
     "url": "https://share.timescar.jp/news/2026/1023/1825.html",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:04+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:04+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:17+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:17+09:00","outcome":"read"},
   },
   "breachTimesCarFirst2026": {
     "title": "タイムズカー：不正アクセスによる個人情報漏えいの可能性（第1報・追記あり）",
     "url": "https://share.timescar.jp/news/2026/0925/1814.html",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-09-25",
     "updatedAt": "2026-10-01",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:03:44+09:00",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:17+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:17+09:00","outcome":"read"},
   },
   "breachTimesCarFaq2026": {
     "title": "タイムズカー：不正アクセスに関する質問と回答",
     "url": "https://corp.timescar.jp/mail/announce/faq.pdf",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-01",
     "updatedAt": "2026-10-23",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:46+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:46+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:51+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:51+09:00","outcome":"read"},
   },
   "breachJrEastMail2026": {
     "title": "JR東日本：外部メール配信サービスの個人情報に関する続報（10月15日更新）",
     "url": "https://www.jreast.co.jp/press/2026/20261009_ho02.pdf",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-09",
     "updatedAt": "2026-10-15",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:03:44+09:00",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:17+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:17+09:00","outcome":"read"},
   },
   "breachViewCardMail2026": {
     "title": "ビューカード：外部メール配信サービスのメールアドレスに関する続報（10月15日更新）",
     "url": "https://www.jreast.co.jp/card/news/pdf/20261015.pdf",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-09",
     "updatedAt": "2026-10-15",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:03:44+09:00",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:17+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:17+09:00","outcome":"read"},
   },
   "breachBurgerKingNoticeIndex2026": {
     "title": "バーガーキング：公式お知らせ一覧（10月15日の告知掲載を確認）",
@@ -240,7 +284,7 @@ export const breachSources = {
     "kind": "incident",
     "sourceRole": "publication-index",
     "verificationNote": "告知の掲載と公表日を確認した一覧です。事案本文は別記の告知文書を参照しています。",
-    lastAttempt: {"at":"2026-10-25T18:03:44+09:00","note":"ナビゲーションのみ取得でき、告知一覧の本文を確認できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:27:51+09:00","note":"ナビゲーションのみ取得でき、告知一覧本文を確認できませんでした。","outcome":"unavailable"},
   },
   "breachSeicomartFirst2026": {
     "title": "セイコーマート：アプリへの不正アクセスによる個人情報流出の可能性",
@@ -303,10 +347,10 @@ export const breachSources = {
     "url": "https://www.lawson.co.jp/contents/cont07/1533174_3310.html",
     "publishedAt": "2026-10-08",
     "updatedAt": "2026-10-24",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:05:44+09:00",
-    lastAttempt: {"at":"2026-10-25T18:05:44+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:27:51+09:00",
+    lastAttempt: {"at":"2026-10-26T06:27:51+09:00","outcome":"read"},
   },
   "breachYakinikuKing2026": {
     "title": "焼肉きんぐ：公式アプリ会員情報の漏えい",
@@ -397,10 +441,10 @@ export const breachSources = {
     "url": "https://www.idcf.jp/news/topics/20261018001",
     "publishedAt": "2026-10-18",
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:05:59+09:00",
-    lastAttempt: {"at":"2026-10-25T18:05:59+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:24+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:24+09:00","outcome":"read"},
   },
   "breachSompoSr2026": {
     "title": "損保ジャパン：SMILING ROAD問い合わせ委託先への不正アクセス",
@@ -464,18 +508,20 @@ export const breachSources = {
     "url": "https://www.capcom.co.jp/ir/news/html/261022.html",
     "publishedAt": "2026-10-22",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:29:06+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:29:06+09:00","outcome":"read"}
   },
   "breachCapcomSecond2026": {
     "title": "カプコン：イーカプコン19件への影響を報告（第二報）",
     "url": "https://www.capcom.co.jp/ir/news/html/261023.html",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:46+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:46+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:28:45+09:00",
+    lastAttempt: {"at":"2026-10-26T06:28:45+09:00","outcome":"read"},
   },
   "breachCmoa2026": {
     "title": "NTTソルマーレ：コミックシーモア情報流出（第4報）",
@@ -658,36 +704,42 @@ export const breachSources = {
   "breachIwaiCosmoSecond2026": {
     "title": "岩井コスモ証券：外部委託先への不正アクセス（第2報）",
     "url": "https://www.iwaicosmo.co.jp/info/2026/10201710.html",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-20",
     "updatedAt": null,
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:06:50+09:00",
-    lastAttempt: {"at":"2026-10-25T18:06:50+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:06+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:06+09:00","outcome":"read"},
   },
   "breachIwaiCosmoFollowup2026": {
     "title": "岩井コスモ証券：個人情報漏洩および不正取引に関する報告",
     "url": "https://www.iwaicosmo.net/info/post_499.html",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-21",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:29:06+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:29:06+09:00","outcome":"read"}
   },
   "breachAtlinkInvestigation2026": {
     "title": "メドレー：アットリンクへの不正アクセスに関する調査状況",
     "url": "https://at-link.net/information/%E3%82%A2%E3%83%83%E3%83%88%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%B8%E3%81%AE%E4%B8%8D%E6%AD%A3%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E8%AA%BF%E6%9F%BB%E7%8A%B6%E6%B3%81/",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:30:16+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:30:16+09:00","outcome":"read"}
   },
   "breachMedleyAtlink2026": {
     "title": "メドレー：アットリンクの不正アクセス・サービス停止の最新情報",
     "url": "https://www.medley.jp/notice/20261015.html",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-15",
     "updatedAt": "2026-10-23",
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:30:08+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:30:08+09:00","outcome":"read"}
   },
   "breachTranscosmos2026": {
     "title": "トランスコスモス：採用応募者の個人情報漏えい",
@@ -793,13 +845,13 @@ export const breachSources = {
   "breachAenaResume2026": {
     "title": "アエナ：ECアプリ再開とパスワード再設定",
     "url": "https://www.aena.co.jp/news/detail/7904/",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-20",
     "updatedAt": null,
     "kind": "incident",
     "verificationNote": "ページ日付は10月20日。本文が明示する実際の再開日時は10月19日正午。",
-    checkedAtTime: "2026-10-25T18:06:40+09:00",
-    lastAttempt: {"at":"2026-10-25T18:06:40+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:24+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:24+09:00","outcome":"read"},
   },
   "breachIzumiFirst2026": {
     "title": "イズミ：委託先のクラウド障害に伴うメールアドレス等の漏えいの可能性",
@@ -824,15 +876,17 @@ export const breachSources = {
     "updatedAt": null,
     "checkedAt": "2026-10-25",
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:05:44+09:00","note":"取得ツールでこのURLの本文を取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:28:45+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"},
   },
   "breachStudio2026": {
     "title": "Studio：不正アクセスによる個人情報流出の可能性",
     "url": "https://studio.design/ja/whats-new/unauthorized-access-2026-10",
     "publishedAt": "2026-10-16",
     "updatedAt": "2026-10-18",
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:29:37+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:29:37+09:00","outcome":"read"}
   },
   "breachStudioPortal2026": {
     "title": "Studio：セキュリティインシデントの対処・FAQ",
@@ -871,20 +925,20 @@ export const breachSources = {
     "url": "https://www.sourcenext.com/support/i/2026/1015_info/",
     "publishedAt": "2026-10-15",
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:05:59+09:00",
-    lastAttempt: {"at":"2026-10-25T18:05:59+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:24+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:24+09:00","outcome":"read"},
   },
   "breachSourcenextFAQ2026": {
     "title": "ソースネクスト：情報漏洩に関するFAQ",
     "url": "https://www.sourcenext.com/support/i/2026/1015_1/",
     "publishedAt": null,
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:05:59+09:00",
-    lastAttempt: {"at":"2026-10-25T18:05:59+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:37+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:37+09:00","outcome":"read"},
   },
   "breachSkypMail2026": {
     "title": "スカパーJSAT：メールアドレス漏洩なしを確認した調査結果",
@@ -920,7 +974,8 @@ export const breachSources = {
     "publishedAt": "2026-10-13",
     "updatedAt": null,
     "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:28:58+09:00","note":"本文が画像で、本文の内容を再確認できませんでした。","outcome":"unavailable"}
   },
   "breachBookoffCorrection2026": {
     "title": "BOOKOFF：個人情報漏えい（第2報）の一部訂正",
@@ -929,7 +984,7 @@ export const breachSources = {
     "updatedAt": null,
     "checkedAt": "2026-10-25",
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:06:50+09:00","note":"告知本文は画像のため、この取得結果では本文の再確認ができませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:28:45+09:00","note":"本文が画像で、本文の内容を再確認できませんでした。","outcome":"unavailable"},
   },
   "breachBookoffFollowup2026": {
     "title": "BOOKOFF：個別通知完了・WEB照会機能追加",
@@ -937,7 +992,8 @@ export const breachSources = {
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:28:45+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"}
   },
   "breachBookoffFaq2026": {
     "title": "BOOKOFF：個人情報漏えいに関するよくあるご質問",
@@ -945,7 +1001,8 @@ export const breachSources = {
     "publishedAt": "2026-10-23",
     "updatedAt": null,
     "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:28:58+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"}
   },
   "breachMos2026": {
     "title": "モスバーガー：モスカード情報の流出・利用者への案内",
@@ -954,7 +1011,7 @@ export const breachSources = {
     "updatedAt": null,
     "checkedAt": "2026-10-25",
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:05:44+09:00","note":"取得ツールでこのURLの本文を取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:28:34+09:00","note":"公式ページを取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"},
   },
   "breachMosDisclosure2026": {
     "title": "モスフードサービス：プリペイドカード情報流出の適時開示",
@@ -965,7 +1022,8 @@ export const breachSources = {
     "kind": "incident",
     "verificationMethod": "official-document-reproduction",
     "verificationUrl": "https://finance-frontend-pc-dist.west.edge.storage-yahoo.jp/disclosure/20261023/20261023555430.pdf",
-    "verificationNote": "モスフードサービスがTDnetに開示した公式文書の全文3ページをYahoo!ファイナンス掲載PDFで確認。公式消費者向け告知も確認。"
+    "verificationNote": "モスフードサービスがTDnetに開示した公式文書の全文3ページをYahoo!ファイナンス掲載PDFで確認。公式消費者向け告知も確認。",
+    "lastAttempt": {"at":"2026-10-26T06:28:58+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"}
   },
   "breachPizzahut2026": {
     "title": "ピザハット：システムへの不正アクセスに関するお詫びとお知らせ",
@@ -1076,16 +1134,20 @@ export const breachSources = {
     "url": "https://www.nimoca.jp/news/detail/109",
     "publishedAt": "2026-10-15",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:29:37+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:29:37+09:00","outcome":"read"}
   },
   "breachDigitalStudio2026": {
     "title": "デジタル庁：Studio不正アクセスによるフォーム情報の漏えい可能性",
     "url": "https://www.digital.go.jp/press/a0a8f66c-b32d-4695-9372-bcd5d4280f22",
     "publishedAt": "2026-10-22",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:30:08+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:30:08+09:00","outcome":"read"}
   },
   "breachAeon2026": {
     "title": "イオン：一部Webサイトへの不正アクセスによるシステムメンテナンス",
@@ -1134,8 +1196,10 @@ export const breachSources = {
     "url": "https://www.mhlw.go.jp/stf/newpage_76892.html",
     "publishedAt": "2026-10-22",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:30:24+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:30:24+09:00","outcome":"read"}
   },
   "breachFukuokaConvention2026": {
     "title": "福岡市・福岡コンベンションセンター：Webフォーム情報の漏えい可能性",
@@ -1209,7 +1273,8 @@ export const breachSources = {
     "publishedAt": "2026-10-22",
     "updatedAt": "2026-10-23",
     "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "kind": "incident",
+    "lastAttempt": {"at":"2026-10-26T06:29:24+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"}
   },
   "breachNiigataThird2026": {
     "title": "新潟日報社：会員情報漏洩（第3報）",
@@ -1218,25 +1283,27 @@ export const breachSources = {
     "updatedAt": "2026-10-24",
     "checkedAt": "2026-10-25",
     "kind": "incident",
-    lastAttempt: {"at":"2026-10-25T18:06:40+09:00","note":"取得ツールでこのURLの本文を取得できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T06:28:45+09:00","note":"資料を取得できませんでした。最後に成功した確認日時を保持。","outcome":"unavailable"},
   },
   "breachFurusato2026": {
     "title": "トラストバンク：ふるさとチョイス会員情報の外部流出",
     "url": "https://www.trustbank.co.jp/newsroom/newsrelease/news261020/",
     "publishedAt": "2026-10-20",
     "updatedAt": null,
-    "checkedAt": "2026-10-25",
-    "kind": "incident"
+    "checkedAt": "2026-10-26",
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:30:08+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:30:08+09:00","outcome":"read"}
   },
   "breachFurusatoSecond2026": {
     "title": "トラストバンク：ふるさとチョイス会員情報の外部流出（第2報）",
     "url": "https://www.trustbank.co.jp/newsroom/newsrelease/news20261023/",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:36+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:15+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:15+09:00","outcome":"read"},
   },
   "breachFurusatoDisplay2026": {
     "title": "トラストバンク：Amazon Pay寄付手続き中の他利用者情報表示",
@@ -1321,38 +1388,42 @@ export const breachSources = {
   "breachOnamaeDesktopThird2026": {
     "title": "GMO：お名前.com デスクトップクラウドへの不正アクセス（第3報）",
     "url": "https://group.gmo/info/alert/20261023/",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:34+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:34+09:00","outcome":"read"}
   },
   "breachOnamaeDesktopFourth2026": {
     "title": "GMO：お名前.com デスクトップクラウドへの攻撃と補償方針（第4報）",
     "url": "https://group.gmo/info/alert/20261024/",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-24",
     "updatedAt": null,
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:46+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:46+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:28:34+09:00",
+    lastAttempt: {"at":"2026-10-26T06:28:34+09:00","outcome":"read"},
   },
   "breachOnamaeDesktopFifth2026": {
     "title": "GMO：お名前.com デスクトップクラウド利用者へのお願い（第5報）",
     "url": "https://group.gmo/info/alert/2026102402/",
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-24",
     "updatedAt": null,
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:04:36+09:00",
-    lastAttempt: {"at":"2026-10-25T18:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:28:34+09:00",
+    lastAttempt: {"at":"2026-10-26T06:28:34+09:00","outcome":"read"},
   },
   "breachOnamaeDesktopFirst2026": {
     "title": "お名前.com：デスクトップクラウドへの不正アクセス（第1報）",
     "url": "https://www.onamae.com/news/article/11584",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "publishedAt": "2026-10-21",
     "updatedAt": null,
-    "kind": "incident"
+    "kind": "incident",
+    "checkedAtTime": "2026-10-26T06:28:34+09:00",
+    "lastAttempt": {"at":"2026-10-26T06:28:34+09:00","outcome":"read"}
   },
   "breachNabariGas2026": {
     "title": "名張近鉄ガス：委託先ファイルサーバーへの不正アクセス",
@@ -1433,10 +1504,10 @@ export const breachSources = {
     "url": "https://www.resorttrust.co.jp/topics/20261023/3418/",
     "publishedAt": "2026-10-23",
     "updatedAt": null,
-    "checkedAt": '2026-10-25',
+    "checkedAt": "2026-10-26",
     "kind": "incident",
-    checkedAtTime: "2026-10-25T18:05:59+09:00",
-    lastAttempt: {"at":"2026-10-25T18:05:59+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T06:29:24+09:00",
+    lastAttempt: {"at":"2026-10-26T06:29:24+09:00","outcome":"read"},
   },
   "breachHisThailand2026": {
     "title": "HIS：タイ現地法人ファイルサーバの個人情報流出可能性",
@@ -1505,6 +1576,100 @@ export const breachSources = {
 };
 
 export const breachIncidents = [
+{
+  "id": "hachijuni-nagano-bank-mail-2026",
+  "serviceIds": [
+    "hachijuni-nagano-bank"
+  ],
+  "title": "八十二長野銀行の職員1名のメールアカウントへの不正アクセス",
+  "type": "breach",
+  "publishedAt": "2026-10-08",
+  "updatedAt": "2026-10-19",
+  "occurredAt": "2026年10月7日にフィッシングメールを起点とする不正アクセスが発生。同日中にアクセスを遮断。",
+  "affectedPeriod": "対象メールの保存・やり取りの期間は未公表。10月7日は不正アクセスの発生日です。",
+  "scope": "職員1名のメール内にあった個人情報34名、法人取引先627社、その他関係機関11機関。全口座利用者を一律の対象とする公表ではありません。",
+  "dataTypes": [
+    "34名の氏名・勤務先名・電話番号・メールアドレス",
+    "法人取引先531社の社名・海外拠点名、96社の銀行との取引に関する情報",
+    "11機関の機関名等・35メールアドレス（初報の「35名」に対応する区分）"
+  ],
+  "excludedData": "口座情報・暗証番号等の漏えいは確認されていません。対象職員以外のアカウントへの不正アクセスも未確認。",
+  "status": {
+    "code": "possible",
+    "label": "メール内情報の漏えいの可能性",
+    "text": "第2報では第三者に閲覧されたメールを確認し、漏えいの可能性がある範囲を特定。10月19日時点で不正利用による被害の申し出はないと説明。"
+  },
+  "providerResponse": {
+    "label": "アクセス遮断・個別連絡・対策強化",
+    "text": "個人34名、取引情報の対象96社、関係機関への個別連絡は完了。社名・海外拠点名の対象531社には連絡を進めています。システム対策と職員教育を強化。"
+  },
+  "officialAction": {
+    "text": "銀行からの個別案内を確認してください。銀行や職員を装う不審な連絡に注意し、心当たりのないメールのリンクや添付ファイルを開かないよう案内。不明点は公式のお客さま相談室へ。"
+  },
+  "sourceIds": [
+    "breach82BankFirst2026",
+    "breach82BankFollowup2026"
+  ],
+  "history": [
+    {
+      "id": "initial-listing-20261026-morning",
+      "date": "2026-10-26",
+      "changedAtTime": "2026-10-26T06:30:28+09:00",
+      "changeKind": "new",
+      "actionImpact": "unknown",
+      "actionSummary": "初回掲載です。公表された対象範囲と公式の案内をご確認ください。",
+      "title": "公式公表を新規掲載",
+      "summary": "公式本文の対象範囲と案内を確認して追加。掲載日は発生日・公表日とは異なります。"
+    }
+  ],
+  "caution": "34名・627社・11機関・35メールアドレスは異なる区分・単位です。合算して被害人数とは扱いません。"
+},
+{
+  "id": "osaka-university-nec-cloud-2026",
+  "serviceIds": [
+    "osaka-university"
+  ],
+  "title": "大阪大学の委託事業者のクラウドストレージからの個人情報漏えい",
+  "type": "breach",
+  "publishedAt": "2026-10-21",
+  "updatedAt": null,
+  "occurredAt": "2026年9月26日に第三者がファイルをダウンロード。大学は10月9日にNECから報告を受領。",
+  "affectedPeriod": "対象者の在籍・登録期間の区切りは未公表。9月26日はファイルのダウンロード日です。",
+  "scope": "卒業生59,014名、在学生15,035名、教職員3,802名の計77,851人（重複を除く）。全卒業生・学生・教職員が一律に対象という意味ではありません。",
+  "dataTypes": [
+    "氏名・大阪大学個人ID・大学が付与したメールアドレス（OUMailアカウント等）",
+    "学籍番号または職員番号・所属情報（対象者ごとに漏えい項目は異なる）"
+  ],
+  "excludedData": "対象外の情報項目の明示はありません。全学教育用電子計算機システムへの関連する不正アクセスの痕跡は確認されていません。",
+  "status": {
+    "code": "confirmed",
+    "label": "委託先での個人情報漏えいを確認",
+    "text": "NECが協力会社との共有に使ったクラウドストレージから、個人情報を含むファイルが第三者にダウンロードされました。10月21日時点で関連する不正利用・二次被害は未確認。"
+  },
+  "providerResponse": {
+    "label": "個別情報の通知・委託先への対応要求",
+    "text": "個別の対象情報は今後通知すると公表。大学はNECに収束対応、原因究明、再発防止策の徹底を求めています。"
+  },
+  "officialAction": {
+    "text": "大学からの個別の対象情報の通知をご確認ください。漏えい情報を悪用するフィッシングメールやなりすましメールに注意するよう案内。不明点は公式告知内の問い合わせ窓口へ。"
+  },
+  "sourceIds": [
+    "breachOsakaUniversity2026"
+  ],
+  "history": [
+    {
+      "id": "initial-listing-20261026-morning",
+      "date": "2026-10-26",
+      "changedAtTime": "2026-10-26T06:30:28+09:00",
+      "changeKind": "new",
+      "actionImpact": "unknown",
+      "actionSummary": "初回掲載です。公表された対象範囲と公式の案内をご確認ください。",
+      "title": "公式公表を新規掲載",
+      "summary": "公式本文の対象範囲と案内を確認して追加。掲載日は発生日・公表日とは異なります。"
+    }
+  ],
+  "caution": "大阪公立大学とは別の大学・公表です。委託先クラウド上のファイル漏えいと、大学のシステムへの侵入を混同しません。"
+},
 {
   "id": "futureshop-member-leak-2026",
   "serviceIds": [
@@ -6975,6 +7140,25 @@ export const breachIncidents = [
 ];
 
 export const breachReviews = {
+  "hachijuni-nagano-bank": {
+    "attemptedAt": "2026-10-26",
+    "attemptedAtTime": "2026-10-26T06:29:12+09:00",
+    "status": "body-reviewed",
+    "sourceIds": [
+      "breach82BankFirst2026",
+      "breach82BankFollowup2026"
+    ],
+    "note": "公式告知本文と続報の検索を確認して掲載。掲載資料以外の網羅確認ではありません。"
+  },
+  "osaka-university": {
+    "attemptedAt": "2026-10-26",
+    "attemptedAtTime": "2026-10-26T06:29:12+09:00",
+    "status": "body-reviewed",
+    "sourceIds": [
+      "breachOsakaUniversity2026"
+    ],
+    "note": "公式告知本文と続報の検索を確認して掲載。掲載資料以外の網羅確認ではありません。"
+  },
   "futureshop": {
     "attemptedAt": "2026-10-25",
     "attemptedAtTime": "2026-10-25T18:05:15+09:00",

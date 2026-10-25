@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { services, sources } from '../src/catalog.mjs';
+import { sources } from '../src/catalog.mjs';
+import { directoryServices as services } from '../src/service-directory.mjs';
 import { breachIncidents, breachSources, breachReviews } from '../src/incidents.mjs';
 import { incidentsForService, incidentMetadata } from '../src/incident-model.mjs';
 
@@ -12,6 +13,21 @@ function assertCalendarDate(value, label) {
 }
 
 const serviceIds = new Set(services.map(service => service.id));
+
+test('Arcadia preserves the latest NET119 count and separates provider-wide scopes', () => {
+  const records = incidentsForService(breachIncidents, 'arcadia-raiden');
+  assert.equal(records.length, 3);
+  const net = records.find(record => record.id === 'arcadia-net119-2026');
+  const fire = records.find(record => record.id === 'arcadia-119raiden-2026');
+  const mail = records.find(record => record.id === 'arcadia-speecan-2026');
+  assert.match(net.scope, /9,020/);
+  assert.match(net.excludedData, /要配慮個人情報/);
+  assert.match(fire.scope, /fs119\.ktaiwork\.jp のみ/);
+  assert.match(fire.excludedData, /対象外/);
+  assert.match(mail.scope, /313万6,000/);
+  assert.ok(records.every(record => record.status.code === 'possible'));
+  assert.ok(records.every(record => record.caution.includes('合算できません')));
+});
 
 test('incident IDs and service references remain unique and resolvable', () => {
   assert.ok(breachIncidents.length > 0);
@@ -27,12 +43,13 @@ test('incident IDs and service references remain unique and resolvable', () => {
 });
 
 test('incident sources resolve to credential-free HTTPS links and valid calendar dates', () => {
-  const referenced = new Set();
+  const referenced = new Set(services.flatMap(service => service.domainSourceIds ?? []));
   for (const incident of breachIncidents) {
     assert.ok(incident.sourceIds.length > 0, incident.id);
     assert.equal(new Set(incident.sourceIds).size, incident.sourceIds.length, incident.id);
     for (const id of incident.sourceIds) {
       assert.ok(Object.hasOwn(breachSources, id), `${incident.id}: ${id}`);
+      assert.equal(breachSources[id].kind, 'incident', `${incident.id}: domain evidence must not establish incident facts`);
       referenced.add(id);
     }
   }
@@ -44,7 +61,7 @@ test('incident sources resolve to credential-free HTTPS links and valid calendar
     assert.equal(url.username, '', id);
     assert.equal(url.password, '', id);
     assert.equal(url.hash, '', id);
-    assert.equal(source.kind, 'incident', id);
+    assert.ok(['incident', 'domain'].includes(source.kind), id);
     assertCalendarDate(source.checkedAt, `${id}.checkedAt`);
     for (const field of ['publishedAt', 'updatedAt']) {
       if (source[field] === null) continue;
@@ -80,8 +97,9 @@ test('breach evidence and provider response remain independent of PHP patch data
   for (const incident of breachIncidents) {
     assert.ok(!Object.hasOwn(incident, 'php'), incident.id);
     assert.ok(incident.scope.trim(), incident.id);
-    assert.ok(incident.dataTypes.length > 0 && incident.dataTypes.every(text => typeof text === 'string' && text.trim()), incident.id);
-    assert.ok(['confirmed', 'possible', 'access-confirmed', 'investigating', 'unknown'].includes(incident.status.code), incident.id);
+    assert.ok(Array.isArray(incident.dataTypes) && incident.dataTypes.every(text => typeof text === 'string' && text.trim()), incident.id);
+    if (!incident.dataTypes.length) assert.match(`${incident.scope} ${incident.status.text}`, /未公表|未確認|調査中/, `${incident.id}: undisclosed data types need an explicit explanation`);
+    assert.ok(['confirmed', 'possible', 'access-confirmed', 'investigating', 'unknown', 'not-confirmed'].includes(incident.status.code), incident.id);
     assert.ok(incident.status.label.trim() && incident.status.text.trim(), incident.id);
     assert.ok(incident.providerResponse.label.trim() && incident.providerResponse.text.trim(), incident.id);
     assert.notStrictEqual(incident.status, incident.providerResponse, incident.id);
@@ -90,7 +108,7 @@ test('breach evidence and provider response remain independent of PHP patch data
       const service = services.find(item => item.id === id);
       assert.notStrictEqual(incident, service.incident);
       assert.notStrictEqual(incident.officialAction, service.officialAction);
-      for (const sourceId of incident.sourceIds) assert.ok(!service.php.sourceIds.includes(sourceId), incident.id);
+      for (const sourceId of incident.sourceIds) assert.ok(!(service.php?.sourceIds ?? []).includes(sourceId), incident.id);
     }
   }
 });
@@ -130,4 +148,41 @@ test('research attempts distinguish reading from search without claiming no brea
     if (review.status === 'body-reviewed') assert.ok(review.sourceIds.length > 0, id);
     if (review.status === 'searched') assert.match(review.note, /被害がない.*(意味しません|判断できません)/, id);
   }
+});
+
+test('JR East and View Card retain the later no-leak report and distinct affected services', () => {
+  for (const [serviceId, incidentId] of [['jr-east', 'jr-east-external-mail-2026'], ['view-card', 'view-card-external-mail-2026']]) {
+    const [record] = incidentsForService(breachIncidents, serviceId);
+    assert.equal(record.id, incidentId);
+    assert.deepEqual(record.serviceIds, [serviceId]);
+    assert.equal(record.publishedAt, '2026-10-09');
+    assert.equal(record.updatedAt, '2026-10-15');
+    assert.equal(record.status.code, 'not-confirmed');
+    assert.match(record.status.text, /漏えいはなかったと判断したとの報告/);
+    assert.ok(record.dataTypes.every(text => text.startsWith('当初調査対象：')));
+  }
+});
+
+test('Sagawa and Times Car retain uncertainty instead of treating all records as confirmed exposure', () => {
+  const [sagawa] = incidentsForService(breachIncidents, 'sagawa');
+  assert.equal(sagawa.status.code, 'possible');
+  assert.match(sagawa.scope, /重複.*実人数ではありません/);
+  assert.match(sagawa.affectedPeriod, /2026年6月21日〜9月30日/);
+  const [times] = incidentsForService(breachIncidents, 'times-car');
+  assert.equal(times.updatedAt, '2026-10-23');
+  assert.match(times.status.text, /外部送信.*閲覧できたかは別/);
+  assert.ok(times.dataTypes.some(text => /外部送信の痕跡.*アクセスのみ確認/.test(text)));
+});
+
+test('Burger King document reproduction is recorded transparently with publication-index evidence', () => {
+  const [record] = incidentsForService(breachIncidents, 'burger-king');
+  assert.equal(record.publishedAt, '2026-10-15');
+  assert.match(record.excludedData, /パスワード情報の漏えいは未確認/);
+  const body = breachSources.breachBurgerKing2026;
+  assert.equal(body.verificationMethod, 'official-document-reproduction');
+  assert.equal(new URL(body.verificationUrl).protocol, 'https:');
+  assert.match(body.verificationNote, /直接取得できず/);
+  assert.match(body.verificationNote, /再確認は未完了/);
+  assert.ok(record.sourceIds.includes('breachBurgerKingNoticeIndex2026'));
+  assert.equal(breachSources.breachBurgerKingNoticeIndex2026.sourceRole, 'publication-index');
 });

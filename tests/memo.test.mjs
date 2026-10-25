@@ -197,3 +197,12 @@ test('breach strings stay on one line and shared source URLs are listed once', (
   assert.doesNotMatch(text, /\n【偽の案内】/);
   assert.equal(text.match(/https:\/\/example.com\/help/g).length, 1);
 });
+
+test('export retains evidence limitations when an official document was read through a reproduction', () => {
+  const text = createMemoText({ includePhp: false, includeBreaches: true, breachSources: [{
+    id: 'reproduced', title: '公式告知', url: 'https://example.com/notice.pdf', checkedAt: '2026-10-25', kind: 'incident',
+    verificationNote: '公式PDFの直接取得は未完了。公式文書の転載画像を確認。',
+  }] });
+  assert.match(text, /公式PDFの直接取得は未完了/);
+  assert.match(text, /公式文書の転載画像を確認/);
+});

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { services, sources } from '../src/catalog.mjs';
+import { sources } from '../src/catalog.mjs';
+import { directoryServices as services } from '../src/service-directory.mjs';
 import { breachIncidents, breachSources } from '../src/incidents.mjs';
 import { metadataForService, metadataForCatalog, summarizeUpdateMetadata, historyForService, updateHistory, updateTrackedSince, appReleases } from '../src/updates.mjs';
 
@@ -74,7 +75,7 @@ test('UI history copies cannot mutate recorded source or service IDs', () => {
 test('live metadata follows current data without assuming a fixed date or empty changes', () => {
   for (const service of services) {
     const incidentSourceIds = breachIncidents.filter(incident => incident.serviceIds.includes(service.id)).flatMap(incident => incident.sourceIds);
-    assert.deepEqual(metadataForService(service.id),summarizeUpdateMetadata(service,{...sources,...breachSources},updateHistory,updateTrackedSince,incidentSourceIds));
+    assert.deepEqual(metadataForService(service.id),summarizeUpdateMetadata(service,{...sources,...breachSources},updateHistory,updateHistory.filter(event=>event.serviceIds.includes(service.id)).map(event=>event.date).sort()[0]??null,incidentSourceIds));
   }
   const dates = services.map(service => metadataForService(service.id).checkedAt);
   assert.equal(metadataForCatalog().checkedAt, dates.every(Boolean) ? dates.sort()[0] : null);
@@ -113,4 +114,9 @@ test('each incident history entry is a dated guide content change, independent o
   }
   assert.equal(updateHistory.filter(event => event.type === 'baseline').length, 1);
   assert.match(appReleases.find(release => release.version === '0.6.0').title, /ネットサービスの確認手帳/);
+});
+
+test('newly researched services do not inherit the earlier PHP tracking start date', () => {
+  assert.equal(metadataForService('sagawa').trackedSince, '2026-10-25');
+  assert.equal(metadataForService('note').trackedSince, '2026-10-24');
 });

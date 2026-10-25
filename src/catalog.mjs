@@ -3,6 +3,7 @@ import { socialSources, socialServices } from './catalog-social.mjs';
 import { adminSources, adminServices } from './catalog-admin.mjs';
 
 export const checkedAt = '2026-10-24';
+export const phpIssueCheckedAt = '2026-10-25';
 
 const baseSources = {
   noteNotice: {
@@ -32,7 +33,7 @@ const baseSources = {
   boothNotice: {
     title: 'BOOTH: 緊急メンテナンスに伴う注文・ログインへの影響について (復旧)',
     url: 'https://booth.pm/announcements/1004',
-    publishedAt: '2026-10-21',
+    publishedAt: '2026-10-21', updatedAt: '2026-10-21',
     checkedAt: '2026-10-25',
   },
   boothDomains: {
@@ -50,13 +51,13 @@ const baseSources = {
     title: 'WordPress.org: 動作要件',
     url: 'https://wordpress.org/about/requirements/',
     publishedAt: null,
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   drupalRequirements: {
     title: 'Drupal: PHPの動作要件',
     url: 'https://www.drupal.org/docs/getting-started/system-requirements/php-requirements',
     publishedAt: null,
-    checkedAt,
+    checkedAt: '2026-10-25',
   },
   drupalAudit: {
     title: 'Drupal: PHP更新後のサイト点検の案内',

@@ -7,6 +7,31 @@
   "publishedSiteUrl": "https://epsilon-lab-atelier.github.io/php-action-guide/",
   "account": "Epsilon-Lab-Atelier",
   "updateMode": "pull_request",
-  "allowAutoMerge": false,
-  "allowDeployment": false
+  "allowAutoMerge": true,
+  "allowDeployment": true,
+  "schedule": {
+    "timezone": "Asia/Tokyo",
+    "hours": [6, 18],
+    "minute": 0
+  },
+  "publicationScope": "verified_content_only",
+  "publicationRequirements": [
+    "official_source_body_verified",
+    "public_noreply_identity_verified",
+    "latest_main_preserved",
+    "content_diff_reviewed",
+    "build_and_tests_passed",
+    "pull_request_head_ci_passed",
+    "pages_deployment_verified"
+  ],
+  "allowedUpdatePaths": [
+    "src/catalog.mjs",
+    "src/catalog-admin.mjs",
+    "src/catalog-retail.mjs",
+    "src/catalog-social.mjs",
+    "src/catalog-breach.mjs",
+    "src/incidents.mjs",
+    "src/updates.mjs",
+    "dist/index.html"
+  ]
 }

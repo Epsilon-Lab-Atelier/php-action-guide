@@ -182,6 +182,7 @@ export function createMemoText(input = {}) {
   const sourceKinds = { support: '公式窓口 (個別の対応状況を示す根拠ではありません)', domain: '公式のドメイン案内', technical: '公式の技術資料', incident: '公式資料' };
   for (const [index, source] of exportSources.entries()) {
     lines.push(`- [${index + 1}] ${memoLine(source.title, '公式資料・確認先')}`, `  ${source.url}`, `  ${sourceKinds[source.kind] ?? '掲載資料'} / 確認日: ${memoDate(source.checkedAt) ?? '未確認'}`);
+    if (source.verificationNote) lines.push(`  確認方法: ${memoLine(source.verificationNote)}`);
   }
   if (!exportSources.length) lines.push('このメモに掲載された公式リンクはありません。');
   lines.push('', '保存したメモは作成時点の内容です。最新状況と必要な手続きは、公式サイト・公式アプリで確かめてください。', '入力URLのパス・クエリ・フラグメントは、このメモには含めていません。');

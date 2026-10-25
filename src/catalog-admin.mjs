@@ -2,7 +2,12 @@ export const adminSources = {
   sakuraPhpNotice: {
     title: 'さくらインターネット: PHPの脆弱性に関する対応状況 (10月23日追記)',
     url: 'https://www.sakura.ad.jp/corporate/information/announcements/2026/10/22/1968226117/',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
+    publishedAt: '2026-10-22', updatedAt: '2026-10-23', checkedAt: '2026-10-25', kind: 'incident',
+  },
+  sakuraRentalPhpHelp: {
+    title: 'さくら：提供PHPの脆弱性対応状況と利用者への案内',
+    url: 'https://help.sakura.ad.jp/notification/n-2700/',
+    publishedAt: '2026-10-22', updatedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
   },
   sakuraStatus: {
     title: 'さくらインターネット: メンテナンス・障害情報',
@@ -12,7 +17,7 @@ export const adminSources = {
   xserverPhpNotice: {
     title: 'エックスサーバー: 公式サイト・管理画面等の一時停止とPHPへの対応',
     url: 'https://www.xserver.ne.jp/news_detail.php?view_id=19734',
-    publishedAt: '2026-10-22', checkedAt: '2026-10-25', kind: 'incident',
+    publishedAt: '2026-10-22', updatedAt: '2026-10-23', checkedAt: '2026-10-25', kind: 'incident',
   },
   xserverStatus: {
     title: 'エックスサーバー: 障害・メンテナンス情報',
@@ -68,8 +73,8 @@ export const adminServices = [
       sourceIds: ['sakuraPhpNotice'],
     },
     officialAction: {
-      text: '事業者は、サポートが続いているPHPの利用を勧めています。自分でOSやソフトウェアを管理する契約では、利用者自身による確認と修正が必要です。',
-      sourceIds: ['sakuraPhpNotice'],
+      text: '10月21日の2件について、コントロールパネルで提供するPHPは対応済みで、利用者の緊急対応は不要と案内しています。サポート中のPHPへの移行は引き続き推奨しています。自分でOSやPHPを管理するVPS等の契約は対象外です。',
+      sourceIds: ['sakuraPhpNotice', 'sakuraRentalPhpHelp'],
     },
     actions: {
       user: ['サイト運営元のお知らせを確認する。', '利用できない機能と案内されている手続きを確認する。', '不明点はサイト運営元へ問い合わせる。'],

@@ -10,6 +10,7 @@ const riskDataPatterns = {
 const riskBreachChoices = [
   { id:'account', label:'登録・申込み・問い合わせをした', short:'会員登録やフォームへの入力など' },
   { id:'browse', label:'閲覧・検索をした', short:'Webサイトやアプリの閲覧' },
+  { id:'post', label:'記事を投稿した', short:'投稿した時期・記事数を確認' },
   { id:'purchase', label:'購入・契約・支払いをした', short:'注文・予約・有料サービスなど' },
   { id:'address', label:'住所・配送先を伝えた', short:'申込みや配送での登録も含む' },
   { id:'identity', label:'本人確認書類を提出した', short:'免許証・本人確認画像など' },
@@ -18,6 +19,11 @@ const riskBreachChoices = [
   { id:'notice', label:'個別のお知らせが届いた', short:'対象者へのメールや郵送など' },
 ];
 const riskServiceWords = {
+  'awa-bank': {
+    account:['法人IBの契約先・株主・関係先にあたる','その他の顧客も公表対象の区分と照合'],
+    purchase:['口座や決済を利用した','全口座利用者が一律に対象ではありません'],
+    former:['以前、法人契約・株主などの関係があった','当時の契約・株式保有・取引時期を確認'],
+  },
   sagawa: {
     account:['スマートクラブに登録した','以前の会員登録も含む'],
     purchase:['荷物を送った・受け取った','会員登録せず利用した場合も含む'],
@@ -88,7 +94,7 @@ function riskEvidenceFor(record, id) {
 function riskSourceIds(record) {
   return [...new Set((Array.isArray(record?.sourceIds)?record.sourceIds:[]).filter(id=>typeof id==='string'))];
 }
-function riskItem(id, title, text, sourceIds=[]) { return {id,title,text,sourceIds:[...sourceIds]}; }
+function riskItem(id, title, text, sourceIds=[]) { return {id,title,text,sourceIds:[...new Set(sourceIds)]}; }
 function riskGroup(id,title,kind,items) { return {id,title,kind,items}; }
 
 /** Pass the service's incident records to offer only relevant information choices. */
@@ -103,6 +109,7 @@ export function riskOptionsForService(service, topic='breach', role='user', inci
   const words=Object.hasOwn(riskServiceWords,service.id)?riskServiceWords[service.id]:{};
   const commerceGroups=['transport','shopping','media','finance','daily','commerce'];
   return riskBreachChoices.filter(option=>{
+    if (option.id==='post') return service.id==='note' && records.some(record=>/投稿/.test(record.scope??''));
     if (option.id==='relationship') return riskRelationshipServiceIds.has(service.id);
     if ((option.id==='account'||option.id==='purchase') && riskWorkforceOnlyServiceIds.has(service.id)) return false;
     if (option.id==='purchase') return Boolean(words.purchase) || commerceGroups.includes(service.groupByRole?.[role]) || records.some(record=>riskEvidenceFor(record,'purchase').length);
@@ -125,7 +132,7 @@ function riskBreachScope(record, selected) {
   if (record.status?.code==='not-confirmed') return riskItem(`scope.${record.id}`,record.title,`${status}\n公表対象：${record.scope}`,refs);
   const specific=selected.filter(id=>['address','identity','purchase'].includes(id));
   const evidence=[...new Set(specific.flatMap(id=>riskEvidenceFor(record,id)))];
-  const fullData=selected.includes('account')||selected.includes('former')||selected.includes('relationship');
+  const fullData=selected.includes('account')||selected.includes('post')||selected.includes('former')||selected.includes('relationship');
   const displayed=evidence.length?evidence:(fullData?riskEvidenceFor(record,'account'):[]);
   const paragraphs=[`${record.status?.label ?? '状況を確認中'}。公表対象：${record.scope}`];
   if (displayed.length) paragraphs.push(`登録・提出した情報と照合する項目：${displayed.join('／')}`);
@@ -141,11 +148,16 @@ function riskBreachExtra(service, records, selected) {
   if (selected.includes('notice')) items.push(riskItem('notice','届いた通知の対象と手続き','公式サイト・公式アプリから通知の真偽を確かめ、対象となる情報・必要な手続き・期限を確認してください。通知内のリンクだけを頼りに個人情報を入力しないでください。'));
   if (!active.length) return items;
   if (selected.includes('former')) {
-    if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))items.push(riskItem('former','以前の関係も公表範囲と照合','在籍・勤務・採用応募などの時期を公表範囲と照らし合わせてください。会社の公式窓口や個別通知で、対象となる在籍者・退職者・業務関係者等の範囲を確認してください。'));
+    if(service.id==='awa-bank')items.push(riskItem('former','以前の契約・株主などの関係を照合','当時の法人契約・株式保有・取引の時期を、公表された区分ごとの基準時点と照らし合わせてください。現在の口座利用の有無だけでは判断せず、銀行からの個別案内も確認してください。',records.flatMap(riskSourceIds)));
+    else if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))items.push(riskItem('former','以前の関係も公表範囲と照合','在籍・勤務・採用応募などの時期を公表範囲と照らし合わせてください。会社の公式窓口や個別通知で、対象となる在籍者・退職者・業務関係者等の範囲を確認してください。'));
     else if(service.id==='medley-atlink')items.push(riskItem('former','過去の受診歴も確認','受診した医療機関と時期を公表対象と照らし合わせてください。現在は通院していない場合も、対象医療機関の案内を確認してください。'));
     else items.push(riskItem('former','過去の利用も対象範囲と照合','利用・登録していた時期を公表範囲と照らし合わせてください。退会済みでログインできない場合は、元利用者向けの公式窓口を確認してください。'));
   }
-  if (selected.includes('browse') && !selected.some(id=>['account','purchase','address','identity','relationship','former'].includes(id))) {
+  if (selected.includes('post') && service.id==='note') {
+    const postingRecords=active.filter(record=>/投稿/.test(record.scope??''));
+    if(postingRecords.length)items.push(riskItem('note.post','投稿した時期・記事数を照合','当時の記事の投稿時期と記事数を、公表された対象条件と照らし合わせてください。投稿したという選択だけで、あなたの情報が取得・利用されたとは判定できません。',postingRecords.flatMap(riskSourceIds)));
+  }
+  if (selected.includes('browse') && !selected.some(id=>['account','post','purchase','address','identity','relationship','former'].includes(id))) {
     if(service.id==='medley-atlink')items.push(riskItem('browse','アプリ未利用でも受診歴を確認','公式は、アプリ・Web予約を利用していない患者の初期ログイン情報等も公表対象に含めています。対象の医療機関を受診したことがあるか、医療機関の案内で確認してください。',riskSourceIds(records[0])));
     else items.push(riskItem('browse','閲覧と情報の登録を区別','閲覧したという選択だけでは、公表された被害対象とは判定できません。上に示す対象サービス・機能を利用したか、登録や問い合わせで情報を入力したことがないかを確認してください。'));
   }
@@ -175,6 +187,49 @@ function riskPhpGuidance(service,role,selected) {
   return groups;
 }
 
+function riskFirstAction(text, sourceIds=[]) {
+  return {text,sourceIds:[...new Set(sourceIds)]};
+}
+function riskFirstSentence(text) {
+  return String(text??'').trim().match(/^[\s\S]*?[。！？](?:[」』])?|^[\s\S]+$/)?.[0]??'';
+}
+
+// This is an initial reading/checking step, never an individual exposure finding.
+function riskBreachFirstAction(service,records,selected) {
+  const refs=[...new Set(records.flatMap(riskSourceIds))];
+  if(selected.includes('notice'))return riskFirstAction('公式サイト・公式アプリから、届いた通知の対象と必要な手続きを確認してください。',refs.length?refs:service.supportSourceIds??[]);
+  if(!records.length)return riskFirstAction('利用したサービスの公式お知らせで、自分に関係する案内が出ているか確認してください。',service.supportSourceIds??[]);
+  if(records.every(record=>record.status?.code==='not-confirmed'))return riskFirstAction(riskFirstSentence(records[0].officialAction?.text)||'掲載した公式の続報で、現在の状況と利用者への案内を確認してください。',riskSourceIds(records[0]));
+  if(selected.includes('former')) {
+    if(service.id==='awa-bank')return riskFirstAction('公表された各基準時点に、法人契約・株式保有・取引の関係があったか確認してください。',refs);
+    if(riskWorkforceOnlyServiceIds.has(service.id)||selected.includes('relationship'))return riskFirstAction('以前の在籍・勤務・応募などの時期が、公表された対象範囲に含まれるか確認してください。',refs);
+    if(service.id==='medley-atlink')return riskFirstAction('以前受診した医療機関と時期が、公表された対象範囲に含まれるか確認してください。',refs);
+    if(service.id==='times-car')return riskFirstAction('以前の登録・利用時期を公表範囲と照合し、退会済み・未入会の場合は公式FAQの専用窓口を確認してください。',refs);
+    return riskFirstAction('当時の登録・利用時期が、公表された対象期間・対象範囲に含まれるか確認してください。',refs);
+  }
+  if(selected.includes('post')&&service.id==='note')return riskFirstAction('記事を投稿した時期・記事数が、公表された対象条件に含まれるか確認してください。',records.filter(record=>/投稿/.test(record.scope??'')).flatMap(riskSourceIds));
+  if(selected.includes('relationship'))return riskFirstAction('在籍・勤務・取引・応募などの関係が、公表された対象者に含まれるか確認してください。',refs);
+  if(service.id==='medley-atlink')return riskFirstAction('受診した医療機関が公表対象に含まれるか、医療機関の公式案内を確認してください。',refs);
+  if(service.id==='awa-bank')return riskFirstAction('法人IB契約先・株主・その他顧客や関係先の区分と基準時点を、銀行の公表対象・個別案内で確認してください。',refs);
+  if(selected.includes('account')) {
+    if(service.id==='times-car')return riskFirstAction('現在の会員は、公式マイページで自分の対象情報を確認してください。',refs);
+    return riskFirstAction('登録・申込みをしたサービスや機能が、公表された対象に含まれるか確認してください。',refs);
+  }
+  if(selected.includes('purchase')&&service.id==='burger-king')return riskFirstAction('店舗での注文と公式アプリへの会員登録を分け、公表対象のアプリに登録したことがあるか確認してください。',refs);
+  if(selected.includes('purchase')&&service.id==='sagawa')return riskFirstAction('荷物を送った・受け取った時期が、公表された対象期間に含まれるか確認してください。',refs);
+  if(selected.includes('identity'))return riskFirstAction('提出した本人確認書類の種類が、公表された対象情報に含まれるか公式案内で確認してください。',records.filter(record=>riskEvidenceFor(record,'identity').length).flatMap(riskSourceIds));
+  if(selected.includes('address'))return riskFirstAction('住所・配送先を伝えたサービスと時期が、公表された対象範囲に含まれるか確認してください。',records.filter(record=>riskEvidenceFor(record,'address').length).flatMap(riskSourceIds));
+  if(selected.includes('purchase'))return riskFirstAction('購入・契約・支払いをしたサービスや機能が、公表された対象範囲に含まれるか確認してください。',refs);
+  return riskFirstAction('閲覧だけでなく、対象のサービスや機能で登録・情報入力をしたことがないか確認してください。',refs);
+}
+
+function riskPhpFirstAction(service,role,selected,groups) {
+  const actions=groups.find(group=>group.kind==='action')?.items??[];
+  const priority=role==='admin'?['php.notice','php.delegated','php.unsure']:[];
+  const item=priority.map(id=>actions.find(action=>action.id===id)).find(Boolean)??actions[0];
+  return riskFirstAction(riskFirstSentence(item?.text)||'公式のお知らせで、利用しているサービス・環境に必要な対応を確認してください。',item?.sourceIds?.length?item.sourceIds:service.officialAction?.sourceIds??[]);
+}
+
 /**
  * Pure presentation model. It quotes current record scope/status and official action.
  * Selection count never yields a score, an exposure finding, or a safety finding.
@@ -183,15 +238,17 @@ export function personalizedRiskGuidance({service,topic='breach',role='user',sel
   const records=riskRecordsForService(service,incidents);
   const options=riskOptionsForService(service,topic,role,records);
   const selected=normalizeRiskSelections(selections,options);
-  const result={heading:'あなたに関係する情報と対応',intro:'利用状況を選ぶと、公表された対象範囲と必要な確認を絞って表示します。',selectionLabels:options.filter(option=>selected.includes(option.id)).map(option=>option.label),groups:[]};
+  const result={heading:'あなたに関係する情報と対応',intro:'利用状況を選ぶと、公表された対象範囲と必要な確認を絞って表示します。',selectionLabels:options.filter(option=>selected.includes(option.id)).map(option=>option.label),firstAction:null,groups:[]};
   if(!service || !selected.length)return result;
   if(topic==='php') {
     if(!service.php||!service.officialAction)return result;
     result.intro=role==='admin'?'管理方法に合わせた案内です。公式発表の対象環境・問題を確認してください。':'サービスの利用方法に合わせた案内です。サーバーのPHP更新は運営・管理担当者が行います。';
-    result.groups=riskPhpGuidance(service,role,selected);return result;
+    result.groups=riskPhpGuidance(service,role,selected);
+    result.firstAction=riskPhpFirstAction(service,role,selected,result.groups);return result;
   }
   if(topic!=='breach')return result;
   result.intro='選択した利用状況と公式発表を照合するための案内です。あなた個人の被害の有無を判定するものではありません。';
+  result.firstAction=riskBreachFirstAction(service,records,selected);
   if(!records.length) {
     result.groups=[riskGroup('scope','このサービスの掲載状況','scope',[riskItem('no-record','','このアプリには紹介できる事案がまだ掲載されていません。利用状況から被害の有無は判断できないため、サービスの公式お知らせを確認してください。',service.supportSourceIds??[])])];
     return result;

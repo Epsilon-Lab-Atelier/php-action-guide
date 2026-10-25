@@ -1,5 +1,23 @@
 // Official disclosures are separate from PHP patch status. No personal exposure diagnosis.
 export const breachSources = {
+  "breachAwaBankFirst2026": {
+    "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について",
+    "url": "https://www.awabank.co.jp/kojin/news/2026/news20260403a/",
+    "checkedAt": "2026-10-25",
+    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "publishedAt": "2026-04-03",
+    "updatedAt": null,
+    "kind": "incident"
+  },
+  "breachAwaBankFollowup2026": {
+    "title": "阿波銀行：不正アクセスによるお客さま情報等の漏えい発生について（続報）",
+    "url": "https://www.awabank.co.jp/kojin/news/2026/news20260603a/",
+    "checkedAt": "2026-10-25",
+    "checkedAtTime": "2026-10-25T01:24:29Z",
+    "publishedAt": "2026-06-03",
+    "updatedAt": null,
+    "kind": "incident"
+  },
   "breachDaiwaDomain2026": {
     "title": "大和証券：公式サービスサイト（ドメイン確認）",
     "url": "https://www.daiwa.jp/",
@@ -1377,6 +1395,53 @@ export const breachSources = {
 };
 
 export const breachIncidents = [
+{
+  "id": "awa-bank-test-environment-2026",
+  "serviceIds": [
+    "awa-bank"
+  ],
+  "title": "行内OAシステムのテスト環境からの情報漏えい（2026年4月公表）",
+  "type": "breach",
+  "publishedAt": "2026-04-03",
+  "updatedAt": "2026-06-03",
+  "occurredAt": "2026年3月24日に外部から連絡を受け、翌25日に同行の情報の漏えいを確認。",
+  "affectedPeriod": "法人インターネットバンキング契約先は2024年10月時点、株主は2021年3月31日時点、その他顧客・関係先は主に2021年4月時点。",
+  "scope": "法人インターネットバンキング契約先、株主、その他顧客・関係先の情報、延べ27,745件。全口座利用者を一律の対象とする公表ではありません。",
+  "dataTypes": [
+    "法人契約先の氏名（会社名）・登録メールアドレス",
+    "株主の氏名（会社名）・住所・株主番号・保有株式数。一部は配当金受取口座番号",
+    "その他顧客・関係先の氏名（会社名）。一部は住所・預金や貸出金等の取引情報"
+  ],
+  "excludedData": "暗証番号・パスワード等は含まれないと説明。取引環境とは切り離されたテスト環境の事案です。",
+  "status": {
+    "code": "confirmed",
+    "label": "情報の漏えいを確認",
+    "text": "6月3日続報では、追加の不正アクセス・漏えい・拡散や、本件に起因する二次被害は確認されていないと説明。"
+  },
+  "providerResponse": {
+    "label": "アクセス遮断・個別案内・再発防止策",
+    "text": "対象環境へのアクセスを遮断し、顧客・株主に個別対応。捜査終了後の環境廃止と全情報システムの見直しを公表。"
+  },
+  "officialAction": {
+    "text": "公表対象と銀行からの個別案内を確認してください。不審な電話・メール・郵便物に注意し、不審な連絡は公式のお客さま窓口へ相談するよう案内しています。"
+  },
+  "sourceIds": [
+    "breachAwaBankFirst2026",
+    "breachAwaBankFollowup2026"
+  ],
+  "history": [
+    {
+      "id": "initial-listing-20261025",
+      "date": "2026-10-25",
+      "changedAtTime": "2026-10-25T10:27:36+09:00",
+      "changeKind": "new",
+      "actionImpact": "unknown",
+      "title": "4月公表の事案を新規掲載",
+      "summary": "初報と6月の続報を確認して追加。今日発生した事案という意味ではありません。"
+    }
+  ],
+  "caution": "対象者ごとに情報項目が異なります。個人の被害の有無やPHP問題との関係を判定するものではありません。"
+},
   {
     "id": "line-game-identifiers-2026",
     "serviceIds": [
@@ -6662,6 +6727,15 @@ export const breachIncidents = [
 ];
 
 export const breachReviews = {
+  "awa-bank": {
+  "attemptedAt": "2026-10-25",
+  "status": "body-reviewed",
+  "note": "4月3日初報と6月3日続報の公式本文を確認。公表対象と情報項目を分けて新規掲載。",
+  "sourceIds": [
+    "breachAwaBankFirst2026",
+    "breachAwaBankFollowup2026"
+  ]
+},
   "note": {
     "attemptedAt": "2026-10-25",
     "status": "body-reviewed",

@@ -1,3 +1,5 @@
+import { informationStatus, formatInformationTime, actionImpactForEvent, summarizeActionImpact } from './information-status.mjs';
+
 const updateViewTopics = Object.freeze({ breach: '情報漏洩・不正アクセス', php: 'PHPの問題' });
 const updateViewKinds = Object.freeze({ new: '新規掲載', followup: '続報を反映', correction: '訂正を反映', update: '掲載内容を更新' });
 
@@ -26,7 +28,14 @@ export function groupUpdatesByDate(history = [], services = [], { topic = 'all',
   const days = new Map();
   const ordered = history.map((event, index) => ({ event, index }))
     .filter(({ event }) => event.type === 'content' && updateViewValidDate(event.date))
-    .sort((a, b) => a.event.date.localeCompare(b.event.date) || a.index - b.index);
+    .map(entry => ({ ...entry, time: informationStatus({ history: [entry.event] }).lastChangedAtTime }));
+  const fullyTimedDates = new Map();
+  for (const { event, time } of ordered) fullyTimedDates.set(event.date, (fullyTimedDates.get(event.date) ?? true) && Boolean(time));
+  // Preserve the recorded order when clock times are incomplete. Fully timed
+  // morning/evening batches use actual instants, including mixed UTC/JST input.
+  ordered.sort((a, b) => a.event.date.localeCompare(b.event.date)
+    || (fullyTimedDates.get(a.event.date) ? a.time.localeCompare(b.time) : 0)
+    || a.index - b.index);
 
   for (const { event, index } of ordered) {
     const eventId = event.id ?? `history-${index}`;
@@ -90,6 +99,7 @@ export function renderUpdateView(container, { history = [], services = [], sourc
   heading.append(title, node('p', '', '更新された企業・サービスを、日付ごとに確認できます。'));
   const todayCount = allDays.find(day => day.date === today)?.serviceCount ?? 0;
   heading.append(node('p', 'update-today', `今日（${today ?? '日付を取得できません'}・日本時間）の掲載変更：${todayCount}企業・サービス`));
+  heading.append(node('p', 'hint update-count-note', '本日アプリに追加・変更した掲載情報です。過去の事案の新規掲載も含みます。今日起きた事故の件数ではありません。'));
   container.append(heading);
 
   const controls = node('div', 'update-controls');
@@ -109,7 +119,7 @@ export function renderUpdateView(container, { history = [], services = [], sourc
   controls.append(dateControl, topicControl, searchControl);
   const summary = node('p', 'update-summary'); summary.setAttribute('role', 'status'); summary.setAttribute('aria-live', 'polite');
   const results = node('section', 'update-date-group'); results.setAttribute('aria-label', '選んだ日の掲載変更');
-  container.append(controls, summary, results, node('p', 'hint', '日付はこのアプリの掲載内容を変更した日です。事案の発生日・企業の公表日・資料を確認した日とは異なります。新規掲載には過去の事案も含みます。'));
+  container.append(controls, summary, results);
 
   function populateDates() {
     const dates = [...new Set([...allDays.map(day => day.date), ...(today ? [today] : [])])].sort().reverse();
@@ -138,6 +148,8 @@ export function renderUpdateView(container, { history = [], services = [], sourc
       const badges = node('span', 'update-row-badges');
       for (const topic of service.topics) badges.append(node('span', 'update-theme', updateViewTopics[topic]));
       badges.append(node('span', 'update-kind', service.kinds.map(kind => updateViewKinds[kind]).join('・')));
+      const impact = summarizeActionImpact(service.events);
+      if (impact.code !== 'unknown') badges.append(node('span', `update-impact update-impact-${impact.code}`, impact.label));
       if (service.events.length > 1) badges.append(node('span', 'update-change-count', `${service.events.length}件`));
       rowHeading.append(badges);
       const detail = node('div', 'update-service-detail');
@@ -145,6 +157,10 @@ export function renderUpdateView(container, { history = [], services = [], sourc
       for (const event of service.events) {
         const item = node('li', 'update-event');
         item.append(node('span', 'update-kind', updateViewKinds[event.kind]), node('h3', '', event.title), node('p', '', String(event.summary ?? '').replaceAll('この手帳', 'このアプリ')));
+        const eventImpact = actionImpactForEvent(event);
+        const impactLine = node('p', `update-impact-detail update-impact-${eventImpact.code}`);
+        impactLine.append(node('strong', '', `${eventImpact.label}：`), document.createTextNode(eventImpact.text));
+        item.append(impactLine, node('p', 'hint update-event-time', `アプリへの掲載変更：${formatInformationTime(event.date, event.changedAtTime)}`));
         const sourceList = node('ul', 'source-list');
         for (const id of event.sourceIds) {
           const source = sources[id];

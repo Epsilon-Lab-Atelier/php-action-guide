@@ -9,6 +9,10 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
   type: 'content',
   incidentId: incident.id,
   date: event.date,
+  ...(event.changedAtTime ? {changedAtTime:event.changedAtTime} : {}),
+  ...(event.actionImpact ? {actionImpact:event.actionImpact} : {}),
+  ...(event.actionSummary ? {actionSummary:event.actionSummary} : {}),
+  ...(event.changeKind ? {changeKind:event.changeKind} : {}),
   serviceIds: Object.freeze([...incident.serviceIds]),
   sourceIds: Object.freeze([...(event.sourceIds ?? incident.sourceIds)]),
   title: `${incident.title}：${event.title}`,
@@ -46,6 +50,11 @@ export const updateHistory = Object.freeze([
 ]);
 
 export const appReleases = Object.freeze([
+  Object.freeze({
+    version: '0.10.0', date: '2026-10-25', title: 'ウォッチリストで気になる企業をまとめて確認',
+    summary: '保存した企業の状況と前回開いた後の掲載変更をまとめ、利用状況に応じた最初の行動と対象期間を見やすくしました。',
+    changes: Object.freeze(['このブラウザに保存するウォッチリスト', '対象期間と、利用状況に応じた「まずすること」を表示', '公式資料の確認日時と掲載・対応案内の変更日時を区別', '更新履歴に対応変化の比較記録を表示']),
+  }),
   Object.freeze({
     version: '0.9.0', date: '2026-10-25', title: 'ネットサービスのリスクチェックへ',
     summary: '公開情報を見て、利用状況を選び、自分に関係する情報と対応を確認する構成へ変更しました。事業者の対応状況や資料確認日の更新を意味しません。',

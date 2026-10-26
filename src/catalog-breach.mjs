@@ -1,6 +1,118 @@
 // Directory entries for information-leak research. PHP evidence belongs in catalog.mjs.
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
+{
+  "id": "idare",
+  "name": "IDARE（イデア）",
+  "short": "登録者の残高・取引履歴と個別の対象情報",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "keywords": [
+    "IDARE",
+    "イデア",
+    "Fivot",
+    "LADDER"
+  ],
+  "domains": [
+    {
+      "host": "idare.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachIdareFirst2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "murauchi",
+  "name": "ムラウチドットコム",
+  "short": "顧客情報と配送先情報を区別",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "keywords": [
+    "ムラウチ",
+    "ムラウチドットコム",
+    "murauchi"
+  ],
+  "domains": [
+    {
+      "host": "murauchi.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachMurauchiFaq2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "wellsupport",
+  "name": "ウェルサポート・ウェルサポートPlus",
+  "short": "アプリの問い合わせフォームに限定",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "keywords": [
+    "イネサス",
+    "山口フィナンシャルグループ",
+    "山口FG",
+    "福利厚生",
+    "Leafea"
+  ],
+  "domains": [
+    {
+      "host": "inesus.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachWellsupportDomain2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "passto",
+  "name": "PASSTO（ECOMMIT）",
+  "short": "問い合わせフォーム送信情報に限定",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "keywords": [
+    "パスト",
+    "エコミット",
+    "ECOMMIT",
+    "資源循環"
+  ],
+  "domains": [
+    {
+      "host": "passto.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachPassto2026"
+  ],
+  "supportSourceIds": []
+},
   {
     "id": "gyazo",
     "name": "Gyazo",

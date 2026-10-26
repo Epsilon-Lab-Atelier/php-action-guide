@@ -7,7 +7,7 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","note":"429で本文取得失敗","outcome":"unavailable"},
     "checkedAtTime": "2026-10-26T06:27:49+09:00"
   },
   youtubeContact: {
@@ -16,8 +16,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'domain',
-    checkedAtTime: "2026-10-26T06:27:49+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:15+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","outcome":"read"},
   },
   instagramHelp: {
     title: 'Instagram: ヘルプセンター',
@@ -25,7 +25,7 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: SOCIAL_CHECKED_AT,
     kind: 'support',
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","note":"公式ヘルプの本文取得が429で失敗しました。","outcome":"unavailable"}
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","note":"429で本文取得失敗","outcome":"unavailable"}
   },
   instagramHome: {
     title: 'Instagram: 公式サイト',
@@ -33,7 +33,7 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: SOCIAL_CHECKED_AT,
     kind: 'domain',
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","note":"ページ本文が空のため確認できませんでした。","outcome":"unavailable"}
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","note":"本文が空で確認できず","outcome":"unavailable"}
   },
   xHelp: {
     title: 'X: ヘルプセンター',
@@ -41,8 +41,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:49+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
   lineHelp: {
     title: 'LINE: ヘルプセンター・お知らせ',
@@ -50,8 +50,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:49+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
   lineHome: {
     title: 'LINE: 公式サイト',
@@ -59,8 +59,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'domain',
-    checkedAtTime: "2026-10-26T06:27:49+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
   fanboxHelp: {
     title: 'pixiv FANBOX: ヘルプセンター',
@@ -68,8 +68,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:49+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
   fanboxDomain: {
     title: 'pixiv FANBOX: クリエイターページURLの例 (英語)',
@@ -77,8 +77,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'domain',
-    checkedAtTime: "2026-10-26T06:28:39+09:00",
-    lastAttempt: {"at":"2026-10-26T06:28:39+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
   fanboxFindCreators: {
     title: 'pixiv FANBOX: クリエイターを探す方法 (英語)',
@@ -86,8 +86,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'domain',
-    checkedAtTime: "2026-10-26T06:27:57+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:57+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:21+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:21+09:00","outcome":"read"},
   },
 };
 

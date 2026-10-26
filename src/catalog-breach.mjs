@@ -1,6 +1,94 @@
 // Directory entries for information-leak research. PHP evidence belongs in catalog.mjs.
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
+  {
+    "id": "gyazo",
+    "name": "Gyazo",
+    "short": "ユーザー情報・画像メタデータ・一部画像を区別",
+    "category": "service",
+    "roles": [
+      "user"
+    ],
+    "groupByRole": {
+      "user": "social"
+    },
+    "keywords": [
+      "Gyazo",
+      "ギャゾー",
+      "Helpfeel",
+      "画像共有"
+    ],
+    "domains": [
+      {
+        "host": "gyazo.com",
+        "includeSubdomains": false
+      },
+      {
+        "host": "help-ja.gyazo.com",
+        "includeSubdomains": false
+      }
+    ],
+    "domainSourceIds": [
+      "breachGyazoThird2026"
+    ],
+    "supportSourceIds": []
+  },
+  {
+    "id": "goodsmile-shop",
+    "name": "グッドスマイルカンパニー公式ショップ",
+    "short": "公式ショップ会員・注文と配送先の情報",
+    "category": "service",
+    "roles": [
+      "user"
+    ],
+    "groupByRole": {
+      "user": "shopping"
+    },
+    "keywords": [
+      "グッドスマイルカンパニー",
+      "グッスマ",
+      "GOOD SMILE",
+      "公式ショップ"
+    ],
+    "domains": [
+      {
+        "host": "support.goodsmile.com",
+        "includeSubdomains": false
+      }
+    ],
+    "domainSourceIds": [
+      "breachGoodsmile2026"
+    ],
+    "supportSourceIds": []
+  },
+  {
+    "id": "rvsta-mail",
+    "name": "リバスタ（メール配信先情報）",
+    "short": "ブラストメールを通じた配信先",
+    "category": "service",
+    "roles": [
+      "user"
+    ],
+    "groupByRole": {
+      "user": "business"
+    },
+    "keywords": [
+      "リバスタ",
+      "RVSTA",
+      "メール配信",
+      "ブラストメール"
+    ],
+    "domains": [
+      {
+        "host": "www.rvsta.co.jp",
+        "includeSubdomains": false
+      }
+    ],
+    "domainSourceIds": [
+      "breachRvstaMail2026"
+    ],
+    "supportSourceIds": []
+  },
 {
   "id": "hachijuni-nagano-bank",
   "name": "八十二長野銀行",

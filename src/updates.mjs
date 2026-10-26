@@ -20,6 +20,20 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
 })));
 export const updateHistory = Object.freeze([
   Object.freeze({
+    id: 'sakura-rental-custom-php-2026-10-26', type: 'content', date: '2026-10-26', changedAtTime: '2026-10-26T17:50:12+09:00',
+    serviceIds: Object.freeze(['sakura-rental']), sourceIds: Object.freeze(['sakuraRentalPhpHelp']),
+    title: 'さくらのレンタルサーバで独自導入したPHPの注意事項を追記しました',
+    summary: '10月26日の公式追記に基づき、独自インストールPHPは利用者自身の対応が必要でサポート対象外と明記しました。提供PHPの対応済みという説明と区別しています。日付はこの手帳の変更日です。',
+    actionImpact: 'changed', actionSummary: '独自にPHPを導入している場合は自分で修正対応が必要です。提供PHPへの移行と、旧版からサポート中のPHP 8.3への移行をご確認ください。',
+  }),
+  Object.freeze({
+    id: 'xserver-php-all-versions-2026-10-26', type: 'content', date: '2026-10-26', changedAtTime: '2026-10-26T17:50:12+09:00',
+    serviceIds: Object.freeze(['xserver']), sourceIds: Object.freeze(['xserverServerPhpNotice', 'xserverPhpNotice']),
+    title: 'エックスサーバーのPHP 5.1〜8.5全対象サーバーへの対応完了を反映しました',
+    summary: '公式告知にある10月26日6:20までの対応完了を反映し、従来のPHP 5.1〜5.5は過半数という掲載を更新しました。10月21日の2件に限る説明で、VPSや追加CVEへの対応完了を示すものではありません。日付はこの手帳の変更日です。',
+    actionImpact: 'changed', actionSummary: 'PHP 5.1〜5.5も全対象サーバーが対応済みとなり、この2件への対策として急いで版を変える必要はないと案内されています。追加案内と契約種別は引き続き確認してください。',
+  }),
+  Object.freeze({
     id: 'sakura-rental-action-2026-10-25', type: 'content', date: '2026-10-25',
     serviceIds: Object.freeze(['sakura-rental']), sourceIds: Object.freeze(['sakuraRentalPhpHelp','sakuraPhpNotice']),
     title: 'さくらのレンタルサーバの利用者向け案内を明確にしました',

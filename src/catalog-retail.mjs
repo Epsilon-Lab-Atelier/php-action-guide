@@ -6,7 +6,7 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-24",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","note":"公式ヘルプの本文取得が503で失敗しました。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","note":"503で本文取得失敗","outcome":"unavailable"},
   },
   rakutenHelp: {
     title: '楽天市場: ヘルプ・お問い合わせ',
@@ -14,8 +14,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:40+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:07+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","outcome":"read"},
   },
   rakutenDomains: {
     title: '楽天市場: 公式サイトと商品ページのURLに関する案内',
@@ -23,8 +23,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'domain',
-    checkedAtTime: "2026-10-26T06:27:57+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:57+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:07+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","outcome":"read"},
   },
   yahooShoppingHelp: {
     title: 'Yahoo!ショッピング: サービスの案内とヘルプ',
@@ -32,8 +32,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:40+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:07+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","outcome":"read"},
   },
   yahooShoppingSite: {
     title: 'Yahoo!ショッピング: 公式サイト',
@@ -42,7 +42,7 @@ export const retailSources = {
     checkedAt: "2026-10-26",
     kind: 'domain',
     checkedAtTime: "2026-10-26T06:27:57+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:57+09:00","outcome":"read"},
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","note":"403で本文取得失敗","outcome":"unavailable"},
   },
   mercariHelp: {
     title: 'メルカリ: ヘルプセンター',
@@ -50,7 +50,7 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-24",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","note":"ナビゲーションのみ取得でき、ヘルプ本文を確認できませんでした。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-26T17:47:07+09:00","note":"ヘッダー・フッターのみ取得、ヘルプ本文を確認できず","outcome":"unavailable"},
   },
   mercariStatus: {
     title: 'メルカリ: サービスの稼働状況',
@@ -58,8 +58,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:40+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:15+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","outcome":"read"},
   },
   baseHelp: {
     title: 'BASE: ショップ向け・購入者向けヘルプ',
@@ -67,8 +67,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-26",
     kind: 'support',
-    checkedAtTime: "2026-10-26T06:27:40+09:00",
-    lastAttempt: {"at":"2026-10-26T06:27:40+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-26T17:47:15+09:00",
+    lastAttempt: {"at":"2026-10-26T17:47:15+09:00","outcome":"read"},
   },
 };
 

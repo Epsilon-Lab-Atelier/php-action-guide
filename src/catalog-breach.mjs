@@ -2,6 +2,439 @@
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
 {
+  "id": "ex-reservation",
+  "name": "スマートEX・エクスプレス予約",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "transport"
+  },
+  "short": "外部メール配信サービスに登録された一部会員情報が対象",
+  "keywords": [
+    "スマートEX",
+    "エクスプレス予約",
+    "EX予約",
+    "新幹線"
+  ],
+  "domains": [
+    {
+      "host": "smart-ex.jp",
+      "includeSubdomains": false
+    },
+    {
+      "host": "expy.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachExReservation2026",
+    "breachExReservationExpy2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "komoju",
+  "name": "KOMOJU（決済システム・CRM）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "決済システムと問い合わせCRMの被害を分けて掲載",
+  "keywords": [
+    "KOMOJU",
+    "コモジュ",
+    "決済",
+    "CRM"
+  ],
+  "domains": [
+    {
+      "host": "komoju.com",
+      "includeSubdomains": false
+    },
+    {
+      "host": "ja.komoju.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachKomoju2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "valtec",
+  "name": "バルテック（MOT・POS等の対象サービス）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "MOT・POS等の指定サービス。流出確認・未確認・調査中の範囲を区別",
+  "keywords": [
+    "バルテック",
+    "VALTEC",
+    "MOT",
+    "FreePOS",
+    "BeSHOKU",
+    "BeSALO",
+    "券売機"
+  ],
+  "domains": [
+    {
+      "host": "www.webjapan.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachValtecThird2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "alc-news",
+  "name": "アルク（ALC News +）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "publishing"
+  },
+  "short": "ALC News +の配信先約31万件に限定",
+  "keywords": [
+    "アルク",
+    "ALC News +",
+    "アルクニュースプラス"
+  ],
+  "domains": [
+    {
+      "host": "www.alc.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachAlcNews2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "piccoma",
+  "name": "ピッコマ（メールマガジン配信先）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "media"
+  },
+  "short": "メルマガ1回分の宛先1,002,404件に限定",
+  "keywords": [
+    "ピッコマ",
+    "piccoma",
+    "カカオピッコマ",
+    "メルマガ"
+  ],
+  "domains": [
+    {
+      "host": "piccoma.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachPiccoma2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "chariloto",
+  "name": "チャリロト（チャリカ会員）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "アプリ利用者のうちチャリカ会員373名に限定",
+  "keywords": [
+    "チャリロト",
+    "チャリカ",
+    "チャリ・ロト"
+  ],
+  "domains": [
+    {
+      "host": "chariloto.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachChariloto2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "system5",
+  "name": "システムファイブ（オンラインショップ連携システム）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "最大15,671名分の情報取得の可能性",
+  "keywords": [
+    "システムファイブ",
+    "SYSTEM5",
+    "オンラインショップ"
+  ],
+  "domains": [
+    {
+      "host": "www.system5.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSystem52026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "cotta",
+  "name": "cotta・cotta business",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "不正アクセス・情報流出の有無を調査中",
+  "keywords": [
+    "cotta",
+    "コッタ",
+    "cotta business",
+    "コッタベーカリー"
+  ],
+  "domains": [
+    {
+      "host": "www.cotta.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachCotta2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "tiny-garden",
+  "name": "TINY GARDEN 蓼科",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "transport"
+  },
+  "short": "宿泊日と予約成立日の両条件に該当する予約",
+  "keywords": [
+    "TINY GARDEN",
+    "蓼科",
+    "タイニーガーデン",
+    "アーバンリサーチ"
+  ],
+  "domains": [
+    {
+      "host": "www.urban-research.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachTinyGarden2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "rakuten-travel",
+  "name": "楽天トラベル",
+  "short": "海外ホテルの一部ページと多言語サイトを区別",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "transport"
+  },
+  "keywords": [
+    "楽天トラベル",
+    "楽天旅行",
+    "Rakuten Travel Xchange",
+    "海外ホテル",
+    "多言語予約"
+  ],
+  "domains": [
+    {
+      "host": "travel.rakuten.co.jp",
+      "includeSubdomains": false
+    },
+    {
+      "host": "travel.rakuten.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachRakutenTravel2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "nttpc-mail",
+  "name": "NTTPCコミュニケーションズ（連絡先メール）",
+  "short": "外部メール配信サービスを介した影響を調査中",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "keywords": [
+    "NTTPC",
+    "NTTPCコミュニケーションズ",
+    "連絡先メール",
+    "Cuenote"
+  ],
+  "domains": [
+    {
+      "host": "www.nttpc.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachNttpcMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "ivs2025",
+  "name": "IVS2025（フォーム回答）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "フォーム回答約4,200件の漏えい可能性",
+  "keywords": [
+    "IVS",
+    "IVS2025",
+    "Headline Japan"
+  ],
+  "domains": [
+    {
+      "host": "www.ivs.events",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachIvs20252026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "projectdesign-news",
+  "name": "先端教育機構出版部（メールマガジン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "publishing"
+  },
+  "short": "出版部のメールマガジン配信先に限定",
+  "keywords": [
+    "先端教育機構",
+    "事業構想",
+    "メルマガ",
+    "出版部"
+  ],
+  "domains": [
+    {
+      "host": "www.projectdesign.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachProjectdesignNews2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "comsbi-enterprise",
+  "name": "COMSBI エンタープライズ基盤",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "SaaS版とは別の法人向け個別基盤",
+  "keywords": [
+    "COMSBI",
+    "コムスビ",
+    "ソニックムーブ",
+    "LINE連携"
+  ],
+  "domains": [
+    {
+      "host": "sonicmoov.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachComsbiEnterprise2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "doutor-staff",
+  "name": "ドトールコーヒー（4店舗の従業員・退職者）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "指定4店舗の従業員・退職者951名に限定",
+  "keywords": [
+    "ドトール",
+    "従業員",
+    "退職者",
+    "4店舗"
+  ],
+  "domains": [
+    {
+      "host": "www.doutor.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachDoutorStaff2026"
+  ],
+  "supportSourceIds": []
+},
+{
   "id": "idare",
   "name": "IDARE（イデア）",
   "short": "登録者の残高・取引履歴と個別の対象情報",

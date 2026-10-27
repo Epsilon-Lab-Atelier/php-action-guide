@@ -373,19 +373,7 @@ export const breachSources = {
     },
     "updatedAt": null
   },
-  "breachDoutorStaff2026": {
-    "title": "ドトールコーヒー（4店舗の従業員・退職者）の公式発表",
-    "url": "https://www.doutor.co.jp/news/newsrelease/detail/20261026144748.html",
-    "publishedAt": "2026-10-26",
-    "checkedAt": "2026-10-27",
-    "checkedAtTime": "2026-10-27T17:52:51+09:00",
-    "kind": "incident",
-    "lastAttempt": {
-      "at": "2026-10-27T17:52:51+09:00",
-      "outcome": "read"
-    },
-    "updatedAt": null
-  },
+
   "breachFurusatoThird2026": {
     "title": "ふるさとチョイス：自治体・事業者向け管理システム再開（第3報）",
     "url": "https://www.trustbank.co.jp/newsroom/newsrelease/new20261026/",
@@ -3148,54 +3136,7 @@ export const breachIncidents = [
   ],
   "caution": "この記録だけでは個人の該当有無を判定できません。公表された限定範囲の事案であり、PHPの問題との関連を示すものではありません。"
 },
-{
-  "id": "doutor-staff-access-2026",
-  "serviceIds": [
-    "doutor-staff"
-  ],
-  "type": "breach",
-  "title": "ドトール4店舗の従業員・退職者情報",
-  "publishedAt": "2026-10-26",
-  "updatedAt": null,
-  "occurredAt": "2026年10月20日にシステムへの不正アクセスを検知。",
-  "affectedPeriod": "指定4店舗での勤務対象期間は公式本文に明示なし。退職済みの方も対象。",
-  "scope": "西武大泉学園駅店・国立大学通り店・東京駅八重洲中央口店・石神井公園駅前店に勤務していた従業員と退職者、計951名。",
-  "status": {
-    "code": "possible",
-    "label": "従業員情報が漏えいした可能性",
-    "text": "従業員・退職者の個人データが第三者に閲覧され、外部流出した可能性。二次被害は現時点で未確認。"
-  },
-  "dataTypes": [
-    "氏名・生年月日・住所",
-    "メールアドレス・電話番号・銀行口座番号"
-  ],
-  "excludedData": "現時点でお客様情報への不正アクセスは確認されていない。",
-  "providerResponse": {
-    "label": "調査・対象者への対応",
-    "text": "被害拡大防止・事実調査・個人情報保護委員会への報告等を進める。"
-  },
-  "officialAction": {
-    "text": "不審な電話・電子メール・SMS・郵便物、身に覚えのない請求等に注意。対象従業員には順次連絡、退職者にはこの公表で通知。"
-  },
-  "sourceIds": [
-    "breachDoutorStaff2026"
-  ],
-  "history": [
-    {
-      "date": "2026-10-27",
-      "changedAtTime": "2026-10-27T17:53:35+09:00",
-      "changeKind": "new",
-      "title": "公式公表をこのガイドへ初掲載",
-      "summary": "西武大泉学園駅店・国立大学通り店・東京駅八重洲中央口店・石神井公園駅前店に勤務していた従業員と退職者、計951名。 公表日と、このガイドへの掲載日は異なります。",
-      "actionImpact": "unknown",
-      "actionSummary": "不審な電話・電子メール・SMS・郵便物、身に覚えのない請求等に注意。対象従業員には順次連絡、退職者にはこの公表で通知。",
-      "sourceIds": [
-        "breachDoutorStaff2026"
-      ]
-    }
-  ],
-  "caution": "この記録だけでは個人の該当有無を判定できません。公表された限定範囲の事案であり、PHPの問題との関連を示すものではありません。"
-},
+
 {
   "type": "breach",
   "caution": "この記録だけでは個人の該当有無や被害を判定できません。PHPの問題との関連を示すものではありません。",
@@ -9446,15 +9387,7 @@ export const breachReviews = {
     "note": "公式本文を確認。対象範囲と利用者への指示を確認。",
     "attemptedAtTime": "2026-10-27T17:52:51+09:00"
   },
-  "doutor-staff": {
-    "attemptedAt": "2026-10-27",
-    "status": "body-reviewed",
-    "sourceIds": [
-      "breachDoutorStaff2026"
-    ],
-    "note": "公式本文を確認。対象範囲と利用者への指示を確認。",
-    "attemptedAtTime": "2026-10-27T17:52:51+09:00"
-  },
+
   "idare": {
     "attemptedAt": "2026-10-27",
     "status": "body-reviewed",

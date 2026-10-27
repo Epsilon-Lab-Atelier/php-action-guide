@@ -406,34 +406,7 @@ export const breachServices = [
   ],
   "supportSourceIds": []
 },
-{
-  "id": "doutor-staff",
-  "name": "ドトールコーヒー（4店舗の従業員・退職者）",
-  "category": "service",
-  "roles": [
-    "user"
-  ],
-  "groupByRole": {
-    "user": "daily"
-  },
-  "short": "指定4店舗の従業員・退職者951名に限定",
-  "keywords": [
-    "ドトール",
-    "従業員",
-    "退職者",
-    "4店舗"
-  ],
-  "domains": [
-    {
-      "host": "www.doutor.co.jp",
-      "includeSubdomains": false
-    }
-  ],
-  "domainSourceIds": [
-    "breachDoutorStaff2026"
-  ],
-  "supportSourceIds": []
-},
+
 {
   "id": "idare",
   "name": "IDARE（イデア）",

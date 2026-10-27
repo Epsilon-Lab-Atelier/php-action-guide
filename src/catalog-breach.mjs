@@ -2,6 +2,363 @@
 // A directory entry identifies a service; it does not establish an incident or PHP use.
 export const breachServices = [
 {
+  "id": "tsukutsuku",
+  "name": "ツクツク!!!",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "2025年のカード入力改ざんと個人情報の漏えい可能性",
+  "keywords": [
+    "ツクツク!!!"
+  ],
+  "domains": [
+    {
+      "host": "home.tsuku2.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachTsukutsuku2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "sonet",
+  "name": "So-net・plala（Sコース）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "会員情報と一部メールサービスのパスワード漏えい",
+  "keywords": [
+    "So-net・plala（Sコース）"
+  ],
+  "domains": [
+    {
+      "host": "www.so-net.ne.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSonet2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "yomipost",
+  "name": "ヨミポスト（読宣WEST四国支社）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "media"
+  },
+  "short": "ウェブ申込・退会者の情報流出可能性",
+  "keywords": [
+    "ヨミポスト（読宣WEST四国支社）"
+  ],
+  "domains": [
+    {
+      "host": "www.yomisen.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachYomipost2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "sonicwire",
+  "name": "SONICWIRE（クリプトン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "会員・ニュースレター等の情報取得を確認",
+  "keywords": [
+    "SONICWIRE",
+    "ソニックワイヤ",
+    "クリプトン"
+  ],
+  "domains": [
+    {
+      "host": "www.crypton.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSonicwire2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "giftee",
+  "name": "ギフティ（メール配信・eギフト）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "外部メール配信とeギフト発行の事案を分けて確認",
+  "keywords": [
+    "ギフティ",
+    "giftee",
+    "eギフト",
+    "旅先納税",
+    "giftee Benefit"
+  ],
+  "domains": [
+    {
+      "host": "giftee.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachGifteeMail2026",
+    "breachGifteeEgift2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "buyma-mail",
+  "name": "BUYMA（メール配信先）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "Cuenote FCの一部配信先情報の漏えい可能性",
+  "keywords": [
+    "BUYMA",
+    "バイマ",
+    "エニグモ",
+    "Cuenote"
+  ],
+  "domains": [
+    {
+      "host": "qa.buyma.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachBuymaMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "gundam-base-members",
+  "name": "THE GUNDAM BASE MEMBERS",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "メールアドレス等346,247件の漏えい",
+  "keywords": [
+    "ガンダムベース",
+    "THE GUNDAM BASE MEMBERS",
+    "バンダイナムコID",
+    "BANDAI SPIRITS"
+  ],
+  "domains": [
+    {
+      "host": "bandainamcoid.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachGundamBase2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "sendenkaigi-mail",
+  "name": "宣伝会議（メールマガジン配信先）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "publishing"
+  },
+  "short": "Cuenote FCの顧客アドレス帳流出可能性",
+  "keywords": [
+    "宣伝会議",
+    "広報会議",
+    "メールマガジン"
+  ],
+  "domains": [
+    {
+      "host": "sendenkaigi.co.jp",
+      "includeSubdomains": true
+    }
+  ],
+  "domainSourceIds": [
+    "breachSendenkaigi2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "ferret-one",
+  "name": "ferret One（ベーシック）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "ログイン用メールの取得可能性と6アカウントへの不正ログイン",
+  "keywords": [
+    "ferret One",
+    "フェレットワン",
+    "ベーシック"
+  ],
+  "domains": [
+    {
+      "host": "ferret-one.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachFerretOne2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "wiseman-mell",
+  "name": "MeLL+professional（ワイズマン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "public"
+  },
+  "short": "クラウド環境への不正アクセスと限定サービス再開",
+  "keywords": [
+    "ワイズマン",
+    "MeLL+",
+    "メルタス",
+    "professional",
+    "介護"
+  ],
+  "domains": [
+    {
+      "host": "www.wiseman.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachWisemanMell2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "leanonme-learning",
+  "name": "Lean on Me（Special Learning・Special Shift）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "public"
+  },
+  "short": "顧客情報82,723人の取得とレポート内の要配慮情報",
+  "keywords": [
+    "Lean on Me",
+    "リーンオンミー",
+    "Special Learning",
+    "Special Shift",
+    "研修"
+  ],
+  "domains": [
+    {
+      "host": "leanonme.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachLeanonmeInitial2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "cybozu-mail",
+  "name": "サイボウズ（各種お知らせ配信先）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "Cuenote FCで配信する一部メールアドレス等の漏えい可能性",
+  "keywords": [
+    "サイボウズ",
+    "cybozu",
+    "kintone",
+    "Garoon",
+    "メールワイズ"
+  ],
+  "domains": [
+    {
+      "host": "topics.cybozu.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachCybozuMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "zen-university-form",
+  "name": "ZEN大学（指定問い合わせフォーム）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "public"
+  },
+  "short": "FAQ内の問い合わせフォーム送信分、最大107件に限定",
+  "keywords": [
+    "ZEN大学",
+    "ゼン大学",
+    "問い合わせ",
+    "Studio"
+  ],
+  "domains": [
+    {
+      "host": "zen.ac.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachZenUniversity2026"
+  ],
+  "supportSourceIds": []
+},
+{
   "id": "ex-reservation",
   "name": "スマートEX・エクスプレス予約",
   "category": "service",

@@ -7,8 +7,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
-    "checkedAtTime": "2026-10-27T06:04:36+09:00"
+    lastAttempt: {"at":"2026-10-27T17:50:43+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
+    "checkedAtTime": "2026-10-27T17:50:43+09:00"
   },
   youtubeContact: {
     title: 'YouTube: 公式のお問い合わせ案内',
@@ -16,8 +16,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'domain',
-    checkedAtTime: "2026-10-27T06:04:36+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:50:43+09:00",
+    lastAttempt: {"at":"2026-10-27T17:50:43+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   instagramHelp: {
     title: 'Instagram: ヘルプセンター',
@@ -25,7 +25,7 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: SOCIAL_CHECKED_AT,
     kind: 'support',
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","note":"429で本文取得失敗","outcome":"unavailable"}
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"429で本文取得失敗","outcome":"unavailable"}
   },
   instagramHome: {
     title: 'Instagram: 公式サイト',
@@ -33,7 +33,7 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: SOCIAL_CHECKED_AT,
     kind: 'domain',
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","note":"本文が空で確認できず","outcome":"unavailable"}
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"本文が空で確認できず","outcome":"unavailable"}
   },
   xHelp: {
     title: 'X: ヘルプセンター',
@@ -41,8 +41,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'support',
-    checkedAtTime: "2026-10-27T06:04:36+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:50:52+09:00",
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   lineHelp: {
     title: 'LINE: ヘルプセンター・お知らせ',
@@ -50,8 +50,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'support',
-    checkedAtTime: "2026-10-27T06:04:36+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:50:52+09:00",
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   lineHome: {
     title: 'LINE: 公式サイト',
@@ -59,8 +59,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'domain',
-    checkedAtTime: "2026-10-27T06:04:36+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:50:52+09:00",
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   fanboxHelp: {
     title: 'pixiv FANBOX: ヘルプセンター',
@@ -68,8 +68,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'support',
-    checkedAtTime: "2026-10-27T06:04:36+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:36+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:50:52+09:00",
+    lastAttempt: {"at":"2026-10-27T17:50:52+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   fanboxDomain: {
     title: 'pixiv FANBOX: クリエイターページURLの例 (英語)',
@@ -77,8 +77,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'domain',
-    checkedAtTime: "2026-10-27T06:04:49+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:51:23+09:00",
+    lastAttempt: {"at":"2026-10-27T17:51:23+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
   fanboxFindCreators: {
     title: 'pixiv FANBOX: クリエイターを探す方法 (英語)',
@@ -86,8 +86,8 @@ export const socialSources = {
     publishedAt: null,
     checkedAt: "2026-10-27",
     kind: 'domain',
-    checkedAtTime: "2026-10-27T06:04:49+09:00",
-    lastAttempt: {"at":"2026-10-27T06:04:49+09:00","outcome":"read"},
+    checkedAtTime: "2026-10-27T17:51:23+09:00",
+    lastAttempt: {"at":"2026-10-27T17:51:23+09:00","note":"公式本文を読み、既存掲載内容と比較。今回、掲載済みの対象範囲・PHP対応・利用者への案内の実質変更は確認できず。","outcome":"read"},
   },
 };
 

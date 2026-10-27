@@ -19,6 +19,22 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
   summary: event.summary.includes('発生日・公表日とは異なります') ? event.summary : `${event.summary} 日付はこの手帳の掲載内容を変えた日です。事案の発生日・公表日とは異なります。`,
 })));
 export const updateHistory = Object.freeze([
+  {
+  "id": "xserver-support-delay-20261027",
+  "type": "content",
+  "date": "2026-10-27",
+  "changedAtTime": "2026-10-27T17:56:14+09:00",
+  "serviceIds": [
+    "xserver"
+  ],
+  "sourceIds": [
+    "xserverSupportDelay2026"
+  ],
+  "title": "エックスサーバーの問い合わせ時の案内を追加しました",
+  "summary": "10月26日公式告知に基づき、回答遅延と問い合わせ前の確認、重複送信を控える案内を追加しました。PHPの修正状況や情報漏洩の有無を変更するものではありません。",
+  "actionImpact": "changed",
+  "actionSummary": "PHP 関連の問い合わせは、先に公式告知・FAQ を確認し、重複送信を控えて回答を待つ案内を追加。"
+},
   Object.freeze({
     id: 'sakura-rental-custom-php-2026-10-26', type: 'content', date: '2026-10-26', changedAtTime: '2026-10-26T17:50:12+09:00',
     serviceIds: Object.freeze(['sakura-rental']), sourceIds: Object.freeze(['sakuraRentalPhpHelp']),

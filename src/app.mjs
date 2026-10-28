@@ -1,6 +1,7 @@
 import { sources } from './catalog.mjs';
 import { directoryServices, supportsTopic, servicesForTopic } from './service-directory.mjs';
 import { resolveInput } from './url.mjs';
+import { categoryLabels, categoryOrder, serviceGroupsForRole, groupServicesForDisplay } from './categories.mjs';
 import { filterServices, categoriesForRole, relatedTopicMatches } from './discovery.mjs';
 import { historyForService, updateHistory, appReleases } from './updates.mjs';
 import { breachIncidents, breachSources, breachReviews } from './incidents.mjs';
@@ -22,8 +23,8 @@ const initialGuide = parseGuideHash(location.hash, directoryServices);
 const initialTopic = initialGuide?.topic === 'php' ? 'php' : 'breach';
 const state = {topic:initialTopic,role:'user',view:'check',kind:'empty',service:null,hostname:null,query:'',category:'all',selections:[]};
 const emptyState = $('#result').firstElementChild.cloneNode(true);
-const groupLabels = {transport:'交通・配送・旅行',shopping:'買い物・食事',media:'出版・ニュース',finance:'金融・決済',business:'仕事・事業者向け',public:'公共・教育・医療',daily:'暮らし・会員サービス',social:'SNS・動画・作品',publishing:'ブログ・投稿サービス',cms:'自分で設置するCMS',hosting:'レンタルサーバー',server:'VPS・自分で管理するサーバー',commerce:'ショップ運営サービス'};
-const groupOrder = {user:['transport','shopping','media','finance','daily','social','business','public','publishing'],admin:['cms','hosting','server','commerce','publishing']};
+const groupLabels = categoryLabels;
+const groupOrder = categoryOrder;
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -314,7 +315,7 @@ function renderServiceList() {
   const topicServices=servicesForTopic(state.topic);
   const available = topicServices.filter(service => service.roles.includes(state.role));
   const knownGroups = categoriesForRole(topicServices, state.role);
-  const groups = [...new Set([...groupOrder[state.role],...knownGroups])].filter(id => knownGroups.includes(id));
+  const groups = groupOrder[state.role].filter(id => knownGroups.includes(id));
   if(state.category!=='all'&&!groups.includes(state.category))state.category='all';
   const visible = filterServices(topicServices, state);
   const queryMatches = filterServices(topicServices, {...state,category:'all'});
@@ -325,7 +326,7 @@ function renderServiceList() {
   }
   for (const option of select.options) {
     const group=option.value;
-    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>service.groupByRole[state.role]===group).length;
+    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>serviceGroupsForRole(service,state.role).includes(group)).length;
     option.textContent=`${group==='all'?'すべて':(groupLabels[group]??group)}（${count}件）`;
   }
   select.value=state.category;
@@ -336,9 +337,7 @@ function renderServiceList() {
   $('#reset-filters').hidden = !state.query&&state.category==='all';
   renderRelatedTopics(related);
   const list = $('#service-list'); list.replaceChildren();
-  for (const group of groups) {
-    const matches = visible.filter(service => service.groupByRole[state.role] === group);
-    if (!matches.length) continue;
+  for (const {id:group,services:matches} of groupServicesForDisplay(visible,state)) {
     const section = el('section', 'service-group');
     section.append(el('h3','service-group-title',`${groupLabels[group]??group} (${matches.length})`));
     const grid = el('div','service-grid');

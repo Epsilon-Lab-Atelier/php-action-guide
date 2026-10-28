@@ -20,6 +20,39 @@ const breachUpdateHistory = breachIncidents.flatMap(incident => (incident.histor
 })));
 export const updateHistory = Object.freeze([
   {
+  "id": "sakura-rental-php-faq-20261028",
+  "type": "content",
+  "date": "2026-10-28",
+  "changedAtTime": "2026-10-28T17:58:34+09:00",
+  "serviceIds": [
+    "sakura-rental"
+  ],
+  "sourceIds": [
+    "sakuraRentalPhpHelp"
+  ],
+  "title": "さくらのレンタルサーバのPHP確認・変更時の案内を追加しました",
+  "summary": "10月28日追加の公式FAQに基づき、変更前後の動作確認、PHP利用が不明な場合の制作会社への確認、PHP 8.1以下の表示バージョンが変わらない理由を追記しました。提供PHPと独自導入PHPの区別は維持しています。日付はこの手帳の掲載変更日です。",
+  "actionImpact": "changed",
+  "actionSummary": "従来の変更後の動作確認に、変更前の確認と、PHP利用が不明な場合の制作会社・制作者への確認を追加。"
+},
+  {
+  "id": "wordpress-com-php-faq-20261028",
+  "type": "content",
+  "date": "2026-10-28",
+  "changedAtTime": "2026-10-28T17:58:34+09:00",
+  "serviceIds": [
+    "wordpress-com"
+  ],
+  "sourceIds": [
+    "wordpressComNotice",
+    "wordpressComPhpFaq"
+  ],
+  "title": "WordPress.comのPHP表示バージョンと予防的な非公開設定への案内を追加しました",
+  "summary": "10月21日確認版の公式FAQを掲載根拠に追加しました。この日に公表された2件について、表示PHPバージョンによらず対策済みとの説明と、予防措置で非公開にした場合の再公開案内を追記しました。自己管理や別ホストのWordPressには適用しません。日付はこの手帳の掲載変更日です。",
+  "actionImpact": "changed",
+  "actionSummary": "従来の作業不要という案内に、10月21日の2件への予防措置だけで非公開・Coming Soonにしたサイトは設定から再公開できる案内を追加。"
+},
+  {
   "id": "xserver-support-delay-20261027",
   "type": "content",
   "date": "2026-10-27",

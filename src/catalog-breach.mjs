@@ -326,7 +326,7 @@ export const breachServices = [
   "groupByRole": {
     "user": "business"
   },
-  "short": "Cuenote FCで配信する一部メールアドレス等の漏えい可能性",
+  "short": "パートナー向け配信先等23,384件の情報漏えい",
   "keywords": [
     "サイボウズ",
     "cybozu",
@@ -4501,5 +4501,180 @@ export const breachServices = [
     ],
     "category": "service",
     "supportSourceIds": []
-  }
+  },
+{
+  "id": "dean-deluca-mobile",
+  "name": "DEAN & DELUCA（モバイルオーダー）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "LINEミニアプリの注文情報4件・3人の漏えい",
+  "keywords": [
+    "DEAN & DELUCA（モバイルオーダー）"
+  ],
+  "domains": [
+    {
+      "host": "www.deandeluca.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachDeanDeluca2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "starplatinum-shop",
+  "name": "スタープラチナ（テレビ壁掛けショップ本店）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "本店への不正アクセスと一部顧客情報の漏えい可能性",
+  "keywords": [
+    "スタープラチナ（テレビ壁掛けショップ本店）"
+  ],
+  "domains": [
+    {
+      "host": "starplatinum.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachStarplatinumFirst2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "costco-delivery",
+  "name": "コストコ（スタープラチナ配送委託分）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "iggy・TVセッター商品の配送委託先で情報漏えいの可能性",
+  "keywords": [
+    "コストコ（スタープラチナ配送委託分）"
+  ],
+  "domains": [
+    {
+      "host": "www.costco.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachCostcoDelivery2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "upsider-grid",
+  "name": "Breakthrough GRID（UPSIDER）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "会員・退会者の登録情報とサービス内情報の漏えい",
+  "keywords": [
+    "Breakthrough GRID（UPSIDER）"
+  ],
+  "domains": [
+    {
+      "host": "breakthrough-grid.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachUpsiderGrid2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "betterhome-mail",
+  "name": "ベターホーム（通販メールマガジン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "10月17日配信先7,015件のメールアドレス漏えい",
+  "keywords": [
+    "ベターホーム（通販メールマガジン）"
+  ],
+  "domains": [
+    {
+      "host": "www.betterhome.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachBetterhomeMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "morecontact",
+  "name": "モアコンタクト",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "メール配信先リスト延べ1,548,002件の情報流出",
+  "keywords": [
+    "モアコンタクト"
+  ],
+  "domains": [
+    {
+      "host": "morecon.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachMorecontact2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "resona-mail",
+  "name": "りそな銀行・埼玉りそな銀行・関西みらい銀行（メール配信）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "3行の委託メール配信情報が漏えいした可能性",
+  "keywords": [
+    "りそな銀行・埼玉りそな銀行・関西みらい銀行（メール配信）"
+  ],
+  "domains": [
+    {
+      "host": "www.resona-gr.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachResonaMail2026"
+  ],
+  "supportSourceIds": []
+}
 ];

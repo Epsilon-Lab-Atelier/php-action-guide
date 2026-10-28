@@ -6,7 +6,7 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-24",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-28T05:50:06+09:00","note":"503で本文取得失敗。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-28T17:52:30+09:00","note":"503で本文取得失敗。","outcome":"unavailable"},
   },
   rakutenHelp: {
     title: '楽天市場: ヘルプ・お問い合わせ',
@@ -14,8 +14,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'support',
-    checkedAtTime: "2026-10-28T05:50:06+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:06+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:30+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:30+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
   },
   rakutenDomains: {
     title: '楽天市場: 公式サイトと商品ページのURLに関する案内',
@@ -23,8 +23,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'domain',
-    checkedAtTime: "2026-10-28T05:50:06+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:06+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:30+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:30+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
   },
   yahooShoppingHelp: {
     title: 'Yahoo!ショッピング: サービスの案内とヘルプ',
@@ -32,8 +32,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'support',
-    checkedAtTime: "2026-10-28T05:50:14+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:14+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:38+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:38+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
   },
   yahooShoppingSite: {
     title: 'Yahoo!ショッピング: 公式サイト',
@@ -41,8 +41,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'domain',
-    checkedAtTime: "2026-10-28T05:50:14+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:14+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:38+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:38+09:00","note":"公式トップ本文とPHP対応告知への導線を確認。リンク先の告知は本文確認できたが固定ホスト検証と衝突するため別途保留。","outcome":"read"},
   },
   mercariHelp: {
     title: 'メルカリ: ヘルプセンター',
@@ -50,7 +50,7 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-24",
     kind: 'support',
-    lastAttempt: {"at":"2026-10-28T05:50:14+09:00","note":"ヘッダー・フッターのみ取得、ヘルプ本文を確認できず。","outcome":"unavailable"},
+    lastAttempt: {"at":"2026-10-28T17:52:38+09:00","note":"ヘッダー・フッターのみ取得、ヘルプ本文を確認できず。","outcome":"unavailable"},
   },
   mercariStatus: {
     title: 'メルカリ: サービスの稼働状況',
@@ -58,8 +58,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'support',
-    checkedAtTime: "2026-10-28T05:50:14+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:14+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:38+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:38+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
   },
   baseHelp: {
     title: 'BASE: ショップ向け・購入者向けヘルプ',
@@ -67,8 +67,8 @@ export const retailSources = {
     publishedAt: null,
     checkedAt: "2026-10-28",
     kind: 'support',
-    checkedAtTime: "2026-10-28T05:50:14+09:00",
-    lastAttempt: {"at":"2026-10-28T05:50:14+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
+    checkedAtTime: "2026-10-28T17:52:38+09:00",
+    lastAttempt: {"at":"2026-10-28T17:52:38+09:00","note":"公式本文を読み、登録済みの対象範囲・PHP対応・利用者への案内と照合。掲載済み内容の実質変更は確認できず。","outcome":"read"},
   },
 };
 

@@ -1,9 +1,13 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { categoryAssignmentIssues } from '../src/categories.mjs';
+import { directoryServices } from '../src/service-directory.mjs';
+const categoryIssues = categoryAssignmentIssues(directoryServices);
+if (categoryIssues.length) throw new Error(`Invalid service categories:\n${categoryIssues.join('\n')}`);
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
-const [template, style, url, discovery, usage, retail, social, admin, catalog, breachCatalog, directory, profiles, breaches, incidentModel, updates, navigation, riskGuidance, informationStatusModule, updateView, watchlistModule, app] = await Promise.all(['src/index.html','src/style.css','src/url.mjs','src/discovery.mjs','src/usage.mjs','src/catalog-retail.mjs','src/catalog-social.mjs','src/catalog-admin.mjs','src/catalog.mjs','src/catalog-breach.mjs','src/service-directory.mjs','src/usage-profiles.mjs','src/incidents.mjs','src/incident-model.mjs','src/updates.mjs','src/navigation.mjs','src/risk-guidance.mjs','src/information-status.mjs','src/update-view.mjs','src/watchlist.mjs','src/app.mjs'].map(read));
+const [template, style, url, categories, discovery, usage, retail, social, admin, catalog, breachCatalog, directory, profiles, breaches, incidentModel, updates, navigation, riskGuidance, informationStatusModule, updateView, watchlistModule, app] = await Promise.all(['src/index.html','src/style.css','src/url.mjs','src/categories.mjs','src/discovery.mjs','src/usage.mjs','src/catalog-retail.mjs','src/catalog-social.mjs','src/catalog-admin.mjs','src/catalog.mjs','src/catalog-breach.mjs','src/service-directory.mjs','src/usage-profiles.mjs','src/incidents.mjs','src/incident-model.mjs','src/updates.mjs','src/navigation.mjs','src/risk-guidance.mjs','src/information-status.mjs','src/update-view.mjs','src/watchlist.mjs','src/app.mjs'].map(read));
 // Only project-owned modules are bundled; no network or third-party dependencies.
-const script = [url, discovery, usage, retail, social, admin, catalog, breachCatalog, directory, profiles, breaches, incidentModel, updates, navigation, riskGuidance, informationStatusModule, updateView, watchlistModule, app].map(s => s.replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '')).join('\n');
+const script = [url, categories, discovery, usage, retail, social, admin, catalog, breachCatalog, directory, profiles, breaches, incidentModel, updates, navigation, riskGuidance, informationStatusModule, updateView, watchlistModule, app].map(s => s.replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '')).join('\n');
 if (/<\/script/i.test(script) || /<\/style/i.test(style)) throw new Error('Unsafe closing tag in bundle');
 const hash = s => createHash('sha256').update(s).digest('base64');
 const brandImage = `data:image/png;base64,${(await readFile(new URL('../src/assets/epsilon-mark.png', import.meta.url))).toString('base64')}`;

@@ -26,7 +26,7 @@ test('company aliases do not turn unrelated service names into a matching cloud 
     assert.deepEqual(filterServices([target], { role: 'user', query }), [], query);
   }
   assert.deepEqual(filterServices([target], { role: 'admin', query: 'GMO' }), []);
-  assert.deepEqual(filterServices([target], { role: 'user', category: 'finance', query: 'GMO' }), []);
+  assert.deepEqual(filterServices([target], { role: 'user', category: 'education', query: 'GMO' }), []);
   assert.deepEqual(filterServices([target], { role: 'user', category: 'business', query: 'GMO' }).map(service => service.id), [targetId]);
 });
 

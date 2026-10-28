@@ -91,7 +91,7 @@ export const socialSources = {
   },
 };
 
-function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domainSourceIds, userActions, adminActions, caution, roles = ['user'] }) {
+function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domainSourceIds, userActions, adminActions, caution, roles = ['user'], additionalGroupsByRole }) {
   return {
     id,
     name,
@@ -99,6 +99,7 @@ function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domai
     category: 'service',
     roles,
     groupByRole: roles.includes('admin') ? { user: 'social', admin: 'publishing' } : { user: 'social' },
+    ...(additionalGroupsByRole ? { additionalGroupsByRole } : {}),
     keywords,
     domains: hosts.map((host) => ({ host, includeSubdomains: false })),
     supportSourceIds,
@@ -195,6 +196,7 @@ export const socialServices = [
     name: 'pixiv FANBOX',
     short: 'クリエイターの支援・限定記事',
     roles: ['user', 'admin'],
+    additionalGroupsByRole: { user: ['publishing'] },
     keywords: ['FANBOX', 'ファンボックス', 'ピクシブファンボックス', '支援', 'クリエイター'],
     hosts: ['fanbox.cc', 'www.fanbox.cc', 'official.fanbox.cc'],
     supportSourceIds: ['fanboxHelp'],

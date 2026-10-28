@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MLTB+7ePPGgF0FDwjCHOJEpOLtCqI1f3HhI4u5ihijY='; style-src 'sha256-Aldd3cXioX6XAEXcZ/0fs5Q3Ln7PahRVBPKMVgIvUHQ='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-yntvjl0Pk5AWv4pYwMONbjb87EfdryGe9KZW1KPWDY4='; style-src 'sha256-3+2cm6+tTFLL8qiVs1N1lbbKCINTlGaQRZPu90GGqwQ='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="サービスの公式発表とあなたの利用状況から、関係する情報と必要な対応を確認。情報漏洩・不正アクセスとPHPの問題を分けて掲載しています。">
 <meta name="color-scheme" content="light">
 <title>ネットサービスのリスクチェック | EpsilonLab</title>
@@ -96,6 +96,7 @@ label[for="url-input"] { font-size: 12px; font-weight: 650; }
 .category-picker { margin: 12px 0 0; }
 .category-picker > label { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 650; }
 #service-category { cursor: pointer; padding-right: 5px; }
+#category-hint { margin: 6px 0 0; color: var(--muted); font-size: 10px; line-height: 1.65; }
 .filter-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 8px; margin: 7px 0 9px; }
 .list-count { flex: 1; margin: 0; font-size: 11px; color: var(--muted); }
 #reset-filters { flex-shrink: 0; min-height: 36px; padding: 4px 0; font-size: 11px; }
@@ -489,7 +490,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
 <section class="step role-step"><div class="step-heading"><h2>あなたの立場</h2></div><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>利用者</strong><span>使っているサービス</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>管理者</strong><span>運営するサイト</span></button></div></section>
 <section class="step finder-step"><div class="step-heading"><h2 id="finder-title">サービスを選ぶ</h2></div>
 <div class="mode-switch" role="group" aria-label="検索方法"><button type="button" id="select-mode" aria-pressed="true" class="active">名前で探す</button><button type="button" id="url-mode" aria-pressed="false">URLで探す</button></div>
-<div id="list-panel"><p id="role-list-hint" class="hint">サービス名・企業名と、サービスの種類を組み合わせて探せます。</p><label for="service-filter" class="sr-only">サービス名・企業名で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例：GMO、お名前.com" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div class="category-picker"><label for="service-category">サービスの種類</label><select id="service-category" aria-describedby="list-count"><option value="all">すべて</option></select></div><div class="filter-summary"><p id="list-count" class="list-count" role="status" aria-live="polite"></p><button id="reset-filters" type="button" class="text-button" hidden>絞り込みを解除</button></div><div id="related-topics" class="related-topics" hidden></div><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
+<div id="list-panel"><p id="role-list-hint" class="hint">サービス名・企業名と、サービスの種類を組み合わせて探せます。</p><label for="service-filter" class="sr-only">サービス名・企業名で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例：GMO、お名前.com" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div class="category-picker"><label for="service-category">サービスの種類</label><select id="service-category" aria-describedby="category-hint list-count"><option value="all">すべて</option></select><p id="category-hint">分野・用途に応じて、複数の種類から探せます。</p></div><div class="filter-summary"><p id="list-count" class="list-count" role="status" aria-live="polite"></p><button id="reset-filters" type="button" class="text-button" hidden>絞り込みを解除</button></div><div id="related-topics" class="related-topics" hidden></div><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
 <div id="url-panel" hidden><div id="url-form" role="search" aria-label="掲載サービスのURL照合"><label for="url-input">サービスのURL / ドメイン</label><input id="url-input" type="text" inputmode="url" placeholder="例: note.com" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="4096" aria-describedby="url-hint url-error"><p id="url-hint" class="hint">登録済みのドメインからサービスを探します。</p><button id="url-search-button" class="primary-button" type="button">掲載情報を探す</button><p id="url-error" class="error" role="alert" hidden></p></div><div class="privacy-note"><p>URLは外部に送信・保存しません。入力先の検査は行わず、アプリ内の登録情報と照合します。</p></div><p class="hint">独自ドメインなどで見つからない場合は、名前で探してください。</p></div>
 </section>
 </aside>
@@ -501,7 +502,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
 <div id="watchlist-view" hidden><section id="watchlist" class="watchlist-section" aria-labelledby="watchlist-title"></section></div>
 <div id="updates-view" hidden><section id="updates" class="updates-section" aria-labelledby="updates-title"></section></div>
 </main>
-<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.11.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
+<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.12.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
 <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
 <script type="module">/**
  * Parse a user-supplied web address locally. No DNS, HTTP or storage access.
@@ -604,6 +605,110 @@ function resolveInput(input, services) {
   return parsed.ok ? { ...parsed, service: matchHostname(parsed.hostname, services) } : { ...parsed, service: null };
 }
 
+// Reader-facing service types. Incident mechanisms do not determine a service's type.
+const categoryLabels = Object.freeze({
+  transport: '交通・配送',
+  travel: '旅行・宿泊・レジャー',
+  shopping: '買い物・食事',
+  finance: '金融・決済・保険',
+  communication: '通信・ネット・クラウド',
+  daily: '暮らし・会員サービス',
+  education: '教育・研究',
+  health: '医療・介護・福祉',
+  public: '行政・公共サービス',
+  media: '出版・ニュース・放送',
+  social: 'SNS・動画・ゲーム',
+  publishing: 'ブログ・サイト制作',
+  business: '仕事・採用・法人向け',
+  cms: '自分で設置するCMS',
+  hosting: 'レンタルサーバー',
+  server: 'VPS・自分で管理するサーバー',
+  commerce: 'ショップ運営サービス',
+});
+
+const categoryOrder = Object.freeze({
+  user: Object.freeze(['transport', 'travel', 'shopping', 'finance', 'communication', 'daily', 'education', 'health', 'public', 'media', 'social', 'publishing', 'business']),
+  admin: Object.freeze(['cms', 'hosting', 'server', 'commerce', 'publishing']),
+});
+
+function categoryRoleIsValid(role) {
+  return role === 'user' || role === 'admin';
+}
+
+function categoryIsAllowed(category, role) {
+  return typeof category === 'string' && categoryRoleIsValid(role)
+    && categoryOrder[role].includes(category) && Object.hasOwn(categoryLabels, category);
+}
+
+/** Keep primary grouping stable while allowing a service to be found by other uses. */
+function serviceGroupsForRole(service, role) {
+  if (!categoryRoleIsValid(role) || !Array.isArray(service?.roles) || !service.roles.includes(role)) return [];
+  if (!service.groupByRole || !Object.hasOwn(service.groupByRole, role)) return [];
+  const primary = service.groupByRole?.[role];
+  if (!categoryIsAllowed(primary, role)) return [];
+  const additional = service.additionalGroupsByRole?.[role];
+  return [...new Set([primary, ...(Array.isArray(additional) ? additional : [])]
+    .filter(category => categoryIsAllowed(category, role)))];
+}
+
+/** An all-types list shows each service once; a selected type includes secondary matches. */
+function groupServicesForDisplay(services, { role, category = 'all' } = {}) {
+  if (!categoryRoleIsValid(role)) return [];
+  if (category !== 'all') {
+    if (!categoryIsAllowed(category, role)) return [];
+    const matches = services.filter(service => serviceGroupsForRole(service, role).includes(category));
+    return matches.length ? [{ id: category, services: matches }] : [];
+  }
+  return categoryOrder[role].flatMap(id => {
+    const matches = services.filter(service => serviceGroupsForRole(service, role)[0] === id);
+    return matches.length ? [{ id, services: matches }] : [];
+  });
+}
+
+/** Strict validation for published data: never substitute an unspecified business category. */
+function categoryAssignmentIssues(services) {
+  const issues = [];
+  for (const service of services) {
+    const id = service?.id ?? '(missing service id)';
+    const roles = service?.roles;
+    if (!Array.isArray(roles) || !roles.length || roles.some(role => !categoryRoleIsValid(role)) || new Set(roles).size !== roles.length) {
+      issues.push(`${id}: roles must contain distinct supported roles`);
+      continue;
+    }
+    const primary = service.groupByRole;
+    if (!primary || typeof primary !== 'object' || Array.isArray(primary)) {
+      issues.push(`${id}: groupByRole must specify a primary category for each role`);
+      continue;
+    }
+    for (const role of Object.keys(primary)) {
+      if (!roles.includes(role)) issues.push(`${id}: primary category assigned to unlisted role ${role}`);
+    }
+    for (const role of roles) {
+      if (!Object.hasOwn(primary, role) || !categoryIsAllowed(primary[role], role)) issues.push(`${id}: missing or unsupported primary category for ${role}`);
+    }
+    const additional = service.additionalGroupsByRole;
+    if (additional === undefined) continue;
+    if (!additional || typeof additional !== 'object' || Array.isArray(additional)) {
+      issues.push(`${id}: additionalGroupsByRole must be a role-to-array mapping`);
+      continue;
+    }
+    if (!Object.keys(additional).length) issues.push(`${id}: omit additionalGroupsByRole when there are no additional categories`);
+    for (const [role, groups] of Object.entries(additional)) {
+      if (!roles.includes(role)) issues.push(`${id}: additional categories assigned to unlisted role ${role}`);
+      if (!Array.isArray(groups) || !groups.length) {
+        issues.push(`${id}: additional categories for ${role} must be a nonempty array`);
+        continue;
+      }
+      if (new Set(groups).size !== groups.length || groups.includes(primary[role])) issues.push(`${id}: repeated category for ${role}`);
+      for (const group of groups) {
+        if (!categoryIsAllowed(group, role)) issues.push(`${id}: unsupported additional category for ${role}: ${String(group)}`);
+      }
+    }
+  }
+  return issues;
+}
+
+
 /** Normalize display/search text without making a claim about a site's identity. */
 function normalizeSearchText(text) {
   return String(text ?? '')
@@ -623,7 +728,8 @@ function filterServices(services, { role, query = '', category = 'all' } = {}) {
   const terms = normalizeSearchText(query).split(' ').filter(Boolean);
   return services.filter(service => {
     if (!isListedForRole(service, role)) return false;
-    if (category !== 'all' && service.groupByRole?.[role] !== category) return false;
+    if (!serviceGroupsForRole(service, role).length) return false;
+    if (category !== 'all' && !serviceGroupsForRole(service, role).includes(category)) return false;
     const searchable = normalizeSearchText([
       service.name,
       service.short,
@@ -661,8 +767,7 @@ function relatedTopicMatches(services, { topic, role, query = '' } = {}) {
 function categoriesForRole(services, role) {
   return [...new Set(services
     .filter(service => isListedForRole(service, role))
-    .map(service => service.groupByRole?.[role])
-    .filter(category => typeof category === 'string' && category.length > 0))];
+    .flatMap(service => serviceGroupsForRole(service, role)))];
 }
 
 /** Usage describes what a visitor did, never a risk level or incident finding. */
@@ -1096,7 +1201,7 @@ const socialSources = {
   },
 };
 
-function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domainSourceIds, userActions, adminActions, caution, roles = ['user'] }) {
+function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domainSourceIds, userActions, adminActions, caution, roles = ['user'], additionalGroupsByRole }) {
   return {
     id,
     name,
@@ -1104,6 +1209,7 @@ function socialEntry({ id, name, short, keywords, hosts, supportSourceIds, domai
     category: 'service',
     roles,
     groupByRole: roles.includes('admin') ? { user: 'social', admin: 'publishing' } : { user: 'social' },
+    ...(additionalGroupsByRole ? { additionalGroupsByRole } : {}),
     keywords,
     domains: hosts.map((host) => ({ host, includeSubdomains: false })),
     supportSourceIds,
@@ -1200,6 +1306,7 @@ const socialServices = [
     name: 'pixiv FANBOX',
     short: 'クリエイターの支援・限定記事',
     roles: ['user', 'admin'],
+    additionalGroupsByRole: { user: ['publishing'] },
     keywords: ['FANBOX', 'ファンボックス', 'ピクシブファンボックス', '支援', 'クリエイター'],
     hosts: ['fanbox.cc', 'www.fanbox.cc', 'official.fanbox.cc'],
     supportSourceIds: ['fanboxHelp'],
@@ -1830,7 +1937,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "communication"
   },
   "short": "会員情報と一部メールサービスのパスワード漏えい",
   "keywords": [
@@ -1856,6 +1963,9 @@ const breachServices = [
   ],
   "groupByRole": {
     "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["daily"]
   },
   "short": "ウェブ申込・退会者の情報流出可能性",
   "keywords": [
@@ -1907,7 +2017,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "finance"
+    "user": "shopping"
+  },
+  "additionalGroupsByRole": {
+    "user": ["finance", "business"]
   },
   "short": "外部メール配信とeギフト発行の事案を分けて確認",
   "keywords": [
@@ -1993,7 +2106,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "Cuenote FCの顧客アドレス帳流出可能性",
   "keywords": [
@@ -2047,7 +2163,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "health"
+  },
+  "additionalGroupsByRole": {
+    "user": ["business"]
   },
   "short": "クラウド環境への不正アクセスと限定サービス再開",
   "keywords": [
@@ -2076,7 +2195,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "health"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "顧客情報82,723人の取得とレポート内の要配慮情報",
   "keywords": [
@@ -2134,7 +2256,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "education"
   },
   "short": "FAQ内の問い合わせフォーム送信分、最大107件に限定",
   "keywords": [
@@ -2197,6 +2319,9 @@ const breachServices = [
   "groupByRole": {
     "user": "finance"
   },
+  "additionalGroupsByRole": {
+    "user": ["business"]
+  },
   "short": "決済システムと問い合わせCRMの被害を分けて掲載",
   "keywords": [
     "KOMOJU",
@@ -2258,7 +2383,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "education"
+  },
+  "additionalGroupsByRole": {
+    "user": ["media"]
   },
   "short": "ALC News +の配信先約31万件に限定",
   "keywords": [
@@ -2313,7 +2441,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "daily"
+    "user": "travel"
   },
   "short": "アプリ利用者のうちチャリカ会員373名に限定",
   "keywords": [
@@ -2369,6 +2497,9 @@ const breachServices = [
   "groupByRole": {
     "user": "shopping"
   },
+  "additionalGroupsByRole": {
+    "user": ["business"]
+  },
   "short": "不正アクセス・情報流出の有無を調査中",
   "keywords": [
     "cotta",
@@ -2395,7 +2526,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "transport"
+    "user": "travel"
   },
   "short": "宿泊日と予約成立日の両条件に該当する予約",
   "keywords": [
@@ -2424,7 +2555,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "transport"
+    "user": "travel"
   },
   "keywords": [
     "楽天トラベル",
@@ -2457,7 +2588,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "communication"
+  },
+  "additionalGroupsByRole": {
+    "user": ["business"]
   },
   "keywords": [
     "NTTPC",
@@ -2484,7 +2618,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "daily"
+    "user": "business"
   },
   "short": "フォーム回答約4,200件の漏えい可能性",
   "keywords": [
@@ -2511,7 +2645,10 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "出版部のメールマガジン配信先に限定",
   "keywords": [
@@ -2625,6 +2762,9 @@ const breachServices = [
   ],
   "groupByRole": {
     "user": "business"
+  },
+  "additionalGroupsByRole": {
+    "user": ["daily"]
   },
   "keywords": [
     "イネサス",
@@ -2797,7 +2937,7 @@ const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "education"
   },
   "keywords": [
     "大阪大学",
@@ -2825,6 +2965,9 @@ const breachServices = [
   ],
   "groupByRole": {
     "user": "business"
+  },
+  "additionalGroupsByRole": {
+    "user": ["shopping"]
   },
   "keywords": [
     "futureshop",
@@ -3048,7 +3191,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "finance"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "VIEW's NET",
@@ -3309,6 +3455,9 @@ const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["public"]
+    },
     "domains": [
       {
         "host": "www.jetro.go.jp",
@@ -3361,7 +3510,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
     },
     "domains": [
       {
@@ -3394,7 +3543,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "domains": [
       {
@@ -3422,7 +3574,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "finance"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business", "transport"]
     },
     "domains": [
       {
@@ -3480,6 +3635,9 @@ const breachServices = [
     "groupByRole": {
       "user": "social"
     },
+    "additionalGroupsByRole": {
+      "user": ["business"]
+    },
     "domains": [
       {
         "host": "commune.co.jp",
@@ -3505,7 +3663,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "domains": [
       {
@@ -3563,6 +3724,9 @@ const breachServices = [
     "groupByRole": {
       "user": "media"
     },
+    "additionalGroupsByRole": {
+      "user": ["daily"]
+    },
     "keywords": [
       "NHK出版",
       "趣味の園芸",
@@ -3589,6 +3753,9 @@ const breachServices = [
     ],
     "groupByRole": {
       "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping"]
     },
     "keywords": [
       "カプコン",
@@ -3810,6 +3977,9 @@ const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["finance"]
+    },
     "domains": [
       {
         "host": "www.kuronekoyamato.co.jp",
@@ -3843,7 +4013,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "health"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "keywords": [
       "エンタッチ",
@@ -3872,7 +4045,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "health"
     },
     "keywords": [
       "エムスリー",
@@ -3964,7 +4137,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "東邦ガス",
@@ -3991,7 +4164,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "スズキ",
@@ -4018,7 +4194,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "コロナ",
@@ -4081,7 +4257,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "メドレー",
@@ -4143,7 +4319,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "business"
+    },
+    "additionalGroupsByRole": {
+      "user": ["social"]
     },
     "keywords": [
       "ヤマハ",
@@ -4190,6 +4369,9 @@ const breachServices = [
     ],
     "groupByRole": {
       "user": "shopping"
+    },
+    "additionalGroupsByRole": {
+      "user": ["daily", "transport"]
     },
     "keywords": [
       "トレファク",
@@ -4446,7 +4628,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "communication"
     },
     "keywords": [
       "nifty",
@@ -4502,7 +4684,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "social"
+      "user": "business"
+    },
+    "additionalGroupsByRole": {
+      "user": ["social"]
     },
     "keywords": [
       "LINEヤフー",
@@ -4558,7 +4743,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "media"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping", "media"]
     },
     "keywords": [
       "OZmall",
@@ -4900,7 +5088,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping"]
     },
     "domains": [
       {
@@ -4965,7 +5156,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "domains": [
       {
@@ -5004,6 +5198,9 @@ const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "domains": [
       {
         "host": "www.jr-shikoku.co.jp",
@@ -5032,7 +5229,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "travel"
     },
     "domains": [
       {
@@ -5059,7 +5256,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "shopping"
     },
     "domains": [
       {
@@ -5120,6 +5317,9 @@ const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["finance"]
+    },
     "domains": [
       {
         "host": "www.nimoca.jp",
@@ -5179,6 +5379,9 @@ const breachServices = [
     "groupByRole": {
       "user": "public"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "keywords": [
       "GREEN EXPO",
       "グリーンエクスポ",
@@ -5235,7 +5438,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "education"
+    },
+    "additionalGroupsByRole": {
+      "user": ["public"]
     },
     "keywords": [
       "いちえふエデュ",
@@ -5265,6 +5471,9 @@ const breachServices = [
     ],
     "groupByRole": {
       "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
     },
     "keywords": [
       "マリンメッセ",
@@ -5348,7 +5557,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "education"
     },
     "keywords": [
       "OMU",
@@ -5440,7 +5649,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "shopping"
+      "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["daily"]
     },
     "keywords": [
       "ふるさとチョイス",
@@ -5474,6 +5686,9 @@ const breachServices = [
     ],
     "groupByRole": {
       "user": "shopping"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "keywords": [
       "ショップサーブ",
@@ -5562,6 +5777,9 @@ const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["social"]
+    },
     "keywords": [
       "Sansan",
       "サンサン",
@@ -5588,7 +5806,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "ヤマハ発動機",
@@ -5650,7 +5871,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "マツダ",
@@ -5682,7 +5906,10 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
+    },
+    "additionalGroupsByRole": {
+      "user": ["finance", "business"]
     },
     "keywords": [
       "お名前.com",
@@ -5718,7 +5945,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "名張近鉄ガス",
@@ -5746,7 +5973,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "新宮ガス",
@@ -5773,7 +6000,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "旭化成メディカル",
@@ -5896,6 +6123,9 @@ const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "domains": [
       {
         "host": "www.temairazu.co.jp",
@@ -5925,7 +6155,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -5962,7 +6192,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -5990,7 +6220,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -6076,7 +6306,7 @@ const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "旭化成",
@@ -6106,6 +6336,9 @@ const breachServices = [
     ],
     "groupByRole": {
       "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["education"]
     },
     "keywords": [
       "アルカディア",
@@ -18295,6 +18528,10 @@ const updateHistory = Object.freeze([
 
 const appReleases = Object.freeze([
   Object.freeze({
+    version: '0.12.0', date: '2026-10-28', title: '教育・医療などの分類を見直しました',
+    summary: '大阪大学の誤分類を修正し、掲載サービス全体の分野・用途を点検しました。教育・医療・公共、通信、旅行などを分け、複数の種類から探せるサービスにも対応しました。分類と探し方の改善で、事案の新たな発生や続報を示すものではありません。',
+  }),
+  Object.freeze({
     version: '0.11.0', date: '2026-10-28', title: '企業名とサービスの種類から探しやすく',
     summary: 'サービスの種類を選ぶプルダウンを常に表示し、GMOの正式名称でも対象サービスを検索できるようにしました。運営企業名と、別テーマに掲載されたサービスへの案内も追加しました。',
   }),
@@ -19310,6 +19547,7 @@ function renderWatchlistView(container, { rows = [], onOpen, onRemove, onBrowse,
 
 
 
+
 const $ = selector => document.querySelector(selector);
 const allSourceRecords = {...sources, ...breachSources};
 let watchStorage = null;
@@ -19321,8 +19559,8 @@ const initialGuide = parseGuideHash(location.hash, directoryServices);
 const initialTopic = initialGuide?.topic === 'php' ? 'php' : 'breach';
 const state = {topic:initialTopic,role:'user',view:'check',kind:'empty',service:null,hostname:null,query:'',category:'all',selections:[]};
 const emptyState = $('#result').firstElementChild.cloneNode(true);
-const groupLabels = {transport:'交通・配送・旅行',shopping:'買い物・食事',media:'出版・ニュース',finance:'金融・決済',business:'仕事・事業者向け',public:'公共・教育・医療',daily:'暮らし・会員サービス',social:'SNS・動画・作品',publishing:'ブログ・投稿サービス',cms:'自分で設置するCMS',hosting:'レンタルサーバー',server:'VPS・自分で管理するサーバー',commerce:'ショップ運営サービス'};
-const groupOrder = {user:['transport','shopping','media','finance','daily','social','business','public','publishing'],admin:['cms','hosting','server','commerce','publishing']};
+const groupLabels = categoryLabels;
+const groupOrder = categoryOrder;
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -19613,7 +19851,7 @@ function renderServiceList() {
   const topicServices=servicesForTopic(state.topic);
   const available = topicServices.filter(service => service.roles.includes(state.role));
   const knownGroups = categoriesForRole(topicServices, state.role);
-  const groups = [...new Set([...groupOrder[state.role],...knownGroups])].filter(id => knownGroups.includes(id));
+  const groups = groupOrder[state.role].filter(id => knownGroups.includes(id));
   if(state.category!=='all'&&!groups.includes(state.category))state.category='all';
   const visible = filterServices(topicServices, state);
   const queryMatches = filterServices(topicServices, {...state,category:'all'});
@@ -19624,7 +19862,7 @@ function renderServiceList() {
   }
   for (const option of select.options) {
     const group=option.value;
-    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>service.groupByRole[state.role]===group).length;
+    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>serviceGroupsForRole(service,state.role).includes(group)).length;
     option.textContent=`${group==='all'?'すべて':(groupLabels[group]??group)}（${count}件）`;
   }
   select.value=state.category;
@@ -19635,9 +19873,7 @@ function renderServiceList() {
   $('#reset-filters').hidden = !state.query&&state.category==='all';
   renderRelatedTopics(related);
   const list = $('#service-list'); list.replaceChildren();
-  for (const group of groups) {
-    const matches = visible.filter(service => service.groupByRole[state.role] === group);
-    if (!matches.length) continue;
+  for (const {id:group,services:matches} of groupServicesForDisplay(visible,state)) {
     const section = el('section', 'service-group');
     section.append(el('h3','service-group-title',`${groupLabels[group]??group} (${matches.length})`));
     const grid = el('div','service-grid');

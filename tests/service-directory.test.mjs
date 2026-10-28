@@ -6,6 +6,7 @@ import { directoryServices, servicesForTopic, supportsTopic, mergeServiceDirecto
 import { breachSources, breachReviews, breachIncidents } from '../src/incidents.mjs';
 import { resolveInput } from '../src/url.mjs';
 import { createCatalogSnapshot, diffCatalogSnapshots } from '../scripts/catalog-snapshot.mjs';
+import { categoryAssignmentIssues } from '../src/categories.mjs';
 
 test('topic directories preserve PHP coverage and do not infer PHP from a breach', () => {
   assert.equal(new Set(directoryServices.map(service => service.id)).size, directoryServices.length);
@@ -35,7 +36,7 @@ test('breach-only entries have distinct documented domains and published inciden
   for (const service of breachServices) {
     assert.ok(service.name && service.short && service.keywords.length, service.id);
     assert.deepEqual(service.roles, ['user']);
-    assert.ok(['shopping', 'transport', 'media', 'finance', 'business', 'public', 'daily', 'social', 'publishing'].includes(service.groupByRole.user), service.id);
+    assert.deepEqual(categoryAssignmentIssues([service]), [], service.id);
     assert.ok(service.domains.length > 0 && service.domainSourceIds.length > 0, service.id);
     const sourceIds = breachIncidents.filter(incident => incident.serviceIds.includes(service.id)).flatMap(incident => incident.sourceIds);
     for (const id of service.domainSourceIds) {

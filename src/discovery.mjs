@@ -1,3 +1,5 @@
+import { serviceGroupsForRole } from './categories.mjs';
+
 /** Normalize display/search text without making a claim about a site's identity. */
 export function normalizeSearchText(text) {
   return String(text ?? '')
@@ -17,7 +19,8 @@ export function filterServices(services, { role, query = '', category = 'all' } 
   const terms = normalizeSearchText(query).split(' ').filter(Boolean);
   return services.filter(service => {
     if (!isListedForRole(service, role)) return false;
-    if (category !== 'all' && service.groupByRole?.[role] !== category) return false;
+    if (!serviceGroupsForRole(service, role).length) return false;
+    if (category !== 'all' && !serviceGroupsForRole(service, role).includes(category)) return false;
     const searchable = normalizeSearchText([
       service.name,
       service.short,
@@ -55,6 +58,5 @@ export function relatedTopicMatches(services, { topic, role, query = '' } = {}) 
 export function categoriesForRole(services, role) {
   return [...new Set(services
     .filter(service => isListedForRole(service, role))
-    .map(service => service.groupByRole?.[role])
-    .filter(category => typeof category === 'string' && category.length > 0))];
+    .flatMap(service => serviceGroupsForRole(service, role)))];
 }

@@ -34,7 +34,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "communication"
   },
   "short": "会員情報と一部メールサービスのパスワード漏えい",
   "keywords": [
@@ -60,6 +60,9 @@ export const breachServices = [
   ],
   "groupByRole": {
     "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["daily"]
   },
   "short": "ウェブ申込・退会者の情報流出可能性",
   "keywords": [
@@ -111,7 +114,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "finance"
+    "user": "shopping"
+  },
+  "additionalGroupsByRole": {
+    "user": ["finance", "business"]
   },
   "short": "外部メール配信とeギフト発行の事案を分けて確認",
   "keywords": [
@@ -197,7 +203,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "Cuenote FCの顧客アドレス帳流出可能性",
   "keywords": [
@@ -251,7 +260,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "health"
+  },
+  "additionalGroupsByRole": {
+    "user": ["business"]
   },
   "short": "クラウド環境への不正アクセスと限定サービス再開",
   "keywords": [
@@ -280,7 +292,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "health"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "顧客情報82,723人の取得とレポート内の要配慮情報",
   "keywords": [
@@ -338,7 +353,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "public"
+    "user": "education"
   },
   "short": "FAQ内の問い合わせフォーム送信分、最大107件に限定",
   "keywords": [
@@ -401,6 +416,9 @@ export const breachServices = [
   "groupByRole": {
     "user": "finance"
   },
+  "additionalGroupsByRole": {
+    "user": ["business"]
+  },
   "short": "決済システムと問い合わせCRMの被害を分けて掲載",
   "keywords": [
     "KOMOJU",
@@ -462,7 +480,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "education"
+  },
+  "additionalGroupsByRole": {
+    "user": ["media"]
   },
   "short": "ALC News +の配信先約31万件に限定",
   "keywords": [
@@ -517,7 +538,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "daily"
+    "user": "travel"
   },
   "short": "アプリ利用者のうちチャリカ会員373名に限定",
   "keywords": [
@@ -573,6 +594,9 @@ export const breachServices = [
   "groupByRole": {
     "user": "shopping"
   },
+  "additionalGroupsByRole": {
+    "user": ["business"]
+  },
   "short": "不正アクセス・情報流出の有無を調査中",
   "keywords": [
     "cotta",
@@ -599,7 +623,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "transport"
+    "user": "travel"
   },
   "short": "宿泊日と予約成立日の両条件に該当する予約",
   "keywords": [
@@ -628,7 +652,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "transport"
+    "user": "travel"
   },
   "keywords": [
     "楽天トラベル",
@@ -661,7 +685,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "communication"
+  },
+  "additionalGroupsByRole": {
+    "user": ["business"]
   },
   "keywords": [
     "NTTPC",
@@ -688,7 +715,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "daily"
+    "user": "business"
   },
   "short": "フォーム回答約4,200件の漏えい可能性",
   "keywords": [
@@ -715,7 +742,10 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "publishing"
+    "user": "media"
+  },
+  "additionalGroupsByRole": {
+    "user": ["education"]
   },
   "short": "出版部のメールマガジン配信先に限定",
   "keywords": [
@@ -829,6 +859,9 @@ export const breachServices = [
   ],
   "groupByRole": {
     "user": "business"
+  },
+  "additionalGroupsByRole": {
+    "user": ["daily"]
   },
   "keywords": [
     "イネサス",
@@ -1001,7 +1034,7 @@ export const breachServices = [
     "user"
   ],
   "groupByRole": {
-    "user": "business"
+    "user": "education"
   },
   "keywords": [
     "大阪大学",
@@ -1029,6 +1062,9 @@ export const breachServices = [
   ],
   "groupByRole": {
     "user": "business"
+  },
+  "additionalGroupsByRole": {
+    "user": ["shopping"]
   },
   "keywords": [
     "futureshop",
@@ -1252,7 +1288,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "finance"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "VIEW's NET",
@@ -1513,6 +1552,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["public"]
+    },
     "domains": [
       {
         "host": "www.jetro.go.jp",
@@ -1565,7 +1607,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
     },
     "domains": [
       {
@@ -1598,7 +1640,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "domains": [
       {
@@ -1626,7 +1671,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "finance"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business", "transport"]
     },
     "domains": [
       {
@@ -1684,6 +1732,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "social"
     },
+    "additionalGroupsByRole": {
+      "user": ["business"]
+    },
     "domains": [
       {
         "host": "commune.co.jp",
@@ -1709,7 +1760,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "domains": [
       {
@@ -1767,6 +1821,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "media"
     },
+    "additionalGroupsByRole": {
+      "user": ["daily"]
+    },
     "keywords": [
       "NHK出版",
       "趣味の園芸",
@@ -1793,6 +1850,9 @@ export const breachServices = [
     ],
     "groupByRole": {
       "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping"]
     },
     "keywords": [
       "カプコン",
@@ -2014,6 +2074,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["finance"]
+    },
     "domains": [
       {
         "host": "www.kuronekoyamato.co.jp",
@@ -2047,7 +2110,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "health"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "keywords": [
       "エンタッチ",
@@ -2076,7 +2142,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "health"
     },
     "keywords": [
       "エムスリー",
@@ -2168,7 +2234,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "東邦ガス",
@@ -2195,7 +2261,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "スズキ",
@@ -2222,7 +2291,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "コロナ",
@@ -2285,7 +2354,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "メドレー",
@@ -2347,7 +2416,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "business"
+    },
+    "additionalGroupsByRole": {
+      "user": ["social"]
     },
     "keywords": [
       "ヤマハ",
@@ -2394,6 +2466,9 @@ export const breachServices = [
     ],
     "groupByRole": {
       "user": "shopping"
+    },
+    "additionalGroupsByRole": {
+      "user": ["daily", "transport"]
     },
     "keywords": [
       "トレファク",
@@ -2650,7 +2725,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "communication"
     },
     "keywords": [
       "nifty",
@@ -2706,7 +2781,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "social"
+      "user": "business"
+    },
+    "additionalGroupsByRole": {
+      "user": ["social"]
     },
     "keywords": [
       "LINEヤフー",
@@ -2762,7 +2840,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "media"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping", "media"]
     },
     "keywords": [
       "OZmall",
@@ -3104,7 +3185,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["shopping"]
     },
     "domains": [
       {
@@ -3169,7 +3253,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "domains": [
       {
@@ -3208,6 +3295,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "domains": [
       {
         "host": "www.jr-shikoku.co.jp",
@@ -3236,7 +3326,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "travel"
     },
     "domains": [
       {
@@ -3263,7 +3353,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "shopping"
     },
     "domains": [
       {
@@ -3324,6 +3414,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "transport"
     },
+    "additionalGroupsByRole": {
+      "user": ["finance"]
+    },
     "domains": [
       {
         "host": "www.nimoca.jp",
@@ -3383,6 +3476,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "public"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "keywords": [
       "GREEN EXPO",
       "グリーンエクスポ",
@@ -3439,7 +3535,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "education"
+    },
+    "additionalGroupsByRole": {
+      "user": ["public"]
     },
     "keywords": [
       "いちえふエデュ",
@@ -3469,6 +3568,9 @@ export const breachServices = [
     ],
     "groupByRole": {
       "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
     },
     "keywords": [
       "マリンメッセ",
@@ -3552,7 +3654,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "education"
     },
     "keywords": [
       "OMU",
@@ -3644,7 +3746,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "shopping"
+      "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["daily"]
     },
     "keywords": [
       "ふるさとチョイス",
@@ -3678,6 +3783,9 @@ export const breachServices = [
     ],
     "groupByRole": {
       "user": "shopping"
+    },
+    "additionalGroupsByRole": {
+      "user": ["business"]
     },
     "keywords": [
       "ショップサーブ",
@@ -3766,6 +3874,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["social"]
+    },
     "keywords": [
       "Sansan",
       "サンサン",
@@ -3792,7 +3903,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "ヤマハ発動機",
@@ -3854,7 +3968,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "daily"
+      "user": "social"
+    },
+    "additionalGroupsByRole": {
+      "user": ["transport"]
     },
     "keywords": [
       "マツダ",
@@ -3886,7 +4003,10 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "communication"
+    },
+    "additionalGroupsByRole": {
+      "user": ["finance", "business"]
     },
     "keywords": [
       "お名前.com",
@@ -3922,7 +4042,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "名張近鉄ガス",
@@ -3950,7 +4070,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "business"
+      "user": "daily"
     },
     "keywords": [
       "新宮ガス",
@@ -3977,7 +4097,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "旭化成メディカル",
@@ -4100,6 +4220,9 @@ export const breachServices = [
     "groupByRole": {
       "user": "business"
     },
+    "additionalGroupsByRole": {
+      "user": ["travel"]
+    },
     "domains": [
       {
         "host": "www.temairazu.co.jp",
@@ -4129,7 +4252,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -4166,7 +4289,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -4194,7 +4317,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "transport"
+      "user": "travel"
     },
     "domains": [
       {
@@ -4280,7 +4403,7 @@ export const breachServices = [
       "user"
     ],
     "groupByRole": {
-      "user": "public"
+      "user": "health"
     },
     "keywords": [
       "旭化成",
@@ -4310,6 +4433,9 @@ export const breachServices = [
     ],
     "groupByRole": {
       "user": "public"
+    },
+    "additionalGroupsByRole": {
+      "user": ["education"]
     },
     "keywords": [
       "アルカディア",

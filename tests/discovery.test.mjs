@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeSearchText, filterServices, categoriesForRole } from '../src/discovery.mjs';
+import { normalizeSearchText, filterServices, categoriesForRole, relatedTopicMatches } from '../src/discovery.mjs';
 
 const catalog = [
   { id: 'amazon', name: 'Amazon.co.jp', short: '商品の購入', roles: ['user'], groupByRole: { user: 'shopping' }, keywords: ['アマゾン'], domains: [{ host: 'www.amazon.co.jp' }] },
@@ -77,4 +77,65 @@ test('empty and narrowed results preserve catalog order without mutating input',
   assert.deepEqual(ids({ role: 'user', query: '  ' }), ['amazon', 'wordpress-com', 'note']);
   assert.deepEqual(ids({ role: 'user', query: '検索結果なし' }), []);
   assert.equal(JSON.stringify(catalog), before);
+});
+
+test('operator names and explicit company aliases match together with category and query terms', () => {
+  const entries = [{ ...catalog[0], operator: '販売運営株式会社', companyAliases: ['販売グループ'] }];
+  for (const query of ['販売運営株式会社', '販売グループ Amazon']) {
+    assert.deepEqual(filterServices(entries, { role: 'user', category: 'shopping', query }).map(service => service.id), ['amazon']);
+    assert.deepEqual(filterServices(entries, { role: 'user', category: 'publishing', query }), []);
+    assert.deepEqual(filterServices(entries, { role: 'admin', query }), []);
+  }
+  assert.deepEqual(filterServices(entries, { role: 'user', query: '販売グループ 投稿' }), []);
+});
+
+const topicCatalog = [
+  { ...catalog[0], topics: ['breach'] },
+  { ...catalog[1], topics: ['php', 'breach'] },
+  { ...catalog[2], topics: ['php'] },
+  { ...catalog[3], topics: ['breach'] },
+  { ...catalog[4] },
+];
+const suggestions = options => relatedTopicMatches(topicCatalog, options)
+  .map(({ topic, role, services }) => ({ topic, role, ids: services.map(service => service.id) }));
+
+test('a different topic suggestion keeps its own topic and makes a role switch explicit', () => {
+  assert.deepEqual(suggestions({ topic: 'php', role: 'admin', query: 'Amazon' }), [
+    { topic: 'breach', role: 'user', ids: ['amazon'] },
+  ]);
+  assert.deepEqual(suggestions({ topic: 'breach', role: 'user', query: 'さくら' }), [
+    { topic: 'php', role: 'admin', ids: ['sakura'] },
+  ]);
+  assert.deepEqual(suggestions({ topic: 'php', role: 'user', query: 'Amazon', category: 'publishing' }), [
+    { topic: 'breach', role: 'user', ids: ['amazon'] },
+  ]);
+});
+
+test('related topics prefer the current role and never duplicate a multi-role service', () => {
+  assert.deepEqual(suggestions({ topic: 'php', role: 'admin', query: 'note' }), [
+    { topic: 'breach', role: 'admin', ids: ['note'] },
+  ]);
+  assert.deepEqual(suggestions({ topic: 'php', role: 'user', query: 'note' }), [
+    { topic: 'breach', role: 'user', ids: ['note'] },
+  ]);
+});
+
+test('shared-topic entries and the current topic produce no redundant suggestion', () => {
+  assert.deepEqual(suggestions({ topic: 'php', role: 'user', query: 'WordPress' }), []);
+  assert.deepEqual(suggestions({ topic: 'breach', role: 'user', query: 'Amazon' }), []);
+});
+
+test('related-topic search rejects empty searches, unknown roles and unknown topics without mutation', () => {
+  const before = JSON.stringify(topicCatalog);
+  for (const options of [
+    { topic: 'php', role: 'user', query: '' },
+    { topic: 'php', role: 'user', query: '　 ' },
+    { topic: 'php', role: 'user', query: null },
+    { topic: 'php', role: 'owner', query: 'Amazon' },
+    { topic: 'all', role: 'user', query: 'Amazon' },
+    { topic: 'php', role: 'user', query: 'Amazon 投稿' },
+    {},
+  ]) assert.deepEqual(suggestions(options), []);
+  assert.deepEqual(relatedTopicMatches(topicCatalog), []);
+  assert.equal(JSON.stringify(topicCatalog), before);
 });

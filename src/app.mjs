@@ -1,7 +1,7 @@
 import { sources } from './catalog.mjs';
 import { directoryServices, supportsTopic, servicesForTopic } from './service-directory.mjs';
 import { resolveInput } from './url.mjs';
-import { filterServices, categoriesForRole } from './discovery.mjs';
+import { filterServices, categoriesForRole, relatedTopicMatches } from './discovery.mjs';
 import { historyForService, updateHistory, appReleases } from './updates.mjs';
 import { breachIncidents, breachSources, breachReviews } from './incidents.mjs';
 import { incidentsForService, incidentMetadata } from './incident-model.mjs';
@@ -29,6 +29,11 @@ function el(tag, className, text) {
   if (className) node.className = className;
   if (text !== undefined) node.textContent = String(text).replaceAll('この手帳','このアプリ');
   return node;
+}
+function serviceOperatorText(service) {
+  if (!service?.operator) return '';
+  const aliases = service.companyAliases?.length ? `（${service.companyAliases.join(' / ')}）` : '';
+  return `運営：${service.operator}${aliases}`;
 }
 function officialLink(source, text = source.title) {
   const link = el('a', '', text);
@@ -212,7 +217,7 @@ function render(focus=false) {
   const root=$('#result');root.replaceChildren();
   if(state.kind==='empty'){root.append(emptyState.cloneNode(true));return;}
   const title=el('h2','',state.service?.name??(state.kind==='invalid'?'URLを確認してください':'掲載情報が見つかりませんでした'));title.id='result-title';title.tabIndex=-1;
-  const header=el('div','result-header');const block=el('div');block.append(el('p','result-kicker',includesPhp()?'PHPの問題':'情報漏洩・不正アクセス'),title);header.append(block,el('span','role-label',state.role==='admin'?'管理者向け':'利用者向け'));root.append(header);
+  const header=el('div','result-header');const block=el('div');block.append(el('p','result-kicker',includesPhp()?'PHPの問題':'情報漏洩・不正アクセス'),title);if(state.service?.operator)block.append(el('p','service-operator',serviceOperatorText(state.service)));header.append(block,el('span','role-label',state.role==='admin'?'管理者向け':'利用者向け'));root.append(header);
   if(state.service){const button=el('button','watch-toggle');button.type='button';setWatchButton(button,state.service);button.addEventListener('click',()=>{
     const service=state.service;const saved=persistWatch(toggleWatchService(watchState,service.id,watchServiceRevisions(service,watchData)));setWatchButton(button,service);
     $('#announcement').textContent=saved?`${service.name}のウォッチリストを更新しました。`:'ブラウザに保存できないため、このページを開いている間だけ保持します。';
@@ -241,13 +246,17 @@ function selectService(service,hostname=null,{focus=true}={}) {
   Object.assign(state,{service,hostname,kind:service?'found':'unknown',selections:[]});$('#url-error').hidden=true;$('#url-input').removeAttribute('aria-invalid');render(focus);
   if(service&&watchState.items.some(item=>item.serviceId===service.id))persistWatch(markWatchServiceSeen(watchState,service.id,watchServiceRevision(service,watchData,state.topic),state.topic));
 }
-function chooseRole(role,{renderResult=true}={}) {
+function updateFinderLabels() {
+  $('#finder-title').textContent=state.role==='admin'?'管理する環境を探す':'サービスを探す';
+  $('#role-list-hint').textContent=state.role==='admin'?'契約先のサーバーやCMSを選んでください。':'サービス名・企業名と、サービスの種類を組み合わせて探せます。';
+  $('#service-filter').placeholder=state.role==='admin'?'例：さくら、WordPress':includesPhp()?'例：note、WordPress.com':'例：GMO、お名前.com';
+}
+function chooseRole(role,{renderResult=true,preserveQuery=false}={}) {
   if(!['user','admin'].includes(role))return;
-  state.role=role;state.query='';state.category='all';state.selections=[];$('#service-filter').value='';
+  state.role=role;if(!preserveQuery)state.query='';state.category='all';state.selections=[];$('#service-filter').value=state.query;
   if(state.service&&!state.service.roles.includes(role))Object.assign(state,{service:null,hostname:null,kind:'empty'});
   document.querySelectorAll('[data-role]').forEach(button=>{button.classList.toggle('active',button.dataset.role===role);button.setAttribute('aria-pressed',String(button.dataset.role===role));});
-  $('#finder-title').textContent=role==='admin'?'管理する環境を探す':'サービスを探す';
-  $('#role-list-hint').textContent=role==='admin'?'契約先のサーバーやCMSを選んでください。':'サービス名や企業名で検索できます。';
+  updateFinderLabels();
   renderServiceList();if(renderResult)render();
 }
 function switchMode(mode) {
@@ -268,12 +277,12 @@ function updateTopicDates() {
   if(stale)$('#stale-notice').textContent=`確認から7日以上経過した資料があります。最新状況は各公式ページでご確認ください。`;
   const note=$('.update-note');if(note)note.textContent=`掲載内容の最終更新 ${updateHistory.filter(event=>event.type==='content').map(event=>event.date).sort().at(-1)??'未記録'}`;
 }
-function chooseTopic(topic,{renderResult=true}={}) {
-  state.topic=topic==='php'?'php':'breach';state.selections=[];state.query='';state.category='all';$('#service-filter').value='';document.body.dataset.topic=state.topic;
+function chooseTopic(topic,{renderResult=true,preserveQuery=false}={}) {
+  state.topic=topic==='php'?'php':'breach';state.selections=[];if(!preserveQuery)state.query='';state.category='all';$('#service-filter').value=state.query;document.body.dataset.topic=state.topic;
   if(state.service&&!supportsTopic(state.service,state.topic))Object.assign(state,{kind:'empty',service:null,hostname:null});
   document.querySelectorAll('button[data-topic]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topic===state.topic)));
   $('#issue').hidden=!includesPhp();
-  $('#service-filter').placeholder=state.role==='admin'?'例：さくら、WordPress':includesPhp()?'例：note、WordPress.com':'例：佐川急便、タイムズ';
+  updateFinderLabels();
   renderServiceList();updateTopicDates();if(renderResult){render();if(state.view==='check'&&state.service&&watchState.items.some(item=>item.serviceId===state.service.id))persistWatch(markWatchServiceSeen(watchState,state.service.id,watchServiceRevision(state.service,watchData,state.topic),state.topic));}
 }
 function applyGuideSelection(selection,{focus=false}={}) {
@@ -286,8 +295,10 @@ function applyGuideSelection(selection,{focus=false}={}) {
 }
 $('#service-filter').addEventListener('input',()=>{state.query=$('#service-filter').value;renderServiceList();});
 $('#clear-filter').addEventListener('click',()=>{state.query='';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
-document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>chooseRole(button.dataset.role)));
-document.querySelectorAll('button[data-topic]').forEach(button=>button.addEventListener('click',()=>chooseTopic(button.dataset.topic)));
+$('#service-category').addEventListener('change',()=>{state.category=$('#service-category').value;renderServiceList();});
+$('#reset-filters').addEventListener('click',()=>{state.query='';state.category='all';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
+document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>chooseRole(button.dataset.role,{preserveQuery:true})));
+document.querySelectorAll('button[data-topic]').forEach(button=>button.addEventListener('click',()=>chooseTopic(button.dataset.topic,{preserveQuery:true})));
 $('#select-mode').addEventListener('click',()=>switchMode('select'));$('#url-mode').addEventListener('click',()=>switchMode('url'));
 $('#unknown-button').addEventListener('click',()=>selectService(null));$('#url-search-button').addEventListener('click',searchUrl);
 $('#url-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();searchUrl();}});
@@ -302,20 +313,28 @@ else if(location.hash==='#watchlist')showWatchlist();
 function renderServiceList() {
   const topicServices=servicesForTopic(state.topic);
   const available = topicServices.filter(service => service.roles.includes(state.role));
-  const visible = filterServices(topicServices, state);
   const knownGroups = categoriesForRole(topicServices, state.role);
   const groups = [...new Set([...groupOrder[state.role],...knownGroups])].filter(id => knownGroups.includes(id));
-  $('#category-filters').replaceChildren();
-  for (const group of ['all', ...groups]) {
-    const count = group === 'all' ? available.length : available.filter(service => service.groupByRole[state.role] === group).length;
-    const button = el('button', 'category-button', `${group === 'all' ? 'すべて' : (groupLabels[group]??group)} ${count}`);
-    button.type = 'button'; button.dataset.category = group;
-    button.setAttribute('aria-pressed', String(state.category === group));
-    button.addEventListener('click',()=>{ state.category = group; renderServiceList(); document.querySelector(`[data-category="${group}"]`).focus(); });
-    $('#category-filters').append(button);
+  if(state.category!=='all'&&!groups.includes(state.category))state.category='all';
+  const visible = filterServices(topicServices, state);
+  const queryMatches = filterServices(topicServices, {...state,category:'all'});
+  const select = $('#service-category');
+  const categoryIds = ['all',...groups];
+  if([...select.options].map(option=>option.value).join('|')!==categoryIds.join('|')) {
+    select.replaceChildren(...categoryIds.map(group=>{const option=el('option');option.value=group;return option;}));
   }
-  $('#list-count').textContent = `${state.role === 'user' ? '利用者向け' : '管理者向け'} ${available.length}件のうち ${visible.length}件を表示`;
+  for (const option of select.options) {
+    const group=option.value;
+    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>service.groupByRole[state.role]===group).length;
+    option.textContent=`${group==='all'?'すべて':(groupLabels[group]??group)}（${count}件）`;
+  }
+  select.value=state.category;
+  const related=relatedTopicMatches(directoryServices,state);
+  const relatedCount=related.reduce((count,match)=>count+match.services.length,0);
+  $('#list-count').textContent = `${state.role === 'user' ? '利用者向け' : '管理者向け'} ${available.length}件のうち ${visible.length}件を表示${relatedCount?` · 別のテーマに${relatedCount}件`:''}`;
   $('#clear-filter').hidden = !state.query;
+  $('#reset-filters').hidden = !state.query&&state.category==='all';
+  renderRelatedTopics(related);
   const list = $('#service-list'); list.replaceChildren();
   for (const group of groups) {
     const matches = visible.filter(service => service.groupByRole[state.role] === group);
@@ -327,7 +346,9 @@ function renderServiceList() {
       const button = el('button','service-button'); button.type = 'button';
       button.dataset.id = service.id; button.setAttribute('aria-pressed',String(service.id === state.service?.id));
       const initial = el('span','service-initial',service.id === 'wordpress-selfhost' ? 'W' : service.name.charAt(0)); initial.setAttribute('aria-hidden','true');
-      const text = el('span'); text.append(el('strong','',service.name),el('small','',service.short));
+      const text = el('span'); text.append(el('strong','',service.name));
+      if(service.operator)text.append(el('small','service-operator',serviceOperatorText(service)));
+      text.append(el('small','',service.short));
       const info=coverage(service); text.append(el('small',`evidence-label ${info.kind}`,info.label));
       const chevron = el('span','chevron','›'); chevron.setAttribute('aria-hidden','true');
       button.append(initial,text,chevron); button.addEventListener('click',()=>selectService(service));
@@ -337,9 +358,27 @@ function renderServiceList() {
   }
   if (!visible.length) {
     const empty = el('div','filter-empty');
-    empty.append(el('p','','一致する項目はありません。名前の一部で探すか、用途の絞り込みを変更してください。'));
-    const reset = el('button','text-button','絞り込みを解除する'); reset.type='button';
-    reset.addEventListener('click',()=>{ state.query='';state.category='all';$('#service-filter').value='';renderServiceList();$('#service-filter').focus(); });
-    empty.append(reset);list.append(empty);
+    empty.append(el('p','','この条件に一致する項目はありません。サービス名・企業名の一部で探すか、サービスの種類を「すべて」に戻してください。'),el('p','filter-empty-note','未掲載は「被害なし」を意味しません。'));
+    list.append(empty);
+  }
+}
+function renderRelatedTopics(matches) {
+  const panel=$('#related-topics');panel.replaceChildren();panel.hidden=!matches.length;
+  if(!matches.length)return;
+  panel.append(el('p','related-topics-title','別のテーマに掲載があります'));
+  for(const match of matches) {
+    const topicLabel=match.topic==='php'?'PHPの問題':'情報漏洩・不正アクセス';
+    const roleLabel=match.role==='user'?'利用者向け':'管理者向け';
+    const button=el('button','related-topic-button',`${topicLabel} · ${roleLabel}（${match.services.length}件）を見る`);
+    button.type='button';
+    button.addEventListener('click',()=>{
+      Object.assign(state,{kind:'empty',service:null,hostname:null,selections:[]});
+      chooseRole(match.role,{renderResult:false,preserveQuery:true});
+      chooseTopic(match.topic,{renderResult:false,preserveQuery:true});
+      switchMode('select');render();
+      $('#service-list .service-button')?.focus();
+      $('#announcement').textContent=`検索語を保ったまま、${topicLabel}の${roleLabel}に切り替えました。サービスの種類は「すべて」です。`;
+    });
+    panel.append(button);
   }
 }

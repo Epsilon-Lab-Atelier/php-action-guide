@@ -3876,7 +3876,11 @@ export const breachServices = [
   {
     "id": "onamae-desktop-cloud",
     "name": "お名前.com デスクトップクラウド",
-    "short": "FX取引ツール等を設置したサーバー",
+    "short": "FX取引ツールなどを設置して使うクラウドサービス",
+    "operator": "GMOインターネット株式会社",
+    "companyAliases": [
+      "GMOインターネットグループ株式会社"
+    ],
     "category": "service",
     "roles": [
       "user"

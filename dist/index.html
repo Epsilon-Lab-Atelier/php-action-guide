@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-6n8U7a7iHYXsEBJMrfm8/bEXnhKqtb+pPY0mkWrQpRQ='; style-src 'sha256-OjoBOMqFgpw2k+35gjjiJX9ligu0/Qhfi0nhZa8WChw='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MLTB+7ePPGgF0FDwjCHOJEpOLtCqI1f3HhI4u5ihijY='; style-src 'sha256-Aldd3cXioX6XAEXcZ/0fs5Q3Ln7PahRVBPKMVgIvUHQ='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="サービスの公式発表とあなたの利用状況から、関係する情報と必要な対応を確認。情報漏洩・不正アクセスとPHPの問題を分けて掲載しています。">
 <meta name="color-scheme" content="light">
 <title>ネットサービスのリスクチェック | EpsilonLab</title>
@@ -86,19 +86,23 @@ h1 { margin: 0 0 9px; font-size: clamp(25px, 2.8vw, 33px); line-height: 1.4; let
 .hint { color: var(--muted); font-size: 12px; line-height: 1.75; margin: 8px 0 12px; }
 #role-list-hint { font-size: 11px; }
 .name-search { position: relative; margin: 8px 0 7px; }
-.name-search input, #url-input, .update-controls select, .update-controls input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid #cdd6e3; background: #fff; color: var(--ink); -webkit-text-fill-color: var(--ink); font-size: 14px; }
+.name-search input, #url-input, #service-category, .update-controls select, .update-controls input { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid #cdd6e3; background: #fff; color: var(--ink); -webkit-text-fill-color: var(--ink); font-size: 14px; }
 .name-search input { padding-right: 60px; background: #fafbfe; }
 .name-search input::placeholder, #url-input::placeholder { color: #8993a5; -webkit-text-fill-color: #8993a5; opacity: 1; font-size: 13px; }
 .name-search input::-webkit-search-cancel-button { display: none; }
 .name-search button { position: absolute; top: 0; right: 2px; padding: 9px; min-height: 44px; background: transparent; border: 0; color: var(--accent); font-size: 11px; }
 #url-input { margin: 7px 0; }
 label[for="url-input"] { font-size: 12px; font-weight: 650; }
-.category-picker { margin: 5px 0 0; }
-.category-picker > summary { min-height: 34px; padding: 7px 0; color: var(--muted); font-size: 11px; cursor: pointer; }
-.category-filters { display: flex; flex-wrap: wrap; gap: 5px; padding: 4px 0 8px; }
-.category-button { min-height: 36px; padding: 5px 8px; border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: 11px; }
-.category-button:hover, .category-button[aria-pressed="true"] { background: var(--tint); color: var(--accent-dark); border-color: #9db7f2; }
-.list-count { margin: 9px 0 10px; font-size: 11px; color: var(--muted); }
+.category-picker { margin: 12px 0 0; }
+.category-picker > label { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 650; }
+#service-category { cursor: pointer; padding-right: 5px; }
+.filter-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 8px; margin: 7px 0 9px; }
+.list-count { flex: 1; margin: 0; font-size: 11px; color: var(--muted); }
+#reset-filters { flex-shrink: 0; min-height: 36px; padding: 4px 0; font-size: 11px; }
+.related-topics { padding: 12px; margin-bottom: 12px; border: 1px solid #c7d7f3; border-radius: 7px; background: #f4f8ff; }
+.related-topics-title { margin: 0 0 6px; font-size: 12px; font-weight: 650; }
+.related-topic-button { display: block; width: 100%; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: var(--accent-dark); text-align: left; font-size: 12px; line-height: 1.65; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.related-topic-button + .related-topic-button { border-top: 1px solid #dce6f6; }
 #service-list { max-height: 480px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #cad5e7 transparent; padding: 1px 5px 3px 0; }
 .service-group + .service-group { margin-top: 18px; }
 .service-group-title { margin: 0 0 6px; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .02em; }
@@ -111,12 +115,15 @@ label[for="url-input"] { font-size: 12px; font-weight: 650; }
 .service-button > span:nth-child(2) { min-width: 0; }
 .service-button strong { display: block; font-size: 13px; font-weight: 650; line-height: 1.5; }
 .service-button small { display: block; margin-top: 3px; font-size: 10px; color: var(--muted); line-height: 1.5; }
+.service-button .service-operator { color: #50647f; overflow-wrap: anywhere; }
 .service-button .evidence-label { margin-top: 4px; font-size: 10px; color: #7d8aa0; }
 .service-button .evidence-label.explained { color: #4e6c9a; }
 .service-button .chevron { margin-left: auto; color: #a2aec0; font-size: 17px; }
 .text-button, .quiet-button { min-height: 40px; padding: 8px 0; border: 0; background: none; color: var(--accent-dark); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .catalog-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; }
 .filter-empty { padding: 14px; background: #f4f7fc; border-radius: 7px; color: var(--muted); font-size: 12px; }
+.filter-empty p:last-child { margin-bottom: 0; }
+.filter-empty-note { font-size: 11px; }
 .primary-button { width: 100%; min-height: 44px; padding: 10px 15px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-size: 13px; font-weight: 650; }
 .primary-button:hover { background: var(--accent-dark); }
 .privacy-note { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 11px; color: var(--muted); }
@@ -136,6 +143,7 @@ label[for="url-input"] { font-size: 12px; font-weight: 650; }
 .result-header h2 { font-size: 27px; line-height: 1.4; letter-spacing: -.04em; }
 .result-kicker { margin: 0 0 7px; color: var(--muted); font-size: 11px; }
 .result-header .hint { margin: 6px 0 0; }
+.result-header .service-operator { margin: 7px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .role-label { flex-shrink: 0; margin-top: 4px; padding: 4px 8px; border: 1px solid #dce4ef; border-radius: 5px; color: #5e6f88; font-size: 10px; }
 .back-to-finder { display: none; }
 .result-section-title { margin: 0 0 12px; font-size: 15px; }
@@ -308,7 +316,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
   .finder-step { padding-block: 16px; }
   .mode-switch { margin-top: 7px; margin-bottom: 9px; }
   #role-list-hint { display: none; }
-  .name-search input, #url-input { font-size: 16px; }
+  .name-search input, #url-input, #service-category { font-size: 16px; }
   #service-list { max-height: 265px; }
   .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
   .service-button { min-height: 70px; padding: 9px 8px; gap: 7px; }
@@ -316,8 +324,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
   .service-button strong { font-size: 12px; }
   .service-button small { font-size: 10px; }
   .service-group + .service-group { margin-top: 12px; }
-  .category-picker { margin-top: 1px; }
-  .list-count { margin-top: 5px; }
+  .category-picker { margin-top: 10px; }
   .back-to-finder { display: inline-block; min-height: 40px; padding: 7px 0; font-size: 12px; margin-bottom: 10px; }
   .result-header { padding-bottom: 15px; }
   .result-header h2 { font-size: 25px; }
@@ -458,6 +465,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
   .first-action p { font-size: 14px; }
 }
 @media (max-width: 520px) {
+  .service-grid { grid-template-columns: minmax(0,1fr); }
   .main-nav { width: 100%; justify-content: space-between; }
   .main-nav button { flex: 1; font-size: 12px; }
   .watchlist-empty { padding: 32px 20px; }
@@ -481,7 +489,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
 <section class="step role-step"><div class="step-heading"><h2>あなたの立場</h2></div><div class="role-options" role="group" aria-label="あなたの立場"><button type="button" class="role-button active" data-role="user" aria-pressed="true"><strong>利用者</strong><span>使っているサービス</span></button><button type="button" class="role-button" data-role="admin" aria-pressed="false"><strong>管理者</strong><span>運営するサイト</span></button></div></section>
 <section class="step finder-step"><div class="step-heading"><h2 id="finder-title">サービスを選ぶ</h2></div>
 <div class="mode-switch" role="group" aria-label="検索方法"><button type="button" id="select-mode" aria-pressed="true" class="active">名前で探す</button><button type="button" id="url-mode" aria-pressed="false">URLで探す</button></div>
-<div id="list-panel"><p id="role-list-hint" class="hint">名前や用途で絞り込めます。</p><label for="service-filter" class="sr-only">名前で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="サービス名を検索" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><details class="category-picker"><summary>用途で絞り込む</summary><div id="category-filters" class="category-filters" role="group" aria-label="用途で絞り込む"></div></details><p id="list-count" class="list-count" role="status" aria-live="polite"></p><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
+<div id="list-panel"><p id="role-list-hint" class="hint">サービス名・企業名と、サービスの種類を組み合わせて探せます。</p><label for="service-filter" class="sr-only">サービス名・企業名で絞り込む</label><div class="name-search"><input id="service-filter" type="search" placeholder="例：GMO、お名前.com" autocomplete="off" spellcheck="false" aria-describedby="list-count"><button id="clear-filter" type="button" aria-label="名前の絞り込みを消す" hidden>クリア</button></div><div class="category-picker"><label for="service-category">サービスの種類</label><select id="service-category" aria-describedby="list-count"><option value="all">すべて</option></select></div><div class="filter-summary"><p id="list-count" class="list-count" role="status" aria-live="polite"></p><button id="reset-filters" type="button" class="text-button" hidden>絞り込みを解除</button></div><div id="related-topics" class="related-topics" hidden></div><div id="service-list" class="service-list"></div><button type="button" id="unknown-button" class="text-button">一覧にない・わからない</button></div>
 <div id="url-panel" hidden><div id="url-form" role="search" aria-label="掲載サービスのURL照合"><label for="url-input">サービスのURL / ドメイン</label><input id="url-input" type="text" inputmode="url" placeholder="例: note.com" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="4096" aria-describedby="url-hint url-error"><p id="url-hint" class="hint">登録済みのドメインからサービスを探します。</p><button id="url-search-button" class="primary-button" type="button">掲載情報を探す</button><p id="url-error" class="error" role="alert" hidden></p></div><div class="privacy-note"><p>URLは外部に送信・保存しません。入力先の検査は行わず、アプリ内の登録情報と照合します。</p></div><p class="hint">独自ドメインなどで見つからない場合は、名前で探してください。</p></div>
 </section>
 </aside>
@@ -493,7 +501,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; backgroun
 <div id="watchlist-view" hidden><section id="watchlist" class="watchlist-section" aria-labelledby="watchlist-title"></section></div>
 <div id="updates-view" hidden><section id="updates" class="updates-section" aria-labelledby="updates-title"></section></div>
 </main>
-<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.10.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
+<footer class="site-footer wrap"><span class="brand-text">EpsilonLab <span class="version">v0.11.0</span></span><nav class="footer-links" aria-label="関連記事とご案内"><a href="https://note.com/epsilon_lab/n/n175657257ab5" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">PHPの問題をやさしく知る ↗</a><a href="#about">このアプリについて</a></nav></footer>
 <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
 <script type="module">/**
  * Parse a user-supplied web address locally. No DNS, HTTP or storage access.
@@ -619,11 +627,34 @@ function filterServices(services, { role, query = '', category = 'all' } = {}) {
     const searchable = normalizeSearchText([
       service.name,
       service.short,
+      service.operator,
+      ...(service.companyAliases ?? []),
       ...(service.keywords ?? []),
       ...(service.domains ?? []).map(domain => domain.host),
     ].filter(value => value != null).join(' '));
     return terms.every(term => searchable.includes(term));
   });
+}
+
+/** Suggest a separate topic without transferring its evidence to the current one.
+ * Category filtering is deliberately omitted: the destination starts at "all".
+ * Prefer the current role; a different role is returned explicitly for the UI.
+ */
+function relatedTopicMatches(services, { topic, role, query = '' } = {}) {
+  if (!['php', 'breach'].includes(topic) || !['user', 'admin'].includes(role) || !normalizeSearchText(query)) return [];
+  const otherTopic = topic === 'php' ? 'breach' : 'php';
+  const candidates = services.filter(service => Array.isArray(service.topics)
+    && service.topics.includes(otherTopic) && !service.topics.includes(topic));
+  const suggestions = [];
+  const seen = new Set();
+  for (const nextRole of [role, role === 'user' ? 'admin' : 'user']) {
+    const matches = filterServices(candidates, { role: nextRole, query })
+      .filter(service => !seen.has(service.id));
+    if (!matches.length) continue;
+    matches.forEach(service => seen.add(service.id));
+    suggestions.push({ topic: otherTopic, role: nextRole, services: matches });
+  }
+  return suggestions;
 }
 
 /** Category IDs are unique and retain their first visible catalog appearance. */
@@ -5641,7 +5672,11 @@ const breachServices = [
   {
     "id": "onamae-desktop-cloud",
     "name": "お名前.com デスクトップクラウド",
-    "short": "FX取引ツール等を設置したサーバー",
+    "short": "FX取引ツールなどを設置して使うクラウドサービス",
+    "operator": "GMOインターネット株式会社",
+    "companyAliases": [
+      "GMOインターネットグループ株式会社"
+    ],
     "category": "service",
     "roles": [
       "user"
@@ -18260,6 +18295,10 @@ const updateHistory = Object.freeze([
 
 const appReleases = Object.freeze([
   Object.freeze({
+    version: '0.11.0', date: '2026-10-28', title: '企業名とサービスの種類から探しやすく',
+    summary: 'サービスの種類を選ぶプルダウンを常に表示し、GMOの正式名称でも対象サービスを検索できるようにしました。運営企業名と、別テーマに掲載されたサービスへの案内も追加しました。',
+  }),
+  Object.freeze({
     version: '0.10.0', date: '2026-10-25', title: 'ウォッチリストで気になる企業をまとめて確認',
     summary: '保存した企業の状況と前回開いた後の掲載変更をまとめ、利用状況に応じた最初の行動と対象期間を見やすくしました。',
     changes: Object.freeze(['このブラウザに保存するウォッチリスト', '対象期間と、利用状況に応じた「まずすること」を表示', '公式資料の確認日時と掲載・対応案内の変更日時を区別', '更新履歴に対応変化の比較記録を表示']),
@@ -19290,6 +19329,11 @@ function el(tag, className, text) {
   if (text !== undefined) node.textContent = String(text).replaceAll('この手帳','このアプリ');
   return node;
 }
+function serviceOperatorText(service) {
+  if (!service?.operator) return '';
+  const aliases = service.companyAliases?.length ? `（${service.companyAliases.join(' / ')}）` : '';
+  return `運営：${service.operator}${aliases}`;
+}
 function officialLink(source, text = source.title) {
   const link = el('a', '', text);
   link.href = source.url;
@@ -19472,7 +19516,7 @@ function render(focus=false) {
   const root=$('#result');root.replaceChildren();
   if(state.kind==='empty'){root.append(emptyState.cloneNode(true));return;}
   const title=el('h2','',state.service?.name??(state.kind==='invalid'?'URLを確認してください':'掲載情報が見つかりませんでした'));title.id='result-title';title.tabIndex=-1;
-  const header=el('div','result-header');const block=el('div');block.append(el('p','result-kicker',includesPhp()?'PHPの問題':'情報漏洩・不正アクセス'),title);header.append(block,el('span','role-label',state.role==='admin'?'管理者向け':'利用者向け'));root.append(header);
+  const header=el('div','result-header');const block=el('div');block.append(el('p','result-kicker',includesPhp()?'PHPの問題':'情報漏洩・不正アクセス'),title);if(state.service?.operator)block.append(el('p','service-operator',serviceOperatorText(state.service)));header.append(block,el('span','role-label',state.role==='admin'?'管理者向け':'利用者向け'));root.append(header);
   if(state.service){const button=el('button','watch-toggle');button.type='button';setWatchButton(button,state.service);button.addEventListener('click',()=>{
     const service=state.service;const saved=persistWatch(toggleWatchService(watchState,service.id,watchServiceRevisions(service,watchData)));setWatchButton(button,service);
     $('#announcement').textContent=saved?`${service.name}のウォッチリストを更新しました。`:'ブラウザに保存できないため、このページを開いている間だけ保持します。';
@@ -19501,13 +19545,17 @@ function selectService(service,hostname=null,{focus=true}={}) {
   Object.assign(state,{service,hostname,kind:service?'found':'unknown',selections:[]});$('#url-error').hidden=true;$('#url-input').removeAttribute('aria-invalid');render(focus);
   if(service&&watchState.items.some(item=>item.serviceId===service.id))persistWatch(markWatchServiceSeen(watchState,service.id,watchServiceRevision(service,watchData,state.topic),state.topic));
 }
-function chooseRole(role,{renderResult=true}={}) {
+function updateFinderLabels() {
+  $('#finder-title').textContent=state.role==='admin'?'管理する環境を探す':'サービスを探す';
+  $('#role-list-hint').textContent=state.role==='admin'?'契約先のサーバーやCMSを選んでください。':'サービス名・企業名と、サービスの種類を組み合わせて探せます。';
+  $('#service-filter').placeholder=state.role==='admin'?'例：さくら、WordPress':includesPhp()?'例：note、WordPress.com':'例：GMO、お名前.com';
+}
+function chooseRole(role,{renderResult=true,preserveQuery=false}={}) {
   if(!['user','admin'].includes(role))return;
-  state.role=role;state.query='';state.category='all';state.selections=[];$('#service-filter').value='';
+  state.role=role;if(!preserveQuery)state.query='';state.category='all';state.selections=[];$('#service-filter').value=state.query;
   if(state.service&&!state.service.roles.includes(role))Object.assign(state,{service:null,hostname:null,kind:'empty'});
   document.querySelectorAll('[data-role]').forEach(button=>{button.classList.toggle('active',button.dataset.role===role);button.setAttribute('aria-pressed',String(button.dataset.role===role));});
-  $('#finder-title').textContent=role==='admin'?'管理する環境を探す':'サービスを探す';
-  $('#role-list-hint').textContent=role==='admin'?'契約先のサーバーやCMSを選んでください。':'サービス名や企業名で検索できます。';
+  updateFinderLabels();
   renderServiceList();if(renderResult)render();
 }
 function switchMode(mode) {
@@ -19528,12 +19576,12 @@ function updateTopicDates() {
   if(stale)$('#stale-notice').textContent=`確認から7日以上経過した資料があります。最新状況は各公式ページでご確認ください。`;
   const note=$('.update-note');if(note)note.textContent=`掲載内容の最終更新 ${updateHistory.filter(event=>event.type==='content').map(event=>event.date).sort().at(-1)??'未記録'}`;
 }
-function chooseTopic(topic,{renderResult=true}={}) {
-  state.topic=topic==='php'?'php':'breach';state.selections=[];state.query='';state.category='all';$('#service-filter').value='';document.body.dataset.topic=state.topic;
+function chooseTopic(topic,{renderResult=true,preserveQuery=false}={}) {
+  state.topic=topic==='php'?'php':'breach';state.selections=[];if(!preserveQuery)state.query='';state.category='all';$('#service-filter').value=state.query;document.body.dataset.topic=state.topic;
   if(state.service&&!supportsTopic(state.service,state.topic))Object.assign(state,{kind:'empty',service:null,hostname:null});
   document.querySelectorAll('button[data-topic]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topic===state.topic)));
   $('#issue').hidden=!includesPhp();
-  $('#service-filter').placeholder=state.role==='admin'?'例：さくら、WordPress':includesPhp()?'例：note、WordPress.com':'例：佐川急便、タイムズ';
+  updateFinderLabels();
   renderServiceList();updateTopicDates();if(renderResult){render();if(state.view==='check'&&state.service&&watchState.items.some(item=>item.serviceId===state.service.id))persistWatch(markWatchServiceSeen(watchState,state.service.id,watchServiceRevision(state.service,watchData,state.topic),state.topic));}
 }
 function applyGuideSelection(selection,{focus=false}={}) {
@@ -19546,8 +19594,10 @@ function applyGuideSelection(selection,{focus=false}={}) {
 }
 $('#service-filter').addEventListener('input',()=>{state.query=$('#service-filter').value;renderServiceList();});
 $('#clear-filter').addEventListener('click',()=>{state.query='';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
-document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>chooseRole(button.dataset.role)));
-document.querySelectorAll('button[data-topic]').forEach(button=>button.addEventListener('click',()=>chooseTopic(button.dataset.topic)));
+$('#service-category').addEventListener('change',()=>{state.category=$('#service-category').value;renderServiceList();});
+$('#reset-filters').addEventListener('click',()=>{state.query='';state.category='all';$('#service-filter').value='';renderServiceList();$('#service-filter').focus();});
+document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>chooseRole(button.dataset.role,{preserveQuery:true})));
+document.querySelectorAll('button[data-topic]').forEach(button=>button.addEventListener('click',()=>chooseTopic(button.dataset.topic,{preserveQuery:true})));
 $('#select-mode').addEventListener('click',()=>switchMode('select'));$('#url-mode').addEventListener('click',()=>switchMode('url'));
 $('#unknown-button').addEventListener('click',()=>selectService(null));$('#url-search-button').addEventListener('click',searchUrl);
 $('#url-input').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();searchUrl();}});
@@ -19562,20 +19612,28 @@ else if(location.hash==='#watchlist')showWatchlist();
 function renderServiceList() {
   const topicServices=servicesForTopic(state.topic);
   const available = topicServices.filter(service => service.roles.includes(state.role));
-  const visible = filterServices(topicServices, state);
   const knownGroups = categoriesForRole(topicServices, state.role);
   const groups = [...new Set([...groupOrder[state.role],...knownGroups])].filter(id => knownGroups.includes(id));
-  $('#category-filters').replaceChildren();
-  for (const group of ['all', ...groups]) {
-    const count = group === 'all' ? available.length : available.filter(service => service.groupByRole[state.role] === group).length;
-    const button = el('button', 'category-button', `${group === 'all' ? 'すべて' : (groupLabels[group]??group)} ${count}`);
-    button.type = 'button'; button.dataset.category = group;
-    button.setAttribute('aria-pressed', String(state.category === group));
-    button.addEventListener('click',()=>{ state.category = group; renderServiceList(); document.querySelector(`[data-category="${group}"]`).focus(); });
-    $('#category-filters').append(button);
+  if(state.category!=='all'&&!groups.includes(state.category))state.category='all';
+  const visible = filterServices(topicServices, state);
+  const queryMatches = filterServices(topicServices, {...state,category:'all'});
+  const select = $('#service-category');
+  const categoryIds = ['all',...groups];
+  if([...select.options].map(option=>option.value).join('|')!==categoryIds.join('|')) {
+    select.replaceChildren(...categoryIds.map(group=>{const option=el('option');option.value=group;return option;}));
   }
-  $('#list-count').textContent = `${state.role === 'user' ? '利用者向け' : '管理者向け'} ${available.length}件のうち ${visible.length}件を表示`;
+  for (const option of select.options) {
+    const group=option.value;
+    const count=group==='all'?queryMatches.length:queryMatches.filter(service=>service.groupByRole[state.role]===group).length;
+    option.textContent=`${group==='all'?'すべて':(groupLabels[group]??group)}（${count}件）`;
+  }
+  select.value=state.category;
+  const related=relatedTopicMatches(directoryServices,state);
+  const relatedCount=related.reduce((count,match)=>count+match.services.length,0);
+  $('#list-count').textContent = `${state.role === 'user' ? '利用者向け' : '管理者向け'} ${available.length}件のうち ${visible.length}件を表示${relatedCount?` · 別のテーマに${relatedCount}件`:''}`;
   $('#clear-filter').hidden = !state.query;
+  $('#reset-filters').hidden = !state.query&&state.category==='all';
+  renderRelatedTopics(related);
   const list = $('#service-list'); list.replaceChildren();
   for (const group of groups) {
     const matches = visible.filter(service => service.groupByRole[state.role] === group);
@@ -19587,7 +19645,9 @@ function renderServiceList() {
       const button = el('button','service-button'); button.type = 'button';
       button.dataset.id = service.id; button.setAttribute('aria-pressed',String(service.id === state.service?.id));
       const initial = el('span','service-initial',service.id === 'wordpress-selfhost' ? 'W' : service.name.charAt(0)); initial.setAttribute('aria-hidden','true');
-      const text = el('span'); text.append(el('strong','',service.name),el('small','',service.short));
+      const text = el('span'); text.append(el('strong','',service.name));
+      if(service.operator)text.append(el('small','service-operator',serviceOperatorText(service)));
+      text.append(el('small','',service.short));
       const info=coverage(service); text.append(el('small',`evidence-label ${info.kind}`,info.label));
       const chevron = el('span','chevron','›'); chevron.setAttribute('aria-hidden','true');
       button.append(initial,text,chevron); button.addEventListener('click',()=>selectService(service));
@@ -19597,10 +19657,28 @@ function renderServiceList() {
   }
   if (!visible.length) {
     const empty = el('div','filter-empty');
-    empty.append(el('p','','一致する項目はありません。名前の一部で探すか、用途の絞り込みを変更してください。'));
-    const reset = el('button','text-button','絞り込みを解除する'); reset.type='button';
-    reset.addEventListener('click',()=>{ state.query='';state.category='all';$('#service-filter').value='';renderServiceList();$('#service-filter').focus(); });
-    empty.append(reset);list.append(empty);
+    empty.append(el('p','','この条件に一致する項目はありません。サービス名・企業名の一部で探すか、サービスの種類を「すべて」に戻してください。'),el('p','filter-empty-note','未掲載は「被害なし」を意味しません。'));
+    list.append(empty);
+  }
+}
+function renderRelatedTopics(matches) {
+  const panel=$('#related-topics');panel.replaceChildren();panel.hidden=!matches.length;
+  if(!matches.length)return;
+  panel.append(el('p','related-topics-title','別のテーマに掲載があります'));
+  for(const match of matches) {
+    const topicLabel=match.topic==='php'?'PHPの問題':'情報漏洩・不正アクセス';
+    const roleLabel=match.role==='user'?'利用者向け':'管理者向け';
+    const button=el('button','related-topic-button',`${topicLabel} · ${roleLabel}（${match.services.length}件）を見る`);
+    button.type='button';
+    button.addEventListener('click',()=>{
+      Object.assign(state,{kind:'empty',service:null,hostname:null,selections:[]});
+      chooseRole(match.role,{renderResult:false,preserveQuery:true});
+      chooseTopic(match.topic,{renderResult:false,preserveQuery:true});
+      switchMode('select');render();
+      $('#service-list .service-button')?.focus();
+      $('#announcement').textContent=`検索語を保ったまま、${topicLabel}の${roleLabel}に切り替えました。サービスの種類は「すべて」です。`;
+    });
+    panel.append(button);
   }
 }
 </script>

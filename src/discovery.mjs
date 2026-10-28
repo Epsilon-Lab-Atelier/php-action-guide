@@ -21,11 +21,34 @@ export function filterServices(services, { role, query = '', category = 'all' } 
     const searchable = normalizeSearchText([
       service.name,
       service.short,
+      service.operator,
+      ...(service.companyAliases ?? []),
       ...(service.keywords ?? []),
       ...(service.domains ?? []).map(domain => domain.host),
     ].filter(value => value != null).join(' '));
     return terms.every(term => searchable.includes(term));
   });
+}
+
+/** Suggest a separate topic without transferring its evidence to the current one.
+ * Category filtering is deliberately omitted: the destination starts at "all".
+ * Prefer the current role; a different role is returned explicitly for the UI.
+ */
+export function relatedTopicMatches(services, { topic, role, query = '' } = {}) {
+  if (!['php', 'breach'].includes(topic) || !['user', 'admin'].includes(role) || !normalizeSearchText(query)) return [];
+  const otherTopic = topic === 'php' ? 'breach' : 'php';
+  const candidates = services.filter(service => Array.isArray(service.topics)
+    && service.topics.includes(otherTopic) && !service.topics.includes(topic));
+  const suggestions = [];
+  const seen = new Set();
+  for (const nextRole of [role, role === 'user' ? 'admin' : 'user']) {
+    const matches = filterServices(candidates, { role: nextRole, query })
+      .filter(service => !seen.has(service.id));
+    if (!matches.length) continue;
+    matches.forEach(service => seen.add(service.id));
+    suggestions.push({ topic: otherTopic, role: nextRole, services: matches });
+  }
+  return suggestions;
 }
 
 /** Category IDs are unique and retain their first visible catalog appearance. */

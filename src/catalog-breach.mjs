@@ -984,7 +984,8 @@ export const breachServices = [
       "リバスタ",
       "RVSTA",
       "メール配信",
-      "ブラストメール"
+      "ブラストメール",
+      "e-reverse.com"
     ],
     "domains": [
       {
@@ -4674,6 +4675,387 @@ export const breachServices = [
   ],
   "domainSourceIds": [
     "breachResonaMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "daihatsu-media",
+  "name": "ダイハツメディアサイト（報道関係者向け）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "外部メール配信サービス経由の登録者情報漏えい",
+  "keywords": [
+    "ダイハツメディアサイト（報道関係者向け）"
+  ],
+  "domains": [
+    {
+      "host": "www.daihatsu.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachDaihatsuMedia2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "yakult-site",
+  "name": "ヤクルト本社ホームページ",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "ホームページへの不正アクセスと顧客情報への影響調査",
+  "keywords": [
+    "ヤクルト本社ホームページ"
+  ],
+  "domains": [
+    {
+      "host": "www.yakult.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachYakultSite2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "donki-watch-repair",
+  "name": "ドン・キホーテ等4社（時計修理）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "時計修理の委託先への不正アクセスによる情報漏えいの可能性",
+  "keywords": [
+    "ドン・キホーテ",
+    "ドンキ",
+    "長崎屋",
+    "橘百貨店",
+    "UDリテール",
+    "時計修理"
+  ],
+  "domains": [
+    {
+      "host": "www.donki.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachDonkiWatchRepair2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "hana-cupid",
+  "name": "インターネット花キューピット・ビジネス花キューピット",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "公式EC会員のID・ハッシュ化パスワード等の漏えい",
+  "keywords": [
+    "インターネット花キューピット・ビジネス花キューピット"
+  ],
+  "domains": [
+    {
+      "host": "www.i879.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachHanaCupid2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "bandori-ournotes",
+  "name": "バンドリ！アワーノーツ",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "media"
+  },
+  "short": "CBT応募・アンケート・サポート問い合わせ情報漏えい",
+  "keywords": [
+    "バンドリ！アワーノーツ"
+  ],
+  "domains": [
+    {
+      "host": "bushiroad.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachBandoriOurNotes2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "feps-shipping",
+  "name": "古河電工パワーシステムズ（防災製品出荷管理）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "発注者・製品送付先情報の閲覧・取得可能性",
+  "keywords": [
+    "古河電工パワーシステムズ（防災製品出荷管理）"
+  ],
+  "domains": [
+    {
+      "host": "www.feps.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachFeps2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "kyushu-university",
+  "name": "九州大学（校友会メール・QLIFICA）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "education"
+  },
+  "short": "校友会メールと職員治験管理アカウントを区別",
+  "keywords": [
+    "九州大学（校友会メール・QLIFICA）"
+  ],
+  "domains": [
+    {
+      "host": "www.kyushu-u.ac.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachKyushuExternal2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "sompo-health-reservation",
+  "name": "SOMPOヘルスサポート（事業所一括面談予約）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "health"
+  },
+  "short": "メール配信の調査で対象個人情報なしとの報告",
+  "keywords": [
+    "SOMPOヘルスサポート（事業所一括面談予約）"
+  ],
+  "domains": [
+    {
+      "host": "www.sompo-hs.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSompoHealthFirst2026",
+    "breachSompoHealthResult2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "ichiban-online",
+  "name": "一番くじONLINE（配送情報）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "物流委託先の配送情報漏えい可能性",
+  "keywords": [
+    "一番くじONLINE（配送情報）"
+  ],
+  "domains": [
+    {
+      "host": "on-line.1kuji.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachIchibanDelivery2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "satofull-mail",
+  "name": "さとふる（メール配信）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "メール配信サービス保存情報の一部漏えい",
+  "keywords": [
+    "さとふる（メール配信）"
+  ],
+  "domains": [
+    {
+      "host": "www.satofull.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSatofullMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "direct-games",
+  "name": "DIRECT GAMES",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "media"
+  },
+  "short": "会員情報漏えいと全会員パスワード再設定案内",
+  "keywords": [
+    "DIRECT GAMES"
+  ],
+  "domains": [
+    {
+      "host": "www.h2int.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachDirectGames2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "jal-jta",
+  "name": "JAL・JTA（予約情報）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "travel"
+  },
+  "short": "委託先で約9.2万人分の予約記録参照の形跡",
+  "keywords": [
+    "JAL・JTA（予約情報）"
+  ],
+  "domains": [
+    {
+      "host": "www.jal.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachJalAmadeus2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "life-card",
+  "name": "ライフカード（メール配信）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "Cuenote FC保存情報339,610契約の漏えい可能性",
+  "keywords": [
+    "ライフカード（メール配信）"
+  ],
+  "domains": [
+    {
+      "host": "www.lifecard.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachLifeCard2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "animate-mail",
+  "name": "アニメイト通販・ポケドラ（メールマガジン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "メルマガ登録情報の漏えい",
+  "keywords": [
+    "アニメイト通販・ポケドラ（メールマガジン）"
+  ],
+  "domains": [
+    {
+      "host": "www.animate.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachAnimateMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "twitcasting",
+  "name": "ツイキャス（モイ）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "social"
+  },
+  "short": "不正アクセスの痕跡とサービス停止、影響調査中",
+  "keywords": [
+    "ツイキャス（モイ）"
+  ],
+  "domains": [
+    {
+      "host": "twitcasting.tv",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachMoiAccess2026"
   ],
   "supportSourceIds": []
 }

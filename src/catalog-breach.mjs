@@ -884,7 +884,7 @@ export const breachServices = [
 {
   "id": "passto",
   "name": "PASSTO（ECOMMIT）",
-  "short": "問い合わせフォーム送信情報に限定",
+  "short": "問い合わせフォームと宅配利用の配送情報を別々に確認",
   "category": "service",
   "roles": [
     "user"
@@ -5056,6 +5056,269 @@ export const breachServices = [
   ],
   "domainSourceIds": [
     "breachMoiAccess2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "eco-base",
+  "name": "ECO BASE（ヤフー店・メルカリShops店）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "佐川急便への配送委託分に限る情報流出可能性",
+  "keywords": [
+    "エコベース",
+    "ECOMMIT",
+    "エコミット",
+    "Yahoo!オークション",
+    "メルカリShops"
+  ],
+  "domains": [
+    {
+      "host": "www.ecommit.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachEcommitDelivery2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "eneos-power",
+  "name": "ENEOSでんき・でんきサービス",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "低圧顧客57名分の認証・契約利用情報漏えい",
+  "keywords": [
+    "ENEOS Power",
+    "エネオス",
+    "電気"
+  ],
+  "domains": [
+    {
+      "host": "www.eneos-power.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachEneosPower2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "coconala-skill-resume",
+  "name": "ココナラスキルマーケット（履歴書等）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "履歴書・職務経歴書の漏洩を確認",
+  "keywords": [
+    "ココナラスキルマーケット（履歴書等）"
+  ],
+  "domains": [
+    {
+      "host": "www.coconala.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachCoconalaResume2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "chuden-event-mail",
+  "name": "中部電力（イベントメールマガジン）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "イベントメールマガジン希望者の情報漏洩可能性",
+  "keywords": [
+    "中部電力（イベントメールマガジン）"
+  ],
+  "domains": [
+    {
+      "host": "www.chuden.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachChudenEventMail2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "subway-mobile-order",
+  "name": "SUBWAY公式モバイルオーダー",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "モバイルオーダー7名の情報流出可能性と注文再開",
+  "keywords": [
+    "SUBWAY公式モバイルオーダー"
+  ],
+  "domains": [
+    {
+      "host": "subway.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSubwayPicks2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "shizuokagas",
+  "name": "静岡ガス（Webエネリア・静ガスGreeen!）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "daily"
+  },
+  "short": "メール配信と問い合わせフォームの2事案を区別",
+  "keywords": [
+    "静岡ガス",
+    "Webエネリア",
+    "静ガスGreeen!",
+    "問い合わせフォーム"
+  ],
+  "domains": [
+    {
+      "host": "www.shizuokagas.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachShizuokaGasWebEneria2026",
+    "breachShizuokaGasGreeen2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "nel-osina",
+  "name": "osina・NEL（会員・取引先等）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "media"
+  },
+  "short": "osina等の個人情報流出とSNS連携への注意",
+  "keywords": [
+    "osina・NEL（会員・取引先等）"
+  ],
+  "domains": [
+    {
+      "host": "www.nel-all.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachNelOsina2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "ana-amadeus-reservation",
+  "name": "ANA（予約情報・Amadeus）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "travel"
+  },
+  "short": "旅客サービスシステムで予約情報が参照された形跡",
+  "keywords": [
+    "ANA（予約情報・Amadeus）"
+  ],
+  "domains": [
+    {
+      "host": "www.anahd.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachAnaAmadeus2026"
+  ],
+  "supportSourceIds": []
+},
+
+{
+  "id": "vandle-card",
+  "name": "バンドルカード（アプリ・サポート）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "分析委託先への顧客情報誤送信",
+  "keywords": [
+    "バンドルカード（アプリ・サポート）"
+  ],
+  "domains": [
+    {
+      "host": "kanmu.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachVandleMisdirected2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "paydon",
+  "name": "Payどん（メール通知システム）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "外部メール通知システムの情報漏洩可能性",
+  "keywords": [
+    "Payどん",
+    "Ｐａｙどん",
+    "ペイどん"
+  ],
+  "domains": [
+    {
+      "host": "www.kagin.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachPaydonArara2026"
   ],
   "supportSourceIds": []
 }

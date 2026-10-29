@@ -326,7 +326,7 @@ export const breachServices = [
   "groupByRole": {
     "user": "business"
   },
-  "short": "パートナー向け配信先等23,384件の情報漏えい",
+  "short": "パートナー向け配信先等23,392件の情報漏えい",
   "keywords": [
     "サイボウズ",
     "cybozu",

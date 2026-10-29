@@ -5476,6 +5476,17 @@ export const breachIncidents = [
       "sourceIds": [
         "breachCybozuMailSecond2026"
       ]
+    },
+    {
+      "date": "2026-10-29",
+      "changedAtTime": "2026-10-29T18:30:13+09:00",
+      "title": "サービス一覧の件数も訂正後の本文と統一",
+      "summary": "詳細本文で訂正済みの23,392件に合わせ、サービス一覧の短文に残っていた23,384件を修正しました。",
+      "actionImpact": "unchanged",
+      "actionSummary": "対象範囲や利用者向けの対応案内は変更していません。一覧と詳細本文の件数を一致させました。",
+      "sourceIds": [
+        "breachCybozuMailSecond2026"
+      ]
     }
   ]
 },

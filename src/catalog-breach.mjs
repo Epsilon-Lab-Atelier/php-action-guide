@@ -5321,5 +5321,161 @@ export const breachServices = [
     "breachPaydonArara2026"
   ],
   "supportSourceIds": []
+},
+{
+  "id": "jfe-chemical",
+  "name": "JFEケミカル（取引先・社外関係者・社員情報）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "IT環境からの情報取得を確認、対象件数は精査中",
+  "keywords": [
+    "JFEケミカル（取引先・社外関係者・社員情報）"
+  ],
+  "domains": [
+    {
+      "host": "www.jfe-chem.com",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachJfeChemicalFirst2026",
+    "breachJfeChemicalSecond2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "pmda-dwap",
+  "name": "PMDA 医療機器WEB申請プラットフォーム（DWAP）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "public"
+  },
+  "short": "不正アクセス確認に伴う運用停止と申請方法の代替案内",
+  "keywords": [
+    "PMDA 医療機器WEB申請プラットフォーム（DWAP）"
+  ],
+  "domains": [
+    {
+      "host": "www.pmda.go.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachPmdaDwap2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "zerojapan-ec",
+  "name": "ゼロジャパン（ワンダープライス等EC店舗）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "shopping"
+  },
+  "short": "受注管理委託先からの注文・登録情報流出",
+  "keywords": [
+    "ゼロジャパン（ワンダープライス等EC店舗）"
+  ],
+  "domains": [
+    {
+      "host": "zerojapan.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachZeroJapanWasabi2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "monodukuri-newsletter",
+  "name": "ものづくりドットコム（メール配信先リスト）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "business"
+  },
+  "short": "ブラストメールからの送付先リスト流出と個別案内",
+  "keywords": [
+    "ものづくりドットコム（メール配信先リスト）"
+  ],
+  "domains": [
+    {
+      "host": "www.broadleaf.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachMonodukuriFirst2026",
+    "breachMonodukuriSecond2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "sonylife-medicare",
+  "name": "ソニー生命（代理店扱いのメディケア生命契約）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "finance"
+  },
+  "short": "ソニー生命が代理店として扱ったメディケア生命契約の情報漏えい",
+  "keywords": [
+    "ソニー生命",
+    "メディケア生命"
+  ],
+  "domains": [
+    {
+      "host": "www.sonylife.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachSonyLifeMedicare2026"
+  ],
+  "supportSourceIds": []
+},
+{
+  "id": "kids-public-line",
+  "name": "Kids Public（LINE連携の健康医療相談）",
+  "category": "service",
+  "roles": [
+    "user"
+  ],
+  "groupByRole": {
+    "user": "health"
+  },
+  "short": "委託先の漏えいなし報告とLINE相談停止・電話代替案内",
+  "keywords": [
+    "Kids Public",
+    "キッズパブリック",
+    "日中助産師相談",
+    "夜間相談"
+  ],
+  "domains": [
+    {
+      "host": "kids-public.co.jp",
+      "includeSubdomains": false
+    }
+  ],
+  "domainSourceIds": [
+    "breachKidsPublicComsbi2026"
+  ],
+  "supportSourceIds": []
 }
 ];

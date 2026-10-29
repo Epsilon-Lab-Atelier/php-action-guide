@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wa2Gju4GRFD3V8xzQd5TyDrrTYv9BkccOaiS9es8zdM='; style-src 'sha256-3+2cm6+tTFLL8qiVs1N1lbbKCINTlGaQRZPu90GGqwQ='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NMgzY+tsChx+4ScLtkWhyPuiaz4mfcbYinAMBSCSpMw='; style-src 'sha256-3+2cm6+tTFLL8qiVs1N1lbbKCINTlGaQRZPu90GGqwQ='; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="description" content="サービスの公式発表とあなたの利用状況から、関係する情報と必要な対応を確認。情報漏洩・不正アクセスとPHPの問題を分けて掲載しています。">
 <meta name="color-scheme" content="light">
 <title>ネットサービスのリスクチェック | EpsilonLab</title>
@@ -2240,7 +2240,7 @@ const breachServices = [
   "groupByRole": {
     "user": "business"
   },
-  "short": "パートナー向け配信先等23,384件の情報漏えい",
+  "short": "パートナー向け配信先等23,392件の情報漏えい",
   "keywords": [
     "サイボウズ",
     "cybozu",
@@ -12879,6 +12879,17 @@ const breachIncidents = [
       "summary": "公式第2報の10月28日21:43訂正に合わせ、件数を23,384件から23,392件へ修正。10月29日15:15に対象者へ個別メールを送信したという17:56の追記も反映しました。",
       "actionImpact": "unchanged",
       "actionSummary": "個別通知と特設窓口の確認、不審メールのURL・添付への注意という利用者向け案内は変更なし。通知は送信済みと更新しました。",
+      "sourceIds": [
+        "breachCybozuMailSecond2026"
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "changedAtTime": "2026-10-29T18:30:13+09:00",
+      "title": "サービス一覧の件数も訂正後の本文と統一",
+      "summary": "詳細本文で訂正済みの23,392件に合わせ、サービス一覧の短文に残っていた23,384件を修正しました。",
+      "actionImpact": "unchanged",
+      "actionSummary": "対象範囲や利用者向けの対応案内は変更していません。一覧と詳細本文の件数を一致させました。",
       "sourceIds": [
         "breachCybozuMailSecond2026"
       ]
